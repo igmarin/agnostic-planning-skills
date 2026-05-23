@@ -64,14 +64,14 @@ Use this when `RETROSPECTIVE_TEMPLATE.md` is not available in the bundle:
 ### Action Items
 | # | Action | Owner | Timeline | Linked Issue |
 |---|--------|-------|----------|--------------|
-| 1 | Add acceptance criteria checklist to Definition of Ready | @product-owner | Next sprint kickoff | PROJ-42 |
+| 1 | Add acceptance criteria checklist to Definition of Ready | Product Owner | Next sprint kickoff | PROJ-42 |
 
 ### Metrics
 - Velocity: 34 pts committed / 28 pts completed (82%)
 - Carried over: 2 tickets
 
 ### Kudos
-- @alice for unblocking the auth service on short notice.
+- Alice for unblocking the auth service on short notice.
 ```
 
 ## Output Notes

@@ -51,13 +51,13 @@ Apply these six patterns when scanning the plan:
 
 ## Concrete Example
 
-**Sample input task:** "Integrate payment gateway — assigned to @alice, go-live Friday. Vendor sandbox access not yet confirmed."
+**Sample input task:** "Integrate payment gateway — assigned to Alice, go-live Friday. Vendor sandbox access not yet confirmed."
 
 **Resulting risk register row:**
 
 | ID | Risk | Likelihood | Impact | Proximity | Evidence | Mitigation |
 |----|------|-----------|--------|-----------|----------|------------|
-| R1 | Payment gateway integration blocked by missing vendor sandbox access | High | High | Immediate | Task: "Vendor sandbox access not yet confirmed" | Owner: @alice escalates to vendor by EOD Monday; contingency: mock server for internal testing until access granted |
+| R1 | Payment gateway integration blocked by missing vendor sandbox access | High | High | Immediate | Task: "Vendor sandbox access not yet confirmed" | Owner: Alice escalates to vendor by EOD Monday; contingency: mock server for internal testing until access granted |
 
 ## Output Style
 
