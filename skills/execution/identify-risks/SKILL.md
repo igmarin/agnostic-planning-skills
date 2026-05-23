@@ -34,7 +34,11 @@ DO NOT skip mitigations — every risk needs at least one concrete mitigation.
 2. **Scan risk patterns** (see Risk Patterns below) — dependency chains, external deps, ambiguity, single points of failure, capacity, technical uncertainty.
 3. **Classify** — Likelihood (High/Medium/Low), Impact (High/Medium/Low), Proximity (Immediate/Near-term/Future).
 4. **Suggest mitigations** — prevention, contingency, owner.
-5. **Output** — structured risk register.
+5. **Validate** — cross-check each risk against the plan:
+   - Remove any risk that lacks direct evidence from the source material
+   - Flag gaps where patterns apply but no risk was identified
+   - Verify likelihood/impact ratings are justified by evidence
+6. **Output** — structured risk register.
 
 ## Risk Patterns
 
