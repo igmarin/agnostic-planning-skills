@@ -22,7 +22,10 @@ That planning gate is encoded directly into the skills and agent, so agents do n
 > [![OpenCode](https://img.shields.io/badge/OpenCode-4285F4?style=for-the-badge&logoColor=white)](#)
 > [![Windsurf](https://img.shields.io/badge/Windsurf-0B100F?logo=windsurf&logoColor=fff)](#)
 
+> [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/igmarin/agnostic-planning-skills/pulls)
 > [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+> [![tessl](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.tessl.io%2Fv1%2Fbadges%2Figmarin%2Fagnostic-planning-skills)](https://tessl.io/registry/igmarin/agnostic-planning-skills)
+> ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/igmarin/agnostic-planning-skills?utm_source=oss&utm_medium=github&utm_campaign=igmarin%2Fagnostic-planning-skills&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 
 ## Who This Is For
 
@@ -64,13 +67,13 @@ graph LR
     A -->|Direct to tickets| C
 ```
 
-### For a new feature from scratch:
+### For a new feature from scratch
 
 ```text
 create-prd -> [gate: PRD approved] -> generate-tasks -> plan-tickets
 ```
 
-### The full product-owner agent lifecycle:
+### The full product-owner agent lifecycle
 
 ```mermaid
 graph TD
@@ -158,8 +161,31 @@ gh skill install igmarin/agnostic-planning-skills create-prd --scope user
 
 Requires [skills.sh](https://www.skills.sh/) CLI.
 
+> [!IMPORTANT]
+> Because this repository has a root-level `SKILL.md`, you **must** include the `--full-depth` flag so the CLI scans and discovers all the nested skills.
+
+### Project-Level Installation (Local)
+
+To install skills for your current project workspace:
+
 ```bash
-npx skills add igmarin/agnostic-planning-skills
+# Install ALL skills and agents
+npx skills add igmarin/agnostic-planning-skills --full-depth --all
+
+# Install a specific skill (e.g., create-prd)
+npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth
+```
+
+### Global Installation
+
+To install skills globally for your AI coding assistant:
+
+```bash
+# Install ALL skills and agents globally
+npx skills add igmarin/agnostic-planning-skills --full-depth --all --global
+
+# Install a specific skill globally (e.g., create-prd)
+npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 ```
 
 ## Documentation Map

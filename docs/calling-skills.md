@@ -63,8 +63,27 @@ gh skill install igmarin/agnostic-planning-skills
 
 ### Via skills.sh
 
+> [!IMPORTANT]
+> Because this repository has a root-level `SKILL.md`, you **must** include the `--full-depth` flag so the CLI scans and discovers all the nested skills.
+
+#### Project-Level (Local) Installation
+To install skills for your current project workspace:
 ```bash
-npx skills add igmarin/agnostic-planning-skills
+# Install ALL skills and agents
+npx skills add igmarin/agnostic-planning-skills --full-depth --all
+
+# Install a specific skill (e.g., create-prd)
+npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth
+```
+
+#### Global Installation
+To install skills globally for your AI coding assistant:
+```bash
+# Install ALL skills and agents globally
+npx skills add igmarin/agnostic-planning-skills --full-depth --all --global
+
+# Install a specific skill globally (e.g., create-prd)
+npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 ```
 
 ---
