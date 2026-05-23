@@ -27,6 +27,7 @@ That planning gate is encoded directly into the skills and agent, so agents do n
 ## Who This Is For
 
 | Reader | What you get |
+|--------|-------------|
 | Product Managers | AI-assisted PRD generation with structured templates and approval gates. |
 | Tech Leads | A repeatable planning pipeline that produces TDD task checklists from approved scope. |
 | Developers | Step-by-step task breakdown with exact file paths and test-first discipline. |
@@ -154,6 +155,7 @@ npx skills add igmarin/agnostic-planning-skills
 ## Documentation Map
 
 | Need | Document |
+|------|----------|
 | Understand the docs system | [docs/index.md](docs/index.md) |
 | Browse all skills | [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md) |
 | Understand skill chaining | [docs/reference/integration-matrix.md](docs/reference/integration-matrix.md) |
