@@ -2,7 +2,7 @@
 
 **Agnostic Planning Skills turns AI coding assistants into disciplined product collaborators.**
 
-It is a curated library of **3 language-agnostic planning skills** and **1 orchestration agent** that teach AI tools how to write PRDs, break down features into TDD tasks, and generate tracker-ready tickets — regardless of tech stack.
+It is a curated library of **10 language-agnostic planning skills** and **4 orchestration agents** that teach AI tools how to write and review PRDs, break down features into TDD tasks, estimate effort, identify risks, prioritize backlogs, plan sprints, run retrospectives, generate status reports, and create tracker-ready tickets — regardless of tech stack.
 
 The project is built around one non-negotiable rule:
 
@@ -28,17 +28,17 @@ That planning gate is encoded directly into the skills and agent, so agents do n
 
 | Reader | What you get |
 |--------|-------------|
-| Product Managers | AI-assisted PRD generation with structured templates and approval gates. |
-| Tech Leads | A repeatable planning pipeline that produces TDD task checklists from approved scope. |
-| Developers | Step-by-step task breakdown with exact file paths and test-first discipline. |
-| Teams | Sprint-ready tickets with classification, dependencies, and sequencing guidance. |
+| Product Managers | AI-assisted PRD generation, backlog prioritization, and sprint planning. |
+| Tech Leads | Risk assessment, estimation quality review, and technical feasibility checks. |
+| Developers | Step-by-step task breakdown, TDD checklists, and effort estimation. |
+| Teams | Execution tracking, status reports, sprint-ready tickets with classification. |
 
 ## What Is In The Repository
 
 | Area | Purpose |
 |------|---------|
-| `skills/` | 3 language-agnostic skills: `create-prd`, `generate-tasks`, `plan-tickets`. |
-| `agents/` | 1 orchestration agent: `product-owner` — chains all 3 skills through 6 phases with approval gates. |
+| `skills/` | 10 language-agnostic skills across 5 categories: prd, task-management, backlog, ceremony, execution. |
+| `agents/` | 4 orchestration agents: `product-owner`, `project-manager`, `tech-lead`, `delivery-lead`. |
 | `docs/` | Architecture, skill structure, agent guide, templates, and reference catalog. |
 
 The skills are not long-form tutorials. They are executable instructions for AI agents: when to draft a PRD, when to stop for approval, how to break down a feature into TDD tasks, and how to classify and sequence tickets.
@@ -94,14 +94,24 @@ graph TD
 | Skill | Category | Description |
 |-------|----------|-------------|
 | `create-prd` | PRD | Generate structured Product Requirements Documents |
+| `review-prd` | PRD | Review PRDs for completeness, testability, and technical feasibility |
 | `generate-tasks` | Task Management | Break features into TDD task checklists with auto-detected paths |
 | `plan-tickets` | Task Management | Draft tracker-ready tickets with classification and sequencing |
+| `estimate-tasks` | Task Management | Assign story points, t-shirt sizes, or time estimates with confidence levels |
+| `prioritize-backlog` | Backlog | Rank backlog items by RICE, MoSCoW, value-vs-effort, or WSJF |
+| `plan-sprint` | Ceremony | Plan a sprint: select tickets, define goal, allocate capacity |
+| `create-retrospective` | Ceremony | Generate sprint retrospectives with action items |
+| `identify-risks` | Execution | Scan plans for dependency, capacity, and technical risks |
+| `generate-status-report` | Execution | Generate stakeholder status reports with honest progress tracking |
 
 ### Agent
 
 | Agent | Description |
 |-------|-------------|
-| `product-owner` | Full planning lifecycle: Discovery → PRD → Tasks → Tickets → Sprint |
+| `product-owner` | Planning lifecycle: Discovery → PRD → Tasks → Tickets → Sprint |
+| `project-manager` | Execution tracking: Estimation → Risks → Tracking → Status Reports |
+| `tech-lead` | Technical review: PRD Review → Feasibility → Estimation Quality → Risk Report |
+| `delivery-lead` | End-to-end pipeline: Scope → Plan → Prioritize → Sprint → Execute → Retrospect |
 
 See [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md) for the complete catalog and [docs/reference/integration-matrix.md](docs/reference/integration-matrix.md) for skill chaining.
 
@@ -161,8 +171,6 @@ npx skills add igmarin/agnostic-planning-skills
 | Understand skill chaining | [docs/reference/integration-matrix.md](docs/reference/integration-matrix.md) |
 | Follow agent guides | [docs/agent-guide.md](docs/agent-guide.md) |
 | Understand repository structure | [docs/architecture.md](docs/architecture.md) |
-| Create a new skill | [docs/skill-template.md](docs/skill-template.md) |
-| Create a new agent | [docs/agent-template.md](docs/agent-template.md) |
 | Invoke skills and agents | [docs/calling-skills.md](docs/calling-skills.md) |
 
 ## Contributing

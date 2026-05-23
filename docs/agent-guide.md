@@ -1,6 +1,6 @@
 # Agent Guide — Agnostic Planning Skills
 
-Step-by-step workflow for the `product-owner` orchestration agent.
+Step-by-step workflows for the orchestration agents.
 
 ---
 
@@ -27,107 +27,175 @@ graph TD
     J -->|Yes| K[Ready for Development]
 ```
 
-### Phase 1: Discovery & Clarification
+| Phase | Skill | Gate |
+|-------|-------|------|
+| 1. Discovery & Clarification | — | Scope clear |
+| 2. PRD Draft | `create-prd` | — |
+| 3. Review & Revise | — | **PRD Approval** |
+| 4. Task Estimation | `generate-tasks` | — |
+| 5. Ticket Generation | `plan-tickets` | **Ticket Approval** |
+| 6. Sprint Placement | — | **Sprint Confirmation** |
 
-**Objective:** Establish clear scope, goals, and constraints.
-
-1. Receive the feature description or product idea.
-2. Ask 3-5 targeted questions only if scope is ambiguous.
-3. Confirm priorities, constraints, and explicit non-goals.
-4. Proceed when scope is unambiguous.
-
-**Decision Gate:** If scope remains ambiguous after clarification, ask for a one-sentence goal statement.
-
----
-
-### Phase 2: PRD Draft
-
-**Objective:** Produce a structured Product Requirements Document.
-
-1. Activate `prd/create-prd`.
-2. Fill `PRD_TEMPLATE.md` section by section.
-3. Save to `/tasks/prd-<feature-slug>.md`.
-4. Present the PRD for review.
-
-**HARD GATE — PRD Approval:**
-- PRD must be explicitly approved before any task generation.
-- If rejected, move to Phase 3 (revise).
-- If rejected outright, return to Phase 1.
+**Dependencies:** `create-prd`, `generate-tasks`, `plan-tickets`
 
 ---
 
-### Phase 3: Review & Revise
+## Project Manager Agent
 
-**Objective:** Iterate on feedback until the PRD is approved.
+Orchestrates execution tracking: from task estimation through risk assessment to stakeholder status reports. Chains three skills through four phases with approval gates.
 
-1. Collect user feedback on the PRD.
-2. Revise the PRD in place.
-3. Re-present for approval.
+### Phase Flow
 
-**Decision Gate:** After 3 revision rounds without approval, push for a decision: "Which section is the blocker? Can we scope it down?"
+```mermaid
+graph TD
+    A[Task List / PRD] --> B["Phase 1<br/>Estimation<br/>estimate-tasks"]
+    B --> C{"Estimates Reviewed?"}
+    C -->|No| B
+    C -->|Yes| D["Phase 2<br/>Risk Assessment<br/>identify-risks"]
+    D --> E{"Risks Accepted?"}
+    E -->|No| D
+    E -->|Yes| F["Phase 3<br/>Tracking Setup"]
+    F --> G["Phase 4<br/>Status Reporting<br/>generate-status-report"]
+    G --> H{"Report Approved?"}
+    H -->|No| G
+    H -->|Yes| I[Share with Stakeholders]
+```
 
----
+| Phase | Skill | Gate |
+|-------|-------|------|
+| 1. Estimation | `estimate-tasks` | **Estimation Review** |
+| 2. Risk Assessment | `identify-risks` | **Risk Acceptance** |
+| 3. Tracking Setup | — | Quality Check |
+| 4. Status Reporting | `generate-status-report` | **Status Report Approval** |
 
-### Phase 4: Task Estimation
-
-**Objective:** Break the approved PRD into implementation tasks.
-
-1. Activate `task-management/generate-tasks`.
-2. Auto-detect test command, source directory, and documentation tool.
-3. Generate at least 3 TDD task groups.
-4. Save to `/tasks/tasks-<feature-name>.md`.
-5. Present the task breakdown (informational — no hard gate here).
-
-**Quality Check:** Every functional requirement from the PRD is covered by at least one task.
-
----
-
-### Phase 5: Ticket Generation
-
-**Objective:** Convert tasks into tracker-ready tickets.
-
-1. Activate `task-management/plan-tickets`.
-2. Classify each ticket (type, area, execution order, dependency level).
-3. Apply title conventions.
-4. Draft tickets in standard five-section structure.
-
-**HARD GATE — Ticket Approval:**
-- Ticket drafts must be explicitly approved before tracker creation.
-- Default mode is draft-only — no issues are created automatically.
+**Dependencies:** `estimate-tasks`, `identify-risks`, `generate-status-report`
 
 ---
 
-### Phase 6: Sprint Placement
+## Tech Lead Agent
 
-**Objective:** Order tickets into a sprint-ready backlog.
+Orchestrates technical review of a PRD: evaluates completeness, feasibility, and estimation quality. Produces a go/no-go recommendation. Chains two skills through four phases.
 
-1. Apply sprint placement heuristics:
-   - Foundation/API tickets before dependent client tickets.
-   - Client tickets blocked until API surface is stable.
-   - External confirmation tickets excluded from active sprints.
-   - Follow-up tickets in ready-to-refine or later.
-2. Present the sprint-ordered backlog.
+### Phase Flow
 
-**HARD GATE — Sprint Confirmation:**
-- Sprint placement must be confirmed by the user.
-- Do not assume sprint IDs, capacity, or team availability.
-- Validate one issue before bulk creation if creating in tracker.
+```mermaid
+graph TD
+    A[PRD] --> B["Phase 1<br/>PRD Review<br/>review-prd"]
+    B --> C{Verdict?}
+    C -->|Needs Revision| D[Return to create-prd]
+    C -->|Approved| E["Phase 2<br/>Feasibility Assessment"]
+    E --> F{"Feasible?"}
+    F -->|No - Critical| G[Report & Stop]
+    F -->|Yes| H["Phase 3<br/>Estimation Quality<br/>estimate-tasks"]
+    H --> I{"Quality OK?"}
+    I -->|No| H
+    I -->|Yes| J["Phase 4<br/>Technical Risk Report"]
+    J --> K[Go / No-Go / Go with Conditions]
+```
+
+| Phase | Skill | Gate |
+|-------|-------|------|
+| 1. PRD Review | `review-prd` | Decision: Approved / Needs Revision |
+| 2. Feasibility Assessment | — | **PRD Feasibility** |
+| 3. Estimation Quality | `estimate-tasks` | **Estimation Quality** |
+| 4. Technical Risk Report | — | Go/No-Go recommendation |
+
+**Dependencies:** `review-prd`, `estimate-tasks`
 
 ---
 
-## Skill Chaining Diagram
+## Full Planning + Execution Pipeline
 
 ```mermaid
 graph LR
-    A[create-prd] -->|PRD approved| B[generate-tasks]
-    B --> C[plan-tickets]
-    A -->|Direct to tickets| C
+    subgraph "Tech Lead"
+        T[review-prd] --> U[estimate-tasks]
+        U --> V[Technical Risk Report]
+    end
+    subgraph "Product Owner"
+        A[create-prd] -->|approved| B[generate-tasks]
+        B --> C[plan-tickets]
+    end
+    subgraph "Project Manager"
+        D[estimate-tasks] --> E[identify-risks]
+        E --> F[generate-status-report]
+    end
+    A --> T
+    B --> D
+    C --> F
+```
+
+---
+
+## Delivery Lead Agent
+
+Meta-agent orchestrating the full delivery pipeline: from feature idea through execution to retrospective. Chains all 10 skills through six phases with approval gates.
+
+### Phase Flow
+
+```mermaid
+graph TD
+    A[Feature Idea] --> B["Phase 1<br/>Scope<br/>create-prd + review-prd"]
+    B --> C{"PRD Approved?"}
+    C -->|No| B
+    C -->|Yes| D["Phase 2<br/>Plan<br/>generate-tasks + estimate + risks"]
+    D --> E["Phase 3<br/>Prioritize<br/>prioritize-backlog + plan-tickets"]
+    E --> F["Phase 4<br/>Sprint<br/>plan-sprint"]
+    F --> G{"Sprint Committed?"}
+    G -->|No| F
+    G -->|Yes| H["Phase 5<br/>Execute<br/>generate-status-report + risks"]
+    H --> I["Phase 6<br/>Retrospect<br/>create-retrospective"]
+    I --> J{"Retro Complete?"}
+    J -->|No| I
+    J -->|Yes| K[Delivery Complete]
+```
+
+| Phase | Skills | Gate |
+|-------|--------|------|
+| 1. Scope | `create-prd`, `review-prd` | **PRD Approval** |
+| 2. Plan | `generate-tasks`, `estimate-tasks`, `identify-risks` | Quality Check |
+| 3. Prioritize | `prioritize-backlog`, `plan-tickets` | — |
+| 4. Sprint | `plan-sprint` | **Sprint Commitment** |
+| 5. Execute | `generate-status-report`, `identify-risks` | — |
+| 6. Retrospect | `create-retrospective` | **Retrospective Complete** |
+
+**Dependencies:** All 10 skills
+
+---
+
+## Full Pipeline Diagram
+
+```mermaid
+graph LR
+    subgraph "Delivery Lead"
+        DL_Scope[create-prd + review-prd]
+        DL_Plan[generate + estimate + risks]
+        DL_Prioritize[prioritize + tickets]
+        DL_Sprint[plan-sprint]
+        DL_Execute[status + risks]
+        DL_Retro[retrospective]
+        DL_Scope --> DL_Plan --> DL_Prioritize --> DL_Sprint --> DL_Execute --> DL_Retro
+    end
+    subgraph "Tech Lead"
+        T[review-prd] --> U[estimate-tasks]
+        U --> V[Technical Risk Report]
+    end
+    subgraph "Product Owner"
+        A[create-prd] -->|approved| B[generate-tasks]
+        B --> C[plan-tickets]
+    end
+    subgraph "Project Manager"
+        D[estimate-tasks] --> E[identify-risks]
+        E --> F[generate-status-report]
+    end
+    A --> T
+    B --> D
+    C --> F
 ```
 
 ---
 
 ## See Also
 
-- [Skill Catalog](reference/skill-catalog.md) — All skills and the agent
+- [Skill Catalog](reference/skill-catalog.md) — All skills and agents
 - [Integration Matrix](reference/integration-matrix.md) — Complete chaining reference
-- [Agent Template](agent-template.md) — Template for creating new agents

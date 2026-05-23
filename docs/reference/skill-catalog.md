@@ -1,13 +1,13 @@
 # Skill Catalog — Agnostic Planning Skills
 
-Complete catalog of 3 language-agnostic planning skills and 1 orchestration agent.
+Complete catalog of 10 language-agnostic planning skills and 4 orchestration agents.
 
 ---
 
 ## Quick Navigation
 
-**Skills:** [create-prd](#create-prd) · [generate-tasks](#generate-tasks) · [plan-tickets](#plan-tickets)
-**Agents:** [product-owner](#product-owner-agent)
+**Skills:** [create-prd](#create-prd) · [review-prd](#review-prd) · [generate-tasks](#generate-tasks) · [plan-tickets](#plan-tickets) · [estimate-tasks](#estimate-tasks) · [prioritize-backlog](#prioritize-backlog) · [plan-sprint](#plan-sprint) · [create-retrospective](#create-retrospective) · [identify-risks](#identify-risks) · [generate-status-report](#generate-status-report)
+**Agents:** [product-owner](#product-owner-agent) · [project-manager](#project-manager-agent) · [tech-lead](#tech-lead-agent) · [delivery-lead](#delivery-lead-agent)
 
 ---
 
@@ -24,7 +24,22 @@ Complete catalog of 3 language-agnostic planning skills and 1 orchestration agen
 
 **HARD-GATE:** Focus exclusively on WHAT and WHY, not HOW. No code until PRD is approved.
 
-**Next after use:** `generate-tasks` (to break PRD into implementation tasks) or `plan-tickets` (for tracker-ready tickets).
+**Next after use:** `review-prd` (to validate quality), `generate-tasks` (to break PRD into implementation tasks) or `plan-tickets` (for tracker-ready tickets).
+
+---
+
+### review-prd
+
+| Path | `skills/prd/review-prd/SKILL.md` |
+| Category | PRD |
+| Description | Review a PRD for completeness, testability, clarity, and feasibility |
+| Trigger Words | "review PRD", "PRD review", "check requirements", "validate PRD", "feasibility check" |
+
+**What it does:** Systematically evaluates a PRD against a quality checklist. Produces findings categorized as Critical, Suggestion, or Note. Checks completeness, testability, ambiguity, feasibility, edge cases, and dependency clarity.
+
+**HARD-GATE:** Every finding must cite specific PRD evidence. Do not review the idea — review the document's quality.
+
+**Next after use:** `generate-tasks` (if approved), or return to `create-prd` for revisions.
 
 ---
 
@@ -35,11 +50,11 @@ Complete catalog of 3 language-agnostic planning skills and 1 orchestration agen
 | Description | Break a feature into TDD implementation tasks with exact file paths |
 | Trigger Words | "task list", "implementation plan", "feature breakdown", "break down this PRD", "generate tasks" |
 
-**What it does:** Converts a PRD or feature description into a sequential task checklist with TDD quadruplets (write test → run fail → implement → run pass). Auto-detects test commands, source directories, and documentation conventions from the project.
+**What it does:** Converts a PRD or feature description into a sequential task checklist with TDD quadruplets. Auto-detects test commands, source directories, and documentation conventions.
 
-**HARD-GATE:** Do not skip Task 0.0 (Create feature branch). Do not combine the TDD quadruplet sub-tasks into a single task.
+**HARD-GATE:** Do not skip Task 0.0 (Create feature branch). Do not combine TDD sub-tasks into a single task.
 
-**Next after use:** Begin implementation of the first task group, or chain to `plan-tickets` for ticket generation.
+**Next after use:** `estimate-tasks` (to assign effort), `plan-tickets` (for ticket generation), or begin implementation.
 
 ---
 
@@ -50,11 +65,101 @@ Complete catalog of 3 language-agnostic planning skills and 1 orchestration agen
 | Description | Draft tracker-ready tickets from an initiative plan with classification |
 | Trigger Words | "create tickets", "Jira", "Linear", "GitHub Issues", "sprint planning" |
 
-**What it does:** Classifies work items by type, area, execution order, and dependency level. Drafts tickets with title conventions (`BE |`, `FE |`, `Mobile |`) and a standard five-section structure (Summary, Background, Acceptance Criteria, Dependencies, Technical Notes).
+**What it does:** Classifies work items by type, area, execution order, and dependency level. Drafts tickets with title conventions and a standard five-section structure.
 
-**HARD-GATE:** Do not create tracker issues unless the user explicitly asks for creation. Default is draft-only.
+**HARD-GATE:** Do not create tracker issues unless the user explicitly asks. Default is draft-only.
 
-**Next after use:** Continue to sprint placement or begin implementation.
+**Next after use:** Sprint placement or begin implementation.
+
+---
+
+### estimate-tasks
+
+| Path | `skills/task-management/estimate-tasks/SKILL.md` |
+| Category | Task Management |
+| Description | Assign effort estimates with confidence levels |
+| Trigger Words | "estimate", "story points", "t-shirt size", "effort", "how long", "sizing" |
+
+**What it does:** Assigns effort estimates using story points (Fibonacci), t-shirt sizes, or time ranges. Flags high-uncertainty items and recommends spikes or further breakdown.
+
+**HARD-GATE:** Do not assign estimates to tasks you do not understand. State confidence for every estimate.
+
+**Next after use:** `identify-risks` (to assess dependency and uncertainty risks) or `plan-sprint` (to select tickets based on capacity).
+
+---
+
+### prioritize-backlog
+
+| Path | `skills/backlog/prioritize-backlog/SKILL.md` |
+| Category | Backlog |
+| Description | Rank backlog items using a prioritization framework |
+| Trigger Words | "prioritize", "backlog", "RICE", "MoSCoW", "value vs effort", "ranking", "WSJF" |
+
+**What it does:** Ranks tickets, tasks, or features using RICE, MoSCoW, value-vs-effort, or WSJF. Produces an ordered backlog with scores and rationale.
+
+**HARD-GATE:** Do not prioritize without understanding each item. State criteria for every score.
+
+**Next after use:** `plan-sprint` (use ordered backlog to select sprint candidates).
+
+---
+
+### plan-sprint
+
+| Path | `skills/ceremony/plan-sprint/SKILL.md` |
+| Category | Ceremony |
+| Description | Plan a sprint: select tickets, define goal, allocate capacity |
+| Trigger Words | "plan sprint", "sprint planning", "sprint goal", "sprint capacity", "sprint backlog" |
+
+**What it does:** Selects tickets from a prioritized backlog based on team capacity and velocity. Defines a sprint goal and produces a sprint plan with capacity allocation.
+
+**HARD-GATE:** Do not commit more than the team's historical velocity. Define a single clear sprint goal.
+
+**Next after use:** Begin sprint execution. Use `identify-risks` to scan the sprint plan for risks.
+
+---
+
+### create-retrospective
+
+| Path | `skills/ceremony/create-retrospective/SKILL.md` |
+| Category | Ceremony |
+| Description | Generate sprint retrospectives with action items |
+| Trigger Words | "retrospective", "retro", "sprint review", "what went well", "lessons learned" |
+
+**What it does:** Generates a structured retrospective from sprint data and team feedback. Covers what went well, what didn't, action items, metrics, and kudos.
+
+**HARD-GATE:** Every "what didn't" must have an action item with owner and timeline.
+
+**Next after use:** Feed action items into execution tracking or the next sprint plan.
+
+---
+
+### identify-risks
+
+| Path | `skills/execution/identify-risks/SKILL.md` |
+| Category | Execution |
+| Description | Scan plans for risks, dependencies, and blockers |
+| Trigger Words | "risks", "risk assessment", "blockers", "what could go wrong", "risk register" |
+
+**What it does:** Scans task lists and PRDs for dependency chains, external dependencies, ambiguous requirements, single points of failure, capacity concerns, and technical uncertainty. Produces a risk register with likelihood, impact, and mitigation.
+
+**HARD-GATE:** Every risk must reference specific evidence. Do not fabricate risks.
+
+**Next after use:** `generate-status-report` (include risks in status update).
+
+---
+
+### generate-status-report
+
+| Path | `skills/execution/generate-status-report/SKILL.md` |
+| Category | Execution |
+| Description | Generate structured stakeholder status reports |
+| Trigger Words | "status report", "sprint update", "stakeholder update", "progress report", "project status" |
+
+**What it does:** Produces a structured status report following a standard template: Executive Summary, Accomplishments, In Progress, Blocked, Risks, Next Steps.
+
+**HARD-GATE:** Do not fabricate progress. Mark unknown items as "needs update." Do not hide blockers.
+
+**Next after use:** Continue tracking or begin next sprint planning cycle.
 
 ---
 
@@ -65,13 +170,7 @@ Complete catalog of 3 language-agnostic planning skills and 1 orchestration agen
 | Path | `agents/product-owner/SKILL.md` |
 | Description | Full planning lifecycle with approval gates |
 
-**Phases:**
-1. **Discovery & Clarification** — Scope the feature and gather requirements
-2. **PRD Draft** — Generate the Product Requirements Document
-3. **Review & Revise** — Iterate on feedback until approved
-4. **Task Estimation** — Break approved PRD into TDD tasks
-5. **Ticket Generation** — Convert tasks into tracker-ready tickets
-6. **Sprint Placement** — Order tickets by dependency and sprint readiness
+**Phases:** Discovery → PRD Draft → Review & Revise → Task Estimation → Ticket Generation → Sprint Placement
 
 **Hard Gates:** PRD Approval, Ticket Approval, Sprint Confirmation
 
@@ -79,14 +178,62 @@ Complete catalog of 3 language-agnostic planning skills and 1 orchestration agen
 
 ---
 
+### project-manager Agent
+
+| Path | `agents/project-manager/SKILL.md` |
+| Description | Execution tracking lifecycle with approval gates |
+
+**Phases:** Estimation → Risk Assessment → Tracking Setup → Status Reporting
+
+**Hard Gates:** Estimation Review, Risk Acceptance, Status Report Approval
+
+**Dependencies:** `estimate-tasks`, `identify-risks`, `generate-status-report`
+
+---
+
+### tech-lead Agent
+
+| Path | `agents/tech-lead/SKILL.md` |
+| Description | Technical review lifecycle with go/no-go recommendation |
+
+**Phases:** PRD Review → Feasibility Assessment → Estimation Quality Review → Technical Risk Report
+
+**Hard Gates:** PRD Feasibility, Estimation Quality
+
+**Dependencies:** `review-prd`, `estimate-tasks`
+
+---
+
+### delivery-lead Agent
+
+| Path | `agents/delivery-lead/SKILL.md` |
+| Description | End-to-end delivery pipeline — the meta-agent |
+
+**Phases:** Scope → Plan → Prioritize → Sprint → Execute → Retrospect
+
+**Hard Gates:** PRD Approval, Sprint Commitment, Retrospective Complete
+
+**Dependencies:** All 10 skills
+
+---
+
 ## If You Need...
 
 | You need... | Recommended Skill(s) |
 | **Write a PRD** | `create-prd` |
+| **Review a PRD** | `review-prd` |
 | **Break down a feature** | `create-prd` → `generate-tasks` |
+| **Estimate effort** | `generate-tasks` → `estimate-tasks` |
+| **Assess risks** | `estimate-tasks` → `identify-risks` |
 | **Generate tickets** | `plan-tickets` |
+| **Prioritize backlog** | `prioritize-backlog` |
+| **Plan a sprint** | `plan-sprint` |
+| **Retrospective** | `create-retrospective` |
+| **Status report** | `generate-status-report` |
 | **End-to-end planning** | `product-owner` agent |
-| **Sprint-ready backlog** | `product-owner` agent |
+| **Execution tracking** | `project-manager` agent |
+| **Technical feasibility** | `tech-lead` agent |
+| **Full delivery cycle** | `delivery-lead` agent |
 
 ---
 

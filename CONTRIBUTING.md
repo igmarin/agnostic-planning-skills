@@ -6,12 +6,11 @@ Contributions are welcome. This repository follows a Markdown + YAML frontmatter
 
 1. Clone the repository
 2. Review [docs/architecture.md](docs/architecture.md) for structural conventions
-3. Review [docs/skill-design-principles.md](docs/skill-design-principles.md) for content principles
 
 ## Adding a New Skill
 
 1. Create the directory: `skills/<category>/<skill-name>/`
-2. Create `SKILL.md` following [docs/skill-template.md](docs/skill-template.md)
+2. Create `SKILL.md` following the conventions in [docs/architecture.md](docs/architecture.md)
 3. Add companion files (templates, examples, heuristics) as needed
 4. Register the skill in `tile.json`
 5. Add the skill to `docs/reference/skill-catalog.md`
@@ -20,11 +19,10 @@ Contributions are welcome. This repository follows a Markdown + YAML frontmatter
 ## Adding a New Agent
 
 1. Create the directory: `agents/<agent-name>/`
-2. Create `SKILL.md` following [docs/agent-template.md](docs/agent-template.md)
-3. Include phases, hard gates, decision gates, and error recovery
-4. Register the agent in `agents.json`
-5. Add the agent to `docs/reference/skill-catalog.md`
-6. Update `docs/agent-guide.md` with the new agent's workflow
+2. Create `SKILL.md` with phases, hard gates, decision gates, and error recovery
+3. Register the agent in `agents.json`
+4. Add the agent to `docs/reference/skill-catalog.md`
+5. Update `docs/agent-guide.md` with the new agent's workflow
 
 ## Conventions
 

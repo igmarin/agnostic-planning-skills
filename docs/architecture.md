@@ -13,7 +13,7 @@ agnostic-planning-skills/
 ├── docs/                    # Documentation
 │   ├── architecture.md
 │   ├── agent-guide.md
-│   ├── skill-template.md
+│   ├── calling-skills.md
 │   └── reference/
 │       ├── skill-catalog.md
 │       └── integration-matrix.md

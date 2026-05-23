@@ -1,0 +1,38 @@
+{
+  "name": "igmarin/agnostic-planning-skills",
+  "version": "3.0.0",
+  "summary": "Language-agnostic AI knowledge registry for Technical Project Management, PRDs, PRD review, Software Architecture planning, Task breakdown, Estimation, Risk assessment, Status reporting, Backlog prioritization, Sprint planning, Retrospectives, and Agile ticket generation. Uses Markdown + Front-matter architecture.",
+  "docs": "docs/index.md",
+  "skills": {
+    "create-prd": {
+      "path": "skills/prd/create-prd/SKILL.md"
+    },
+    "review-prd": {
+      "path": "skills/prd/review-prd/SKILL.md"
+    },
+    "generate-tasks": {
+      "path": "skills/task-management/generate-tasks/SKILL.md"
+    },
+    "plan-tickets": {
+      "path": "skills/task-management/plan-tickets/SKILL.md"
+    },
+    "estimate-tasks": {
+      "path": "skills/task-management/estimate-tasks/SKILL.md"
+    },
+    "prioritize-backlog": {
+      "path": "skills/backlog/prioritize-backlog/SKILL.md"
+    },
+    "plan-sprint": {
+      "path": "skills/ceremony/plan-sprint/SKILL.md"
+    },
+    "create-retrospective": {
+      "path": "skills/ceremony/create-retrospective/SKILL.md"
+    },
+    "generate-status-report": {
+      "path": "skills/execution/generate-status-report/SKILL.md"
+    },
+    "identify-risks": {
+      "path": "skills/execution/identify-risks/SKILL.md"
+    }
+  }
+}

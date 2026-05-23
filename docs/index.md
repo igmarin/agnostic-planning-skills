@@ -1,17 +1,32 @@
 # Agnostic Planning Skills — Docs
 
-Language-agnostic skills for product planning, task breakdown, and ticket generation.
+10 language-agnostic skills and 4 orchestration agents for product planning, estimation, risk assessment, backlog prioritization, sprint planning, retrospectives, and status reporting.
 
 ## Quick Navigation
 
 | Need | Document |
 |------|----------|
-| Browse all skills | [reference/skill-catalog.md](reference/skill-catalog.md) |
+| Browse all skills and agents | [reference/skill-catalog.md](reference/skill-catalog.md) |
 | Understand skill chaining | [reference/integration-matrix.md](reference/integration-matrix.md) |
-| Agent workflows | [agent-guide.md](agent-guide.md) |
-| Repository structure | [architecture.md](architecture.md) |
-| Create a new skill | [skill-template.md](skill-template.md) |
-| Create a new agent | [agent-template.md](agent-template.md) |
+| Agent workflows with diagrams | [agent-guide.md](agent-guide.md) |
+| Repository structure and conventions | [architecture.md](architecture.md) |
 | Invoke skills and agents | [calling-skills.md](calling-skills.md) |
-| Design principles | [skill-design-principles.md](skill-design-principles.md) |
-| Skill structure spec | [skill-structure.md](skill-structure.md) |
+
+## Skill Categories
+
+| Category | Skills |
+|----------|--------|
+| PRD | `create-prd`, `review-prd` |
+| Task Management | `generate-tasks`, `plan-tickets`, `estimate-tasks` |
+| Backlog | `prioritize-backlog` |
+| Ceremony | `plan-sprint`, `create-retrospective` |
+| Execution | `identify-risks`, `generate-status-report` |
+
+## Agents
+
+| Agent | Focus |
+|-------|-------|
+| `product-owner` | Scope & planning: PRD → Tasks → Tickets → Sprint |
+| `project-manager` | Execution tracking: Estimation → Risks → Tracking → Reports |
+| `tech-lead` | Technical feasibility: PRD Review → Feasibility → Estimation Quality |
+| `delivery-lead` | End-to-end pipeline: Scope → Plan → Prioritize → Sprint → Execute → Retrospect |

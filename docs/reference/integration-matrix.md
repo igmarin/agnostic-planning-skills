@@ -11,13 +11,13 @@ Integration matrix: which skill connects to which and in what order.
 
 ---
 
-## Complete Agent Loop
+## Complete Agent Loops
 
-### Product Owner (Full Planning Lifecycle)
+### Product Owner (Planning Lifecycle)
 
 ```mermaid
 graph TD
-    A[Feature Idea] --> B[Phase 1: Discovery & Clarification]
+    A[Feature Idea] --> B[Phase 1: Discovery]
     B --> C[Phase 2: PRD Draft]
     C --> D{PRD Approved?}
     D -->|No| E[Phase 3: Review & Revise]
@@ -32,16 +32,29 @@ graph TD
     J -->|Yes| K[Ready for Development]
 ```
 
-### Feature Planning Flow
+### Project Manager (Execution Tracking)
 
-```text
-create-prd → [gate: PRD approved] → generate-tasks → plan-tickets
+```mermaid
+graph TD
+    A[Task List / PRD] --> B["Phase 1: Estimation<br/>estimate-tasks"]
+    B --> C{Estimates Reviewed?}
+    C -->|No| B
+    C -->|Yes| D["Phase 2: Risk Assessment<br/>identify-risks"]
+    D --> E{Risks Accepted?}
+    E -->|No| D
+    E -->|Yes| F[Phase 3: Tracking Setup]
+    F --> G["Phase 4: Status Reporting<br/>generate-status-report"]
+    G --> H{Report Approved?}
+    H -->|No| G
+    H -->|Yes| I[Share with Stakeholders]
 ```
 
-### PRD → Tickets (Direct)
+---
+
+## Full Pipeline
 
 ```text
-create-prd → [gate: PRD approved] → plan-tickets
+create-prd → review-prd → [gate: PRD approved] → generate-tasks → estimate-tasks → identify-risks → prioritize-backlog → plan-tickets → plan-sprint → generate-status-report → create-retrospective
 ```
 
 ---
@@ -52,22 +65,77 @@ create-prd → [gate: PRD approved] → plan-tickets
 
 | Next | When |
 |------|------|
-| generate-tasks | Always after PRD approved |
+| review-prd | Always after PRD draft — review for completeness and feasibility |
+| generate-tasks | After PRD reviewed and approved |
 | plan-tickets | If tickets needed directly from PRD scope |
+
+### review-prd
+
+| Next | When |
+|------|------|
+| generate-tasks | After review passes (Approved or Approved with Suggestions) |
+| create-prd | If review returns Needs Revision — loop back to re-draft |
+| tech-lead | For deeper feasibility and estimation quality assessment |
 
 ### generate-tasks
 
 | Next | When |
 |------|------|
+| estimate-tasks | To assign effort estimates to the task breakdown |
 | plan-tickets | If the same initiative needs ticket drafts |
-| (Begin implementation) | Start working on Task 0.0 |
+
+### estimate-tasks
+
+| Next | When |
+|------|------|
+| identify-risks | After estimation, to assess risks surfaced by high-uncertainty tasks |
+| plan-sprint | To select tickets based on capacity vs estimates |
+
+### identify-risks
+
+| Next | When |
+|------|------|
+| generate-status-report | Include the risk register in stakeholder status updates |
+| plan-tickets | If risks reveal new ticket dependencies |
+| plan-sprint | Scan sprint plan for dependency and capacity risks |
 
 ### plan-tickets
 
 | Next | When |
 |------|------|
+| prioritize-backlog | After tickets drafted, rank them for sprint selection |
 | (Create in tracker) | After ticket drafts approved |
-| (Begin implementation) | After tickets are in the sprint backlog |
+| plan-sprint | Selected tickets feed into sprint planning |
+
+### prioritize-backlog
+
+| Next | When |
+|------|------|
+| plan-sprint | Use ordered backlog to select sprint candidates |
+| plan-tickets | If newly prioritized items need ticket drafts |
+
+### plan-sprint
+
+| Next | When |
+|------|------|
+| generate-status-report | Report sprint progress to stakeholders |
+| (Begin implementation) | Start working on sprint tickets |
+| create-retrospective | After sprint ends, generate retrospective |
+
+### generate-status-report
+
+| Next | When |
+|------|------|
+| (Share with stakeholders) | After report approved |
+| identify-risks | If report reveals new or escalating risks |
+| create-retrospective | Status reports feed into end-of-sprint retrospective |
+
+### create-retrospective
+
+| Next | When |
+|------|------|
+| plan-sprint | Action items feed into the next sprint plan |
+| project-manager | Feed action items into execution tracking |
 
 ---
 
@@ -75,16 +143,26 @@ create-prd → [gate: PRD approved] → plan-tickets
 
 ```text
 Have a feature idea?
-  └─ create-prd → generate-tasks
+  └─ create-prd → review-prd → generate-tasks → estimate-tasks
 
-Need tickets from an existing plan?
-  └─ plan-tickets
+Need to prioritize?
+  └─ prioritize-backlog → plan-sprint
+
+Need execution tracking?
+  └─ project-manager (agent)
+    └─ estimate-tasks → identify-risks → generate-status-report
 
 Full end-to-end planning?
   └─ product-owner (agent)
 
-Need to revise a PRD?
-  └─ create-prd (re-draft) or product-owner Phase 3
+Need technical review?
+  └─ tech-lead (agent)
+
+Full delivery cycle?
+  └─ delivery-lead (agent)
+
+Sprint done?
+  └─ create-retrospective
 ```
 
 ---
@@ -92,13 +170,18 @@ Need to revise a PRD?
 ## Checkpoints and Gates
 
 | Name | Type | Defined in | Purpose |
-| PRD Approved | gate | create-prd, product-owner | Don't generate tasks without approved PRD |
-| Ticket Approved | gate | plan-tickets, product-owner | Don't create tracker issues without explicit approval |
-| Sprint Confirmed | gate | product-owner | Don't assume sprint placement without user confirmation |
+| PRD Approved | gate | create-prd, product-owner, delivery-lead | Don't generate tasks without approved PRD |
+| Estimation Review | gate | estimate-tasks, project-manager | Don't proceed if >30% of tasks have low confidence |
+| Risk Acceptance | gate | identify-risks, project-manager | Every High/High risk must have an owner and plan |
+| Ticket Approved | gate | plan-tickets, product-owner | Don't create tracker issues without approval |
+| Status Report Approved | gate | generate-status-report, project-manager | Don't share report without approval |
+| Sprint Confirmed | gate | product-owner | Don't assume sprint placement |
+| Sprint Commitment | gate | plan-sprint, delivery-lead | Don't proceed without committed sprint plan |
+| Retrospective Complete | gate | create-retrospective, delivery-lead | Don't close cycle without action items |
 
 ---
 
 ## See Also
 
 - [Skill Catalog](skill-catalog.md) — Complete skills list with descriptions and trigger words
-- [Agent Guide](../agent-guide.md) — Product Owner agent phases with Mermaid diagrams
+- [Agent Guide](../agent-guide.md) — Agent workflows with Mermaid diagrams
