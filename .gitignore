@@ -1,0 +1,31 @@
+.DS_Store
+evals/
+# Public root-level skill. Override common global build/ ignores.
+!build/
+!build/SKILL.md
+LEAN-CTX.md
+AGENTS.md.lean-ctx.bak
+
+# Plugin manifests (required by CI - shared)
+# .cursor-plugin/ and .windsurf-plugin/ are NOT ignored - CI needs these
+
+# Node
+node_modules/
+.windsurfrules
+.markdownlint.yaml
+
+# IDE / AI assistant configs (personal, not shared)
+.crush/
+.codex/
+.codex-plugin/
+.gemini/
+.gemini-plugin/
+.cursor/
+.windsurf/
+
+private-evals/
+tmp/
+.lean-ctx/
+lean-ctx/
+.claude/
+.antigravitycli/
