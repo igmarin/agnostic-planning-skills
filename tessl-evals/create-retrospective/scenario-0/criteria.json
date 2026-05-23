@@ -1,0 +1,46 @@
+{
+  "context": "Checks whether the final artifact follows the create-retrospective instructions from the published agnostic-planning-skills tile.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "instruction-1",
+      "description": "The submitted artifact follows this skill instruction: Generate a structured retrospective focused on learning and actionable improvements.",
+      "max_score": 13
+    },
+    {
+      "name": "instruction-2",
+      "description": "The submitted artifact follows this skill instruction: DO NOT skip action items — every \"what didn't\" must have at least one action.",
+      "max_score": 13
+    },
+    {
+      "name": "instruction-3",
+      "description": "The submitted artifact follows this skill instruction: **Identify themes** — group related feedback into themes rather than listing raw comments.",
+      "max_score": 13
+    },
+    {
+      "name": "instruction-4",
+      "description": "The submitted artifact follows this skill instruction: **Draft action items** — specific, owned, time-bound. Use the template in [RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md) if available; otherwise use the inline minimal template below.",
+      "max_score": 13
+    },
+    {
+      "name": "instruction-5",
+      "description": "The submitted artifact follows this skill instruction: **Review** — verify every \"what didn't\" maps to an action item.",
+      "max_score": 12
+    },
+    {
+      "name": "instruction-6",
+      "description": "The submitted artifact follows this skill instruction: Use this when `RETROSPECTIVE_TEMPLATE.md` is not available in the bundle:",
+      "max_score": 12
+    },
+    {
+      "name": "instruction-7",
+      "description": "The submitted artifact follows this skill instruction: Use **English only** unless the user requests otherwise.",
+      "max_score": 12
+    },
+    {
+      "name": "instruction-8",
+      "description": "The submitted artifact follows this skill instruction: Themed bullets should include specific examples; the action item table must always include Owner, Timeline, and Linked Issue columns.",
+      "max_score": 12
+    }
+  ]
+}

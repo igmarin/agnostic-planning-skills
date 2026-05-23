@@ -22,10 +22,10 @@ node_modules/
 .gemini-plugin/
 .cursor/
 .windsurf/
-
-private-evals/
 tmp/
 .lean-ctx/
 lean-ctx/
 .claude/
 .antigravitycli/
+evals/
+private-evals/

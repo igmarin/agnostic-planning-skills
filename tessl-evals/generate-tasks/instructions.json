@@ -1,0 +1,78 @@
+{
+  "target_skill": "generate-tasks",
+  "source_path": "skills/task-management/generate-tasks/SKILL.md",
+  "instructions": [
+    {
+      "instruction": "**Task 0.0:** Always create feature branch first",
+      "original_snippets": "**Task 0.0:** Always create feature branch first",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "reminder"
+    },
+    {
+      "instruction": "**Test pattern:** Write test → Run fail → Implement → Run pass (TDD quadruplet)",
+      "original_snippets": "**Test pattern:** Write test → Run fail → Implement → Run pass (TDD quadruplet)",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Validation:** Verify test command works before generating full task list",
+      "original_snippets": "**Validation:** Verify test command works before generating full task list",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Test Command Detection** - Check config files for test scripts",
+      "original_snippets": "**Test Command Detection** - Check config files for test scripts",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Directory Detection** - Identify source and test directories",
+      "original_snippets": "**Directory Detection** - Identify source and test directories",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Documentation Tool Detection** - Identify doc generation tools",
+      "original_snippets": "**Documentation Tool Detection** - Identify doc generation tools",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**CRITICAL:** Verify the detected test command works:",
+      "original_snippets": "**CRITICAL:** Verify the detected test command works:",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Break down the feature/PRD into implementation tasks:",
+      "original_snippets": "Break down the feature/PRD into implementation tasks:",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Identify User-Visible Behaviors** - User capabilities, APIs, data flows",
+      "original_snippets": "**Identify User-Visible Behaviors** - User capabilities, APIs, data flows",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Create Parent Task Groups** - Group related behaviors with TDD quadruplets",
+      "original_snippets": "**Create Parent Task Groups** - Group related behaviors with TDD quadruplets",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Create `/tasks/tasks-[feature-name].md` using the template in `TASK_TEMPLATES.md`.",
+      "original_snippets": "Create `/tasks/tasks-[feature-name].md` using the template in `TASK_TEMPLATES.md`.",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Review Generated Tasks**",
+      "original_snippets": "**Review Generated Tasks**",
+      "relevant_when": "When a user asks for planning work that should trigger generate-tasks.",
+      "why_given": "new knowledge"
+    }
+  ]
+}

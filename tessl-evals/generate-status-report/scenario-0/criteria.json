@@ -1,0 +1,26 @@
+{
+  "context": "Checks whether the final artifact follows the generate-status-report instructions from the published agnostic-planning-skills tile.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "instruction-1",
+      "description": "The submitted artifact follows this skill instruction: Produce a clear, honest status report. Focus on progress, blockers, and what's next.",
+      "max_score": 25
+    },
+    {
+      "name": "instruction-2",
+      "description": "The submitted artifact follows this skill instruction: **Rule:** Never fabricate progress — mark unknowns as \"needs update.\"",
+      "max_score": 25
+    },
+    {
+      "name": "instruction-3",
+      "description": "The submitted artifact follows this skill instruction: **Write Executive Summary** — 2-4 sentences: health, key accomplishment, top concern.",
+      "max_score": 25
+    },
+    {
+      "name": "instruction-4",
+      "description": "The submitted artifact follows this skill instruction: **Review** — verify no status is fabricated or assumed.",
+      "max_score": 25
+    }
+  ]
+}

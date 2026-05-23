@@ -1,11 +1,11 @@
 # Root orchestrator — not an atomic skill registered in tile.json
 /SKILL.md
 
-# Agents are registered in agents.json, not tile.json
+# Agent files are registered in agents.json, not tile.json
 agents/
 
+# Generated eval source — untracked staging output
+tessl-evals/
+
 # Local scratch / config
-CODE_OF_CONDUCT.md
-CONTRIBUTING.md
 tmp/
-.tesslignore
