@@ -1,0 +1,7 @@
+{
+  "agents": {
+    "product-owner": {
+      "path": "agents/product-owner/SKILL.md"
+    }
+  }
+}
