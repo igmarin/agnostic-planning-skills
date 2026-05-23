@@ -31,16 +31,33 @@ DO NOT skip mitigations — every risk needs at least one concrete mitigation.
 ## Core Process
 
 1. **Receive** — task list, PRD, ticket set, or sprint plan.
-2. **Scan risk patterns** (see [RISK_PATTERNS.md](./RISK_PATTERNS.md)) — dependency chains, external deps, ambiguity, single points of failure, capacity, technical uncertainty.
+2. **Scan risk patterns** (see Risk Patterns below) — dependency chains, external deps, ambiguity, single points of failure, capacity, technical uncertainty.
 3. **Classify** — Likelihood (High/Medium/Low), Impact (High/Medium/Low), Proximity (Immediate/Near-term/Future).
 4. **Suggest mitigations** — prevention, contingency, owner.
 5. **Output** — structured risk register.
 
-## Extended Resources (Progressive Disclosure)
+## Risk Patterns
 
-Load these files only when needed:
+Apply these six patterns when scanning the plan:
 
-- **[RISK_PATTERNS.md](./RISK_PATTERNS.md)** — Catalog of 6 risk patterns with examples.
+| # | Pattern | Signals |
+|---|---|---|
+| 1 | **Dependency Chain** | Task B cannot start until Task A completes; A is not yet done |
+| 2 | **Single Point of Failure** | Only one person owns a critical path item; no documented backup |
+| 3 | **Ambiguous Requirement** | Acceptance criteria missing, TBD placeholders, or vague verbs ("improve", "enhance") |
+| 4 | **External Dependency** | Third-party API, vendor delivery, regulatory approval, or customer sign-off required |
+| 5 | **Capacity / Resource** | Team member over-allocated; holiday or leave overlaps delivery window |
+| 6 | **Technical Uncertainty** | New technology, unproven integration, or no spike/prototype yet planned |
+
+## Concrete Example
+
+**Sample input task:** "Integrate payment gateway — assigned to @alice, go-live Friday. Vendor sandbox access not yet confirmed."
+
+**Resulting risk register row:**
+
+| ID | Risk | Likelihood | Impact | Proximity | Evidence | Mitigation |
+|----|------|-----------|--------|-----------|----------|------------|
+| R1 | Payment gateway integration blocked by missing vendor sandbox access | High | High | Immediate | Task: "Vendor sandbox access not yet confirmed" | Owner: @alice escalates to vendor by EOD Monday; contingency: mock server for internal testing until access granted |
 
 ## Output Style
 
@@ -53,6 +70,7 @@ Load these files only when needed:
 ## Integration
 
 | Skill | When to chain |
+|---|---|
 | **estimate-tasks** | After estimation, assess risks from high-uncertainty tasks |
 | **generate-tasks** | After task breakdown, identify dependency risks |
 | **generate-status-report** | Include risk updates in stakeholder status reports |

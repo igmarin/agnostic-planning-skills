@@ -15,13 +15,6 @@ metadata:
 
 Produce a clear, honest status report. Focus on progress, blockers, and what's next.
 
-## Quick Reference
-
-- **Input:** Task progress, sprint info, blocker list, risk register (optional).
-- **Output:** Structured markdown report.
-- **Sections:** Executive Summary, Accomplishments, In Progress, Blocked, Risks, Next Steps.
-- **Rule:** Never fabricate progress — mark unknowns as "needs update."
-
 ## HARD-GATE
 
 ```text
@@ -32,32 +25,102 @@ DO NOT use passive language ("was delayed" → "Blocked on Y, owner: Z").
 
 ## Core Process
 
+- **Input:** Task progress, sprint info, blocker list, risk register (optional).
+- **Output:** Structured markdown report with sections: Executive Summary, Accomplishments, In Progress, Blocked, Risks, Next Steps.
+- **Rule:** Never fabricate progress — mark unknowns as "needs update."
+
 1. **Gather** — task progress, sprint info, blocker list, optional risk register.
 2. **Categorize** — Accomplished, In Progress, Blocked, Upcoming.
 3. **Write Executive Summary** — 2-4 sentences: health, key accomplishment, top concern.
-4. **Fill template** — follow [STATUS_REPORT_TEMPLATE.md](./STATUS_REPORT_TEMPLATE.md) section by section.
+4. **Fill template** — follow the STATUS_REPORT_TEMPLATE below, section by section.
 5. **Review** — verify no status is fabricated or assumed.
 
-## Extended Resources (Progressive Disclosure)
+## STATUS_REPORT_TEMPLATE
 
-Load these files only when needed:
+```markdown
+# Status Report: [Project / Sprint Name]
+**Period:** [Start Date] – [End Date]   **Prepared:** [Date]   **Author:** [Name]
 
-- **[STATUS_REPORT_TEMPLATE.md](./STATUS_REPORT_TEMPLATE.md)** — Standard report structure.
+## Executive Summary
+**Health:** On Track | At Risk | Blocked
+[2-4 sentences: overall health, key accomplishment, top concern.]
 
-## Output Style
+## Accomplishments
+- [Task / milestone completed] — [brief context, e.g., "merged PR #42, closes Auth epic"]
+- …
 
-1. **Header** — project/sprint name, period, date.
-2. **Executive Summary** — health (On Track / At Risk / Blocked), key accomplishment, top concern.
-3. **Accomplishments** — bulleted list with brief context.
-4. **In Progress** — `| Task | Owner | Status | ETA |`
-5. **Blocked** — `| Task | Blocker | Owner | Resolution Plan |`
-6. **Risks & Concerns** — top 3-5, with status changes since last report.
-7. **Next Steps** — what's happening before the next report.
-8. **English only** unless user requests otherwise.
+## In Progress
+| Task | Owner | Status | ETA |
+|------|-------|--------|-----|
+| [Task name] | [Owner] | [% or narrative] | [Date] |
+
+## Blocked
+| Task | Blocker | Owner | Resolution Plan |
+|------|---------|-------|------------------|
+| [Task name] | [Specific blocker description] | [Owner] | [Next action + target date] |
+
+## Risks & Concerns
+| # | Risk | Likelihood | Impact | Status Change |
+|---|------|-----------|--------|---------------|
+| 1 | [Risk description] | High/Med/Low | High/Med/Low | New / Unchanged / Resolved |
+
+## Next Steps
+- [Action] — Owner: [Name], Due: [Date]
+- …
+```
+
+## Concrete Example
+
+**Sample input (provided by user or gathered from context):**
+
+```
+Sprint 14 | May 6–10 2025
+Done: Deploy auth service to staging (owner: Ana)
+In Progress: API rate-limiting (owner: Ben, 60%, ETA May 10); Dashboard redesign (owner: Cara, 30%, ETA May 14)
+Blocked: Payment integration — third-party API keys not received, owner: Dan, escalated to procurement May 7
+Risk: Rate-limiting miss could delay beta by one week
+```
+
+**Resulting report excerpt:**
+
+```markdown
+# Status Report: Sprint 14
+**Period:** May 6–10 2025   **Prepared:** May 10 2025   **Author:** Agent
+
+## Executive Summary
+**Health:** At Risk
+Auth service is deployed to staging on schedule. API rate-limiting is on track for
+Friday but payment integration is blocked pending third-party credentials, putting the
+beta timeline at risk by up to one week.
+
+## Accomplishments
+- Auth service deployed to staging — closes Sprint 13 carry-over (owner: Ana)
+
+## In Progress
+| Task | Owner | Status | ETA |
+|------|-------|--------|-----|
+| API rate-limiting | Ben | 60% | May 10 |
+| Dashboard redesign | Cara | 30% | May 14 |
+
+## Blocked
+| Task | Blocker | Owner | Resolution Plan |
+|------|---------|-------|------------------|
+| Payment integration | Third-party API keys not received | Dan | Escalated to procurement May 7; follow up May 10 |
+
+## Risks & Concerns
+| # | Risk | Likelihood | Impact | Status Change |
+|---|------|-----------|--------|---------------|
+| 1 | Rate-limiting slip delays beta | Medium | High | New |
+
+## Next Steps
+- Confirm API keys received — Owner: Dan, Due: May 10
+- Complete rate-limiting — Owner: Ben, Due: May 10
+```
 
 ## Integration
 
 | Skill | When to chain |
+|-------|---------------|
 | **identify-risks** | Include latest risk register in the status report |
 | **estimate-tasks** | Reference estimates when reporting vs planned effort |
 | **product-owner** | Report on PRD-aligned scope and scope changes |
