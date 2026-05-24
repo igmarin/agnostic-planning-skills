@@ -2,11 +2,13 @@
 name: delivery-lead
 license: MIT
 description: >
-  Orchestrates the full delivery pipeline from idea to retrospective. Chains all
-  10 planning skills through six phases: scope, plan, prioritize, sprint, execute,
-  and retrospect. The meta-agent for end-to-end product delivery. Language-agnostic.
-  Use when taking a feature from idea through delivery, or when running a complete
-  planning cycle from PRD to retrospective.
+  Orchestrates the full delivery pipeline from idea to retrospective, producing a PRD, task breakdown,
+  effort estimates, risk register, prioritized backlog, sprint plan, status reports, and retrospective.
+  Chains all 10 planning skills through six sequential phases: scope, plan, prioritize, sprint, execute,
+  and retrospect — with hard approval gates between key phases. Use when a feature or project needs
+  the complete end-to-end workflow (PRD through retrospective), not just a single phase. Prefer this
+  over individual planning skills when the user needs full project management, release planning, agile
+  workflow orchestration, roadmap execution, or an end-to-end delivery cycle from idea to retrospective.
 metadata:
   version: 1.0.0
   user-invocable: "true"
@@ -19,19 +21,6 @@ metadata:
 # Delivery Lead Agent
 
 Meta-agent orchestrating the full delivery pipeline: from feature idea through execution to retrospective. Chains all 10 skills through six phases with approval gates.
-
-## When to Use
-
-- A feature needs the full planning lifecycle — from PRD through retrospective
-- The team wants a single guided pipeline for end-to-end delivery
-- Stakeholders need visibility across scope, execution, and outcomes
-
-## Anti-Patterns
-
-- Do not use for small features — `product-owner` or `project-manager` alone is sufficient
-- Do not skip phases — each phase produces artifacts the next one depends on
-- Do not proceed past a hard gate without explicit approval
-- Do not assume sprint data or team feedback — gather real inputs
 
 ## Agent Phases
 
@@ -51,9 +40,9 @@ DO NOT proceed to planning without an approved PRD.
 
 ### Phase 2: Plan
 
-1. Activate **task-management/generate-tasks** — break PRD into TDD task groups.
-2. Activate **task-management/estimate-tasks** — assign effort estimates.
-3. Activate **execution/identify-risks** — scan for dependencies and blockers.
+1. Activate **task-management/generate-tasks** — break PRD into TDD task groups. Output: `tasks-[name].md`.
+2. Activate **task-management/estimate-tasks** — assign effort estimates. Output: points + confidence per task.
+3. Activate **execution/identify-risks** — scan for dependencies and blockers. Output: risk register with owners.
 4. Review the full plan before proceeding.
 
 **Quality Check:**
@@ -65,15 +54,15 @@ DO NOT proceed to planning without an approved PRD.
 
 ### Phase 3: Prioritize
 
-1. Activate **backlog/prioritize-backlog** — rank tasks/features.
-2. Activate **task-management/plan-tickets** — convert to tracker-ready tickets.
+1. Activate **backlog/prioritize-backlog** — rank tasks/features. Output: prioritized backlog (RICE / MoSCoW / etc.).
+2. Activate **task-management/plan-tickets** — convert to tracker-ready tickets. Output: ticket stubs ready for import.
 3. Present the prioritized backlog for review (informational — no hard gate here).
 
 ---
 
 ### Phase 4: Sprint
 
-1. Activate **ceremony/plan-sprint** — select tickets for the sprint.
+1. Activate **ceremony/plan-sprint** — select tickets for the sprint. Output: committed ticket list, sprint goal, deferred items.
 2. Define sprint goal, allocate capacity, flag deferred items.
 
 **HARD GATE — Sprint Commitment:**
@@ -86,7 +75,7 @@ DO NOT proceed if sprint capacity is exceeded or sprint goal is undefined.
 
 ### Phase 5: Execute
 
-1. Activate **execution/generate-status-report** — produce regular status updates.
+1. Activate **execution/generate-status-report** — produce regular status updates. Output: status report per cycle.
 2. Monitor risks via **execution/identify-risks** (re-scan as conditions change).
 3. Track completion against the sprint plan.
 4. Flag blockers and escalate as needed.
@@ -95,9 +84,8 @@ DO NOT proceed if sprint capacity is exceeded or sprint goal is undefined.
 
 ### Phase 6: Retrospect
 
-1. Activate **ceremony/create-retrospective** — generate the retrospective.
-2. Gather sprint data, team feedback, and metrics.
-3. Produce action items with owners and timelines.
+1. Activate **ceremony/create-retrospective** — generate the retrospective. Output: action items with owners and timelines.
+2. Gather sprint data, team feedback, and metrics before invoking.
 
 **HARD GATE — Retrospective Complete:**
 ```text

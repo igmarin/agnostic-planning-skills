@@ -17,7 +17,7 @@ metadata:
 
 - **Task 0.0:** Always create feature branch first
 - **Test pattern:** Write test → Run fail → Implement → Run pass (TDD quadruplet)
-- **Auto-detect:** Test command, source dir, test dir, doc tool
+- **Auto-detect:** Test command, source dir, test dir, doc tool (see [REFERENCE.md](REFERENCE.md) for detection rules)
 - **Output:** `/tasks/tasks-[feature-name].md`
 - **Validation:** Verify test command works before generating full task list
 
@@ -25,12 +25,12 @@ metadata:
 
 ### Step 1: Project Detection
 
-Auto-detect project conventions (see `REFERENCE.md` for detailed patterns):
+**CRITICAL RULE:** You MUST explicitly detect and list the project's conventions before generating any tasks (see [REFERENCE.md](REFERENCE.md) for patterns):
 
-1. **Test Command Detection** - Check config files for test scripts
-2. **Directory Detection** - Identify source and test directories
-3. **Work Type Classification** - Web app, CLI, library, API, or other
-4. **Documentation Tool Detection** - Identify doc generation tools
+1. **Test Command Detection** - Check config files (such as `package.json`, `Gemfile`, `Cargo.toml`, `pyproject.toml`, or `go.mod`) for test scripts and identify the exact test command.
+2. **Directory Detection** - Identify the source directory (e.g. `src/`, `lib/`, `app/`, `pkg/`) and test directory (e.g. `__tests__/`, `spec/`, `test/`, `tests/` or co-located tests).
+3. **Work Type Classification** - Classify the project's work type (Web app, CLI tool, Library/SDK, API service, or other).
+4. **Documentation Tool Detection** - Identify the documentation tool in use (e.g. JSDoc/TypeDoc, YARD, rustdoc, godoc, Sphinx) to include documentation tasks.
 
 ### Step 2: Validation Checkpoint
 
@@ -51,12 +51,12 @@ Only proceed if tests run successfully (even if they fail on specific tests).
 Break down the feature/PRD into implementation tasks:
 
 1. **Identify User-Visible Behaviors** - User capabilities, APIs, data flows
-2. **Apply First-Slice Heuristics** - Choose test boundary (see `REFERENCE.md`)
+2. **Apply First-Slice Heuristics** - Choose test boundary (see [REFERENCE.md](REFERENCE.md))
 3. **Create Parent Task Groups** - Group related behaviors with TDD quadruplets
 
 ### Step 4: Generate Task List
 
-Create `/tasks/tasks-[feature-name].md` using the template in `TASK_TEMPLATES.md`.
+Create `/tasks/tasks-[feature-name].md` using the template in [TASK_TEMPLATES.md](TASK_TEMPLATES.md).
 
 ### Step 5: Final Validation
 
@@ -72,4 +72,4 @@ Create `/tasks/tasks-[feature-name].md` using the template in `TASK_TEMPLATES.md
 
 ## Reference Materials
 
-See `REFERENCE.md` for auto-detection patterns and `TASK_TEMPLATES.md` for output templates. 
+See [REFERENCE.md](REFERENCE.md) for auto-detection patterns and [TASK_TEMPLATES.md](TASK_TEMPLATES.md) for output templates. 

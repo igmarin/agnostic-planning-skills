@@ -6,6 +6,7 @@ description: >
   Use when the user provides a plan and wants ticket drafts, wants help shaping
   a plan into tickets, wants sprint-placement guidance, or wants tickets created in
   an issue tracker after the plan is approved.
+  Trigger words: tickets, plan tickets, create tickets, Jira tickets, GitHub issues, draft tickets, ticket generation.
 metadata:
   version: 1.0.0
   user-invocable: "true"

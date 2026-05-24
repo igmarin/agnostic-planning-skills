@@ -41,7 +41,7 @@ DO state confidence (high/medium/low) for every estimate.
 
 ## Estimation Frameworks
 
-See `FRAMEWORKS.md` for detailed framework definitions and selection guidelines.
+See [FRAMEWORKS.md](FRAMEWORKS.md) for detailed framework definitions and selection guidelines.
 
 ### Quick Reference
 
@@ -76,6 +76,10 @@ See `FRAMEWORKS.md` for detailed framework definitions and selection guidelines.
 - **T3 - "Integrate payment gateway":** Low confidence. Recommend a time-boxed spike (1-2 days) to evaluate API docs, sandbox availability, and edge-case handling before assigning points.
 
 **Summary:** 3 estimated tasks total 13 points (High: 2, Medium: 1). T3 blocked pending spike. Re-estimate T3 after spike completes.
+
+## Reference Materials
+
+See [FRAMEWORKS.md](FRAMEWORKS.md) for detailed framework definitions and selection guidelines.
 
 ## Integration
 

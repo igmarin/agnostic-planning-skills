@@ -97,6 +97,10 @@ Deferred (top candidates for Sprint 15):
 3. PERF-05 — Login latency optimisation (5 pts) — lower priority this cycle.
 ```
 
+## Reference Materials
+
+See [SPRINT_PLANNING_GUIDE.md](SPRINT_PLANNING_GUIDE.md) for details on capacity calculations, historical velocity rules, and sprint goal criteria.
+
 ## Integration
 
 | Skill | When to chain |

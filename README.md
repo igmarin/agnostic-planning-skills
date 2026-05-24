@@ -205,6 +205,8 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 
 When contributing skills, agents, or docs:
 
+- Please follow the [Code of Conduct](CODE_OF_CONDUCT.md) in all interactions.
+- Check out the [Contributing Guide](CONTRIBUTING.md) for details on our development and pull request processes.
 - Keep generated artifacts in English unless a user explicitly asks for another language.
 - Preserve the PRD-gates-task-generation rule for every planning skill.
 - Keep public docs consistent with `tile.json`, `agents.json`, and the latest release.

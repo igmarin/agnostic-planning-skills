@@ -71,6 +71,10 @@ Apply these six patterns when scanning the plan:
 4. **Assumptions** — about team, timeline, or external factors.
 5. **English only** unless user requests otherwise.
 
+## Reference Materials
+
+See [RISK_PATTERNS.md](RISK_PATTERNS.md) for detailed descriptions of dependency, resource, and technical risk patterns.
+
 ## Integration
 
 | Skill | When to chain |
