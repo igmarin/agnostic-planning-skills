@@ -3,9 +3,10 @@ name: identify-risks
 license: MIT
 description: >
   Scans plans and tasks for risks: dependency chains, single points of failure,
-  ambiguous requirements, external deps, and capacity concerns. Produces a risk
-  register with likelihood, impact, and mitigations. Language-agnostic.
-  Trigger words: risks, risk assessment, blockers, what could go wrong, risk register.
+  ambiguous requirements, external dependencies, and capacity concerns. Produces a
+  risk register with likelihood, impact, proximity, and mitigations. Language-agnostic.
+  Use when asked about risks, risk assessment, blockers, what could go wrong, or
+  to produce a risk register for a plan, PRD, ticket set, or sprint.
 metadata:
   version: 1.0.0
   user-invocable: "true"
@@ -70,10 +71,6 @@ Apply these six patterns when scanning the plan:
 3. **Top 3 risks** — detailed mitigation recommendations.
 4. **Assumptions** — about team, timeline, or external factors.
 5. **English only** unless user requests otherwise.
-
-## Reference Materials
-
-See [RISK_PATTERNS.md](RISK_PATTERNS.md) for detailed descriptions of dependency, resource, and technical risk patterns.
 
 ## Integration
 

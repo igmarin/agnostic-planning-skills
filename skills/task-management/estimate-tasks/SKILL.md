@@ -41,15 +41,11 @@ DO state confidence (high/medium/low) for every estimate.
 
 ## Estimation Frameworks
 
-See [FRAMEWORKS.md](FRAMEWORKS.md) for detailed framework definitions and selection guidelines.
-
-### Quick Reference
-
-| Framework | When to Use |
-|-----------|------------|
-| Story points | Agile teams, sprint planning |
-| T-shirt sizes | Stakeholder communication |
-| Time ranges | Client contracts, calendar needs |
+| Framework | Scale | Use When |
+|-----------|-------|----------|
+| **Story Points (Fibonacci)** | 1 Trivial · 2 Small · 3 Medium · 5 Large · 8 Very Large · 13 Epic (→ split) | Agile/Scrum teams focusing on relative complexity |
+| **T-Shirt Sizes** | XS · S · M · L · XL (→ split) | High-level roadmap sizing or stakeholder-facing discussions |
+| **Time Ranges** | <1d · 1-2d · 3-5d · 1-2wk · 2+wk (→ split) | Fixed-bid projects requiring calendar anchors |
 
 > **Mixing frameworks:** Never mix frameworks within a single estimation table. If the user switches frameworks mid-session, re-estimate the full table.
 
@@ -61,7 +57,19 @@ See [FRAMEWORKS.md](FRAMEWORKS.md) for detailed framework definitions and select
 4. **Summary** - total estimate, confidence distribution, callouts.
 5. **English only** unless user requests otherwise.
 
-## Worked Example
+## Integration
+
+| Skill | When to chain |
+|-------|---------------|
+| **generate-tasks** | Estimate tasks immediately after generation |
+| **identify-risks** | After estimation, assess dependency and uncertainty risks |
+| **plan-sprint** | Select tickets based on capacity vs estimates |
+
+---
+
+## Reference: Worked Example
+
+> Supplementary reference only. Illustrates a complete estimation session, including a spike-blocked item.
 
 **Framework:** Story points (Fibonacci) - inferred from backlog context.
 
@@ -76,15 +84,3 @@ See [FRAMEWORKS.md](FRAMEWORKS.md) for detailed framework definitions and select
 - **T3 - "Integrate payment gateway":** Low confidence. Recommend a time-boxed spike (1-2 days) to evaluate API docs, sandbox availability, and edge-case handling before assigning points.
 
 **Summary:** 3 estimated tasks total 13 points (High: 2, Medium: 1). T3 blocked pending spike. Re-estimate T3 after spike completes.
-
-## Reference Materials
-
-See [FRAMEWORKS.md](FRAMEWORKS.md) for detailed framework definitions and selection guidelines.
-
-## Integration
-
-| Skill | When to chain |
-|-------|---------------|
-| **generate-tasks** | Estimate tasks immediately after generation |
-| **identify-risks** | After estimation, assess dependency and uncertainty risks |
-| **plan-sprint** | Select tickets based on capacity vs estimates |

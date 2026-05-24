@@ -20,127 +20,160 @@ metadata:
 
 Orchestrates technical review of a PRD: evaluates completeness and feasibility, validates estimation quality, and produces a technical risk report. Chains two skills through four phases.
 
-## When to Use
-
-- A PRD needs technical feasibility review before task breakdown
-- Estimates need validation for realism and consistency
-- The team needs a go/no-go recommendation based on technical risk
-- Architecture or technical concerns need to be surfaced before sprint commitment
-
-## Anti-Patterns
-
-- Do not use without a PRD — this agent reviews existing plans, not creates them
-- Do not substitute technical opinion for evidence — cite specific PRD sections
-- Do not recommend "rewrite in X technology" unless the PRD's technical choices are provably infeasible
-- Do not skip the Feasibility gate for PRDs with external dependencies or new patterns
-
 ## Agent Phases
 
 ### Phase 1: PRD Review
 
-1. Activate **prd/review-prd**: Review the PRD for completeness, testability, and clarity.
-2. Apply the review checklist systematically (see `REVIEW_CHECKLIST.md`).
-3. Classify findings: Critical, Suggestion, Note.
-4. Produce an overall verdict: Approved / Approved with Suggestions / Needs Revision.
+1. Activate **review-prd**: Review the PRD for completeness, testability, and clarity.
+2. Apply the following checklist systematically:
 
-**Decision Gate:**
-- If verdict is "Needs Revision" → return to `create-prd` or the PRD author for revisions. Do not proceed.
-- If verdict is "Approved with Suggestions" → note the suggestions but proceed to Phase 2.
-- If verdict is "Approved" → proceed to Phase 2.
+   **Completeness**
+   - [ ] Problem statement is clearly defined with measurable success criteria
+   - [ ] All user roles and actors are identified
+   - [ ] Functional requirements are explicit (not implied)
+   - [ ] Non-functional requirements (performance, security, scalability) are stated
+   - [ ] Out-of-scope items are explicitly listed
+
+   **Testability**
+   - [ ] Each requirement has a verifiable acceptance criterion
+   - [ ] Edge cases and failure modes are specified
+   - [ ] Integration touchpoints have defined contracts or SLAs
+
+   **Clarity**
+   - [ ] No ambiguous terms (e.g., "fast", "easy", "scalable" without thresholds)
+   - [ ] Data flows and ownership are unambiguous
+   - [ ] Dependencies on external systems are named and versioned
+
+3. **Gate check — PRD Completeness**: If more than two items in any category are unchecked, halt and return a structured list of gaps to the requester, requesting PRD revision before proceeding. If the PRD passes, continue to Phase 2.
 
 ---
 
 ### Phase 2: Feasibility Assessment
 
-1. Evaluate technical feasibility beyond what `review-prd` covers:
-   - **Architecture impact:** Does this feature cross bounded contexts or service boundaries?
-   - **Data implications:** Schema changes, data volume, migration complexity.
-   - **Integration risk:** Third-party APIs, new dependencies, unproven patterns.
-   - **Security surface:** New auth models, data exposure, attack vectors.
-   - **Performance:** Throughput expectations, latency targets, resource constraints.
-2. Classify each concern by severity and proximity.
+1. For each functional and non-functional requirement, evaluate:
+   - **Technical feasibility**: Can this be built with known, available technology?
+   - **Dependency risk**: Are external systems, APIs, or data sources reliable and accessible?
+   - **Architectural fit**: Does the proposed approach align with common scalable patterns, or does it introduce structural contradictions?
+   - **Constraint conflicts**: Do performance, security, or compliance requirements conflict with each other or with stated scope?
 
-**HARD GATE — PRD Feasibility:**
-```text
-The PRD MUST pass feasibility review before estimation quality review.
-DO NOT proceed if any feasibility concern is marked Critical (would block implementation).
-Every Critical concern must have a recommended resolution path.
-```
+2. Assign each concern a severity level:
+   - **High**: Blocks delivery or requires fundamental redesign
+   - **Medium**: Requires significant rework but is solvable within scope
+   - **Low**: Minor risk, addressable during implementation
+
+3. **Gate check — Feasibility**: If any High-severity concern is identified, flag it explicitly, explain the blocker, and recommend either (a) revising the PRD to remove the constraint, (b) reducing scope, or (c) proceeding with a documented risk. Do not silently continue.
 
 ---
 
 ### Phase 3: Estimation Quality Review
 
-1. If estimates exist (from `estimate-tasks`), review them:
-   - Are estimates proportional? (A 2-line change should not be 8 points.)
-   - Are high-uncertainty tasks flagged for spikes?
-   - Are there tasks with no estimate or placeholder values?
-   - Does the total estimate align with the team's historical velocity?
-2. If no estimates exist, activate **task-management/estimate-tasks** to produce them.
+1. Activate **estimate-tasks**: Review all task estimates provided in or alongside the PRD.
+2. Evaluate estimation quality across these dimensions:
 
-**HARD GATE — Estimation Quality:**
-```text
-Estimates MUST pass quality review before the technical risk report.
-DO NOT proceed if >20% of tasks have "Low" confidence or placeholder estimates.
-DO NOT proceed if any task >13 points (or equivalent) has not been decomposed.
-Every flagged item must have a recommended action (spike, split, or clarify).
-```
+   **Coverage**
+   - [ ] All functional requirements have associated estimates
+   - [ ] Non-functional requirements (e.g., performance tuning, security hardening) are costed
+   - [ ] Integration, testing, and deployment tasks are included
+   - [ ] Buffer or contingency is present for high-uncertainty items
+
+   **Realism**
+   - [ ] Estimates are broken into tasks no larger than 2 days (or a defined sprint unit)
+   - [ ] No single estimate covers an entire phase without decomposition
+   - [ ] Dependencies between tasks are sequenced (parallelism is not assumed by default)
+
+   **Consistency**
+   - [ ] Similar tasks have similar estimates (flag outliers)
+   - [ ] Estimates align with the stated team size and skill level
+
+3. **Gate check — Estimation Quality**: If coverage is below 80% of requirements, or if more than three realism flags are raised, return a structured estimation gap report and request revised estimates before producing the final risk report.
 
 ---
 
 ### Phase 4: Technical Risk Report
 
-1. Consolidate findings from all three phases into a technical risk report.
-2. Include:
-   - **Go/No-Go recommendation** with reasoning.
-   - **Top technical risks** (from feasibility and estimation review).
-   - **Required actions before implementation** (spikes, clarifications, architecture decisions).
-   - **Estimated technical debt** the feature will introduce and whether it's acceptable.
-3. Present the report for stakeholder decision.
+Produce a structured **Technical Risk Report** using the following format:
+
+```
+## Technical Risk Report
+
+### PRD Review Summary
+- Completeness: [Pass / Conditional Pass / Fail]
+- Testability: [Pass / Conditional Pass / Fail]
+- Clarity: [Pass / Conditional Pass / Fail]
+- Open gaps: <bulleted list of unresolved items, or "None">
+
+### Feasibility Assessment
+| Concern | Area | Severity | Recommendation |
+|---------|------|----------|----------------|
+| <description> | <e.g., Integration / Architecture / NFR> | High / Medium / Low | <action> |
+
+### Estimation Quality
+- Coverage: <percentage or qualitative rating>
+- Realism flags: <count and summary>
+- Consistency issues: <summary or "None">
+
+### Go / No-Go Recommendation
+**Recommendation**: [Go | Go with Conditions | No-Go]
+
+**Rationale**: <2–4 sentences summarising the basis for the recommendation>
+
+**Conditions (if applicable)**:
+- <Condition 1 that must be resolved before proceeding>
+- <Condition 2>
+
+### Next Steps
+- <Actionable step 1 — owner if known>
+- <Actionable step 2>
+```
 
 ---
 
-## Error Recovery
+## Example: Completed Technical Risk Report
 
-| Scenario | Recovery |
-|----------|----------|
-| PRD fails review (Needs Revision) | Return the review findings to the user. Do not proceed until revisions are confirmed. |
-| No estimates available | Activate `estimate-tasks` to generate them, then return to Phase 3. |
-| Feasibility concern has no clear owner | Flag it and recommend assigning an owner before proceeding. |
-| Estimate quality gate fails | Return flagged items to estimation. Loop back to Phase 3 after fixes. |
-| Team velocity data unavailable | Ask the user for historical velocity or use a conservative default. Flag the assumption. |
+```
+## Technical Risk Report
 
-## Output Style / Report
+### PRD Review Summary
+- Completeness: Conditional Pass
+- Testability: Pass
+- Clarity: Pass
+- Open gaps:
+  - Non-functional requirement for API response time is missing a numeric threshold
+  - Out-of-scope items section is absent
 
-After completing all phases, produce a summary:
-
-```markdown
-## Technical Review: [Feature Name]
-
-### Overall Recommendation
-**Go** / **No-Go** / **Go with Conditions**
-
-### PRD Review
-- Verdict: Approved / Approved with Suggestions / Needs Revision
-- Critical findings: [N]
-- Suggestions: [N]
-
-### Feasibility
-- Critical concerns: [N]
-- Key risks: [list top 3]
-- Required resolutions before implementation: [list]
+### Feasibility Assessment
+| Concern | Area | Severity | Recommendation |
+|---------|------|----------|----------------|
+| Real-time sync requires sub-100ms latency across regions but no CDN or edge strategy is defined | Architecture | High | Define latency budget per region and add edge caching to scope, or relax the latency requirement |
+| OAuth provider dependency has no fallback if provider is unavailable | Integration | Medium | Add graceful degradation or session persistence fallback |
+| "AI-powered recommendations" referenced with no model or data pipeline specified | Scope Clarity | High | Specify model source, training data ownership, and inference latency target |
 
 ### Estimation Quality
-- Framework: [story points / t-shirt sizes / time ranges]
-- Total estimate: [N]
-- Confidence: [N]% High, [N]% Medium, [N]% Low
-- Items needing action: [N] (spikes: [N], splits: [N], clarify: [N])
+- Coverage: 72% — testing and deployment tasks are not estimated
+- Realism flags: 2 — "Backend API" estimated as a single 10-day task with no decomposition; "Auth integration" has no dependency on third-party availability
+- Consistency issues: Frontend tasks estimated at 0.5x the effort of equivalent backend tasks with no stated justification
 
-### Required Actions
-1. [Action] — Owner: [Name] — Deadline: [Date]
-2. [Action] — Owner: [Name] — Deadline: [Date]
+### Go / No-Go Recommendation
+**Recommendation**: No-Go
 
-### Technical Debt Assessment
-- Estimated debt introduced: [Low / Medium / High]
-- Justification: [brief reasoning]
+**Rationale**: Two High-severity feasibility blockers exist that cannot be resolved without PRD revision. Estimation coverage is below threshold and the lack of decomposition introduces significant delivery risk. The PRD is not yet ready for engineering kickoff.
+
+**Conditions**:
+- Resolve the real-time latency architecture concern with a defined strategy
+- Specify the AI recommendation pipeline and data ownership
+- Re-estimate with full task decomposition and coverage of non-functional, testing, and deployment work
+
+### Next Steps
+- Product owner to revise NFR section with numeric thresholds (owner: PM)
+- Engineering lead to define edge/CDN strategy and update architecture notes
+- Re-submit revised PRD and estimates for a second Tech Lead review cycle
 ```
+
+---
+
+## Feedback Loop
+
+- **PRD fails Phase 1 gate**: Return gap list to requester, suspend further phases, and await revised PRD.
+- **Feasibility blocker in Phase 2**: Flag High-severity items immediately. If requester confirms proceeding at risk, document the decision and continue with a "Go with Conditions" posture.
+- **Estimation gaps in Phase 3**: Return estimation gap report. If requester cannot provide revised estimates, note coverage deficit in the final risk report and adjust the recommendation accordingly.
+- **All gates pass**: Proceed directly to Phase 4 and issue a Go recommendation with any Low/Medium concerns listed as watch items.

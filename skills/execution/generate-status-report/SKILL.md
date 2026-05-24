@@ -117,10 +117,6 @@ beta timeline at risk by up to one week.
 - Complete rate-limiting — Owner: Ben, Due: May 10
 ```
 
-## Reference Materials
-
-See [STATUS_REPORT_TEMPLATE.md](STATUS_REPORT_TEMPLATE.md) for the raw template.
-
 ## Integration
 
 | Skill | When to chain |

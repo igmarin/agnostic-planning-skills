@@ -40,7 +40,7 @@ EVERY finding MUST cite the specific PRD section, line, or requirement.
 
 ## Review Checklist
 
-Apply all applicable items. Skip items that are genuinely not relevant to the PRD's domain. See [REVIEW_CHECKLIST.md](REVIEW_CHECKLIST.md) for the comprehensive checklist.
+Apply all applicable items. Skip items that are genuinely not relevant to the PRD's domain.
 
 **Completeness**
 - [ ] Goals and success metrics are stated and measurable.
@@ -83,10 +83,6 @@ Apply all applicable items. Skip items that are genuinely not relevant to the PR
 | 1 | Critical | §3 Acceptance Criteria | "The page must load quickly" is not testable — no threshold defined. | §3: "The dashboard shall load quickly under normal conditions." | Replace with a measurable SLA, e.g. "Dashboard initial load ≤ 2 s at p95 on a 10 Mbps connection." |
 | 2 | Suggestion | §5 Dependencies | External payments API dependency is mentioned but no fallback behavior is specified. | §5: "Integration with PaymentsProvider v2 API." | Add a requirement describing user-facing behavior when the API is unavailable (timeout, retry, graceful error). |
 | 3 | Note | §1 Goals | Success metric for user adoption is aspirational but not tied to a measurement method. | §1: "Achieve high user adoption within 90 days." | Consider specifying the data source (e.g. analytics event) used to measure adoption. |
-
-## Reference Materials
-
-See [REVIEW_CHECKLIST.md](REVIEW_CHECKLIST.md) for the comprehensive review checklist.
 
 ## Integration
 

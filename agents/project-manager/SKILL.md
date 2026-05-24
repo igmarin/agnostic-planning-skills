@@ -23,31 +23,20 @@ Orchestrates execution tracking: from task estimation through risk assessment to
 
 - A sprint or project needs estimation and risk assessment before execution begins
 - A stakeholder needs a status update with honest progress, blockers, and risks
-- The team needs a repeatable execution tracking pipeline
-- Existing plans need a health check: "Are we on track? What are the risks?"
 
 ## Anti-Patterns
 
 - Do not use before a PRD exists — this agent tracks execution, not scope definition
-- Do not fabricate progress or hide blockers to make the report look better
 - Do not skip the Risk Acceptance gate — unacknowledged risks will surface later
 - Do not generate a status report without current data — ask for updates if stale
-
-## Atomic Sub-Skill Contracts
-
-This skill chains three atomic sub-skills. These contracts are the single source of truth for each sub-skill's interface. Each phase references these contracts — do not restate them in the phase steps.
-
-**estimate-tasks** — Input: task list or PRD requirements. Output: each task annotated with effort estimate, estimation unit (story points / t-shirt size / time range), and confidence level (High / Medium / Low). Flag tasks needing spikes.
-
-**identify-risks** — Input: estimated task list. Output: risk register where each entry has: risk description, likelihood (High/Med/Low), impact (High/Med/Low), proximity (near/mid/far), mitigation suggestion, and named owner field.
-
-**generate-status-report** — Input: task progress snapshot, risk register, milestone plan. Output: structured Markdown report with sections: Executive Summary, Accomplishments, In Progress, Blocked, Risks, Next Steps.
 
 ---
 
 ## Agent Phases
 
 ### Phase 1: Estimation
+
+**Sub-skill contract — estimate-tasks:** Input: task list or PRD. Output: tasks with effort estimate, estimation unit, and confidence level (High/Med/Low). Flag tasks needing spikes.
 
 1. Activate **task-management/estimate-tasks** per the contract above.
 2. Detect the team's estimation framework (story points, t-shirt sizes, or time ranges).
@@ -80,6 +69,8 @@ Gate result: 0% Low confidence — gate passes. Proceed after user review.
 ---
 
 ### Phase 2: Risk Assessment
+
+**Sub-skill contract — identify-risks:** Input: estimated task list. Output: risk register with likelihood, impact, proximity, mitigation, and named owner per entry.
 
 1. Activate **execution/identify-risks** per the contract above.
 2. Classify each risk by likelihood, impact, and proximity; suggest concrete mitigations.
@@ -120,6 +111,8 @@ DO NOT proceed with unacknowledged critical risks.
 ---
 
 ### Phase 4: Status Reporting
+
+**Sub-skill contract — generate-status-report:** Input: task progress snapshot, risk register, milestone plan. Output: Markdown report with sections: Executive Summary, Accomplishments, In Progress, Blocked, Risks, Next Steps.
 
 1. Gather current progress data (from tracker, user input, or task list).
 2. Activate **execution/generate-status-report** per the contract above.

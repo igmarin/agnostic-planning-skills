@@ -98,10 +98,6 @@ Input: four feature requests for a SaaS product.
 4. **Flagged items** — items needing clarification or with dependency constraints.
 5. **English only** unless user requests otherwise.
 
-## Reference Materials
-
-See [PRIORITIZATION_FRAMEWORKS.md](PRIORITIZATION_FRAMEWORKS.md) for detailed definitions of RICE, MoSCoW, Value vs Effort, and WSJF.
-
 ## Integration
 
 | Skill | When to chain |

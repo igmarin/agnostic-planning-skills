@@ -33,10 +33,10 @@ DO set a single, clear sprint goal that every selected ticket supports.
 
 1. **Gather inputs** — prioritized backlog (from `prioritize-backlog`), team capacity, sprint dates, historical velocity.
 2. **Define sprint goal** — one sentence describing the sprint's outcome. Every selected ticket should support this goal.
-3. **Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see Capacity Heuristics below).
-4. **Validate** — check no ticket has unresolved dependencies, unclear acceptance criteria, or missing estimates.
+3. **Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see [Capacity Heuristics](#capacity-heuristics) below).
+4. **Validate** — check no ticket has unresolved dependencies, unclear acceptance criteria, or missing estimates. Use the [Common Anti-Patterns](#common-anti-patterns) table as a checklist.
 5. **Flag** — tickets that almost made the cut (next sprint), dependency risks, stretch goals.
-6. **Output** — sprint plan.
+6. **Output** — sprint plan using the format in [Output Style](#output-style).
 
 ## Capacity Heuristics
 
@@ -53,6 +53,7 @@ Use when raw capacity or velocity data is unavailable or needs sanity-checking.
 - **Declining trend:** Use the most recent sprint's figure rather than the average.
 
 ### Common Anti-Patterns
+
 | Anti-Pattern | Mitigation |
 |---|---|
 | Planning to 100% capacity | Cap at 80% |
@@ -71,6 +72,8 @@ Use when raw capacity or velocity data is unavailable or needs sanity-checking.
 6. **English only** unless user requests otherwise.
 
 ## Example Sprint Plan
+
+> Reference output illustrating the expected structure and level of detail.
 
 ```
 Sprint 14 | 2025-08-04 → 2025-08-15 | 10 days | Team: 4 engineers
@@ -96,10 +99,6 @@ Deferred (top candidates for Sprint 15):
 2. UI-90  — Account settings redesign (8 pts) — blocked on design review.
 3. PERF-05 — Login latency optimisation (5 pts) — lower priority this cycle.
 ```
-
-## Reference Materials
-
-See [SPRINT_PLANNING_GUIDE.md](SPRINT_PLANNING_GUIDE.md) for details on capacity calculations, historical velocity rules, and sprint goal criteria.
 
 ## Integration
 
