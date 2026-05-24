@@ -1,5 +1,7 @@
 # Agnostic Planning Skills
 
+![Agnostic Planning Skills Logo](https://github.com/user-attachments/assets/05860870-ec3a-4031-ac5f-b0f95e6e6bec)
+
 **Agnostic Planning Skills turns AI coding assistants into disciplined product collaborators.**
 
 It is a curated library of **10 language-agnostic planning skills** and **4 orchestration agents** that teach AI tools how to write and review PRDs, break down features into TDD tasks, estimate effort, identify risks, prioritize backlogs, plan sprints, run retrospectives, generate status reports, and create tracker-ready tickets — regardless of tech stack.
