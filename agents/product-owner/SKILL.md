@@ -13,7 +13,9 @@ metadata:
   entry_point: "Invoke when planning a feature, defining product requirements, or preparing work for a sprint"
   phases: "Phase 1: Discovery & Clarification, Phase 2: PRD Draft, Phase 3: Review & Revise, Phase 4: Task Estimation, Phase 5: Ticket Generation, Phase 6: Sprint Placement"
   hard_gates: "PRD Approval, Ticket Approval, Sprint Confirmation"
-  dependencies: "create-prd, generate-tasks, plan-tickets"
+  dependencies:
+    - source: self
+      skills: [create-prd, generate-tasks, plan-tickets]
   keywords: product, planning, prd, tickets, sprint, backlog, discovery, requirements, orchestration
 ---
 # Product Owner Agent

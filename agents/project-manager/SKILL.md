@@ -12,7 +12,9 @@ metadata:
   entry_point: "Invoke when tracking project execution, assessing sprint health, or preparing a stakeholder status report"
   phases: "Phase 1: Estimation, Phase 2: Risk Assessment, Phase 3: Tracking Setup, Phase 4: Status Reporting"
   hard_gates: "Estimation Review, Risk Acceptance, Status Report Approval"
-  dependencies: "estimate-tasks, identify-risks, generate-status-report"
+  dependencies:
+    - source: self
+      skills: [estimate-tasks, identify-risks, generate-status-report]
   keywords: execution, tracking, status, risks, estimation, sprint, project management, blockers, stakeholder, report
 ---
 # Project Manager Agent
