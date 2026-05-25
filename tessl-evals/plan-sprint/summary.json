@@ -2,12 +2,12 @@
   "target_skill": "plan-sprint",
   "total_scenarios": 1,
   "instructions_coverage": {
-    "total_instructions": 9,
-    "instructions_tested": 9,
+    "total_instructions": 8,
+    "instructions_tested": 8,
     "coverage_percentage": 100
   },
   "reason_distribution": {
-    "new knowledge": 8,
-    "preference": 1
+    "new knowledge": 6,
+    "preference": 2
   }
 }

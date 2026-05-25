@@ -15,10 +15,10 @@
       "why_given": "preference"
     },
     {
-      "instruction": "**Define sprint goal** — one sentence describing the sprint's outcome. Every selected ticket should support this goal.",
-      "original_snippets": "**Define sprint goal** — one sentence describing the sprint's outcome. Every selected ticket should support this goal.",
+      "instruction": "**Define sprint goal** — every selected ticket must support this goal.",
+      "original_snippets": "**Define sprint goal** — every selected ticket must support this goal.",
       "relevant_when": "When a user asks for planning work that should trigger plan-sprint.",
-      "why_given": "new knowledge"
+      "why_given": "preference"
     },
     {
       "instruction": "**Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see [Capacity Heuristics](#capacity-heuristics) below).",
@@ -29,12 +29,6 @@
     {
       "instruction": "**Validate** — check no ticket has unresolved dependencies, unclear acceptance criteria, or missing estimates. Use the [Common Anti-Patterns](#common-anti-patterns) table as a checklist.",
       "original_snippets": "**Validate** — check no ticket has unresolved dependencies, unclear acceptance criteria, or missing estimates. Use the [Common Anti-Patterns](#common-anti-patterns) table as a checklist.",
-      "relevant_when": "When a user asks for planning work that should trigger plan-sprint.",
-      "why_given": "new knowledge"
-    },
-    {
-      "instruction": "Use when raw capacity or velocity data is unavailable or needs sanity-checking.",
-      "original_snippets": "Use when raw capacity or velocity data is unavailable or needs sanity-checking.",
       "relevant_when": "When a user asks for planning work that should trigger plan-sprint.",
       "why_given": "new knowledge"
     },

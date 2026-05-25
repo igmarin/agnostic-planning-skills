@@ -14,32 +14,32 @@
     },
     {
       "name": "instruction-3",
-      "description": "The submitted artifact follows this skill instruction: **Validation:** Verify test command works before generating full task list.",
+      "description": "The submitted artifact follows this skill instruction: **Gate:** Test command must pass before full generation",
       "max_score": 10
     },
     {
       "name": "instruction-4",
-      "description": "The submitted artifact follows this skill instruction: **Test Command Detection** - Check config files to identify the exact test command.",
+      "description": "The submitted artifact follows this skill instruction: **Test Command Detection** — Use the lookup table in Step 2 with the concrete commands below.",
       "max_score": 10
     },
     {
       "name": "instruction-5",
-      "description": "The submitted artifact follows this skill instruction: **Directory Detection** - Identify the source directory and test directory.",
+      "description": "The submitted artifact follows this skill instruction: **Directory Detection** — Identify source and test directories:",
       "max_score": 10
     },
     {
       "name": "instruction-6",
-      "description": "The submitted artifact follows this skill instruction: **Work Type Classification** - Classify the project (Web app, CLI, library, API, etc.).",
+      "description": "The submitted artifact follows this skill instruction: **Documentation Tool Detection** — Identify the documentation tool in use:",
       "max_score": 10
     },
     {
       "name": "instruction-7",
-      "description": "The submitted artifact follows this skill instruction: **Documentation Tool Detection** - Identify the documentation tool in use.",
+      "description": "The submitted artifact follows this skill instruction: **CRITICAL:** Verify the detected test command works before proceeding. Use the [TEST_COMMANDS.md](./TEST_COMMANDS.md) lookup table.",
       "max_score": 10
     },
     {
       "name": "instruction-8",
-      "description": "The submitted artifact follows this skill instruction: **CRITICAL:** Verify the detected test command works before proceeding:",
+      "description": "The submitted artifact follows this skill instruction: Run the detected command. If it fails, ask the user to confirm:",
       "max_score": 10
     },
     {
@@ -49,7 +49,7 @@
     },
     {
       "name": "instruction-10",
-      "description": "The submitted artifact follows this skill instruction: **Identify User-Visible Behaviors** - Capabilities, APIs, and data flows.",
+      "description": "The submitted artifact follows this skill instruction: **Identify User-Visible Behaviors**",
       "max_score": 10
     }
   ]

@@ -4,7 +4,7 @@
   "checklist": [
     {
       "name": "instruction-1",
-      "description": "The submitted artifact follows this skill instruction: EVERY finding MUST cite the specific PRD section, line, or requirement.",
+      "description": "The submitted artifact follows this skill instruction: EVERY finding MUST cite the specific PRD section, line, or requirement — if the cited text contains sensitive data (API keys, tokens, passwords, credentials), abstract or redact it rather than reproducing it verbatim.",
       "max_score": 20
     },
     {

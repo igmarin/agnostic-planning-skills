@@ -4,8 +4,9 @@ license: MIT
 description: >
   Reviews a PRD for completeness testability clarity feasibility scope dependencies
   and edge cases — classify each finding as Critical Suggestion or Note, cite the
-  specific PRD section or line as evidence, produce a findings table with severity
-  and recommendation, flag ambiguous modal verbs like "should" vs "must".
+  specific PRD section or line as evidence but redact sensitive data (API keys tokens
+  passwords), produce a findings table with severity and recommendation, flag
+  ambiguous modal verbs like "should" vs "must".
   Language-agnostic — evaluates structure and content, not technology.
   Trigger words: review PRD, PRD review, validate PRD, feasibility check, product requirements document review, PRD checklist.
 metadata:
@@ -21,14 +22,14 @@ Evaluate a PRD for quality — not agreement with a preferred solution. Focus on
 - **Input:** A PRD (from `create-prd` or existing document).
 - **Output:** Findings as Critical, Suggestion, or Note.
 - **Checks:** Completeness, testability, ambiguity, feasibility, edge cases, dependencies.
-- **Rule:** Every finding cites the specific PRD section as evidence.
+- **Rule:** Every finding cites the specific PRD section as evidence; redact sensitive data rather than reproducing it verbatim.
 
 ## HARD-GATE
 
 ```text
 DO NOT review the idea — review the document's quality.
 DO NOT suggest alternative solutions unless a requirement is infeasible.
-EVERY finding MUST cite the specific PRD section, line, or requirement.
+EVERY finding MUST cite the specific PRD section, line, or requirement — if the cited text contains sensitive data (API keys, tokens, passwords, credentials), abstract or redact it rather than reproducing it verbatim.
 ```
 
 ## Core Process

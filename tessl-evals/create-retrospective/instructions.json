@@ -21,8 +21,8 @@
       "why_given": "new knowledge"
     },
     {
-      "instruction": "**Draft action items** — specific, owned, time-bound. Use the template in [RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md) if available; otherwise use the inline minimal template below.",
-      "original_snippets": "**Draft action items** — specific, owned, time-bound. Use the template in [RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md) if available; otherwise use the inline minimal template below.",
+      "instruction": "**Draft action items** — specific, owned, time-bound. Use the template in [RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md) if available; otherwise use the minimal template below.",
+      "original_snippets": "**Draft action items** — specific, owned, time-bound. Use the template in [RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md) if available; otherwise use the minimal template below.",
       "relevant_when": "When a user asks for planning work that should trigger create-retrospective.",
       "why_given": "new knowledge"
     },
@@ -33,22 +33,16 @@
       "why_given": "new knowledge"
     },
     {
-      "instruction": "Use this when `RETROSPECTIVE_TEMPLATE.md` is not available in the bundle:",
-      "original_snippets": "Use this when `RETROSPECTIVE_TEMPLATE.md` is not available in the bundle:",
+      "instruction": "Use **[RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md)** if bundled; otherwise use this minimal fallback:",
+      "original_snippets": "Use **[RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md)** if bundled; otherwise use this minimal fallback:",
       "relevant_when": "When a user asks for planning work that should trigger create-retrospective.",
       "why_given": "new knowledge"
     },
     {
-      "instruction": "Use **English only** unless the user requests otherwise.",
-      "original_snippets": "Use **English only** unless the user requests otherwise.",
+      "instruction": "Section order: header → What Went Well → What Didn't → Action Items → Metrics → Kudos. Use English unless the user requests otherwise.",
+      "original_snippets": "Section order: header → What Went Well → What Didn't → Action Items → Metrics → Kudos. Use English unless the user requests otherwise.",
       "relevant_when": "When a user asks for planning work that should trigger create-retrospective.",
       "why_given": "new knowledge"
-    },
-    {
-      "instruction": "Themed bullets should include specific examples; the action item table must always include Owner, Timeline, and Linked Issue columns.",
-      "original_snippets": "Themed bullets should include specific examples; the action item table must always include Owner, Timeline, and Linked Issue columns.",
-      "relevant_when": "When a user asks for planning work that should trigger create-retrospective.",
-      "why_given": "preference"
     }
   ]
 }
