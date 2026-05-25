@@ -15,7 +15,9 @@ metadata:
   entry_point: "Invoke when running a complete delivery cycle from feature idea through to retrospective"
   phases: "Phase 1: Scope, Phase 2: Plan, Phase 3: Prioritize, Phase 4: Sprint, Phase 5: Execute, Phase 6: Retrospect"
   hard_gates: "PRD Approval, Sprint Commitment, Retrospective Complete"
-  dependencies: "create-prd, review-prd, generate-tasks, plan-tickets, estimate-tasks, identify-risks, generate-status-report, prioritize-backlog, plan-sprint, create-retrospective"
+  dependencies:
+    - source: self
+      skills: [create-prd, review-prd, generate-tasks, plan-tickets, estimate-tasks, identify-risks, generate-status-report, prioritize-backlog, plan-sprint, create-retrospective]
   keywords: delivery, end-to-end, pipeline, orchestration, meta, full cycle, planning, execution, retrospective
 ---
 # Delivery Lead Agent

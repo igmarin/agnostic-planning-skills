@@ -13,7 +13,9 @@ metadata:
   entry_point: "Invoke when reviewing a PRD for technical feasibility, validating estimation quality, or preparing a technical go/no-go assessment"
   phases: "Phase 1: PRD Review, Phase 2: Feasibility Assessment, Phase 3: Estimation Quality Review, Phase 4: Technical Risk Report"
   hard_gates: "PRD Feasibility, Estimation Quality"
-  dependencies: "review-prd, estimate-tasks"
+  dependencies:
+    - source: self
+      skills: [review-prd, estimate-tasks]
   keywords: technical, feasibility, architecture, estimation quality, go/no-go, review, tech lead, engineering
 ---
 # Tech Lead Agent
