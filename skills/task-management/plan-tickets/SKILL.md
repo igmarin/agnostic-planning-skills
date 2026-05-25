@@ -3,10 +3,11 @@ name: plan-tickets
 license: MIT
 description: >
   Drafts classifies and creates structured tickets from a project plan —
-  classify each item then draft tickets with area prefixes description acceptance
-  criteria dependencies and labels (type area execution order sprint bucket),
-  confirm before tracker creation, never assume tracker credentials fields or
-  sprint IDs, omit unneeded fields and use the project's default initial status.
+  classify each item with type area execution order and sprint bucket, use area
+  prefixes and five-section ticket format (Summary Background Acceptance Criteria
+  Dependencies Technical Notes), never create tracker issues unless explicitly
+  asked and only after the plan is approved, use whatever integration the user
+  has without assuming credentials, and include a readiness checklist.
   Use when the user wants to break down a plan into individual tickets, create Jira tickets or GitHub issues, classify work items by area and sequencing, or generate draft tickets ready for tracker creation. Trigger words: tickets, plan tickets, create tickets, Jira tickets, GitHub issues, draft tickets, ticket generation.
 metadata:
   version: 1.0.0
@@ -36,15 +37,15 @@ If the user only asks for tickets, return markdown drafts.
 
 ### 1. Normalize the initiative
 Extract: initiative/theme, project/board, draft-only vs. create-in-tracker, default sprint/bucket, constraints on types/prefixes/labels/status.
-- State assumptions for any missing tracker details, plan gaps, or configuration fields.
+- Note assumptions for any missing tracker details, plan gaps, or configuration fields.
 - Default to English unless requested otherwise.
 - If a plan already exists, do not re-plan unless there is a material gap.
 
 ### 2. Classify each ticket
-Before drafting, assign and output a single classification line for every ticket using this format:
+Before drafting, assign and output a single classification line for every ticket:
 `[type: Story|Task] [area: backend|web|mobile|cross-platform|external] [execution_order: foundation|api|client|follow-up] [dependency_level: unblocked|blocked] [target_bucket: ready-to-refine|next-dev-sprint|later]`
 
-Apply additional attributes if relevant (`coordination_need`: `single-team`|`multi-team`, `external_dependency`: `yes`|`no`, `urgency`: `normal`|`priority`). Backend/API enablers come before dependent client tickets.
+Add only when relevant: `coordination_need` (`single-team`|`multi-team`), `external_dependency` (`yes`|`no`), `urgency` (`normal`|`priority`). Backend/API enablers come before dependent client tickets.
 
 ### 3. Apply Sprint Placement Heuristics
 Determine execution sequence and note sequencing dependencies:

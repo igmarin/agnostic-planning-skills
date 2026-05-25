@@ -41,18 +41,12 @@ DO assign an owner and timeline to every action item.
    - **What Didn't** — blockers, bottlenecks, process issues, surprises.
    - **Kudos** — shout-outs and recognition.
 3. **Identify themes** — group related feedback into themes rather than listing raw comments.
-4. **Draft action items** — specific, owned, time-bound. Use the template in [RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md) if available; otherwise use the inline minimal template below.
+4. **Draft action items** — specific, owned, time-bound. Use the template in [RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md) if available; otherwise use the minimal template below.
 5. **Review** — verify every "what didn't" maps to an action item.
 
-## Extended Resources (Progressive Disclosure)
+## Reference Template
 
-Load these files only when needed:
-
-- **[RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md)** — Standard retrospective structure with examples (if bundled). If not available, use the minimal template below.
-
-### Minimal Inline Template
-
-Use this when `RETROSPECTIVE_TEMPLATE.md` is not available in the bundle:
+Use **[RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md)** if bundled; otherwise use this minimal fallback:
 
 ```
 ## Sprint [Name/Number] Retrospective
@@ -77,11 +71,7 @@ Use this when `RETROSPECTIVE_TEMPLATE.md` is not available in the bundle:
 - Alice for unblocking the auth service on short notice.
 ```
 
-## Output Notes
-
-- Use **English only** unless the user requests otherwise.
-- Follow the section order in the template: header → What Went Well → What Didn't → Action Items → Metrics → Kudos.
-- Themed bullets should include specific examples; the action item table must always include Owner, Timeline, and Linked Issue columns.
+Section order: header → What Went Well → What Didn't → Action Items → Metrics → Kudos. Use English unless the user requests otherwise.
 
 ## Integration
 

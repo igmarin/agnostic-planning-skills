@@ -2,12 +2,15 @@
 name: generate-tasks
 license: MIT
 description: >
-  Breaks a feature into implementation tasks — always create feature branch
-  first (Task 0.0), auto-detect test commands source dirs and doc tools, write
-  test → run fail → implement → run pass (TDD quadruplet), verify test command
-  before full generation, identify user-visible behaviors grouped as parent
-  tasks, save to /tasks/tasks-[name].md, and review.
-  Language-agnostic.
+  Breaks a feature into implementation tasks using TDD-based workflow.
+  Use when the user wants to break down a feature into implementation tasks,
+  create a TDD-based task list, or plan feature implementation steps.
+  Always creates a feature branch first (Task 0.0), detects the test command
+  from config files, identifies source and test directories, detects
+  documentation generation tools, writes test → run fail → implement → run pass
+  (TDD quadruplet), verifies the test command before full generation, groups
+  user-visible behaviors as parent task groups, saves to /tasks/tasks-[name].md,
+  and reviews the generated tasks. Language-agnostic.
   Trigger words: task list, implementation plan, feature breakdown, generate tasks, TDD.
 metadata:
   version: 1.0.0
@@ -15,13 +18,15 @@ metadata:
 ---
 # Generating a Task List from Requirements
 
-## Quick Reference
+## Quick Reference (Cheat Sheet)
 
-- **Task 0.0:** Always create feature branch first
-- **Test pattern:** Write test → Run fail → Implement → Run pass (TDD quadruplet)
-- **Auto-detect:** Test command, source directory, test directory, and doc tool.
-- **Output:** `/tasks/tasks-[feature-name].md`
-- **Validation:** Verify test command works before generating full task list.
+| What | Detail |
+|---|---|
+| **Branch** | Task 0.0: `git checkout -b feature/[name]` |
+| **TDD pattern** | Write test → Run (fail) → Implement → Run (pass) |
+| **Output path** | `/tasks/tasks-[feature-name].md` |
+| **Auto-detect** | Test command, source dir, test dir, doc tool |
+| **Gate** | Test command must pass before full generation |
 
 ## Workflow
 
@@ -29,23 +34,37 @@ metadata:
 
 **CRITICAL RULE:** Explicitly detect and list the project's conventions before generating tasks:
 
-1. **Test Command Detection** - Check config files to identify the exact test command.
-2. **Directory Detection** - Identify the source directory and test directory.
-3. **Work Type Classification** - Classify the project (Web app, CLI, library, API, etc.).
-4. **Documentation Tool Detection** - Identify the documentation tool in use.
+1. **Test Command Detection** — Use the lookup table in Step 2 with the concrete commands below.
+2. **Directory Detection** — Identify source and test directories:
+   ```bash
+   # Source dir candidates
+   ls -d src/ lib/ app/ 2>/dev/null | head -1
+   # Test dir candidates
+   ls -d tests/ test/ spec/ __tests__/ 2>/dev/null | head -1
+   ```
+3. **Documentation Tool Detection** — Identify the documentation tool in use:
+   ```bash
+   # Check for common doc tools
+   grep -q 'typedoc\|jsdoc' package.json 2>/dev/null && echo typedoc
+   grep -q 'sphinx\|mkdocs' pyproject.toml requirements.txt 2>/dev/null && echo sphinx/mkdocs
+   ls Doxyfile rustdoc 2>/dev/null
+   ```
 
 ### Step 2: Validation Checkpoint
 
-**CRITICAL:** Verify the detected test command works before proceeding:
-- If `package.json` exists with a `test` script, run `npm test` (or `yarn test`/`pnpm test`).
-- If `Cargo.toml` exists, run `cargo test`.
-- If `Gemfile` exists with `rspec`, run `bundle exec rspec`.
-- If `go.mod` exists, run `go test ./...`.
-- If `pyproject.toml` exists with `pytest`, run `pytest`.
-- If `Makefile` exists with a `test` target, run `make test`.
-- Otherwise, run the default test suite command for the detected language/framework.
+**CRITICAL:** Verify the detected test command works before proceeding. Use this lookup table:
 
-If the command fails, ask the user to confirm:
+| Config File / Indicator | Detection Command | Test Command |
+|---|---|---|
+| `package.json` with `test` script | `jq '.scripts.test' package.json` | `npm test` (or `yarn test` / `pnpm test`) |
+| `Cargo.toml` | `test -f Cargo.toml` | `cargo test` |
+| `Gemfile` + rspec | `grep -q rspec Gemfile` | `bundle exec rspec` |
+| `go.mod` | `test -f go.mod` | `go test ./...` |
+| `pyproject.toml` + pytest | `grep -q pytest pyproject.toml` | `pytest` |
+| `Makefile` with test target | `grep -q '^test:' Makefile` | `make test` |
+| Fallback | — | Default test suite for detected language |
+
+Run the detected command. If it fails, ask the user to confirm:
 _"Detected test command: [command]. Is this correct?"_
 Only proceed if tests execute successfully.
 
@@ -102,4 +121,4 @@ Based on: `prd-[feature-name].md`
 - [ ] 2.0 API Documentation & Code Review
   - [ ] 2.1 Document public API methods
   - [ ] 2.2 Self-review diff before PR
-``` 
+```

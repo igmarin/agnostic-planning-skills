@@ -2,10 +2,10 @@
 name: create-prd
 license: MIT
 description: >
-  Drafts a clear actionable PRD from a feature — focus on what/why not how,
-  write requirements in natural language, fill PRD_TEMPLATE.md section by
-  section, clarify if ambiguous then draft then get explicit approval, save to
-  /tasks/prd-SLUG.md in kebab-case, close with next steps like "run generate-tasks once approved".
+  Drafts a clear actionable PRD from a feature — focus on what/why, no code,
+  write requirements in natural language, fill PRD_TEMPLATE.md section by section
+  without inventing parallel outline, clarify then draft then get approval, save
+  to /tasks/prd-SLUG.md in kebab-case, close with next steps like "run generate-tasks once approved".
   Language-agnostic.
   Trigger words: PRD, product requirements, plan a feature, write a spec,
   requirements document.

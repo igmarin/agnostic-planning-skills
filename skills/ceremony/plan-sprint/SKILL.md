@@ -3,10 +3,11 @@ name: plan-sprint
 license: MIT
 description: >
   Plans a sprint by selecting tickets from a prioritized backlog based on team
-  capacity and historical velocity — start from top of backlog stop at ≤80%
-  capacity, define a single sprint goal that all selected tickets support, use
-  theoretical_capacity × 0.6 when no history exists or most recent sprint for
-  declining trends, produce a ticket selection table with estimate and confidence.
+  capacity and historical velocity — start from top stop at ≤80% capacity,
+  define a single sprint goal that all selected tickets support, use
+  theoretical_capacity × 0.6 when no history or use the most recent sprint for
+  declining trends, produce a table with Rank Ticket Estimate Confidence Notes,
+  and use the capacity heuristics section when data is unavailable.
   Language-agnostic — works with any tracker or estimation framework.
   Trigger words: plan sprint, sprint planning, sprint goal, sprint capacity,
   what should we work on this sprint, sprint backlog.
@@ -35,7 +36,7 @@ DO set a single, clear sprint goal that every selected ticket supports.
 ## Core Process
 
 1. **Gather inputs** — prioritized backlog (from `prioritize-backlog`), team capacity, sprint dates, historical velocity.
-2. **Define sprint goal** — one sentence describing the sprint's outcome. Every selected ticket should support this goal.
+2. **Define sprint goal** — every selected ticket must support this goal.
 3. **Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see [Capacity Heuristics](#capacity-heuristics) below).
 4. **Validate** — check no ticket has unresolved dependencies, unclear acceptance criteria, or missing estimates. Use the [Common Anti-Patterns](#common-anti-patterns) table as a checklist.
 5. **Flag** — tickets that almost made the cut (next sprint), dependency risks, stretch goals.
@@ -43,15 +44,13 @@ DO set a single, clear sprint goal that every selected ticket supports.
 
 ## Capacity Heuristics
 
-Use when raw capacity or velocity data is unavailable or needs sanity-checking.
-
 ### Theoretical Capacity
-- **Per person per day:** 6 productive hours (subtract meetings, reviews, interruptions).
+- **Per person per day:** 6 productive hours.
 - **Sprint capacity:** `team_size × sprint_days × 6h × utilisation_factor`
 - **Utilisation factor:** 0.8 for stable teams; 0.6–0.7 for new or high-uncertainty teams.
 
 ### Velocity
-- **Rolling average:** Mean completed points across last 3–5 sprints; exclude holiday/incident-disrupted sprints.
+- **Rolling average:** Mean completed points across last 3–5 sprints; exclude disrupted sprints.
 - **No history:** Use `theoretical_capacity × 0.6` as a conservative baseline.
 - **Declining trend:** Use the most recent sprint's figure rather than the average.
 
@@ -68,15 +67,13 @@ Use when raw capacity or velocity data is unavailable or needs sanity-checking.
 ## Output Style
 
 1. **Sprint header** — name, dates, duration, team capacity.
-2. **Sprint goal** — one sentence.
+2. **Sprint goal** — single sentence.
 3. **Selected tickets** — `| Rank | Ticket | Estimate | Confidence | Notes |`
 4. **Capacity allocation** — total committed, buffer (%), stretch goals.
 5. **Deferred** — top 3 items that didn't fit, for next sprint visibility.
 6. **English only** unless user requests otherwise.
 
 ## Example Sprint Plan
-
-> Reference output illustrating the expected structure and level of detail.
 
 ```
 Sprint 14 | 2025-08-04 → 2025-08-15 | 10 days | Team: 4 engineers
