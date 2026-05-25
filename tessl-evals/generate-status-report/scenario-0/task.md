@@ -4,7 +4,7 @@
 
 A team needs help with a planning task in this area:
 
-Generates a structured stakeholder status report from task progress and blocker data.
+Generates a stakeholder status report from task data — never fabricate progress mark unknowns as "needs update", include Executive Summary (health key accomplishment top concern) then accomplishments in-progress blockers risks and next steps, verify no status is fabricated or assumed.
 
 The team has asked for a concise planning artifact that a reviewer can inspect without needing to observe the agent's process.
 

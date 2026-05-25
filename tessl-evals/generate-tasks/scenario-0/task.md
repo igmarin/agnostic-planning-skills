@@ -4,7 +4,7 @@
 
 A team needs help with a planning task in this area:
 
-Breaks a feature or PRD into implementation tasks with TDD quadruplets (write test → run fail → implement → run pass).
+Breaks a feature into implementation tasks — always create feature branch first (Task 0.0), auto-detect test commands source dirs and doc tools, write test → run fail → implement → run pass (TDD quadruplet), verify test command before full generation, identify user-visible behaviors grouped as parent tasks, save to /tasks/tasks-[name].md, and review.
 
 The team has asked for a concise planning artifact that a reviewer can inspect without needing to observe the agent's process.
 

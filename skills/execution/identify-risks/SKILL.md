@@ -2,9 +2,12 @@
 name: identify-risks
 license: MIT
 description: >
-  Scans plans and tasks for risks: dependency chains, single points of failure,
-  ambiguous requirements, external dependencies, and capacity concerns. Produces a
-  risk register with likelihood, impact, proximity, and mitigations. Language-agnostic.
+  Scans plans for risks backed by evidence not speculation — check dependency
+  chains single points of failure ambiguous requirements external dependencies
+  capacity and technical uncertainty, classify each risk with Likelihood Impact
+  and Proximity, reference the specific task or requirement as evidence, and
+  include concrete mitigations.
+  Language-agnostic.
   Use when asked about risks, risk assessment, blockers, what could go wrong, or
   to produce a risk register for a plan, PRD, ticket set, or sprint.
 metadata:

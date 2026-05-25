@@ -4,7 +4,7 @@
 
 A team needs help with a planning task in this area:
 
-Prioritizes a backlog of tickets, tasks, or features using a prioritization framework (RICE, MoSCoW, value-vs-effort, WSJF).
+Prioritizes a backlog using a framework (RICE MoSCoW value-vs-effort WSJF) — rank items by impact and urgency not gut feeling, produce an ordered backlog table with Rank Item Score Rationale, and justify every ranking decision.
 
 The team has asked for a concise planning artifact that a reviewer can inspect without needing to observe the agent's process.
 

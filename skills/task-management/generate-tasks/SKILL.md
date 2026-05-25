@@ -2,10 +2,12 @@
 name: generate-tasks
 license: MIT
 description: >
-  Breaks a feature or PRD into implementation tasks with TDD quadruplets
-  (write test → run fail → implement → run pass). Auto-detects test commands,
-  source directories, and doc conventions from the project. Saves to
-  /tasks/tasks-[name].md. Language-agnostic.
+  Breaks a feature into implementation tasks — always create feature branch
+  first (Task 0.0), auto-detect test commands source dirs and doc tools, write
+  test → run fail → implement → run pass (TDD quadruplet), verify test command
+  before full generation, identify user-visible behaviors grouped as parent
+  tasks, save to /tasks/tasks-[name].md, and review.
+  Language-agnostic.
   Trigger words: task list, implementation plan, feature breakdown, generate tasks, TDD.
 metadata:
   version: 1.0.0

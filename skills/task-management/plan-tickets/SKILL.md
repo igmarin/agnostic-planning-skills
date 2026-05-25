@@ -2,7 +2,12 @@
 name: plan-tickets
 license: MIT
 description: >
-  Drafts, classifies, and creates structured tickets from a project plan. Generates ticket titles with area prefixes, descriptions, acceptance criteria, dependency notes, and classification labels (type, area, execution order, sprint bucket) for each work item. Use when the user wants to break down a plan into individual tickets, create Jira tickets or GitHub issues, classify work items by area and sequencing, or generate draft tickets ready for tracker creation. Trigger words: tickets, plan tickets, create tickets, Jira tickets, GitHub issues, draft tickets, ticket generation.
+  Drafts classifies and creates structured tickets from a project plan —
+  classify each item then draft tickets with area prefixes description acceptance
+  criteria dependencies and labels (type area execution order sprint bucket),
+  confirm before tracker creation, never assume tracker credentials fields or
+  sprint IDs, omit unneeded fields and use the project's default initial status.
+  Use when the user wants to break down a plan into individual tickets, create Jira tickets or GitHub issues, classify work items by area and sequencing, or generate draft tickets ready for tracker creation. Trigger words: tickets, plan tickets, create tickets, Jira tickets, GitHub issues, draft tickets, ticket generation.
 metadata:
   version: 1.0.0
   user-invocable: "true"

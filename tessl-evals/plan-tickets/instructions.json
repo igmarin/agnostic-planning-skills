@@ -21,38 +21,50 @@
       "why_given": "preference"
     },
     {
-      "instruction": "Assign these core planning attributes to each ticket:",
-      "original_snippets": "Assign these core planning attributes to each ticket:",
+      "instruction": "Do not add prefixes to tickets not owned by those areas unless requested.",
+      "original_snippets": "Do not add prefixes to tickets not owned by those areas unless requested.",
+      "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Draft each ticket using exactly five sections in this order:",
+      "original_snippets": "Draft each ticket using exactly five sections in this order:",
       "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
       "why_given": "new knowledge"
     },
     {
-      "instruction": "**Create in issue tracker:**",
-      "original_snippets": "**Create in issue tracker:**",
+      "instruction": "**Draft-only mode (Default):**",
+      "original_snippets": "**Draft-only mode (Default):**",
       "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
       "why_given": "new knowledge"
     },
     {
-      "instruction": "Verify the target project/board details first.",
-      "original_snippets": "Verify the target project/board details first.",
+      "instruction": "Include a **Readiness Checklist** of what must be verified before creation: target project/board, tracker create-metadata endpoint, required fields, integration path, user approval, and default initial status.",
+      "original_snippets": "Include a **Readiness Checklist** of what must be verified before creation: target project/board, tracker create-metadata endpoint, required fields, integration path, user approval, and default initial status.",
+      "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "**Create-in-tracker mode:**",
+      "original_snippets": "**Create-in-tracker mode:**",
       "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
       "why_given": "new knowledge"
     },
     {
-      "instruction": "Create issues **only after** the plan is considered approved enough.",
-      "original_snippets": "Create issues **only after** the plan is considered approved enough.",
+      "instruction": "Create issues only after explicit user approval. Do not assume tracker credentials.",
+      "original_snippets": "Create issues only after explicit user approval. Do not assume tracker credentials.",
+      "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Verify target project/board and confirm required fields from the tracker's create-metadata endpoint.",
+      "original_snippets": "Verify target project/board and confirm required fields from the tracker's create-metadata endpoint.",
       "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
       "why_given": "new knowledge"
     },
     {
-      "instruction": "Use whatever integration the user has (API, MCP, UI); do not assume credentials in the repo.",
-      "original_snippets": "Use whatever integration the user has (API, MCP, UI); do not assume credentials in the repo.",
-      "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
-      "why_given": "new knowledge"
-    },
-    {
-      "instruction": "Omit fields the project does not require. Confirm actual field names from the tracker's create-metadata endpoint before issuing the call. Do not set status on create — use the project's default initial status.",
-      "original_snippets": "Omit fields the project does not require. Confirm actual field names from the tracker's create-metadata endpoint before issuing the call. Do not set status on create — use the project's default initial status.",
+      "instruction": "Omit fields not required. Do not set status on create (use project's default initial status).",
+      "original_snippets": "Omit fields not required. Do not set status on create (use project's default initial status).",
       "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
       "why_given": "preference"
     },
@@ -61,18 +73,6 @@
       "original_snippets": "**[EXAMPLES.md](./EXAMPLES.md)** — Use when you need a full plan → ticket draft example with classification applied.",
       "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
       "why_given": "new knowledge"
-    },
-    {
-      "instruction": "**[assets/ticket-samples/sample_issue.md](assets/ticket-samples/sample_issue.md)** — Use when you need the detailed format for a single issue.",
-      "original_snippets": "**[assets/ticket-samples/sample_issue.md](assets/ticket-samples/sample_issue.md)** — Use when you need the detailed format for a single issue.",
-      "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
-      "why_given": "new knowledge"
-    },
-    {
-      "instruction": "When asked to draft tickets, your output MUST include:",
-      "original_snippets": "When asked to draft tickets, your output MUST include:",
-      "relevant_when": "When a user asks for planning work that should trigger plan-tickets.",
-      "why_given": "preference"
     }
   ]
 }

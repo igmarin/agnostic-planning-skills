@@ -2,8 +2,11 @@
 name: plan-sprint
 license: MIT
 description: >
-  Plans a sprint: selects tickets from a prioritized backlog based on team capacity
-  and historical velocity, defines a sprint goal, and produces a sprint plan.
+  Plans a sprint by selecting tickets from a prioritized backlog based on team
+  capacity and historical velocity — start from top of backlog stop at ≤80%
+  capacity, define a single sprint goal that all selected tickets support, use
+  theoretical_capacity × 0.6 when no history exists or most recent sprint for
+  declining trends, produce a ticket selection table with estimate and confidence.
   Language-agnostic — works with any tracker or estimation framework.
   Trigger words: plan sprint, sprint planning, sprint goal, sprint capacity,
   what should we work on this sprint, sprint backlog.

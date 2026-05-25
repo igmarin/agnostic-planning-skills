@@ -5,42 +5,47 @@
     {
       "name": "instruction-1",
       "description": "The submitted artifact follows this skill instruction: Select tickets, define a goal, and commit to a sprint scope.",
-      "max_score": 13
+      "max_score": 12
     },
     {
       "name": "instruction-2",
       "description": "The submitted artifact follows this skill instruction: **Rule:** Don't overcommit — plan for ≤80% of theoretical capacity.",
-      "max_score": 13
+      "max_score": 11
     },
     {
       "name": "instruction-3",
       "description": "The submitted artifact follows this skill instruction: **Define sprint goal** — one sentence describing the sprint's outcome. Every selected ticket should support this goal.",
-      "max_score": 13
+      "max_score": 11
     },
     {
       "name": "instruction-4",
-      "description": "The submitted artifact follows this skill instruction: **Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see Capacity Heuristics below).",
-      "max_score": 13
+      "description": "The submitted artifact follows this skill instruction: **Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see [Capacity Heuristics](#capacity-heuristics) below).",
+      "max_score": 11
     },
     {
       "name": "instruction-5",
-      "description": "The submitted artifact follows this skill instruction: Use when raw capacity or velocity data is unavailable or needs sanity-checking.",
-      "max_score": 12
+      "description": "The submitted artifact follows this skill instruction: **Validate** — check no ticket has unresolved dependencies, unclear acceptance criteria, or missing estimates. Use the [Common Anti-Patterns](#common-anti-patterns) table as a checklist.",
+      "max_score": 11
     },
     {
       "name": "instruction-6",
-      "description": "The submitted artifact follows this skill instruction: **No history:** Use `theoretical_capacity × 0.6` as a conservative baseline.",
-      "max_score": 12
+      "description": "The submitted artifact follows this skill instruction: Use when raw capacity or velocity data is unavailable or needs sanity-checking.",
+      "max_score": 11
     },
     {
       "name": "instruction-7",
-      "description": "The submitted artifact follows this skill instruction: **Declining trend:** Use the most recent sprint's figure rather than the average.",
-      "max_score": 12
+      "description": "The submitted artifact follows this skill instruction: **No history:** Use `theoretical_capacity × 0.6` as a conservative baseline.",
+      "max_score": 11
     },
     {
       "name": "instruction-8",
+      "description": "The submitted artifact follows this skill instruction: **Declining trend:** Use the most recent sprint's figure rather than the average.",
+      "max_score": 11
+    },
+    {
+      "name": "instruction-9",
       "description": "The submitted artifact follows this skill instruction: **Selected tickets** — `| Rank | Ticket | Estimate | Confidence | Notes |`",
-      "max_score": 12
+      "max_score": 11
     }
   ]
 }
