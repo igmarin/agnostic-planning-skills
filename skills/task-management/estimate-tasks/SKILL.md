@@ -2,8 +2,11 @@
 name: estimate-tasks
 license: MIT
 description: >
-  Assigns effort estimates to tasks using story points (Fibonacci), t-shirt sizes,
-  or time ranges. Flags high-uncertainty items. Language-agnostic.
+  Assigns relative effort estimates using story points (Fibonacci) t-shirt sizes
+  or time ranges — never mix frameworks within a single table, include confidence
+  level per task, use table format with ID Task Estimate Confidence Notes, and
+  flag high-uncertainty items.
+  Language-agnostic.
   Use when the user asks to estimate effort, size tasks, or assign story points to
   backlog items. Trigger words: estimate, story points, t-shirt size, effort, sizing, fibonacci.
 metadata:

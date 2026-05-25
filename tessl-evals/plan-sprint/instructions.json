@@ -21,8 +21,14 @@
       "why_given": "new knowledge"
     },
     {
-      "instruction": "**Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see Capacity Heuristics below).",
-      "original_snippets": "**Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see Capacity Heuristics below).",
+      "instruction": "**Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see [Capacity Heuristics](#capacity-heuristics) below).",
+      "original_snippets": "**Select tickets** — start from the top of the backlog, stop when total estimate reaches ≤80% of capacity (see [Capacity Heuristics](#capacity-heuristics) below).",
+      "relevant_when": "When a user asks for planning work that should trigger plan-sprint.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Validate** — check no ticket has unresolved dependencies, unclear acceptance criteria, or missing estimates. Use the [Common Anti-Patterns](#common-anti-patterns) table as a checklist.",
+      "original_snippets": "**Validate** — check no ticket has unresolved dependencies, unclear acceptance criteria, or missing estimates. Use the [Common Anti-Patterns](#common-anti-patterns) table as a checklist.",
       "relevant_when": "When a user asks for planning work that should trigger plan-sprint.",
       "why_given": "new knowledge"
     },

@@ -4,7 +4,7 @@
 
 A team needs help with a planning task in this area:
 
-Generates a clear, actionable Product Requirements Document (PRD) in Markdown from a feature description and saves it to /tasks/prd-SLUG.md.
+Drafts a clear actionable PRD from a feature — focus on what/why, no code, write requirements in natural language, fill PRD_TEMPLATE.md section by section without inventing parallel outline, clarify then draft then get approval, save to /tasks/prd-SLUG.md in kebab-case, close with next steps like "run generate-tasks once approved".
 
 The team has asked for a concise planning artifact that a reviewer can inspect without needing to observe the agent's process.
 

@@ -14,42 +14,42 @@
     },
     {
       "name": "instruction-3",
-      "description": "The submitted artifact follows this skill instruction: **Validation:** Verify test command works before generating full task list",
+      "description": "The submitted artifact follows this skill instruction: **Validation:** Verify test command works before generating full task list.",
       "max_score": 10
     },
     {
       "name": "instruction-4",
-      "description": "The submitted artifact follows this skill instruction: **Test Command Detection** - Check config files for test scripts",
+      "description": "The submitted artifact follows this skill instruction: **Test Command Detection** - Check config files to identify the exact test command.",
       "max_score": 10
     },
     {
       "name": "instruction-5",
-      "description": "The submitted artifact follows this skill instruction: **Directory Detection** - Identify source and test directories",
+      "description": "The submitted artifact follows this skill instruction: **Directory Detection** - Identify the source directory and test directory.",
       "max_score": 10
     },
     {
       "name": "instruction-6",
-      "description": "The submitted artifact follows this skill instruction: **Documentation Tool Detection** - Identify doc generation tools",
+      "description": "The submitted artifact follows this skill instruction: **Work Type Classification** - Classify the project (Web app, CLI, library, API, etc.).",
       "max_score": 10
     },
     {
       "name": "instruction-7",
-      "description": "The submitted artifact follows this skill instruction: **CRITICAL:** Verify the detected test command works:",
+      "description": "The submitted artifact follows this skill instruction: **Documentation Tool Detection** - Identify the documentation tool in use.",
       "max_score": 10
     },
     {
       "name": "instruction-8",
-      "description": "The submitted artifact follows this skill instruction: Break down the feature/PRD into implementation tasks:",
+      "description": "The submitted artifact follows this skill instruction: **CRITICAL:** Verify the detected test command works before proceeding:",
       "max_score": 10
     },
     {
       "name": "instruction-9",
-      "description": "The submitted artifact follows this skill instruction: **Identify User-Visible Behaviors** - User capabilities, APIs, data flows",
+      "description": "The submitted artifact follows this skill instruction: Break down the feature/PRD into implementation tasks:",
       "max_score": 10
     },
     {
       "name": "instruction-10",
-      "description": "The submitted artifact follows this skill instruction: **Create Parent Task Groups** - Group related behaviors with TDD quadruplets",
+      "description": "The submitted artifact follows this skill instruction: **Identify User-Visible Behaviors** - Capabilities, APIs, and data flows.",
       "max_score": 10
     }
   ]

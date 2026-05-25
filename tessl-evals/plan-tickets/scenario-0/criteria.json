@@ -19,37 +19,37 @@
     },
     {
       "name": "instruction-4",
-      "description": "The submitted artifact follows this skill instruction: Assign these core planning attributes to each ticket:",
+      "description": "The submitted artifact follows this skill instruction: Do not add prefixes to tickets not owned by those areas unless requested.",
       "max_score": 10
     },
     {
       "name": "instruction-5",
-      "description": "The submitted artifact follows this skill instruction: **Create in issue tracker:**",
+      "description": "The submitted artifact follows this skill instruction: Draft each ticket using exactly five sections in this order:",
       "max_score": 10
     },
     {
       "name": "instruction-6",
-      "description": "The submitted artifact follows this skill instruction: Verify the target project/board details first.",
+      "description": "The submitted artifact follows this skill instruction: **Draft-only mode (Default):**",
       "max_score": 10
     },
     {
       "name": "instruction-7",
-      "description": "The submitted artifact follows this skill instruction: Create issues **only after** the plan is considered approved enough.",
+      "description": "The submitted artifact follows this skill instruction: Include a **Readiness Checklist** of what must be verified before creation: target project/board, tracker create-metadata endpoint, required fields, integration path, user approval, and default initial status.",
       "max_score": 10
     },
     {
       "name": "instruction-8",
-      "description": "The submitted artifact follows this skill instruction: Use whatever integration the user has (API, MCP, UI); do not assume credentials in the repo.",
+      "description": "The submitted artifact follows this skill instruction: **Create-in-tracker mode:**",
       "max_score": 10
     },
     {
       "name": "instruction-9",
-      "description": "The submitted artifact follows this skill instruction: Omit fields the project does not require. Confirm actual field names from the tracker's create-metadata endpoint before issuing the call. Do not set status on create — use the project's default initial status.",
+      "description": "The submitted artifact follows this skill instruction: Create issues only after explicit user approval. Do not assume tracker credentials.",
       "max_score": 10
     },
     {
       "name": "instruction-10",
-      "description": "The submitted artifact follows this skill instruction: **[EXAMPLES.md](./EXAMPLES.md)** — Use when you need a full plan → ticket draft example with classification applied.",
+      "description": "The submitted artifact follows this skill instruction: Verify target project/board and confirm required fields from the tracker's create-metadata endpoint.",
       "max_score": 10
     }
   ]

@@ -2,9 +2,10 @@
 name: create-prd
 license: MIT
 description: >
-  Generates a clear, actionable Product Requirements Document (PRD) in Markdown
-  from a feature description and saves it to /tasks/prd-SLUG.md. Use when
-  planning a feature, defining requirements, or writing a product spec.
+  Drafts a clear actionable PRD from a feature — focus on what/why, no code,
+  write requirements in natural language, fill PRD_TEMPLATE.md section by section
+  without inventing parallel outline, clarify then draft then get approval, save
+  to /tasks/prd-SLUG.md in kebab-case, close with next steps like "run generate-tasks once approved".
   Language-agnostic.
   Trigger words: PRD, product requirements, plan a feature, write a spec,
   requirements document.

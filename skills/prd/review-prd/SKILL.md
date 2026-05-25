@@ -2,8 +2,10 @@
 name: review-prd
 license: MIT
 description: >
-  Reviews a Product Requirements Document (PRD) for completeness, testability, clarity, and feasibility.
-  Produces findings categorized as Critical (blocking), Suggestion, or Note.
+  Reviews a PRD for completeness testability clarity feasibility scope dependencies
+  and edge cases — classify each finding as Critical Suggestion or Note, cite the
+  specific PRD section or line as evidence, produce a findings table with severity
+  and recommendation, flag ambiguous modal verbs like "should" vs "must".
   Language-agnostic — evaluates structure and content, not technology.
   Trigger words: review PRD, PRD review, validate PRD, feasibility check, product requirements document review, PRD checklist.
 metadata:

@@ -2,9 +2,11 @@
 name: generate-status-report
 license: MIT
 description: >
-  Generates a structured stakeholder status report from task progress and blocker
-  data. Follows a standard template: executive summary, accomplishments, in-progress,
-  blockers, risks, next steps. Language-agnostic.
+  Generates a stakeholder status report from task data — never fabricate progress
+  mark unknowns as "needs update", include Executive Summary (health key
+  accomplishment top concern) then accomplishments in-progress blockers risks and
+  next steps, verify no status is fabricated or assumed.
+  Language-agnostic.
   Trigger words: status report, sprint update, stakeholder update, progress report,
   weekly update, project status.
 metadata:
