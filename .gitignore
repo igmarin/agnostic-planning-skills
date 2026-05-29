@@ -27,6 +27,7 @@ tmp/
 lean-ctx/
 .claude/
 .antigravitycli/
+.agents/
 evals/
 private-evals/
 docs/skill-description-strategy.md
