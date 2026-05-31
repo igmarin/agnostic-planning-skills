@@ -4,6 +4,8 @@
 
 **Agnostic Planning Skills turns AI coding assistants into disciplined product collaborators.**
 
+> Internal planning workflow for consulting engagements, open-sourced. These skills are used by the maintainer for structured project discovery and PRD workflows. They are not a standalone product.
+
 It is a curated library of **10 language-agnostic planning skills** and **4 orchestration agents** that teach AI tools how to write and review PRDs, break down features into TDD tasks, estimate effort, identify risks, prioritize backlogs, plan sprints, run retrospectives, generate status reports, and create tracker-ready tickets — regardless of tech stack.
 
 The project is built around one non-negotiable rule:
