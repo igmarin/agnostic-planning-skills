@@ -11,7 +11,7 @@ Integration matrix: which skill connects to which and in what order.
 
 ---
 
-## Complete Agent Loops
+## Complete Persona Loops
 
 ### Product Owner (Planning Lifecycle)
 
@@ -149,12 +149,40 @@ Need to prioritize?
   └─ prioritize-backlog → plan-sprint
 
 Need execution tracking?
-   └─ project-manager (persona)
+  └─ project-manager (persona)
+     └─ estimate-tasks → identify-risks → generate-status-report
 
-   └─ product-owner (persona)
+Full end-to-end planning?
+  └─ product-owner (persona)
 
-   └─ tech-lead (persona)
+Need technical review?
+  └─ tech-lead (persona)
 
-   └─ delivery-lead (persona)
+Full delivery cycle?
+  └─ delivery-lead (persona)
 
+Sprint done?
+  └─ create-retrospective
+```
+
+---
+
+## Checkpoints and Gates
+
+| Name | Type | Defined in | Purpose |
+|------|------|------------|---------|
+| PRD Approved | gate | create-prd, product-owner, delivery-lead | Don't generate tasks without approved PRD |
+| Estimation Review | gate | estimate-tasks, project-manager | Don't proceed if >30% of tasks have low confidence |
+| Risk Acceptance | gate | identify-risks, project-manager | Every High/High risk must have an owner and plan |
+| Ticket Approved | gate | plan-tickets, product-owner | Don't create tracker issues without approval |
+| Status Report Approved | gate | generate-status-report, project-manager | Don't share report without approval |
+| Sprint Confirmed | gate | product-owner | Don't assume sprint placement |
+| Sprint Commitment | gate | plan-sprint, delivery-lead | Don't proceed without committed sprint plan |
+| Retrospective Complete | gate | create-retrospective, delivery-lead | Don't close cycle without action items |
+
+---
+
+## See Also
+
+- [Skill Catalog](skill-catalog.md) — Complete skills list with descriptions and trigger words
 - [Persona Guide](../persona-guide.md) — Persona workflows with Mermaid diagrams
