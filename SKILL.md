@@ -1,17 +1,18 @@
 ---
 name: agnostic-planning-skills
+type: catalog
 description: >
   Master orchestrator for the Agnostic Planning Skills library. Use to discover and
-  activate 10 language-agnostic skills for product planning, task breakdown,
-  estimation, risk assessment, ticket generation, backlog prioritization, sprint
-  planning, retrospectives, and status reporting. 4 orchestration agents guide
-  end-to-end workflows.
+  activate 11 language-agnostic skills and 4 personas for product planning,
+  task breakdown, estimation, risk assessment, ticket generation, backlog
+  prioritization, sprint planning, retrospectives, requirements clarification,
+  and status reporting. Personas guide end-to-end workflows.
   prd, planning, tasks, tickets, estimation, risks, status, backlog, sprint,
-  retrospective, tdd, agile, product management.
+  retrospective, tdd, agile, product management, requirements, clarification.
 ---
 # Agnostic Planning Skills
 
-Master entry point. Navigate and activate 10 language-agnostic planning skills plus 4 orchestration agents.
+Master entry point. Navigate and activate 11 language-agnostic planning skills plus 4 personas.
 
 **Core principle:** Atomic, task-specific instructions that turn AI coding assistants into reliable product collaborators through structured planning, estimation, risk assessment, and execution tracking.
 
@@ -29,10 +30,11 @@ Master entry point. Navigate and activate 10 language-agnostic planning skills p
 | **Retrospective** | `create-retrospective` |
 | **Identify risks** | `identify-risks` |
 | **Status report** | `generate-status-report` |
-| **End-to-end planning** | `product-owner` (agent) |
-| **Execution tracking** | `project-manager` (agent) |
-| **Technical feasibility** | `tech-lead` (agent) |
-| **Full delivery cycle** | `delivery-lead` (agent) |
+| **Clarify requirements** | `requirements-clarifier` |
+| **End-to-end planning** | `product-owner` (persona) |
+| **Execution tracking** | `project-manager` (persona) |
+| **Technical feasibility** | `tech-lead` (persona) |
+| **Full delivery cycle** | `delivery-lead` (persona) |
 
 ## HARD-GATE
 
@@ -50,7 +52,8 @@ The PRD is the single source of truth for scope — everything flows from it.
 4. **Sprint** → `plan-sprint`
 5. **Execute** → `generate-status-report` → `identify-risks`
 6. **Retrospect** → `create-retrospective`
-7. **Orchestrate** → Use `product-owner`, `project-manager`, `tech-lead`, or `delivery-lead` agents
+7. **Clarify** → `requirements-clarifier` (if requirements are vague)
+8. **Orchestrate** → Use `product-owner`, `project-manager`, `tech-lead`, or `delivery-lead` personas
 
 ## Skill Catalog
 
@@ -61,20 +64,19 @@ The PRD is the single source of truth for scope — everything flows from it.
 | **Backlog** | `prioritize-backlog` |
 | **Ceremony** | `plan-sprint`, `create-retrospective` |
 | **Execution** | `generate-status-report`, `identify-risks` |
+| **Analysis** | `requirements-clarifier` |
 
-## Agents
+## Personas
 
-| Agent | Focus | Phases |
-|-------|-------|--------|
+| Persona | Focus | Phases |
+|---------|-------|--------|
 | **product-owner** | Scope & planning | Discovery → PRD → Tasks → Tickets → Sprint |
 | **project-manager** | Execution tracking | Estimation → Risks → Tracking → Status Reports |
 | **tech-lead** | Technical feasibility | PRD Review → Feasibility → Estimation Quality → Risk Report |
 | **delivery-lead** | End-to-end pipeline | Scope → Plan → Prioritize → Sprint → Execute → Retrospect |
 
-*See `tile.json` for the complete skill registry and `agents.json` for the agent registry.*
-
 ## Integration
 
-- **Source of Truth:** `tile.json` (skill registry), `agents.json` (agent registry)
+- **Source of Truth:** `directory.json` (skill registry)
 - **Reference:** `docs/reference/skill-catalog.md`, `docs/reference/integration-matrix.md`
-- **Agent Workflows:** `docs/agent-guide.md`
+- **Persona Workflows:** `docs/persona-guide.md`

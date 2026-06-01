@@ -1,10 +1,10 @@
-# Agent Guide — Agnostic Planning Skills
+# Persona Guide — Agnostic Planning Skills
 
-Step-by-step workflows for the orchestration agents.
+Step-by-step workflows for the orchestrating personas.
 
 ---
 
-## Product Owner Agent
+## Product Owner Persona
 
 Orchestrates the full product planning lifecycle: from a feature idea to sprint-ready tickets. Chains three skills through six phases with explicit approval gates.
 
@@ -40,7 +40,7 @@ graph TD
 
 ---
 
-## Project Manager Agent
+## Project Manager Persona
 
 Orchestrates execution tracking: from task estimation through risk assessment to stakeholder status reports. Chains three skills through four phases with approval gates.
 
@@ -72,7 +72,7 @@ graph TD
 
 ---
 
-## Tech Lead Agent
+## Tech Lead Persona
 
 Orchestrates technical review of a PRD: evaluates completeness, feasibility, and estimation quality. Produces a go/no-go recommendation. Chains two skills through four phases.
 
@@ -127,9 +127,9 @@ graph LR
 
 ---
 
-## Delivery Lead Agent
+## Delivery Lead Persona
 
-Meta-agent orchestrating the full delivery pipeline: from feature idea through execution to retrospective. Chains all 10 skills through six phases with approval gates.
+Meta-persona orchestrating the full delivery pipeline: from feature idea through execution to retrospective. Chains skills through six phases with approval gates.
 
 ### Phase Flow
 
@@ -197,5 +197,5 @@ graph LR
 
 ## See Also
 
-- [Skill Catalog](reference/skill-catalog.md) — All skills and agents
+- [Skill Catalog](reference/skill-catalog.md) — All skills and personas
 - [Integration Matrix](reference/integration-matrix.md) — Complete chaining reference

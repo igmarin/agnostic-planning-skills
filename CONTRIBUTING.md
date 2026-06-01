@@ -1,6 +1,6 @@
 # Contributing to agnostic-planning-skills
 
-Contributions are welcome. This repository follows a Markdown + YAML frontmatter architecture for skills and agents.
+Contributions are welcome. This repository follows a Markdown + YAML frontmatter architecture for skills and personas.
 
 ## Getting Started
 
@@ -16,13 +16,13 @@ Contributions are welcome. This repository follows a Markdown + YAML frontmatter
 5. Add the skill to `docs/reference/skill-catalog.md`
 6. Add the skill to `docs/reference/integration-matrix.md`
 
-## Adding a New Agent
+## Adding a New Persona
 
-1. Create the directory: `agents/<agent-name>/`
-2. Create `SKILL.md` with phases, hard gates, decision gates, and error recovery
-3. Register the agent in `agents.json`
-4. Add the agent to `docs/reference/skill-catalog.md`
-5. Update `docs/agent-guide.md` with the new agent's workflow
+1. Create the directory: `skills/personas/<persona-name>/`
+2. Create `SKILL.md` with `type: persona` in frontmatter
+3. Register the persona in `directory.json`
+4. Add the persona to `docs/reference/skill-catalog.md`
+5. Update `docs/persona-guide.md` with the new persona's workflow
 
 ## Conventions
 
@@ -30,4 +30,4 @@ Contributions are welcome. This repository follows a Markdown + YAML frontmatter
 - Skill names match directory names (kebab-case)
 - Frontmatter `description` starts with action-oriented trigger language
 - HARD-GATE rules go in fenced code blocks
-- Keep public docs consistent with `tile.json` and `agents.json`
+- Keep public docs consistent with `directory.json`

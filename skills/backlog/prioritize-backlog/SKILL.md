@@ -1,11 +1,14 @@
 ---
 name: prioritize-backlog
+type: atomic
 license: MIT
 description: >
   Prioritizes a backlog using a framework (RICE MoSCoW value-vs-effort WSJF) —
   rank items by impact and urgency not gut feeling, produce an ordered backlog
   table with Rank Item Score Rationale, and justify every ranking decision.
   Language-agnostic.
+  Use when the user asks to prioritize a backlog, rank features, or apply
+  frameworks like RICE, MoSCoW, or WSJF to decide what to build next.
   Trigger words: prioritize, backlog, RICE, MoSCoW, ranking, what should we build first,
   value vs effort, WSJF, priority order.
 metadata:

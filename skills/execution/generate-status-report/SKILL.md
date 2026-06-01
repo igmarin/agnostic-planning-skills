@@ -1,5 +1,6 @@
 ---
 name: generate-status-report
+type: atomic
 license: MIT
 description: >
   Generates a stakeholder status report from task data — never fabricate progress

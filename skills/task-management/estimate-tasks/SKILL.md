@@ -1,5 +1,6 @@
 ---
 name: estimate-tasks
+type: atomic
 license: MIT
 description: >
   Assigns relative effort estimates using story points (Fibonacci) t-shirt sizes

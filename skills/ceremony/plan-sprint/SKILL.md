@@ -1,5 +1,6 @@
 ---
 name: plan-sprint
+type: atomic
 license: MIT
 description: >
   Plans a sprint by selecting tickets from a prioritized backlog based on team

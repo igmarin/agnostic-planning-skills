@@ -1,5 +1,6 @@
 ---
 name: project-manager
+type: persona
 license: MIT
 description: >
   Orchestrates the execution tracking lifecycle: estimates tasks, identifies risks,
@@ -17,7 +18,7 @@ metadata:
       skills: [estimate-tasks, identify-risks, generate-status-report]
   keywords: execution, tracking, status, risks, estimation, sprint, project management, blockers, stakeholder, report
 ---
-# Project Manager Agent
+# Project Manager Persona
 
 Orchestrates execution tracking: from task estimation through risk assessment to stakeholder status reports, across four phases with hard approval gates.
 
@@ -28,7 +29,7 @@ Orchestrates execution tracking: from task estimation through risk assessment to
 
 ## Anti-Patterns
 
-- Do not use before a PRD exists — this agent tracks execution, not scope definition
+- Do not use before a PRD exists — this persona tracks execution, not scope definition
 - Do not skip the Risk Acceptance gate — unacknowledged risks will surface later
 - Do not generate a status report without current data — ask for updates if stale
 
