@@ -6,6 +6,8 @@ description: >
 mode: subagent
 prompt: "{file:./skills/personas/delivery-lead/SKILL.md}"
 permission:
+  # Orchestrates skills as a subagent: allows file writes (PRDs, tasks, reports)
+  # but denies arbitrary shell execution. Task delegation to other subagents allowed.
   bash: deny
   edit: allow
   write: allow

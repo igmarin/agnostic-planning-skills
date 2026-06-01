@@ -228,7 +228,7 @@ Complete catalog of 11 language-agnostic planning skills and 4 personas.
 
 **Hard Gates:** PRD Approval, Sprint Commitment, Retrospective Complete
 
-**Dependencies:** All 11 skills
+**Dependencies:** All 10 skills
 
 ---
 

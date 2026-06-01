@@ -12,7 +12,7 @@ Contributions are welcome. This repository follows a Markdown + YAML frontmatter
 1. Create the directory: `skills/<category>/<skill-name>/`
 2. Create `SKILL.md` following the conventions in [docs/architecture.md](docs/architecture.md)
 3. Add companion files (templates, examples, heuristics) as needed
-4. Register the skill in `tile.json`
+4. Register the skill in `directory.json`
 5. Add the skill to `docs/reference/skill-catalog.md`
 6. Add the skill to `docs/reference/integration-matrix.md`
 
