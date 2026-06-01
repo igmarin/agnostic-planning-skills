@@ -47,7 +47,7 @@ If the user responds with the revise command, address the noted concerns and re-
 
 ---
 
-## Agent Phases
+## Persona Phases
 
 ### Phase 1: Scope
 

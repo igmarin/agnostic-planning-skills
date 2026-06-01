@@ -6,7 +6,7 @@ Complete catalog of 11 language-agnostic planning skills and 4 personas.
 
 ## Quick Navigation
 
-**Skills:** [create-prd](#create-prd) · [review-prd](#review-prd) · [generate-tasks](#generate-tasks) · [plan-tickets](#plan-tickets) · [estimate-tasks](#estimate-tasks) · [prioritize-backlog](#prioritize-backlog) · [plan-sprint](#plan-sprint) · [create-retrospective](#create-retrospective) · [identify-risks](#identify-risks) · [generate-status-report](#generate-status-report)
+**Skills:** [create-prd](#create-prd) · [review-prd](#review-prd) · [requirements-clarifier](#requirements-clarifier) · [generate-tasks](#generate-tasks) · [plan-tickets](#plan-tickets) · [estimate-tasks](#estimate-tasks) · [prioritize-backlog](#prioritize-backlog) · [plan-sprint](#plan-sprint) · [create-retrospective](#create-retrospective) · [identify-risks](#identify-risks) · [generate-status-report](#generate-status-report)
 **Personas:** [product-owner](#product-owner-persona) · [project-manager](#project-manager-persona) · [tech-lead](#tech-lead-persona) · [delivery-lead](#delivery-lead-persona)
 
 ---
