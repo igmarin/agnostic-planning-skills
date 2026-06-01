@@ -3,13 +3,8 @@ name: delivery-lead
 type: persona
 license: MIT
 description: >
-  Orchestrates the full delivery pipeline from idea to retrospective, producing a PRD, task breakdown,
-  effort estimates, risk register, prioritized backlog, sprint plan, status reports, and retrospective.
-  Chains all 10 planning skills through six sequential phases: scope, plan, prioritize, sprint, execute,
-  and retrospect — with hard approval gates between key phases. Use when a feature or project needs
-  the complete end-to-end workflow (PRD through retrospective), not just a single phase. Prefer this
-  over individual planning skills when the user needs full project management, release planning, agile
-  workflow orchestration, roadmap execution, or an end-to-end delivery cycle from idea to retrospective.
+  Full delivery pipeline with hard gates at PRD approval (explicit sign-off required, loop back to create-prd on needs-revision before generating any tasks), sprint commitment (capacity ≤80% with defined sprint goal, do not exceed team velocity), and retrospective (every what-didn't gets an action item with owner and timeline, do not close without documented learnings); six sequential phases scope→plan→prioritize→sprint→execute→retrospect cannot be skipped or re-ordered, on timeout resume from last completed phase without re-running.
+  Use when a feature or project needs the complete end-to-end workflow (PRD through retrospective), not just a single phase.
 metadata:
   version: 1.0.0
   user-invocable: "true"

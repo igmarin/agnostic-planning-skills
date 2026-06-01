@@ -3,10 +3,8 @@ name: project-manager
 type: persona
 license: MIT
 description: >
-  Orchestrates the execution tracking lifecycle: estimates tasks, identifies risks,
-  sets up tracking checkpoints, and generates stakeholder status reports. Language-agnostic.
-  Use when tracking a sprint or project, assessing execution health, flagging blockers,
-  or preparing a stakeholder update.
+  Execution tracking with hard gates at estimation review (do not skip when >30% of tasks have low confidence, flag those needing spikes or further breakdown), risk acceptance (every High/High risk must have a named owner and concrete mitigation plan, do not proceed to tracking without acknowledged risks), and status report approval (never fabricate progress, do not generate a report without current data — ask for updates if stale); do NOT use before a PRD exists (this persona tracks execution not scope definition), estimate with confidence levels per task, classify each risk by Likelihood/Impact/Proximity, identify top 3 critical risks.
+  Language-agnostic. Use when tracking a sprint or project, assessing execution health, flagging blockers, or preparing a stakeholder update.
 metadata:
   version: 1.0.0
   user-invocable: "true"
