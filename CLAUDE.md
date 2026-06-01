@@ -4,11 +4,11 @@ This file instructs Claude Code on how to discover and invoke skills from the `a
 
 ## Repository Purpose
 
-`agnostic-planning-skills` is a curated library of 10 language-agnostic skills and 4 callable agents for technical project management, product planning, and agile execution. It teaches AI coding agents how to scope requirements, draft PRDs, estimate work, manage backlogs, plan sprints, and track execution health independently of any particular technology stack.
+`agnostic-planning-skills` is a curated library of 11 language-agnostic skills and 4 personas for technical project management, product planning, and agile execution. It teaches AI coding agents how to scope requirements, draft PRDs, estimate work, manage backlogs, plan sprints, and track execution health independently of any particular technology stack.
 
 ## Skill Catalog
 
-The repository contains 10 atomic planning skills and 4 agents covering:
+The repository contains 11 atomic planning skills and 4 personas covering:
 
 | Skill | Category | Use when... |
 |-------|----------|-------------|
@@ -22,6 +22,7 @@ The repository contains 10 atomic planning skills and 4 agents covering:
 | `create-retrospective` | Ceremony | Reflecting on a completed sprint or milestone to capture lessons and actions. |
 | `generate-status-report` | Execution | Preparing milestone or sprint execution status reports for stakeholders. |
 | `identify-risks` | Execution | Conducting risk assessments and mapping mitigations for active projects. |
+| `requirements-clarifier` | Analysis | Transforming vague requests into actionable specifications with acceptance criteria. |
 
 ## How to Discover Skills
 
@@ -36,13 +37,14 @@ Reference skills by their canonical `name` from YAML frontmatter:
 - `create-prd`
 - `generate-tasks`
 - `plan-tickets`
-- `product-owner` (agent)
-- `delivery-lead` (agent)
+- `requirements-clarifier`
+- `product-owner` (persona)
+- `delivery-lead` (persona)
 
 File paths (for reference only):
 - `skills/prd/create-prd/SKILL.md`
 - `skills/task-management/generate-tasks/SKILL.md`
-- `agents/product-owner/SKILL.md`
+- `skills/personas/product-owner/SKILL.md`
 
 ## Ecosystem Context
 

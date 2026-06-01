@@ -11,7 +11,7 @@ Integration matrix: which skill connects to which and in what order.
 
 ---
 
-## Complete Agent Loops
+## Complete Persona Loops
 
 ### Product Owner (Planning Lifecycle)
 
@@ -149,17 +149,17 @@ Need to prioritize?
   └─ prioritize-backlog → plan-sprint
 
 Need execution tracking?
-  └─ project-manager (agent)
-    └─ estimate-tasks → identify-risks → generate-status-report
+  └─ project-manager (persona)
+     └─ estimate-tasks → identify-risks → generate-status-report
 
 Full end-to-end planning?
-  └─ product-owner (agent)
+  └─ product-owner (persona)
 
 Need technical review?
-  └─ tech-lead (agent)
+  └─ tech-lead (persona)
 
 Full delivery cycle?
-  └─ delivery-lead (agent)
+  └─ delivery-lead (persona)
 
 Sprint done?
   └─ create-retrospective
@@ -170,6 +170,7 @@ Sprint done?
 ## Checkpoints and Gates
 
 | Name | Type | Defined in | Purpose |
+|------|------|------------|---------|
 | PRD Approved | gate | create-prd, product-owner, delivery-lead | Don't generate tasks without approved PRD |
 | Estimation Review | gate | estimate-tasks, project-manager | Don't proceed if >30% of tasks have low confidence |
 | Risk Acceptance | gate | identify-risks, project-manager | Every High/High risk must have an owner and plan |
@@ -184,4 +185,4 @@ Sprint done?
 ## See Also
 
 - [Skill Catalog](skill-catalog.md) — Complete skills list with descriptions and trigger words
-- [Agent Guide](../agent-guide.md) — Agent workflows with Mermaid diagrams
+- [Persona Guide](../persona-guide.md) — Persona workflows with Mermaid diagrams

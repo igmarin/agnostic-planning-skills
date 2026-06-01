@@ -1,5 +1,6 @@
 ---
 name: review-prd
+type: atomic
 license: MIT
 description: >
   Reviews a PRD for completeness testability clarity feasibility scope dependencies
@@ -93,4 +94,4 @@ Apply all applicable items. Skip items that are genuinely not relevant to the PR
 |-------|---------------|
 | **create-prd** | Review immediately after PRD generation |
 | **generate-tasks** | After review passes, proceed to task breakdown |
-| **tech-lead** agent | For deeper feasibility and estimation quality review |
+| **tech-lead** persona | For deeper feasibility and estimation quality review |

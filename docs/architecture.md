@@ -3,7 +3,7 @@
 Conventions and structure for every `SKILL.md` in this library.
 
 - **Overview and catalog:** [README](../README.md)
-- **Agent chains:** [agent-guide.md](agent-guide.md)
+- **Persona chains:** [persona-guide.md](persona-guide.md)
 - **Docs index:** [index.md](index.md)
 
 ## Directory Structure
@@ -12,23 +12,25 @@ Conventions and structure for every `SKILL.md` in this library.
 agnostic-planning-skills/
 ├── docs/                    # Documentation
 │   ├── architecture.md
-│   ├── agent-guide.md
+│   ├── persona-guide.md
 │   ├── calling-skills.md
 │   └── reference/
 │       ├── skill-catalog.md
 │       └── integration-matrix.md
-├── agents/                  # Orchestrated agent skills
-│   └── product-owner/
-│       └── SKILL.md
-├── skills/                  # Categorized skills
-│   ├── prd/                 # PRD creation skills
+├── skills/                  # Categorized skills and personas
+│   ├── prd/                 # PRD creation skills (atomic)
 │   │   └── create-prd/
-│   └── task-management/     # Task and ticket skills
-│       ├── generate-tasks/
-│       └── plan-tickets/
+│   ├── task-management/     # Task and ticket skills (atomic)
+│   │   ├── generate-tasks/
+│   │   └── plan-tickets/
+│   ├── requirements-clarifier/ # Analysis skill (atomic)
+│   └── personas/            # Role-based orchestrators (persona)
+│       └── product-owner/
+│           └── SKILL.md
+├── .opencode/               # OpenCode-specific config
+│   └── agents/              # Subagent wrappers
+│       └── product-owner.md
 ├── SKILL.md                 # Root orchestrator
-├── tile.json                # Skill registry
-├── agents.json              # Agent registry
 └── README.md
 ```
 
@@ -158,19 +160,21 @@ description: >
 
 ## Skill Types
 
-### Planning Skills
+### Atomic Skills (`type: atomic`)
 
-Produce structured artifacts (PRDs, task lists, tickets).
+Single-purpose capabilities. Do one thing well.
 
 - `create-prd` — Product Requirements Documents
 - `generate-tasks` — TDD task checklists from PRDs
 - `plan-tickets` — Tracker-ready ticket drafts
+- `requirements-clarifier` — Transform vague requests into specifications
 
-### Orchestration Agents
+### Personas (`type: persona`)
 
-Chain multiple skills with approval gates.
+Role-based orchestrators that sequence atomic skills with approval gates.
 
 - `product-owner` — Full planning lifecycle: Discovery → PRD → Tasks → Tickets → Sprint
+- `delivery-lead` — End-to-end pipeline: Scope → Plan → Prioritize → Sprint → Execute → Retrospect
 
 ## Skill Reference Formats
 
@@ -178,11 +182,11 @@ Skills are referenced by three conventions depending on context:
 
 | Context | Format | Example |
 |---------|--------|---------|
-| `tile.json` and `agents.json` | Full path: `skills/<category>/<name>/SKILL.md` | `skills/prd/create-prd/SKILL.md` |
-| Agent body (activate calls) | Category-path: `<category>/<name>` | `prd/create-prd` |
+| `directory.json` | Full path: `skills/<category>/<name>/SKILL.md` | `skills/prd/create-prd/SKILL.md` |
+| Persona body (activate calls) | Category-path: `<category>/<name>` | `prd/create-prd` |
 | Integration tables | Short name only | `create-prd` |
 
-The category-path format (`<category>/<name>`) drops the `skills/` prefix and the `/SKILL.md` suffix from the full tile.json path. Integration tables use bare names since the surrounding context (which skill file you're in) plus the category taxonomy in the root `SKILL.md` makes disambiguation straightforward.
+The category-path format (`<category>/<name>`) drops the `skills/` prefix and the `/SKILL.md` suffix from the full directory.json path. Integration tables use bare names since the surrounding context (which skill file you're in) plus the category taxonomy in the root `SKILL.md` makes disambiguation straightforward.
 
 ## Approval Gates
 
@@ -190,21 +194,21 @@ Planning skills use **hard gates** — explicit user approval checkpoints that b
 
 ### PRD Approval Gate
 
-Defined in: `create-prd`, `product-owner` agent.
+Defined in: `create-prd`, `product-owner` persona.
 
 Purpose: The PRD must be explicitly approved before any task generation or implementation. This prevents feature work on unapproved scope.
 
 ### Ticket Approval Gate
 
-Defined in: `plan-tickets`, `product-owner` agent.
+Defined in: `plan-tickets`, `product-owner` persona.
 
 Purpose: Ticket drafts must be reviewed and approved before creating issues in a tracker. Default mode is draft-only.
 
 ### Sprint Confirmation Gate
 
-Defined in: `product-owner` agent.
+Defined in: `product-owner` persona.
 
-Purpose: Sprint placement must be confirmed by the user. The agent does not assume sprint IDs, capacity, or team availability.
+Purpose: Sprint placement must be confirmed by the user. The persona does not assume sprint IDs, capacity, or team availability.
 
 ## Platform Compatibility
 

@@ -1,5 +1,6 @@
 ---
 name: delivery-lead
+type: persona
 license: MIT
 description: >
   Orchestrates the full delivery pipeline from idea to retrospective, producing a PRD, task breakdown,
@@ -20,9 +21,36 @@ metadata:
       skills: [create-prd, review-prd, generate-tasks, plan-tickets, estimate-tasks, identify-risks, generate-status-report, prioritize-backlog, plan-sprint, create-retrospective]
   keywords: delivery, end-to-end, pipeline, orchestration, meta, full cycle, planning, execution, retrospective
 ---
-# Delivery Lead Agent
+# Delivery Lead Persona
 
-Meta-agent orchestrating the full delivery pipeline: from feature idea through execution to retrospective. Chains all 10 skills through six phases with approval gates.
+Meta-persona orchestrating the full delivery pipeline: from feature idea through execution to retrospective. Chains skills through six phases with approval gates.
+
+## Sub-Skill Manifest
+
+| Phase | Skill Path |
+|-------|------------|
+| Scope | `prd/create-prd`, `prd/review-prd` |
+| Plan | `task-management/generate-tasks`, `task-management/estimate-tasks`, `execution/identify-risks` |
+| Prioritize | `backlog/prioritize-backlog`, `task-management/plan-tickets` |
+| Sprint | `ceremony/plan-sprint` |
+| Execute | `execution/generate-status-report`, `execution/identify-risks` |
+| Retrospect | `ceremony/create-retrospective` |
+
+## Gate Interaction Pattern
+
+All three hard gates follow the same approve/revise loop. Replace `[PROMPT]`, `[APPROVE_CMD]`, and `[REVISE_CMD]` with gate-specific values shown in each phase:
+
+```
+Agent: "[PROMPT] Please respond with:
+  - [APPROVE_CMD] — proceed
+  - [REVISE_CMD]: [your notes] — I will revise and re-present"
+User: "[APPROVE_CMD]"
+Agent: "Confirmed. Proceeding to next phase."
+```
+
+If the user responds with the revise command, address the noted concerns and re-present without advancing.
+
+---
 
 ## Agent Phases
 
@@ -37,6 +65,8 @@ Meta-agent orchestrating the full delivery pipeline: from feature idea through e
 PRD MUST be explicitly approved. If "Needs Revision," loop back to create-prd.
 DO NOT proceed to planning without an approved PRD.
 ```
+
+Use gate pattern with: prompt = "PRD draft is ready for your review.", approve = `APPROVED`, revise = `NEEDS REVISION`.
 
 ---
 
@@ -73,6 +103,8 @@ Sprint plan MUST be explicitly committed to by the team.
 DO NOT proceed if sprint capacity is exceeded or sprint goal is undefined.
 ```
 
+Use gate pattern with: prompt = "Sprint plan is ready. Capacity: [N] points, committed: [N] points ([N]% load). Sprint goal: [one sentence].", approve = `COMMITTED`, revise = `REVISE SCOPE`.
+
 ---
 
 ### Phase 5: Execute
@@ -95,12 +127,14 @@ Retrospective MUST include action items for every "what didn't."
 DO NOT close the delivery cycle without documented learnings and improvements.
 ```
 
+Use gate pattern with: prompt = "Retrospective is ready for sign-off. [N] action items documented with owners.", approve = `COMPLETE`, revise = `ADD ITEMS`.
+
 ---
 
 ## Error Recovery
 
 | Scenario | Recovery |
-|----------|----------|
+|----------|---------|
 | PRD rejected | Return to Phase 1. Do not skip to planning. |
 | Sprint overcommitted | Reduce scope to ≤80% capacity. Defer lowest-priority items. |
 | Mid-sprint scope change | Re-evaluate Phase 3 (prioritize) and Phase 4 (sprint). Update stakeholders. |

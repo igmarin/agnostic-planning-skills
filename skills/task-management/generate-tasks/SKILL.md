@@ -1,5 +1,6 @@
 ---
 name: generate-tasks
+type: atomic
 license: MIT
 description: >
   Breaks a feature into implementation tasks — always create a feature branch
@@ -19,7 +20,6 @@ metadata:
 ## Quick Reference
 
 - **Task 0.0:** Always create feature branch first
-- **Test pattern:** Write test → Run fail → Implement → Run pass (TDD quadruplet)
 - **Output:** `/tasks/tasks-[feature-name].md`
 - **Auto-detect:** Test command, source directory, test directory, and doc tool.
 - **Gate:** Test command must pass before full generation
@@ -30,14 +30,8 @@ metadata:
 
 **CRITICAL RULE:** Explicitly detect and list the project's conventions before generating tasks:
 
-1. **Test Command Detection** — Use the lookup table in Step 2 with the concrete commands below.
-2. **Directory Detection** — Identify source and test directories:
-   ```bash
-   # Source dir candidates
-   ls -d src/ lib/ app/ 2>/dev/null | head -1
-   # Test dir candidates
-   ls -d tests/ test/ spec/ __tests__/ 2>/dev/null | head -1
-   ```
+1. **Test Command Detection** — Use the lookup table below to resolve the concrete command.
+2. **Directory Detection** — Check for common source dirs (`src/`, `lib/`, `app/`) and test dirs (`tests/`, `test/`, `spec/`, `__tests__/`).
 3. **Documentation Tool Detection** — Identify the documentation tool in use:
    ```bash
    # Check for common doc tools
@@ -46,9 +40,22 @@ metadata:
    ls Doxyfile rustdoc 2>/dev/null
    ```
 
+### Test Command Lookup Table
+
+| Config File Present | Detected Test Command |
+|---|---|
+| `package.json` (jest/vitest) | `npm test` or `npx vitest run` |
+| `package.json` (mocha) | `npx mocha` |
+| `pyproject.toml` / `pytest.ini` | `pytest` |
+| `Cargo.toml` | `cargo test` |
+| `go.mod` | `go test ./...` |
+| `Gemfile` (rspec) | `bundle exec rspec` |
+| `build.gradle` / `pom.xml` | `./gradlew test` / `mvn test` |
+| `.phpunit.xml` | `vendor/bin/phpunit` |
+
 ### Step 2: Validation Checkpoint
 
-**CRITICAL:** Verify the detected test command works before proceeding. Use the [TEST_COMMANDS.md](./TEST_COMMANDS.md) lookup table.
+**CRITICAL:** Verify the detected test command works before proceeding.
 
 Run the detected command. If it fails, ask the user to confirm:
 _"Detected test command: [command]. Is this correct?"_
@@ -72,7 +79,46 @@ Break down the feature/PRD into implementation tasks:
 
 ### Step 4: Generate Task List
 
-Create `/tasks/tasks-[feature-name].md` using the [TASK_TEMPLATES.md](./TASK_TEMPLATES.md) template.
+Create `/tasks/tasks-[feature-name].md` using the structure below.
+
+#### Task File Template
+
+```markdown
+# Tasks: [Feature Name]
+
+## Relevant Files
+- `src/[module]/[file].[ext]` — [brief description]
+- `tests/[module]/[file].test.[ext]` — [brief description]
+
+## Tasks
+
+- [ ] 0.0 Create feature branch `feat/[feature-name]`
+
+- [ ] 1.0 [Parent behavior group — e.g., "User can submit a contact form"]
+  - [ ] 1.1 Write failing test for [smallest behavior slice]
+  - [ ] 1.2 Run test suite — confirm test 1.1 fails (`[test command]`)
+  - [ ] 1.3 Implement [feature code] to make test 1.1 pass
+  - [ ] 1.4 Run test suite — confirm all tests pass (`[test command]`)
+
+- [ ] 2.0 [Next parent behavior group]
+  - [ ] 2.1 Write failing test for ...
+  - [ ] 2.2 Run — confirm fail
+  - [ ] 2.3 Implement ...
+  - [ ] 2.4 Run — confirm pass
+```
+
+#### TDD Quadruplet Example
+
+For a Python feature adding a `UserService.create()` method:
+
+```markdown
+- [ ] 1.0 UserService can create a new user
+  - [ ] 1.1 Write failing test in `tests/services/test_user_service.py`:  
+         `def test_create_user_returns_user_with_id(): ...`
+  - [ ] 1.2 Run `pytest tests/services/test_user_service.py` — confirm `FAILED` (AttributeError or assertion)
+  - [ ] 1.3 Implement `UserService.create()` in `src/services/user_service.py`
+  - [ ] 1.4 Run `pytest tests/services/test_user_service.py` — confirm `1 passed`
+```
 
 ### Step 5: Final Validation
 

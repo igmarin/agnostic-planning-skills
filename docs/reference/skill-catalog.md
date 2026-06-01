@@ -1,13 +1,13 @@
 # Skill Catalog — Agnostic Planning Skills
 
-Complete catalog of 10 language-agnostic planning skills and 4 orchestration agents.
+Complete catalog of 11 language-agnostic planning skills and 4 personas.
 
 ---
 
 ## Quick Navigation
 
 **Skills:** [create-prd](#create-prd) · [review-prd](#review-prd) · [generate-tasks](#generate-tasks) · [plan-tickets](#plan-tickets) · [estimate-tasks](#estimate-tasks) · [prioritize-backlog](#prioritize-backlog) · [plan-sprint](#plan-sprint) · [create-retrospective](#create-retrospective) · [identify-risks](#identify-risks) · [generate-status-report](#generate-status-report)
-**Agents:** [product-owner](#product-owner-agent) · [project-manager](#project-manager-agent) · [tech-lead](#tech-lead-agent) · [delivery-lead](#delivery-lead-agent)
+**Personas:** [product-owner](#product-owner-persona) · [project-manager](#project-manager-persona) · [tech-lead](#tech-lead-persona) · [delivery-lead](#delivery-lead-persona)
 
 ---
 
@@ -55,6 +55,21 @@ Complete catalog of 10 language-agnostic planning skills and 4 orchestration age
 **HARD-GATE:** Do not skip Task 0.0 (Create feature branch). Do not combine TDD sub-tasks into a single task.
 
 **Next after use:** `estimate-tasks` (to assign effort), `plan-tickets` (for ticket generation), or begin implementation.
+
+---
+
+### requirements-clarifier
+
+| Path | `skills/requirements-clarifier/SKILL.md` |
+| Category | Analysis |
+| Description | Transform vague requests into actionable specifications |
+| Trigger Words | "clarify", "requirements", "spec", "define", "scope this", "refine", "unclear task" |
+
+**What it does:** Takes an ambiguous or incomplete task description and produces clarified requirements with user stories, acceptance criteria, identified edge cases, and open questions. Never produces code.
+
+**HARD-GATE:** Output requirements only. No implementation code, configuration, or test cases.
+
+**Next after use:** `create-prd` (to draft a PRD from clarified requirements), or use `generate-tasks` to break into implementation tasks.
 
 ---
 
@@ -163,11 +178,11 @@ Complete catalog of 10 language-agnostic planning skills and 4 orchestration age
 
 ---
 
-## Agents
+## Personas
 
-### product-owner Agent
+### product-owner Persona
 
-| Path | `agents/product-owner/SKILL.md` |
+| Path | `skills/personas/product-owner/SKILL.md` |
 | Description | Full planning lifecycle with approval gates |
 
 **Phases:** Discovery → PRD Draft → Review & Revise → Task Estimation → Ticket Generation → Sprint Placement
@@ -178,9 +193,9 @@ Complete catalog of 10 language-agnostic planning skills and 4 orchestration age
 
 ---
 
-### project-manager Agent
+### project-manager Persona
 
-| Path | `agents/project-manager/SKILL.md` |
+| Path | `skills/personas/project-manager/SKILL.md` |
 | Description | Execution tracking lifecycle with approval gates |
 
 **Phases:** Estimation → Risk Assessment → Tracking Setup → Status Reporting
@@ -191,9 +206,9 @@ Complete catalog of 10 language-agnostic planning skills and 4 orchestration age
 
 ---
 
-### tech-lead Agent
+### tech-lead Persona
 
-| Path | `agents/tech-lead/SKILL.md` |
+| Path | `skills/personas/tech-lead/SKILL.md` |
 | Description | Technical review lifecycle with go/no-go recommendation |
 
 **Phases:** PRD Review → Feasibility Assessment → Estimation Quality Review → Technical Risk Report
@@ -204,10 +219,10 @@ Complete catalog of 10 language-agnostic planning skills and 4 orchestration age
 
 ---
 
-### delivery-lead Agent
+### delivery-lead Persona
 
-| Path | `agents/delivery-lead/SKILL.md` |
-| Description | End-to-end delivery pipeline — the meta-agent |
+| Path | `skills/personas/delivery-lead/SKILL.md` |
+| Description | End-to-end delivery pipeline |
 
 **Phases:** Scope → Plan → Prioritize → Sprint → Execute → Retrospect
 
@@ -220,6 +235,7 @@ Complete catalog of 10 language-agnostic planning skills and 4 orchestration age
 ## If You Need...
 
 | You need... | Recommended Skill(s) |
+| **Clarify requirements** | `requirements-clarifier` |
 | **Write a PRD** | `create-prd` |
 | **Review a PRD** | `review-prd` |
 | **Break down a feature** | `create-prd` → `generate-tasks` |
@@ -230,15 +246,15 @@ Complete catalog of 10 language-agnostic planning skills and 4 orchestration age
 | **Plan a sprint** | `plan-sprint` |
 | **Retrospective** | `create-retrospective` |
 | **Status report** | `generate-status-report` |
-| **End-to-end planning** | `product-owner` agent |
-| **Execution tracking** | `project-manager` agent |
-| **Technical feasibility** | `tech-lead` agent |
-| **Full delivery cycle** | `delivery-lead` agent |
+| **End-to-end planning** | `product-owner` persona |
+| **Execution tracking** | `project-manager` persona |
+| **Technical feasibility** | `tech-lead` persona |
+| **Full delivery cycle** | `delivery-lead` persona |
 
 ---
 
 ## See Also
 
 - [Integration Matrix](integration-matrix.md) — How skills chain together
-- [Agent Guide](../agent-guide.md) — Agent workflow details with Mermaid diagrams
+- [Persona Guide](../persona-guide.md) — Persona workflow details with Mermaid diagrams
 - [Architecture](../architecture.md) — Repository layout and conventions

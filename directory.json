@@ -1,8 +1,8 @@
 {
   "name": "igmarin/agnostic-planning-skills",
-  "version": "3.0.10",
+  "version": "4.0.0",
   "license": "MIT",
-  "summary": "Language-agnostic AI knowledge registry for Technical Project Management, PRDs, PRD review, Software Architecture planning, Task breakdown, Estimation, Risk assessment, Status reporting, Backlog prioritization, Sprint planning, Retrospectives, and Agile ticket generation. Uses Markdown + Front-matter architecture.",
+  "summary": "A curated library of 11 language-agnostic planning skills and 4 personas for technical project management, product planning, and agile execution. Skills are typed as `atomic` (single-purpose) or `persona` (role-based orchestrator).",
   "skills": {
     "create-prd": {
       "path": "skills/prd/create-prd/SKILL.md"
@@ -33,6 +33,21 @@
     },
     "identify-risks": {
       "path": "skills/execution/identify-risks/SKILL.md"
+    },
+    "requirements-clarifier": {
+      "path": "skills/requirements-clarifier/SKILL.md"
+    },
+    "product-owner": {
+      "path": "skills/personas/product-owner/SKILL.md"
+    },
+    "project-manager": {
+      "path": "skills/personas/project-manager/SKILL.md"
+    },
+    "tech-lead": {
+      "path": "skills/personas/tech-lead/SKILL.md"
+    },
+    "delivery-lead": {
+      "path": "skills/personas/delivery-lead/SKILL.md"
     }
   }
 }

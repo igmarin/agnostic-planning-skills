@@ -1,5 +1,6 @@
 ---
 name: create-prd
+type: atomic
 license: MIT
 description: >
   Drafts a clear actionable PRD from a feature — focus on what/why, no code,

@@ -1,4 +1,4 @@
-# Calling Skills and Agents
+# Calling Skills and Personas
 
 Agnostic Planning Skills can be invoked in different ways depending on your environment and desired level of autonomy.
 
@@ -34,13 +34,14 @@ In environments like Cursor, Windsurf, or Gemini CLI:
 
 ---
 
-## Using Agents
+## Using Personas
 
-Agents orchestrate multiple skills through phases with approval gates.
+Personas orchestrate multiple skills through phases with approval gates.
 
 ### Via Chat Commands
 
 ```text
+@requirements-clarifier Clarify the user notification system requirements
 @product-owner Plan the user notification system feature
 @project-manager Track execution of the current sprint
 @tech-lead Review the notification PRD for feasibility
@@ -69,7 +70,7 @@ gh skill install igmarin/agnostic-planning-skills
 #### Project-Level (Local) Installation
 To install skills for your current project workspace:
 ```bash
-# Install ALL skills and agents
+# Install ALL skills and personas
 npx skills add igmarin/agnostic-planning-skills --full-depth --all
 
 # Install a specific skill (e.g., create-prd)
@@ -79,7 +80,7 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth
 #### Global Installation
 To install skills globally for your AI coding assistant:
 ```bash
-# Install ALL skills and agents globally
+# Install ALL skills and personas globally
 npx skills add igmarin/agnostic-planning-skills --full-depth --all --global
 
 # Install a specific skill globally (e.g., create-prd)
@@ -88,9 +89,9 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 
 ---
 
-## Available Skills and Agents
+## Available Skills and Personas
 
-### Skills (10)
+### Skills (11)
 
 | Name | Category | Description |
 |------|----------|-------------|
@@ -104,8 +105,9 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 | `create-retrospective` | Ceremony | Generate sprint retrospectives with action items |
 | `identify-risks` | Execution | Scan plans for dependency and capacity risks |
 | `generate-status-report` | Execution | Generate stakeholder status reports |
+| `requirements-clarifier` | Analysis | Transform vague requests into actionable specifications |
 
-### Agents (4)
+### Personas (4)
 
 | Name | Phases | Focus |
 |------|--------|-------|

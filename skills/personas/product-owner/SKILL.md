@@ -1,5 +1,6 @@
 ---
 name: product-owner
+type: persona
 license: MIT
 description: >
   Orchestrates the full product planning lifecycle: clarifies scope, drafts a PRD,
@@ -18,7 +19,7 @@ metadata:
       skills: [create-prd, generate-tasks, plan-tickets]
   keywords: product, planning, prd, tickets, sprint, backlog, discovery, requirements, orchestration
 ---
-# Product Owner Agent
+# Product Owner Persona
 
 Orchestrates end-to-end product planning: from feature idea to sprint-ready tickets. Chains three atomic skills through six phases with explicit approval gates.
 

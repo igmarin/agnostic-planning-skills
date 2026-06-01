@@ -6,7 +6,7 @@
 
 > Internal planning workflow for consulting engagements, open-sourced. These skills are used by the maintainer for structured project discovery and PRD workflows. They are not a standalone product.
 
-It is a curated library of **10 language-agnostic planning skills** and **4 orchestration agents** that teach AI tools how to write and review PRDs, break down features into TDD tasks, estimate effort, identify risks, prioritize backlogs, plan sprints, run retrospectives, generate status reports, and create tracker-ready tickets — regardless of tech stack.
+It is a curated library of **11 language-agnostic planning skills** and **4 personas** that teach AI tools how to write and review PRDs, break down features into TDD tasks, estimate effort, identify risks, prioritize backlogs, plan sprints, run retrospectives, generate status reports, clarify requirements, and create tracker-ready tickets — regardless of tech stack.
 
 The project is built around one non-negotiable rule:
 
@@ -14,7 +14,7 @@ The project is built around one non-negotiable rule:
 No implementation without an approved PRD. The PRD is the single source of truth for scope.
 ```
 
-That planning gate is encoded directly into the skills and agent, so agents do not just produce plausible plans. They follow a repeatable product management process.
+That planning gate is encoded directly into the skills and personas, so they do not just produce plausible plans. They follow a repeatable product management process.
 
 ## Part of the AI Skill Ecosystem
 
@@ -25,7 +25,7 @@ This repo is one of 6 in a composable AI skill ecosystem:
 | [`ruby-core-skills`](https://github.com/igmarin/ruby-core-skills) | 15 shared Ruby skills + process discipline |
 | [`rails-agent-skills`](https://github.com/igmarin/rails-agent-skills) | 28 Rails-specific skills + 9 agents |
 | [`hanakai-yaku`](https://github.com/igmarin/hanakai-yaku) | 35 Hanami/dry-rb skills + 10 agents |
-| [**`agnostic-planning-skills`**](https://github.com/igmarin/agnostic-planning-skills) | 10 planning skills + 4 agents |
+| [**`agnostic-planning-skills`**](https://github.com/igmarin/agnostic-planning-skills) | 11 planning skills + 4 personas |
 | [`agent-mcp-runtime`](https://github.com/igmarin/agent-mcp-runtime) | Rust CLI runtime (pack resolution, MCP) |
 | [`ruby-skill-bench`](https://github.com/igmarin/ruby-skill-bench) | Benchmark/eval engine |
 
@@ -61,9 +61,9 @@ See the [Ecosystem Overview](https://github.com/igmarin/agent-mcp-runtime/blob/m
 
 | Area | Purpose |
 |------|---------|
-| `skills/` | 10 language-agnostic skills across 5 categories: prd, task-management, backlog, ceremony, execution. |
-| `agents/` | 4 orchestration agents: `product-owner`, `project-manager`, `tech-lead`, `delivery-lead`. |
-| `docs/` | Architecture, skill structure, agent guide, templates, and reference catalog. |
+| `skills/` | 11 language-agnostic skills across 5 categories + 1 standalone: prd, task-management, backlog, ceremony, execution, requirements-clarifier. |
+| `skills/personas/` | 4 personas: `product-owner`, `project-manager`, `tech-lead`, `delivery-lead`. |
+| `docs/` | Architecture, skill structure, persona guide, templates, and reference catalog. |
 
 The skills are not long-form tutorials. They are executable instructions for AI agents: when to draft a PRD, when to stop for approval, how to break down a feature into TDD tasks, and how to classify and sequence tickets.
 
@@ -77,7 +77,7 @@ Agnostic Planning Skills can be invoked through chat commands:
 
 > MCP support is planned but not yet implemented. Currently, skills are invoked via chat commands (`@skill-name` in Cursor, Windsurf, Gemini CLI) or installed via `gh skill install`.
 
-**[Read the complete guide on Calling Skills and Agents](docs/calling-skills.md)** for syntax examples and when to use each method.
+**[Read the complete guide on Calling Skills and Personas](docs/calling-skills.md)** for syntax examples and when to use each method.
 
 ## The Planning Pipeline
 
@@ -94,7 +94,7 @@ graph LR
 create-prd -> [gate: PRD approved] -> generate-tasks -> plan-tickets
 ```
 
-### The full product-owner agent lifecycle
+### The full product-owner persona lifecycle
 
 ```mermaid
 graph TD
@@ -127,11 +127,12 @@ graph TD
 | `create-retrospective` | Ceremony | Generate sprint retrospectives with action items |
 | `identify-risks` | Execution | Scan plans for dependency, capacity, and technical risks |
 | `generate-status-report` | Execution | Generate stakeholder status reports with honest progress tracking |
+| `requirements-clarifier` | Analysis | Transform vague requests into actionable specifications |
 
-### Agent
+### Persona
 
-| Agent | Description |
-|-------|-------------|
+| Persona | Description |
+|---------|-------------|
 | `product-owner` | Planning lifecycle: Discovery → PRD → Tasks → Tickets → Sprint |
 | `project-manager` | Execution tracking: Estimation → Risks → Tracking → Status Reports |
 | `tech-lead` | Technical review: PRD Review → Feasibility → Estimation Quality → Risk Report |
@@ -152,7 +153,7 @@ Each skill is a single `SKILL.md` file with YAML frontmatter and a 6-section bod
 6. Integration              — predecessor/successor skills
 ```
 
-The `product-owner` agent chains skills with additional phases, hard gates, decision gates, and error recovery.
+The `product-owner` persona chains skills with additional phases, hard gates, decision gates, and error recovery.
 
 ## Language-Agnostic by Design
 
@@ -190,7 +191,7 @@ Requires [skills.sh](https://www.skills.sh/) CLI.
 To install skills for your current project workspace:
 
 ```bash
-# Install ALL skills and agents
+# Install ALL skills and personas
 npx skills add igmarin/agnostic-planning-skills --full-depth --all
 
 # Install a specific skill (e.g., create-prd)
@@ -202,7 +203,7 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth
 To install skills globally for your AI coding assistant:
 
 ```bash
-# Install ALL skills and agents globally
+# Install ALL skills and personas globally
 npx skills add igmarin/agnostic-planning-skills --full-depth --all --global
 
 # Install a specific skill globally (e.g., create-prd)
@@ -216,16 +217,16 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 | Understand the docs system | [docs/index.md](docs/index.md) |
 | Browse all skills | [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md) |
 | Understand skill chaining | [docs/reference/integration-matrix.md](docs/reference/integration-matrix.md) |
-| Follow agent guides | [docs/agent-guide.md](docs/agent-guide.md) |
+| Follow persona guides | [docs/persona-guide.md](docs/persona-guide.md) |
 | Understand repository structure | [docs/architecture.md](docs/architecture.md) |
-| Invoke skills and agents | [docs/calling-skills.md](docs/calling-skills.md) |
+| Invoke skills and personas | [docs/calling-skills.md](docs/calling-skills.md) |
 
 ## Contributing
 
-When contributing skills, agents, or docs:
+When contributing skills, personas, or docs:
 
 - Please follow the [Code of Conduct](CODE_OF_CONDUCT.md) in all interactions.
 - Check out the [Contributing Guide](CONTRIBUTING.md) for details on our development and pull request processes.
 - Keep generated artifacts in English unless a user explicitly asks for another language.
 - Preserve the PRD-gates-task-generation rule for every planning skill.
-- Keep public docs consistent with `tile.json`, `agents.json`, and the latest release.
+- Keep public docs consistent with `directory.json` and the latest release.

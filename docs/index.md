@@ -1,16 +1,16 @@
 # Agnostic Planning Skills — Docs
 
-10 language-agnostic skills and 4 orchestration agents for product planning, estimation, risk assessment, backlog prioritization, sprint planning, retrospectives, and status reporting.
+11 language-agnostic skills and 4 personas for product planning, estimation, risk assessment, backlog prioritization, sprint planning, retrospectives, requirements clarification, and status reporting.
 
 ## Quick Navigation
 
 | Need | Document |
 |------|----------|
-| Browse all skills and agents | [reference/skill-catalog.md](reference/skill-catalog.md) |
+| Browse all skills and personas | [reference/skill-catalog.md](reference/skill-catalog.md) |
 | Understand skill chaining | [reference/integration-matrix.md](reference/integration-matrix.md) |
-| Agent workflows with diagrams | [agent-guide.md](agent-guide.md) |
+| Persona workflows with diagrams | [persona-guide.md](persona-guide.md) |
 | Repository structure and conventions | [architecture.md](architecture.md) |
-| Invoke skills and agents | [calling-skills.md](calling-skills.md) |
+| Invoke skills and personas | [calling-skills.md](calling-skills.md) |
 
 ## Skill Categories
 
@@ -21,11 +21,12 @@
 | Backlog | `prioritize-backlog` |
 | Ceremony | `plan-sprint`, `create-retrospective` |
 | Execution | `identify-risks`, `generate-status-report` |
+| Analysis | `requirements-clarifier` |
 
-## Agents
+## Personas
 
-| Agent | Focus |
-|-------|-------|
+| Persona | Focus |
+|---------|-------|
 | `product-owner` | Scope & planning: PRD → Tasks → Tickets → Sprint |
 | `project-manager` | Execution tracking: Estimation → Risks → Tracking → Reports |
 | `tech-lead` | Technical feasibility: PRD Review → Feasibility → Estimation Quality |

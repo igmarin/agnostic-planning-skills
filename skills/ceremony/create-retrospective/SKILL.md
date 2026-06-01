@@ -1,5 +1,6 @@
 ---
 name: create-retrospective
+type: atomic
 license: MIT
 description: >
   Generates a sprint retrospective from sprint data feedback and metrics —

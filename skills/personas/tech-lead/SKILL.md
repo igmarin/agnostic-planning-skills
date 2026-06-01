@@ -1,5 +1,6 @@
 ---
 name: tech-lead
+type: persona
 license: MIT
 description: >
   Orchestrates technical review of a PRD: evaluates completeness and feasibility,
@@ -18,7 +19,7 @@ metadata:
       skills: [review-prd, estimate-tasks]
   keywords: technical, feasibility, architecture, estimation quality, go/no-go, review, tech lead, engineering
 ---
-# Tech Lead Agent
+# Tech Lead Persona
 
 Orchestrates technical review of a PRD: evaluates completeness and feasibility, validates estimation quality, and produces a technical risk report. Chains two skills through four phases.
 

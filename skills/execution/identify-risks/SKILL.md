@@ -1,5 +1,6 @@
 ---
 name: identify-risks
+type: atomic
 license: MIT
 description: >
   Scans plans for risks backed by evidence not speculation — check dependency
