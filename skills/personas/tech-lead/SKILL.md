@@ -3,11 +3,8 @@ name: tech-lead
 type: persona
 license: MIT
 description: >
-  Orchestrates technical review of a PRD: evaluates completeness and feasibility,
-  validates estimation quality, flags architectural concerns, and produces a
-  technical risk report. Language-agnostic — evaluates the plan, not the stack.
-  Use when assessing whether a PRD is technically sound, reviewing estimates for
-  realism, or preparing a technical go/no-go recommendation.
+  Technical PRD review evaluating every requirement for completeness feasibility and testability plus validating estimation quality (flag tasks with low confidence, identify architectural concerns and technical debt risks) and producing structured findings with severity classification Critical/Suggestion/Note — each finding MUST cite specific PRD evidence, do not review the idea review the document's quality, output a go/no-go recommendation with a technical risk report covering dependency chains, capacity concerns, and single points of failure.
+  Language-agnostic — evaluates the plan, not the stack. Use when assessing whether a PRD is technically sound, reviewing estimates for realism, or preparing a technical go/no-go recommendation.
 metadata:
   version: 1.0.0
   user-invocable: "true"

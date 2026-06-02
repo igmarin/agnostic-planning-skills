@@ -61,7 +61,7 @@ See the [Ecosystem Overview](https://github.com/igmarin/agent-mcp-runtime/blob/m
 
 | Area | Purpose |
 |------|---------|
-| `skills/` | 11 language-agnostic skills across 5 categories + 1 standalone: prd, task-management, backlog, ceremony, execution, requirements-clarifier. |
+| `skills/` | 11 language-agnostic skills across 6 categories: prd, task-management, backlog, ceremony, execution, analysis (requirements-clarifier). |
 | `skills/personas/` | 4 personas: `product-owner`, `project-manager`, `tech-lead`, `delivery-lead`. |
 | `docs/` | Architecture, skill structure, persona guide, templates, and reference catalog. |
 
