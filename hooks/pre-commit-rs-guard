@@ -6,24 +6,48 @@
 # Uses --dry-run so it never blocks the commit — output is informational only.
 #
 # Requirements:
-#   - rs-guard installed: cargo install rs-guard
 #   - DEEPSEEK_API_KEY set in your shell environment
+#
+# Binary resolution order:
+#   1. bin/rs-guard-macos-arm64  (bundled — macOS arm64)
+#   2. bin/rs-guard-linux-x64    (bundled — Linux x86_64)
+#   3. rs-guard in PATH
+#   4. ~/.cargo/bin/rs-guard     (installed via `cargo install rs-guard`)
 #
 # Usage: This script is invoked automatically by git via hooks/hooks.json.
 # To install manually: cp hooks/pre-commit-rs-guard .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
 
 set -euo pipefail
 
-RS_GUARD_BIN="${RS_GUARD_BIN:-rs-guard}"
+# Locate the bundled binary for the current platform
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-if ! command -v "$RS_GUARD_BIN" &>/dev/null; then
-  RS_GUARD_BIN="$HOME/.cargo/bin/rs-guard"
-fi
+resolve_binary() {
+  local os arch
+  os="$(uname -s)"
+  arch="$(uname -m)"
 
-if ! command -v "$RS_GUARD_BIN" &>/dev/null && [ ! -x "$RS_GUARD_BIN" ]; then
-  echo "[rs-guard] rs-guard not found — skipping pre-commit review."
-  echo "[rs-guard] Install with: cargo install rs-guard"
-  exit 0
+  case "${os}-${arch}" in
+    Darwin-arm64)  echo "$REPO_ROOT/bin/rs-guard-macos-arm64" ;;
+    Linux-x86_64)  echo "$REPO_ROOT/bin/rs-guard-linux-x64"  ;;
+    *)             echo "" ;;
+  esac
+}
+
+RS_GUARD_BIN="$(resolve_binary)"
+
+# Fall back to PATH then ~/.cargo/bin
+if [ -z "$RS_GUARD_BIN" ] || [ ! -x "$RS_GUARD_BIN" ]; then
+  if command -v rs-guard &>/dev/null; then
+    RS_GUARD_BIN="rs-guard"
+  elif [ -x "$HOME/.cargo/bin/rs-guard" ]; then
+    RS_GUARD_BIN="$HOME/.cargo/bin/rs-guard"
+  else
+    echo "[rs-guard] rs-guard not found — skipping pre-commit review."
+    echo "[rs-guard] Install with: cargo install rs-guard"
+    exit 0
+  fi
 fi
 
 if [ -z "${DEEPSEEK_API_KEY:-}" ]; then

@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/pre-commit-rs-guard\"",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/pre-commit-rs-guard",
             "async": false
           }
         ]

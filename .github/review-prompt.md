@@ -22,7 +22,7 @@ Every skill directory must contain a `SKILL.md` file with valid YAML frontmatter
 - `name` value must exactly match the skill's directory name (e.g. directory `create-prd` → `name: create-prd`)
 - `type` must be one of: `atomic`, `catalog`, `persona` — reject `promptscript`, `script`, or any unknown type
 - `description` must contain at least one trigger phrase such as "Use when", "Trigger words:", or "Use for"
-- `metadata.version` should be present for atomic skills (e.g. `metadata:\n  version: 1.0.0`)
+- `metadata.version` must be present for atomic skills (e.g. `metadata:\n  version: 1.0.0`)
 
 **Suggestions:**
 
