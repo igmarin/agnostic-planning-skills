@@ -30,8 +30,20 @@ Every PR is reviewed automatically by [rs-guard](https://github.com/nebulaideas/
 
 ### Prerequisites
 
-- `DEEPSEEK_API_KEY` set in your shell environment
+- An API key for any [supported provider](#supported-providers) set in your shell environment
 - The bundled binary for your platform (already in `bin/`; no install needed)
+
+#### Supported providers
+
+| Provider | Environment variable | `.reviewer.toml` `provider` value |
+|----------|---------------------|-----------------------------------|
+| DeepSeek | `DEEPSEEK_API_KEY` | `deepseek` |
+| OpenAI | `OPENAI_API_KEY` | `openai` |
+| Kimi (Moonshot AI) | `KIMI_API_KEY` | `kimi` |
+| Qwen (Alibaba Cloud) | `DASHSCOPE_API_KEY` | `qwen` |
+| OpenRouter | `OPENROUTER_API_KEY` | `openrouter` |
+
+The repo's CI uses DeepSeek by default (configured in `.reviewer.toml`). To use a different provider locally, set its API key and pass `--provider <name>` on the command line — or update `.reviewer.toml`.
 
 ### Run a review on your staged changes (pre-commit)
 
@@ -39,7 +51,7 @@ Every PR is reviewed automatically by [rs-guard](https://github.com/nebulaideas/
 # Stage your changes first
 git add .
 
-# Run the pre-commit hook manually
+# Run the pre-commit hook manually (uses the provider set in .reviewer.toml)
 bash hooks/pre-commit-rs-guard
 ```
 
@@ -49,7 +61,7 @@ bash hooks/pre-commit-rs-guard
 # Generate a diff against main
 git diff main...HEAD --unified=5 > my.diff
 
-# Run rs-guard against it
+# Run rs-guard against it — replace --provider with your chosen provider
 bin/rs-guard-macos-arm64 \
   --diff-file my.diff \
   --prompt-file .github/review-prompt.md \
