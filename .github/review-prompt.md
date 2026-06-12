@@ -91,7 +91,7 @@ Every skill directory must contain a `SKILL.md` file with valid YAML frontmatter
 - Bash scripts must start with `#!/bin/bash` and use `set -e` (or `set -euo pipefail`)
 - No secrets, tokens, or API keys hardcoded anywhere — use `${{ secrets.NAME }}` in workflows
 - GitHub Actions workflows must pin third-party actions to a specific version tag (e.g. `@v4`, `@v6`) — do not use `@latest` or `@main`
-- Ruby scripts must not use deprecated APIs or `require 'open-uri'` without explicit URI whitelisting
+- Scripts must not use deprecated or insecure APIs for their language/runtime — e.g. no unvalidated URL construction, no shell injection via unquoted variables
 
 **Suggestions:**
 

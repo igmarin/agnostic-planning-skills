@@ -68,9 +68,9 @@ echo "[rs-guard] Running AI review on staged changes..."
 
 "$RS_GUARD_BIN" \
   --diff-file "$DIFF_FILE" \
-  --prompt-file ".github/review-prompt.md" \
+  --prompt-file "$REPO_ROOT/.github/review-prompt.md" \
   --provider deepseek \
   --dry-run \
-  2>&1 || true
+  2>&1 || echo "[rs-guard] Review exited with a non-zero code (advisory only — commit proceeds)."
 
 echo "[rs-guard] Review complete. Commit proceeding."
