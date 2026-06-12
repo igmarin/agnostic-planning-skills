@@ -1,0 +1,95 @@
+#!/bin/bash
+#
+# rs-guard pre-commit hook
+#
+# Runs an AI-powered review of staged changes using rs-guard before each commit.
+# Uses --dry-run so it never blocks the commit — output is informational only.
+#
+# Provider is read from .reviewer.toml (default: deepseek). Set the matching
+# API key environment variable for your chosen provider:
+#
+#   Provider     | Environment variable
+#   -------------|---------------------
+#   DeepSeek     | DEEPSEEK_API_KEY
+#   OpenAI       | OPENAI_API_KEY
+#   Kimi         | KIMI_API_KEY
+#   Qwen         | DASHSCOPE_API_KEY
+#   OpenRouter   | OPENROUTER_API_KEY
+#
+# Binary resolution order:
+#   1. bin/rs-guard-macos-arm64  (bundled — macOS arm64)
+#   2. bin/rs-guard-linux-x64    (bundled — Linux x86_64)
+#   3. rs-guard in PATH
+#   4. ~/.cargo/bin/rs-guard     (installed via `cargo install rs-guard`)
+#
+# Usage: This script is invoked automatically by git via hooks/hooks.json.
+# To install manually: cp hooks/pre-commit-rs-guard .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+set -euo pipefail
+
+# Locate the bundled binary for the current platform
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+resolve_binary() {
+  local os arch
+  os="$(uname -s)"
+  arch="$(uname -m)"
+
+  case "${os}-${arch}" in
+    Darwin-arm64)  echo "$REPO_ROOT/bin/rs-guard-macos-arm64" ;;
+    Linux-x86_64)  echo "$REPO_ROOT/bin/rs-guard-linux-x64"  ;;
+    *)             echo "" ;;
+  esac
+}
+
+RS_GUARD_BIN="$(resolve_binary)"
+
+# Fall back to PATH then ~/.cargo/bin
+if [ -z "$RS_GUARD_BIN" ] || [ ! -x "$RS_GUARD_BIN" ]; then
+  if command -v rs-guard &>/dev/null; then
+    RS_GUARD_BIN="rs-guard"
+  elif [ -x "$HOME/.cargo/bin/rs-guard" ]; then
+    RS_GUARD_BIN="$HOME/.cargo/bin/rs-guard"
+  else
+    echo "[rs-guard] rs-guard not found — skipping pre-commit review."
+    echo "[rs-guard] Install with: cargo install rs-guard"
+    exit 0
+  fi
+fi
+
+# Check that at least one supported provider API key is set.
+# rs-guard reads the provider from .reviewer.toml and resolves the key itself;
+# this check just gives an early, human-readable message if none are present.
+has_api_key=false
+for key in DEEPSEEK_API_KEY OPENAI_API_KEY KIMI_API_KEY DASHSCOPE_API_KEY OPENROUTER_API_KEY; do
+  if [ -n "${!key:-}" ]; then
+    has_api_key=true
+    break
+  fi
+done
+
+if [ "$has_api_key" = false ]; then
+  echo "[rs-guard] No provider API key found — skipping pre-commit review."
+  echo "[rs-guard] Set one of: DEEPSEEK_API_KEY, OPENAI_API_KEY, KIMI_API_KEY, DASHSCOPE_API_KEY, OPENROUTER_API_KEY"
+  exit 0
+fi
+
+DIFF_FILE="$(mktemp /tmp/rs-guard-staged-XXXXXX.diff)"
+trap 'rm -f "$DIFF_FILE"' EXIT
+
+git diff --cached --unified=5 > "$DIFF_FILE"
+
+if [ ! -s "$DIFF_FILE" ]; then
+  exit 0
+fi
+
+echo "[rs-guard] Running AI review on staged changes..."
+
+"$RS_GUARD_BIN" \
+  --diff-file "$DIFF_FILE" \
+  --prompt-file "$REPO_ROOT/.github/review-prompt.md" \
+  --dry-run \
+  2>&1 || echo "[rs-guard] Review exited with a non-zero code (advisory only — commit proceeds)."
+
+echo "[rs-guard] Review complete. Commit proceeding."
