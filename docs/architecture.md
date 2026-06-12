@@ -27,9 +27,13 @@ agnostic-planning-skills/
 │   └── personas/            # Role-based orchestrators (persona)
 │       └── product-owner/
 │           └── SKILL.md
-├── .opencode/               # OpenCode-specific config
-│   └── agents/              # Subagent wrappers
-│       └── product-owner.md
+├── bin/                     # Pre-built rs-guard binaries for local review
+│   ├── rs-guard-macos-arm64 # macOS arm64 (v1.0.0)
+│   ├── rs-guard-linux-x64   # Linux x86_64 (v1.0.0)
+│   └── CHECKSUMS.txt        # SHA-256 checksums and provenance
+├── hooks/                   # Git hook scripts
+│   ├── pre-commit-rs-guard  # Advisory pre-commit review (rs-guard)
+│   └── hooks.json           # Hook wiring for agent runtimes
 ├── SKILL.md                 # Root orchestrator
 └── README.md
 ```
