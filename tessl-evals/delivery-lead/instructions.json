@@ -1,0 +1,66 @@
+{
+  "target_skill": "delivery-lead",
+  "source_path": "skills/personas/delivery-lead/SKILL.md",
+  "instructions": [
+    {
+      "instruction": "Agent: \"Confirmed. Proceeding to Phase 2: Plan.\"",
+      "original_snippets": "Agent: \"Confirmed. Proceeding to Phase 2: Plan.\"",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Run **analysis/requirements-clarifier** to clarify vague feature descriptions into actionable specifications.",
+      "original_snippets": "Run **analysis/requirements-clarifier** to clarify vague feature descriptions into actionable specifications.",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Draft the PRD using **prd/create-prd**.",
+      "original_snippets": "Draft the PRD using **prd/create-prd**.",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Review for completeness and feasibility with **prd/review-prd**.",
+      "original_snippets": "Review for completeness and feasibility with **prd/review-prd**.",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**HARD GATE — PRD Approval:** Apply gate row 1. PRD must be explicitly approved before proceeding; if revised, loop back to create-prd before generating any tasks.",
+      "original_snippets": "**HARD GATE — PRD Approval:** Apply gate row 1. PRD must be explicitly approved before proceeding; if revised, loop back to create-prd before generating any tasks.",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Review the full plan before proceeding.",
+      "original_snippets": "Review the full plan before proceeding.",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Define sprint goal, allocate capacity, flag deferred items.",
+      "original_snippets": "Define sprint goal, allocate capacity, flag deferred items.",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**HARD GATE — Sprint Commitment:** Apply gate row 2. Do not proceed if capacity exceeds 80% or sprint goal is undefined.",
+      "original_snippets": "**HARD GATE — Sprint Commitment:** Apply gate row 2. Do not proceed if capacity exceeds 80% or sprint goal is undefined.",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "**HARD GATE — Retrospective Complete:** Apply gate row 3. Every \"what didn't\" must have an action item with owner and timeline; do not close the cycle without documented learnings.",
+      "original_snippets": "**HARD GATE — Retrospective Complete:** Apply gate row 3. Every \"what didn't\" must have an action item with owner and timeline; do not close the cycle without documented learnings.",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Review: [N] suggestions, [N] critical (resolved)",
+      "original_snippets": "Review: [N] suggestions, [N] critical (resolved)",
+      "relevant_when": "When a user asks for planning work that should trigger delivery-lead.",
+      "why_given": "new knowledge"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "context": "Checks whether the final artifact follows the github-issue instructions from the published agnostic-planning-skills plugin.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "instruction-1",
+      "description": "The submitted artifact follows this skill instruction: Use this skill when you need to create, track, or manage GitHub issues with project board integration and milestone tracking.",
+      "max_score": 20
+    },
+    {
+      "name": "instruction-2",
+      "description": "The submitted artifact follows this skill instruction: **Core principle:** Always validate issue drafts with the user before creating. In non-interactive contexts, present the draft with noted assumptions and proceed.",
+      "max_score": 20
+    },
+    {
+      "name": "instruction-3",
+      "description": "The submitted artifact follows this skill instruction: The preview MUST include title, labels, milestone, and project board",
+      "max_score": 20
+    },
+    {
+      "name": "instruction-4",
+      "description": "The submitted artifact follows this skill instruction: All labels use kebab-case. New issues MUST start with stage label `todo`.",
+      "max_score": 20
+    },
+    {
+      "name": "instruction-5",
+      "description": "The submitted artifact follows this skill instruction: A successfully created GitHub issue must conform to this shape:",
+      "max_score": 20
+    }
+  ]
+}

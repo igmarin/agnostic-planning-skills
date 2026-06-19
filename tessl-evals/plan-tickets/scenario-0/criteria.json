@@ -1,0 +1,56 @@
+{
+  "context": "Checks whether the final artifact follows the plan-tickets instructions from the published agnostic-planning-skills plugin.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "instruction-1",
+      "description": "The submitted artifact follows this skill instruction: Plan input -> classify each item -> draft tickets -> confirm before tracker creation",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-2",
+      "description": "The submitted artifact follows this skill instruction: Do not create tracker issues unless the user explicitly asks for creation.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-3",
+      "description": "The submitted artifact follows this skill instruction: Do not assume tracker credentials, project fields, sprint IDs, status behavior, or required custom fields.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-4",
+      "description": "The submitted artifact follows this skill instruction: Do not re-plan if a plan already exists, unless there is a material gap.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-5",
+      "description": "The submitted artifact follows this skill instruction: Do not add prefixes to tickets not owned by those areas unless requested.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-6",
+      "description": "The submitted artifact follows this skill instruction: Draft each ticket using exactly five sections in this order:",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-7",
+      "description": "The submitted artifact follows this skill instruction: **Draft-only mode (Default):**",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-8",
+      "description": "The submitted artifact follows this skill instruction: Include a **Readiness Checklist** of what must be verified before creation: target project/board, tracker create-metadata endpoint, required fields, integration path, user approval, and default initial status.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-9",
+      "description": "The submitted artifact follows this skill instruction: **Create-in-tracker mode:**",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-10",
+      "description": "The submitted artifact follows this skill instruction: Create issues only after explicit user approval. Do not assume tracker credentials.",
+      "max_score": 10
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "context": "Checks whether the final artifact follows the identify-risks instructions from the published agnostic-planning-skills plugin.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "instruction-1",
+      "description": "The submitted artifact follows this skill instruction: Scan plans for risks backed by concrete evidence — not speculation.",
+      "max_score": 20
+    },
+    {
+      "name": "instruction-2",
+      "description": "The submitted artifact follows this skill instruction: DO NOT fabricate risks. Every risk MUST reference a specific task or requirement.",
+      "max_score": 20
+    },
+    {
+      "name": "instruction-3",
+      "description": "The submitted artifact follows this skill instruction: **Scan risk patterns** (see Risk Patterns below) — dependency chains, external deps, ambiguity, single points of failure, capacity, technical uncertainty.",
+      "max_score": 20
+    },
+    {
+      "name": "instruction-4",
+      "description": "The submitted artifact follows this skill instruction: **Classify** — Likelihood (High/Medium/Low), Impact (High/Medium/Low), Proximity (Immediate/Near-term/Future).",
+      "max_score": 20
+    },
+    {
+      "name": "instruction-5",
+      "description": "The submitted artifact follows this skill instruction: Verify likelihood/impact ratings are justified by evidence",
+      "max_score": 20
+    }
+  ]
+}

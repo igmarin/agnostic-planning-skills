@@ -1,0 +1,78 @@
+{
+  "target_skill": "project-manager",
+  "source_path": "skills/personas/project-manager/SKILL.md",
+  "instructions": [
+    {
+      "instruction": "Do not generate a status report without current data — ask for updates if stale. In non-interactive contexts, mark unknowns as \"needs update\" and proceed.",
+      "original_snippets": "Do not generate a status report without current data — ask for updates if stale. In non-interactive contexts, mark unknowns as \"needs update\" and proceed.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Assign estimates with confidence levels; flag tasks needing further breakdown or spikes.",
+      "original_snippets": "Assign estimates with confidence levels; flag tasks needing further breakdown or spikes.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**HARD GATE — Estimation Review:**",
+      "original_snippets": "**HARD GATE — Estimation Review:**",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "The estimation must be reviewed before proceeding to risk assessment.",
+      "original_snippets": "The estimation must be reviewed before proceeding to risk assessment.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Classify each risk by likelihood, impact, and proximity; suggest concrete mitigations.",
+      "original_snippets": "Classify each risk by likelihood, impact, and proximity; suggest concrete mitigations.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Identify the top 3 critical risks.",
+      "original_snippets": "Identify the top 3 critical risks.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "The risk register must be reviewed before tracking setup.",
+      "original_snippets": "The risk register must be reviewed before tracking setup.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Every High/High risk must have a named owner and a mitigation plan.",
+      "original_snippets": "Every High/High risk must have a named owner and a mitigation plan.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Define tracking checkpoints:",
+      "original_snippets": "Define tracking checkpoints:",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Check-in cadence:** Daily standup, weekly sync, or async updates.",
+      "original_snippets": "**Check-in cadence:** Daily standup, weekly sync, or async updates.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Map tasks to milestones — which tasks must complete by which checkpoint.",
+      "original_snippets": "Map tasks to milestones — which tasks must complete by which checkpoint.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "The status report must be reviewed before sharing with stakeholders.",
+      "original_snippets": "The status report must be reviewed before sharing with stakeholders.",
+      "relevant_when": "When a user asks for planning work that should trigger project-manager.",
+      "why_given": "preference"
+    }
+  ]
+}

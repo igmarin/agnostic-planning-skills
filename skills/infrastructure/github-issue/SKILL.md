@@ -17,18 +17,19 @@ metadata:
 
 Use this skill when you need to create, track, or manage GitHub issues with project board integration and milestone tracking.
 
-**Core principle:** Always validate issue drafts with the user before creating. Never create tracker issues without explicit approval.
+**Core principle:** Always validate issue drafts with the user before creating. In non-interactive contexts, present the draft with noted assumptions and proceed.
 
 ## HARD-GATE
 
 ```text
-DO NOT create any GitHub issue unless the user explicitly responds
-with "yes", "approve", "create it", or an equivalent confirmation.
-The issue body, title, labels, milestone, and project board placement
-MUST all be presented to the user and confirmed before creation.
+Present and verify every GitHub issue draft before creation.
+The preview MUST include title, labels, milestone, and project board
+placement. In non-interactive contexts, document assumptions and
+proceed with best-effort creation.
 
-For issue updates: DO NOT change stage labels or close issues without
-user confirmation. User must explicitly state the desired stage change.
+For issue updates: verify stage label changes and issue closures before
+applying. In non-interactive contexts, document the intended change
+and proceed.
 ```
 
 ## Quick Reference
@@ -49,6 +50,7 @@ user confirmation. User must explicitly state the desired stage change.
 ---
 
 ## Label Conventions
+
 **Type** (required, one): `bug`, `new-feature`, `improvement`, `refactor`, `security`
 
 **Stage** (lifecycle): `todo`, `in-progress`, `in-review`, `done`
@@ -57,7 +59,7 @@ user confirmation. User must explicitly state the desired stage change.
 
 **Priority** (optional): `priority:high`, `priority:medium`, `priority:low`
 
-All labels use kebab-case. New issues always start with stage label `todo`.
+All labels use kebab-case. New issues MUST start with stage label `todo`.
 
 ---
 
@@ -140,7 +142,7 @@ Here's the issue I'm about to create:
 Does this look good, or would you like to adjust anything?
 ```
 
-Wait for explicit approval before proceeding.
+Wait for user confirmation before proceeding. In non-interactive contexts, document assumptions and proceed.
 
 ### Step 5: Create the Issue
 
@@ -277,7 +279,7 @@ Present results to confirm the right issue.
 
 ### Step 2: Detect Stage Change
 
-**User must explicitly state the desired stage change.** Examples: "Move #42 to in-progress", "Mark #42 as done", "Close #42".
+Present the intended stage change for confirmation. In non-interactive contexts, document the change and proceed. Examples: "Move #42 to in-progress", "Mark #42 as done", "Close #42".
 
 ### Step 3: Update Labels
 

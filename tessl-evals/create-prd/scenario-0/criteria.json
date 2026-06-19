@@ -1,0 +1,41 @@
+{
+  "context": "Checks whether the final artifact follows the create-prd instructions from the published agnostic-planning-skills plugin.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "instruction-1",
+      "description": "The submitted artifact follows this skill instruction: **Goal:** Draft a clear, actionable PRD from a feature request.",
+      "max_score": 15
+    },
+    {
+      "name": "instruction-2",
+      "description": "The submitted artifact follows this skill instruction: **Constraints:** Focus on what/why. No code. Use the task's requested output path if one is specified; otherwise default to `/tasks/prd-<slug>.md`.",
+      "max_score": 15
+    },
+    {
+      "name": "instruction-3",
+      "description": "The submitted artifact follows this skill instruction: **Flow:** Clarify if ambiguous → Draft using template → Get explicit approval.",
+      "max_score": 14
+    },
+    {
+      "name": "instruction-4",
+      "description": "The submitted artifact follows this skill instruction: **Draft** — fill **[PRD_TEMPLATE.md](./PRD_TEMPLATE.md)** section by section. Do not invent a parallel outline.",
+      "max_score": 14
+    },
+    {
+      "name": "instruction-5",
+      "description": "The submitted artifact follows this skill instruction: **Create the PRD at the requested destination.** If the task specifies an output file (e.g., `answer.md`), create the PRD there. When no output path is specified, default to `/tasks/prd-<feature-slug>.md` (kebab-case). State the path.",
+      "max_score": 14
+    },
+    {
+      "name": "instruction-6",
+      "description": "The submitted artifact follows this skill instruction: **Write requirements in natural language** — not code. \"The system must send a confirmation email when…\"",
+      "max_score": 14
+    },
+    {
+      "name": "instruction-7",
+      "description": "The submitted artifact follows this skill instruction: **Close with next steps** — typically: \"Run `generate-tasks` once this PRD is approved.\"",
+      "max_score": 14
+    }
+  ]
+}

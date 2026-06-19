@@ -1,0 +1,30 @@
+{
+  "target_skill": "estimate-tasks",
+  "source_path": "skills/task-management/estimate-tasks/SKILL.md",
+  "instructions": [
+    {
+      "instruction": "Assign relative complexity estimates. Focus on comparison, not calendar time.",
+      "original_snippets": "Assign relative complexity estimates. Focus on comparison, not calendar time.",
+      "relevant_when": "When a user asks for planning work that should trigger estimate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Assign** - relative sizing, confidence level per task.",
+      "original_snippets": "**Assign** - relative sizing, confidence level per task.",
+      "relevant_when": "When a user asks for planning work that should trigger estimate-tasks.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "> **Mixing frameworks:** Never mix frameworks within a single estimation table. If the user switches frameworks mid-session, re-estimate the full table.",
+      "original_snippets": "> **Mixing frameworks:** Never mix frameworks within a single estimation table. If the user switches frameworks mid-session, re-estimate the full table.",
+      "relevant_when": "When a user asks for planning work that should trigger estimate-tasks.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "**Estimation table** - `| ID | Task | Estimate | Confidence | Notes |`",
+      "original_snippets": "**Estimation table** - `| ID | Task | Estimate | Confidence | Notes |`",
+      "relevant_when": "When a user asks for planning work that should trigger estimate-tasks.",
+      "why_given": "new knowledge"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+# Create Prd Task
+
+## Problem
+
+A team needs help with a planning task in this area:
+
+Drafts a clear actionable PRD from a feature — focus on what/why, no code, write requirements in natural language, fill PRD_TEMPLATE.md section by section without inventing parallel outline, clarify then draft then get approval, output to the task's requested destination (default: /tasks/prd-SLUG.md in kebab-case), close with next steps like "run generate-tasks once approved".
+
+The team has asked for a concise planning artifact that a reviewer can inspect without needing to observe the agent's process.
+
+## Output
+
+Create `answer.md` with:
+
+- a short plan for the work
+- the concrete planning artifact or recommendation
+- the verification steps or quality gates that should be run
+- any assumptions that affect the result

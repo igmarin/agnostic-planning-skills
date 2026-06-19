@@ -3,7 +3,7 @@ name: product-owner
 type: persona
 license: MIT
 description: >
-  Product planning lifecycle with hard gates at scope confirmation (do not proceed to PRD draft without explicit user sign-off on the clarified scope), PRD approval (do not generate tasks before PRD is explicitly approved, iterate on feedback and re-draft until approved), task breakdown approval (do not generate tickets before task list is approved), and sprint placement (do not assume sprint capacity — ask for points per sprint and number of available sprints); six sequential phases discovery→PRD draft→review and revise→task estimation→ticket generation→sprint placement.
+  Product planning lifecycle with verification checkpoints at scope confirmation (present clarified scope for sign-off before PRD draft), PRD approval (present PRD for approval before generating tasks, iterate on feedback until approved), task breakdown approval (present task list for approval before generating tickets), and sprint placement (ask for points per sprint and number of available sprints); six sequential phases discovery→PRD draft→review and revise→task estimation→ticket generation→sprint placement. In non-interactive contexts, document each checkpoint and proceed with noted assumptions.
   Language-agnostic — works with any tech stack.
   Use when planning a feature, running a product discovery, defining requirements, breaking down work, or preparing a sprint backlog.
 metadata:
@@ -11,7 +11,7 @@ metadata:
   user-invocable: "true"
   entry_point: "Invoke when planning a feature, defining product requirements, or preparing work for a sprint"
   phases: "Phase 1: Discovery & Clarification, Phase 2: PRD Draft, Phase 3: Review & Revise, Phase 4: Task Estimation, Phase 5: Ticket Generation, Phase 6: Sprint Placement"
-  hard_gates: "PRD Approval, Ticket Approval, Sprint Confirmation"
+  hard_gates: "Scope Confirmation (present for review), PRD Approval (present for review), Ticket Approval (present for review), Sprint Confirmation (present for review). In non-interactive contexts, document each checkpoint and proceed."
   dependencies:
     - source: self
       skills: [requirements-clarifier, create-prd, generate-tasks, plan-tickets]
@@ -23,7 +23,7 @@ Orchestrates end-to-end product planning: from feature idea to sprint-ready tick
 
 **Scope:** Use for features that need scoping, a PRD, and a task breakdown before development. Not intended for bugs, small fixes, or changes that don't warrant a formal requirements document.
 
-> **Approval discipline:** Every phase ends with a hard gate (`🔒 Gate`). No phase may be skipped. Each gate requires an explicit user signal before the next phase begins. The first gate below is fully annotated; subsequent gates follow the same rule.
+> **Approval discipline:** Every phase ends with a verification gate (`🔒 Gate`). No phase may be skipped. Present each gate for user confirmation. In non-interactive or automated contexts, document the gate checkpoint and proceed with noted assumptions.
 
 ## Sub-Skills
 
@@ -56,7 +56,7 @@ Orchestrates end-to-end product planning: from feature idea to sprint-ready tick
 - Admin dashboard lists entries with CSV export
 - No CRM sync in this iteration
 
-🔒 **Gate — Scope Confirmation:** Do not proceed to Phase 2 until the user explicitly confirms the scope summary. If the user replies with "revise", incorporate changes and re-present the summary.
+🔒 **Gate — Scope Confirmation:** Present the scope summary for user confirmation before proceeding to Phase 2. In non-interactive contexts, document that the gate was reached and proceed. If the user replies with "revise", incorporate changes and re-present the summary.
 
 ---
 
@@ -70,7 +70,7 @@ Orchestrates end-to-end product planning: from feature idea to sprint-ready tick
 
 **Example output path:** `/tasks/prd-waitlist.md`
 
-🔒 **Gate — PRD Review:** Wait for explicit user response before proceeding. On "revise", move to Phase 3.
+🔒 **Gate — PRD Review:** Present the draft for user review. In non-interactive contexts, document that the gate was reached and proceed. On "revise", move to Phase 3.
 
 ---
 
@@ -82,7 +82,7 @@ Orchestrates end-to-end product planning: from feature idea to sprint-ready tick
 3. Summarise what changed.
 4. Repeat until the user replies with an unambiguous approval signal (e.g., "approved", "looks good", "LGTM").
 
-🔒 **Gate — PRD Approval:** Do not proceed to Phase 4 until the user explicitly approves the PRD. On further feedback, repeat the revision loop.
+🔒 **Gate — PRD Approval:** Present the PRD for final approval before proceeding to Phase 4. In non-interactive contexts, document that the gate was reached and proceed. On further feedback, repeat the revision loop.
 
 ```
 ✅ PRD approved by user
@@ -112,7 +112,7 @@ Proceeding to task breakdown...
 | T-06 | Admin dashboard — CSV export | 1 pt |
 | T-07 | Write integration tests | 2 pts |
 
-🔒 **Gate — Task Approval:** Do not proceed to Phase 5 until the task list is approved. On "revise", adjust tasks and re-present the table.
+🔒 **Gate — Task Approval:** Present the task list for approval before proceeding to Phase 5. In non-interactive contexts, document that the gate was reached and proceed. On "revise", adjust tasks and re-present the table.
 
 ---
 
@@ -143,7 +143,7 @@ Create the `waitlist_entries` table with fields: id, email, created_at, status.
 - [ ] Rollback migration tested
 ```
 
-🔒 **Gate — Ticket Approval:** Do not proceed to Phase 6 until tickets are approved. On "revise", adjust the flagged tickets and re-present.
+🔒 **Gate — Ticket Approval:** Present ticket drafts for approval before proceeding to Phase 6. In non-interactive contexts, document that the gate was reached and proceed. On "revise", adjust the flagged tickets and re-present.
 
 ---
 

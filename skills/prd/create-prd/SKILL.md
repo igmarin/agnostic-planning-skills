@@ -5,8 +5,9 @@ license: MIT
 description: >
   Drafts a clear actionable PRD from a feature — focus on what/why, no code,
   write requirements in natural language, fill PRD_TEMPLATE.md section by section
-  without inventing parallel outline, clarify then draft then get approval, save
-  to /tasks/prd-SLUG.md in kebab-case, close with next steps like "run generate-tasks once approved".
+  without inventing parallel outline, clarify then draft then get approval, output
+  to the task's requested destination (default: /tasks/prd-SLUG.md in kebab-case),
+  close with next steps like "run generate-tasks once approved".
   Language-agnostic.
   Trigger words: PRD, product requirements, plan a feature, write a spec,
   requirements document.
@@ -21,7 +22,7 @@ Focus on *what* and *why*, not *how*. No code until the PRD is approved.
 ## Quick Reference
 
 - **Goal:** Draft a clear, actionable PRD from a feature request.
-- **Constraints:** Focus on what/why. No code. Save to `/tasks/prd-<slug>.md`.
+- **Constraints:** Focus on what/why. No code. Use the task's requested output path if one is specified; otherwise default to `/tasks/prd-<slug>.md`.
 - **Flow:** Clarify if ambiguous → Draft using template → Get explicit approval.
 
 ## HARD-GATE
@@ -49,14 +50,14 @@ Load these files only when their specific content is needed:
 
 ## Output Style
 
-1. **Save to** `/tasks/prd-<feature-slug>.md` (kebab-case). State the path.
+1. **Create the PRD at the requested destination.** If the task specifies an output file (e.g., `answer.md`), create the PRD there. When no output path is specified, default to `/tasks/prd-<feature-slug>.md` (kebab-case). State the path.
 2. **Follow the template** section by section. Every section appears, even if "TBD".
 3. **Write requirements in natural language** — not code. "The system must send a confirmation email when…"
 4. **Close with next steps** — typically: "Run `generate-tasks` once this PRD is approved."
 5. **Request explicit approval** before any implementation or task generation.
 6. **English only** unless the user requests otherwise.
 
-After saving, surface the file path and request explicit approval.
+After creating the PRD, surface the file path and request explicit approval.
 
 ## Integration
 

@@ -1,0 +1,56 @@
+{
+  "context": "Checks whether the final artifact follows the generate-tasks instructions from the published agnostic-planning-skills plugin.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "instruction-1",
+      "description": "The submitted artifact follows this skill instruction: **Test Command Detection** — Use the lookup table below to resolve the concrete command.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-2",
+      "description": "The submitted artifact follows this skill instruction: **Directory Detection** — Check for common source dirs (`src/`, `lib/`, `app/`) and test dirs (`tests/`, `test/`, `spec/`, `__tests__/`).",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-3",
+      "description": "The submitted artifact follows this skill instruction: **Documentation Tool Detection** — Identify the documentation tool by checking `package.json`, `pyproject.toml`, `requirements.txt`, or a `Doxyfile` for references to tools such as `typedoc`, `jsdoc`, `sphinx`, `mkdocs`, or `doxygen`.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-4",
+      "description": "The submitted artifact follows this skill instruction: Verify the detected test command works before proceeding.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-5",
+      "description": "The submitted artifact follows this skill instruction: Run the detected command. If it fails, ask the user to confirm:",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-6",
+      "description": "The submitted artifact follows this skill instruction: Break down the feature/PRD into implementation tasks:",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-7",
+      "description": "The submitted artifact follows this skill instruction: **Identify User-Visible Behaviors**",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-8",
+      "description": "The submitted artifact follows this skill instruction: **Create Parent Task Groups** — Group related behaviors with TDD quadruplets.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-9",
+      "description": "The submitted artifact follows this skill instruction: Create `/tasks/tasks-[feature-name].md` using the structure below.",
+      "max_score": 10
+    },
+    {
+      "name": "instruction-10",
+      "description": "The submitted artifact follows this skill instruction: [ ] 0.0 Create feature branch `feat/[feature-name]`",
+      "max_score": 10
+    }
+  ]
+}

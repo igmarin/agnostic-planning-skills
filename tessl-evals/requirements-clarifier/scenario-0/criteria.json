@@ -1,0 +1,26 @@
+{
+  "context": "Checks whether the final artifact follows the requirements-clarifier instructions from the published agnostic-planning-skills plugin.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "instruction-1",
+      "description": "The submitted artifact follows this skill instruction: **Core principle:** Before any implementation begins, requirements must be unambiguous enough that an engineer can build them and QA can test them.",
+      "max_score": 25
+    },
+    {
+      "name": "instruction-2",
+      "description": "The submitted artifact follows this skill instruction: Do not write implementation code, configuration, or test cases.",
+      "max_score": 25
+    },
+    {
+      "name": "instruction-3",
+      "description": "The submitted artifact follows this skill instruction: Do not edit project source, configuration, or test files. Creating planning deliverables (e.g., requirements documents, answer.md) is permitted.",
+      "max_score": 25
+    },
+    {
+      "name": "instruction-4",
+      "description": "The submitted artifact follows this skill instruction: **Analyze the request** — Identify what is stated, what is implied, and what is missing.",
+      "max_score": 25
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "target_skill": "review-prd",
+  "source_path": "skills/prd/review-prd/SKILL.md",
+  "instructions": [
+    {
+      "instruction": "EVERY finding MUST cite the specific PRD section, line, or requirement — if the cited text contains sensitive data (API keys, tokens, passwords, credentials), abstract or redact it rather than reproducing it verbatim.",
+      "original_snippets": "EVERY finding MUST cite the specific PRD section, line, or requirement — if the cited text contains sensitive data (API keys, tokens, passwords, credentials), abstract or redact it rather than reproducing it verbatim.",
+      "relevant_when": "When a user asks for planning work that should trigger review-prd.",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "**Scan the checklist** (see [Review Checklist](#review-checklist) below) — covers completeness, testability, clarity, feasibility, scope, dependencies, and edge cases.",
+      "original_snippets": "**Scan the checklist** (see [Review Checklist](#review-checklist) below) — covers completeness, testability, clarity, feasibility, scope, dependencies, and edge cases.",
+      "relevant_when": "When a user asks for planning work that should trigger review-prd.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Classify:** Critical (blocks implementation), Suggestion (improves it), Note (observation).",
+      "original_snippets": "**Classify:** Critical (blocks implementation), Suggestion (improves it), Note (observation).",
+      "relevant_when": "When a user asks for planning work that should trigger review-prd.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "**Produce** — findings table with severity, evidence, and recommendation.",
+      "original_snippets": "**Produce** — findings table with severity, evidence, and recommendation.",
+      "relevant_when": "When a user asks for planning work that should trigger review-prd.",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "[ ] No ambiguous modal verbs (\"should\" vs. \"must\" vs. \"may\").",
+      "original_snippets": "[ ] No ambiguous modal verbs (\"should\" vs. \"must\" vs. \"may\").",
+      "relevant_when": "When a user asks for planning work that should trigger review-prd.",
+      "why_given": "preference"
+    }
+  ]
+}
