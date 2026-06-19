@@ -23,15 +23,10 @@ metadata:
 
 Orchestrates execution tracking: from task estimation through risk assessment to stakeholder status reports, across four phases with hard approval gates.
 
-## When to Use
-
-- A sprint or project needs estimation and risk assessment before execution begins
-- A stakeholder needs a status update with honest progress, blockers, and risks
-
 ## Anti-Patterns
 
 - Do not use before a PRD exists — this persona tracks execution, not scope definition
-- Do not skip the Risk Acceptance gate — unacknowledged risks will surface later
+- Do not proceed past a hard gate without explicit acknowledgement
 - Do not generate a status report without current data — ask for updates if stale
 
 ---
@@ -40,7 +35,7 @@ Orchestrates execution tracking: from task estimation through risk assessment to
 
 ### Phase 1: Estimation
 
-**Sub-skill contract — estimate-tasks:** Input: task list or PRD. Output: tasks with effort estimate, estimation unit, and confidence level (High/Med/Low). Flag tasks needing spikes.
+**Sub-skill contract — estimate-tasks:** Produces tasks with effort estimate, estimation unit, and confidence level (High/Med/Low); flags tasks needing spikes.
 
 1. Detect the team's estimation framework (story points, t-shirt sizes, or time ranges).
 2. Assign estimates with confidence levels; flag tasks needing further breakdown or spikes.
@@ -55,13 +50,13 @@ If high-uncertainty tasks exist, recommend spikes or further breakdown before co
 **Example Output (story points, 1 SP ≈ half a day):**
 
 ```
-| Task                          | Estimate | Confidence | Notes                          |
-|-------------------------------|----------|------------|--------------------------------|
-| Design database schema        | 3 SP     | High       |                                |
-| Implement user authentication | 5 SP     | Medium     | OAuth flow needs spike         |
-| Build REST API endpoints      | 8 SP     | Medium     | Scope depends on auth design   |
-| Write integration tests       | 3 SP     | High       |                                |
-| Deploy to staging             | 2 SP     | High       |                                |
+| Task                          | Estimate | Confidence | Notes                        |
+|-------------------------------|----------|------------|------------------------------|
+| Design database schema        | 3 SP     | High       |                              |
+| Implement user authentication | 5 SP     | Medium     | OAuth flow needs spike       |
+| Build REST API endpoints      | 8 SP     | Medium     | Scope depends on auth design |
+| Write integration tests       | 3 SP     | High       |                              |
+| Deploy to staging             | 2 SP     | High       |                              |
 
 Total: 21 SP | Confidence: 60% High, 40% Medium, 0% Low
 Spike recommended: OAuth provider selection (1 SP) before auth implementation.
@@ -73,7 +68,7 @@ Gate result: 0% Low confidence — gate passes. Proceed after user review.
 
 ### Phase 2: Risk Assessment
 
-**Sub-skill contract — identify-risks:** Input: estimated task list. Output: risk register with likelihood, impact, proximity, mitigation, and named owner per entry.
+**Sub-skill contract — identify-risks:** Produces a risk register with likelihood, impact, proximity, mitigation, and named owner per entry.
 
 1. Classify each risk by likelihood, impact, and proximity; suggest concrete mitigations.
 2. Identify the top 3 critical risks.
@@ -87,11 +82,11 @@ DO NOT proceed with unacknowledged critical risks.
 
 **Example Risk Register:**
 ```
-| Risk                              | Likelihood | Impact | Proximity | Mitigation                              | Owner |
-|-----------------------------------|------------|--------|-----------|-----------------------------------------|-------|
-| OAuth spike reveals scope creep   | High       | High   | Near      | Timebox spike to 1 SP; decide by Day 2 | Alice |
-| Staging environment unavailable   | Med        | High   | Mid       | Reserve env slot; confirm with DevOps  | Bob   |
-| Integration tests flaky on CI     | Med        | Med    | Far       | Add retry logic; dedicate 0.5 SP buffer| Alice |
+| Risk                            | Likelihood | Impact | Proximity | Mitigation                              | Owner |
+|---------------------------------|------------|--------|-----------|-----------------------------------------|-------|
+| OAuth spike reveals scope creep | High       | High   | Near      | Timebox spike to 1 SP; decide by Day 2 | Alice |
+| Staging environment unavailable | Med        | High   | Mid       | Reserve env slot; confirm with DevOps  | Bob   |
+| Integration tests flaky on CI   | Med        | Med    | Far       | Add retry logic; 0.5 SP buffer         | Alice |
 ```
 
 ---
@@ -114,7 +109,7 @@ DO NOT proceed with unacknowledged critical risks.
 
 ### Phase 4: Status Reporting
 
-**Sub-skill contract — generate-status-report:** Input: task progress snapshot, risk register, milestone plan. Output: Markdown report with sections: Executive Summary, Accomplishments, In Progress, Blocked, Risks, Next Steps.
+**Sub-skill contract — generate-status-report:** Produces a Markdown report with sections: Executive Summary, Accomplishments, In Progress, Blocked, Risks, Next Steps.
 
 1. Gather current progress data (from tracker, user input, or task list).
 2. Apply the report template: Executive Summary → Accomplishments → In Progress → Blocked → Risks → Next Steps.
@@ -133,14 +128,13 @@ After all four phases complete, produce a consolidated execution summary:
 
 ### Estimation Summary
 - Framework: [story points / t-shirt sizes / time ranges]
-- Total estimate: [N points/units]
-- Confidence: [X% High, Y% Medium, Z% Low]
+- Total estimate: [N points/units] | Confidence: [X% High, Y% Medium, Z% Low]
 - Items needing breakdown: [count and description, or "None"]
 
-### Top Risks
-1. [Risk description] — [Likelihood/Impact] — Owner: [Name]
-2. [Risk description] — [Likelihood/Impact] — Owner: [Name]
-3. [Risk description] — [Likelihood/Impact] — Owner: [Name]
+### Top Risks (from Risk Register)
+1. [Risk] — [Likelihood/Impact] — Owner: [Name]
+2. [Risk] — [Likelihood/Impact] — Owner: [Name]
+3. [Risk] — [Likelihood/Impact] — Owner: [Name]
 
 ### Tracking Plan
 - Milestones: [count and key dates/events]
@@ -157,7 +151,7 @@ After all four phases complete, produce a consolidated execution summary:
 ## Error Recovery
 
 | Scenario | Recovery |
-|----------|---------|
+|----------|----------|
 | Cannot detect estimation framework | Ask: "What estimation framework does your team use? (story points, t-shirt sizes, or time ranges)" |
 | No task list available for estimation | Ask: "Do you have a task list or PRD I can estimate from? If not, I can estimate from the PRD requirements directly." |
 | Risk register has no High/High items but plan seems risky | Flag: "The risk scan found no critical risks, but consider: [specific concern based on plan analysis]. Should I add it?" |

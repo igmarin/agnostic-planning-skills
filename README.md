@@ -6,7 +6,7 @@
 
 > Internal planning workflow for consulting engagements, open-sourced. These skills are used by the maintainer for structured project discovery and PRD workflows. They are not a standalone product.
 
-It is a curated library of **11 language-agnostic planning skills** and **4 personas** that teach AI tools how to write and review PRDs, break down features into TDD tasks, estimate effort, identify risks, prioritize backlogs, plan sprints, run retrospectives, generate status reports, clarify requirements, and create tracker-ready tickets — regardless of tech stack.
+It is a curated library of **12 language-agnostic planning skills** and **4 personas** that teach AI tools how to write and review PRDs, break down features into TDD tasks, estimate effort, identify risks, prioritize backlogs, plan sprints, run retrospectives, generate status reports, clarify requirements, manage GitHub issues, and create tracker-ready tickets — regardless of tech stack.
 
 The project is built around one non-negotiable rule:
 
@@ -25,7 +25,7 @@ This repo is one of 6 in a composable AI skill ecosystem:
 | [`ruby-core-skills`](https://github.com/igmarin/ruby-core-skills) | 15 shared Ruby skills + process discipline |
 | [`rails-agent-skills`](https://github.com/igmarin/rails-agent-skills) | 28 Rails-specific skills + 9 agents |
 | [`hanakai-yaku`](https://github.com/igmarin/hanakai-yaku) | 35 Hanami/dry-rb skills + 10 agents |
-| [**`agnostic-planning-skills`**](https://github.com/igmarin/agnostic-planning-skills) | 11 planning skills + 4 personas |
+| [**`agnostic-planning-skills`**](https://github.com/igmarin/agnostic-planning-skills) | 12 planning skills + 4 personas |
 | [`agent-mcp-runtime`](https://github.com/igmarin/agent-mcp-runtime) | Rust CLI runtime (pack resolution, MCP) |
 | [`ruby-skill-bench`](https://github.com/igmarin/ruby-skill-bench) | Benchmark/eval engine |
 
@@ -61,7 +61,7 @@ See the [Ecosystem Overview](https://github.com/igmarin/agent-mcp-runtime/blob/m
 
 | Area | Purpose |
 |------|---------|
-| `skills/` | 11 language-agnostic skills across 6 categories: prd, task-management, backlog, ceremony, execution, analysis (requirements-clarifier). |
+| `skills/` | 12 language-agnostic planning skills across 7 categories: prd, task-management, backlog, ceremony, execution, analysis, infrastructure. |
 | `skills/personas/` | 4 personas: `product-owner`, `project-manager`, `tech-lead`, `delivery-lead`. |
 | `docs/` | Architecture, skill structure, persona guide, templates, and reference catalog. |
 
@@ -128,6 +128,7 @@ graph TD
 | `identify-risks` | Execution | Scan plans for dependency, capacity, and technical risks |
 | `generate-status-report` | Execution | Generate stakeholder status reports with honest progress tracking |
 | `requirements-clarifier` | Analysis | Transform vague requests into actionable specifications |
+| `github-issue` | Infrastructure | Create, track, and manage GitHub issues with project boards and milestones |
 
 ### Persona
 

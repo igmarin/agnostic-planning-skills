@@ -29,14 +29,14 @@ graph TD
 
 | Phase | Skill | Gate |
 |-------|-------|------|
-| 1. Discovery & Clarification | — | Scope clear |
+| 1. Discovery & Clarification | `requirements-clarifier` | Scope clear |
 | 2. PRD Draft | `create-prd` | — |
 | 3. Review & Revise | — | **PRD Approval** |
 | 4. Task Estimation | `generate-tasks` | — |
-| 5. Ticket Generation | `plan-tickets` | **Ticket Approval** |
+| 5. Ticket Generation | `plan-tickets`, `github-issue` (optional) | **Ticket Approval** |
 | 6. Sprint Placement | — | **Sprint Confirmation** |
 
-**Dependencies:** `create-prd`, `generate-tasks`, `plan-tickets`
+**Dependencies:** `requirements-clarifier`, `create-prd`, `generate-tasks`, `plan-tickets`
 
 ---
 
@@ -159,7 +159,7 @@ graph TD
 | 5. Execute | `generate-status-report`, `identify-risks` | — |
 | 6. Retrospect | `create-retrospective` | **Retrospective Complete** |
 
-**Dependencies:** All 10 skills
+**Dependencies:** All 12 skills
 
 ---
 

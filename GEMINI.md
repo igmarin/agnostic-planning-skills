@@ -4,11 +4,11 @@ This file provides equivalent instructions to `CLAUDE.md` for Gemini CLI.
 
 ## Repository Purpose
 
-`agnostic-planning-skills` is a curated library of 11 language-agnostic skills and 4 personas for technical project management, product planning, and agile execution. It teaches AI coding agents how to scope requirements, draft PRDs, estimate work, manage backlogs, plan sprints, and track execution health independently of any particular technology stack.
+`agnostic-planning-skills` is a curated library of 12 language-agnostic skills and 4 personas for technical project management, product planning, and agile execution. It teaches AI coding agents how to scope requirements, draft PRDs, estimate work, manage backlogs, plan sprints, manage GitHub issues, and track execution health independently of any particular technology stack.
 
 ## Skill Catalog
 
-The repository contains 11 atomic planning skills and 4 personas covering:
+The repository contains 12 atomic planning skills and 4 personas covering:
 
 | Skill | Category | Use when... |
 |-------|----------|-------------|
@@ -23,6 +23,7 @@ The repository contains 11 atomic planning skills and 4 personas covering:
 | `generate-status-report` | Execution | Preparing milestone or sprint execution status reports for stakeholders. |
 | `identify-risks` | Execution | Conducting risk assessments and mapping mitigations for active projects. |
 | `requirements-clarifier` | Analysis | Transforming vague requests into actionable specifications with acceptance criteria. |
+| `github-issue` | Infrastructure | Creating, tracking, and managing GitHub issues with project board integration, milestones, and stage lifecycle management. |
 
 ## How to Discover Skills
 
@@ -38,12 +39,14 @@ Reference skills by their canonical `name` from YAML frontmatter:
 - `generate-tasks`
 - `plan-tickets`
 - `requirements-clarifier`
+- `github-issue`
 - `product-owner` (persona)
 - `delivery-lead` (persona)
 
 File paths (for reference only):
 - `skills/prd/create-prd/SKILL.md`
 - `skills/task-management/generate-tasks/SKILL.md`
+- `skills/analysis/requirements-clarifier/SKILL.md`
 - `skills/personas/product-owner/SKILL.md`
 
 ## Gemini-Specific Conventions

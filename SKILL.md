@@ -3,10 +3,10 @@ name: agnostic-planning-skills
 type: catalog
 description: >
   Master orchestrator for the Agnostic Planning Skills library. Use to discover and
-  activate 11 language-agnostic skills and 4 personas for product planning,
+  activate 12 language-agnostic skills and 4 personas for product planning,
   task breakdown, estimation, risk assessment, ticket generation, backlog
   prioritization, sprint planning, retrospectives, requirements clarification,
-  and status reporting. Personas guide end-to-end workflows.
+  status reporting, and GitHub issue management. Personas guide end-to-end workflows.
   prd, planning, tasks, tickets, estimation, risks, status, backlog, sprint,
   retrospective, tdd, agile, product management, requirements, clarification.
 metadata:
@@ -14,7 +14,7 @@ metadata:
 ---
 # Agnostic Planning Skills
 
-Master entry point. Navigate and activate 11 language-agnostic planning skills plus 4 personas.
+Master entry point. Navigate and activate 12 language-agnostic planning skills plus 4 personas.
 
 **Core principle:** Atomic, task-specific instructions that turn AI coding assistants into reliable product collaborators through structured planning, estimation, risk assessment, and execution tracking.
 
@@ -33,6 +33,7 @@ Master entry point. Navigate and activate 11 language-agnostic planning skills p
 | **Identify risks** | `identify-risks` |
 | **Status report** | `generate-status-report` |
 | **Clarify requirements** | `requirements-clarifier` |
+| **Manage GitHub issues** | `github-issue` |
 | **End-to-end planning** | `product-owner` (persona) |
 | **Execution tracking** | `project-manager` (persona) |
 | **Technical feasibility** | `tech-lead` (persona) |
@@ -67,6 +68,7 @@ The PRD is the single source of truth for scope — everything flows from it.
 | **Ceremony** | `plan-sprint`, `create-retrospective` |
 | **Execution** | `generate-status-report`, `identify-risks` |
 | **Analysis** | `requirements-clarifier` |
+| **Infrastructure** | `github-issue` |
 
 ## Personas
 

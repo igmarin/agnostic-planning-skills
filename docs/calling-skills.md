@@ -42,6 +42,7 @@ Personas orchestrate multiple skills through phases with approval gates.
 
 ```text
 @requirements-clarifier Clarify the user notification system requirements
+@github-issue Create an issue for the notification API bug
 @product-owner Plan the user notification system feature
 @project-manager Track execution of the current sprint
 @tech-lead Review the notification PRD for feasibility
@@ -91,7 +92,7 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 
 ## Available Skills and Personas
 
-### Skills (11)
+### Skills (12)
 
 | Name | Category | Description |
 |------|----------|-------------|
@@ -106,6 +107,7 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 | `identify-risks` | Execution | Scan plans for dependency and capacity risks |
 | `generate-status-report` | Execution | Generate stakeholder status reports |
 | `requirements-clarifier` | Analysis | Transform vague requests into actionable specifications |
+| `github-issue` | Infrastructure | Create, track, and manage GitHub issues with project boards and milestones |
 
 ### Personas (4)
 
