@@ -17,50 +17,29 @@
 #   OpenRouter   | OPENROUTER_API_KEY
 #
 # Binary resolution order:
-#   1. bin/rs-guard-macos-arm64  (bundled — macOS arm64)
-#   2. bin/rs-guard-linux-x64    (bundled — Linux x86_64)
-#   3. rs-guard in PATH
-#   4. ~/.cargo/bin/rs-guard     (installed via `cargo install rs-guard`)
+#   1. rs-guard in PATH
+#   2. ~/.cargo/bin/rs-guard     (installed via `cargo install rs-guard`)
+#
+# Install locally with: cargo install rs-guard --version 1.0.2 --locked
 #
 # Usage: This script is invoked automatically by git via hooks/hooks.json.
 # To install manually: cp hooks/pre-commit-rs-guard .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
 
 set -euo pipefail
 
-# Locate the bundled binary for the current platform
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-resolve_binary() {
-  local os arch
-  os="$(uname -s)"
-  arch="$(uname -m)"
-
-  case "${os}-${arch}" in
-    Darwin-arm64)  echo "$REPO_ROOT/bin/rs-guard-macos-arm64" ;;
-    Linux-x86_64)  echo "$REPO_ROOT/bin/rs-guard-linux-x64"  ;;
-    *)             echo "" ;;
-  esac
-}
-
-RS_GUARD_BIN="$(resolve_binary)"
-
-# Fall back to PATH then ~/.cargo/bin
-if [ -z "$RS_GUARD_BIN" ] || [ ! -x "$RS_GUARD_BIN" ]; then
-  if command -v rs-guard &>/dev/null; then
-    RS_GUARD_BIN="rs-guard"
-  elif [ -x "$HOME/.cargo/bin/rs-guard" ]; then
-    RS_GUARD_BIN="$HOME/.cargo/bin/rs-guard"
-  else
-    echo "[rs-guard] rs-guard not found — skipping pre-commit review."
-    echo "[rs-guard] Install with: cargo install rs-guard"
-    exit 0
-  fi
+if command -v rs-guard &>/dev/null; then
+  RS_GUARD_BIN="rs-guard"
+elif [ -x "$HOME/.cargo/bin/rs-guard" ]; then
+  RS_GUARD_BIN="$HOME/.cargo/bin/rs-guard"
+else
+  echo "[rs-guard] rs-guard not found — skipping pre-commit review."
+  echo "[rs-guard] Install with: cargo install rs-guard --version 1.2.0 --locked"
+  exit 0
 fi
 
-# Check that at least one supported provider API key is set.
-# rs-guard reads the provider from .reviewer.toml and resolves the key itself;
-# this check just gives an early, human-readable message if none are present.
 has_api_key=false
 for key in DEEPSEEK_API_KEY OPENAI_API_KEY KIMI_API_KEY DASHSCOPE_API_KEY OPENROUTER_API_KEY; do
   if [ -n "${!key:-}" ]; then
