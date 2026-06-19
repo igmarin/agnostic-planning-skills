@@ -1,6 +1,6 @@
 {
   "name": "igmarin/agnostic-planning-skills",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "license": "MIT",
   "description": "A curated library of 12 language-agnostic planning skills and 4 personas for technical project management, product planning, and agile execution.",
   "skills": [
