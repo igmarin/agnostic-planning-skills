@@ -9,8 +9,8 @@ description: >
   fail → implement → run pass (TDD quadruplet), verify the test command before
   full generation, identify user-visible behaviors grouped as parent task groups,
   save to /tasks/tasks-[name].md, and review the generated tasks.
-  Language-agnostic.
-  Trigger words: task list, implementation plan, feature breakdown, generate tasks, TDD.
+  Language-agnostic. Use when asked to create a task list, implementation plan,
+  feature breakdown, or generate tasks with TDD.
 metadata:
   version: 1.0.0
   user-invocable: "true"
@@ -32,13 +32,7 @@ metadata:
 
 1. **Test Command Detection** — Use the lookup table below to resolve the concrete command.
 2. **Directory Detection** — Check for common source dirs (`src/`, `lib/`, `app/`) and test dirs (`tests/`, `test/`, `spec/`, `__tests__/`).
-3. **Documentation Tool Detection** — Identify the documentation tool in use:
-   ```bash
-   # Check for common doc tools
-   grep -q 'typedoc\|jsdoc' package.json 2>/dev/null && echo typedoc
-   grep -q 'sphinx\|mkdocs' pyproject.toml requirements.txt 2>/dev/null && echo sphinx/mkdocs
-   ls Doxyfile rustdoc 2>/dev/null
-   ```
+3. **Documentation Tool Detection** — Identify the documentation tool by checking `package.json`, `pyproject.toml`, `requirements.txt`, or a `Doxyfile` for references to tools such as `typedoc`, `jsdoc`, `sphinx`, `mkdocs`, or `doxygen`.
 
 ### Test Command Lookup Table
 
@@ -83,6 +77,8 @@ Create `/tasks/tasks-[feature-name].md` using the structure below.
 
 #### Task File Template
 
+Each parent group follows the TDD quadruplet: write failing test → confirm fail → implement → confirm pass.
+
 ```markdown
 # Tasks: [Feature Name]
 
@@ -94,30 +90,21 @@ Create `/tasks/tasks-[feature-name].md` using the structure below.
 
 - [ ] 0.0 Create feature branch `feat/[feature-name]`
 
-- [ ] 1.0 [Parent behavior group — e.g., "User can submit a contact form"]
+- [ ] 1.0 [Parent behavior group]  e.g. `UserService can create a new user`
   - [ ] 1.1 Write failing test for [smallest behavior slice]
-  - [ ] 1.2 Run test suite — confirm test 1.1 fails (`[test command]`)
+         e.g. `def test_create_user_returns_user_with_id()` in `tests/services/test_user_service.py`
+  - [ ] 1.2 Run `[test command]` — confirm test 1.1 fails
+         e.g. `pytest tests/services/test_user_service.py` → FAILED (AttributeError)
   - [ ] 1.3 Implement [feature code] to make test 1.1 pass
-  - [ ] 1.4 Run test suite — confirm all tests pass (`[test command]`)
+         e.g. `UserService.create()` in `src/services/user_service.py`
+  - [ ] 1.4 Run `[test command]` — confirm all tests pass
+         e.g. `pytest tests/services/test_user_service.py` → 1 passed
 
 - [ ] 2.0 [Next parent behavior group]
   - [ ] 2.1 Write failing test for ...
   - [ ] 2.2 Run — confirm fail
   - [ ] 2.3 Implement ...
   - [ ] 2.4 Run — confirm pass
-```
-
-#### TDD Quadruplet Example
-
-For a Python feature adding a `UserService.create()` method:
-
-```markdown
-- [ ] 1.0 UserService can create a new user
-  - [ ] 1.1 Write failing test in `tests/services/test_user_service.py`:  
-         `def test_create_user_returns_user_with_id(): ...`
-  - [ ] 1.2 Run `pytest tests/services/test_user_service.py` — confirm `FAILED` (AttributeError or assertion)
-  - [ ] 1.3 Implement `UserService.create()` in `src/services/user_service.py`
-  - [ ] 1.4 Run `pytest tests/services/test_user_service.py` — confirm `1 passed`
 ```
 
 ### Step 5: Final Validation

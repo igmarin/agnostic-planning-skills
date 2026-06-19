@@ -3,10 +3,11 @@ name: project-manager
 type: persona
 license: MIT
 description: >
-  Orchestrates the execution tracking lifecycle: estimates tasks, identifies risks,
-  sets up tracking checkpoints, and generates stakeholder status reports. Language-agnostic.
-  Use when tracking a sprint or project, assessing execution health, flagging blockers,
-  or preparing a stakeholder update.
+  Orchestrates the execution tracking lifecycle across four hard-gated phases: estimates tasks with
+  confidence levels, builds a risk register with owners and mitigations, sets up milestone tracking
+  checkpoints, and generates stakeholder status reports. Language-agnostic. Use when tracking a
+  sprint or project, assessing execution health, flagging blockers, or preparing a stakeholder
+  update — especially where formal approval gates are needed before proceeding.
 metadata:
   version: 1.0.0
   user-invocable: "true"
@@ -41,9 +42,8 @@ Orchestrates execution tracking: from task estimation through risk assessment to
 
 **Sub-skill contract — estimate-tasks:** Input: task list or PRD. Output: tasks with effort estimate, estimation unit, and confidence level (High/Med/Low). Flag tasks needing spikes.
 
-1. Activate **task-management/estimate-tasks** per the contract above.
-2. Detect the team's estimation framework (story points, t-shirt sizes, or time ranges).
-3. Assign estimates with confidence levels; flag tasks needing further breakdown or spikes.
+1. Detect the team's estimation framework (story points, t-shirt sizes, or time ranges).
+2. Assign estimates with confidence levels; flag tasks needing further breakdown or spikes.
 
 **HARD GATE — Estimation Review:**
 ```text
@@ -75,9 +75,8 @@ Gate result: 0% Low confidence — gate passes. Proceed after user review.
 
 **Sub-skill contract — identify-risks:** Input: estimated task list. Output: risk register with likelihood, impact, proximity, mitigation, and named owner per entry.
 
-1. Activate **execution/identify-risks** per the contract above.
-2. Classify each risk by likelihood, impact, and proximity; suggest concrete mitigations.
-3. Identify the top 3 critical risks.
+1. Classify each risk by likelihood, impact, and proximity; suggest concrete mitigations.
+2. Identify the top 3 critical risks.
 
 **HARD GATE — Risk Acceptance:**
 ```text
@@ -118,8 +117,7 @@ DO NOT proceed with unacknowledged critical risks.
 **Sub-skill contract — generate-status-report:** Input: task progress snapshot, risk register, milestone plan. Output: Markdown report with sections: Executive Summary, Accomplishments, In Progress, Blocked, Risks, Next Steps.
 
 1. Gather current progress data (from tracker, user input, or task list).
-2. Activate **execution/generate-status-report** per the contract above.
-3. Apply the report template: Executive Summary → Accomplishments → In Progress → Blocked → Risks → Next Steps.
+2. Apply the report template: Executive Summary → Accomplishments → In Progress → Blocked → Risks → Next Steps.
 
 **HARD GATE — Status Report Approval:**
 ```text
@@ -128,42 +126,40 @@ Verify: no fabricated progress, no hidden blockers, every blocked item has an ow
 DO NOT distribute the report without approval.
 ```
 
+After all four phases complete, produce a consolidated execution summary:
+
+```markdown
+## Execution Tracking Set Up: [Sprint or Project Name]
+
+### Estimation Summary
+- Framework: [story points / t-shirt sizes / time ranges]
+- Total estimate: [N points/units]
+- Confidence: [X% High, Y% Medium, Z% Low]
+- Items needing breakdown: [count and description, or "None"]
+
+### Top Risks
+1. [Risk description] — [Likelihood/Impact] — Owner: [Name]
+2. [Risk description] — [Likelihood/Impact] — Owner: [Name]
+3. [Risk description] — [Likelihood/Impact] — Owner: [Name]
+
+### Tracking Plan
+- Milestones: [count and key dates/events]
+- Check-in cadence: [daily / weekly / async and channel]
+- Escalation path: [who to notify and after how many days]
+
+### Latest Status
+- Report saved: [path or location]
+- Health: [🟢 On Track / 🟡 At Risk / 🔴 Off Track] — [one-line summary]
+```
+
 ---
 
 ## Error Recovery
 
 | Scenario | Recovery |
-|----------|----------|
+|----------|---------|
 | Cannot detect estimation framework | Ask: "What estimation framework does your team use? (story points, t-shirt sizes, or time ranges)" |
 | No task list available for estimation | Ask: "Do you have a task list or PRD I can estimate from? If not, I can estimate from the PRD requirements directly." |
 | Risk register has no High/High items but plan seems risky | Flag: "The risk scan found no critical risks, but consider: [specific concern based on plan analysis]. Should I add it?" |
 | Status data is stale (no updates in N days) | Flag: "Task progress hasn't been updated since [date]. I'll mark unknown items as 'needs update.' Share this report only after confirming status." |
 | User rejects status report | Ask: "Which section needs correction? I'll revise the specific items rather than regenerating the whole report." |
-
-## Output Style / Report
-
-After completing all phases, produce a summary. Example with realistic sample data:
-
-```markdown
-## Execution Tracking Set Up: Auth Service Sprint 4
-
-### Estimation Summary
-- Framework: Story points (1 SP ≈ half a day)
-- Total estimate: 21 points
-- Confidence: 60% High, 40% Medium, 0% Low
-- Items needing breakdown: 1 (OAuth spike — timebox to 1 SP)
-
-### Top Risks
-1. OAuth spike reveals scope creep — High/High — Owner: Alice
-2. Staging environment unavailable — Med/High — Owner: Bob
-3. Integration tests flaky on CI — Med/Med — Owner: Alice
-
-### Tracking Plan
-- Milestones: 3 defined (OAuth spike complete Day 2, API contract freeze Day 5, Feature complete Day 8)
-- Check-in cadence: Daily async update in #sprint-4 Slack channel
-- Escalation path: Notify Tech Lead if any blocker unresolved after 2 days
-
-### Latest Status
-- Report saved: `/reports/status-2024-11-15.md`
-- Health: 🟡 At Risk — OAuth spike outcome pending; all other tasks on track
-```
