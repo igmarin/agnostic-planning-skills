@@ -9,6 +9,8 @@ description: >
   and status reporting. Personas guide end-to-end workflows.
   prd, planning, tasks, tickets, estimation, risks, status, backlog, sprint,
   retrospective, tdd, agile, product management, requirements, clarification.
+metadata:
+  internal: true
 ---
 # Agnostic Planning Skills
 

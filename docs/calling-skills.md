@@ -64,8 +64,8 @@ gh skill install igmarin/agnostic-planning-skills
 
 ### Via skills.sh
 
-> [!IMPORTANT]
-> Because this repository has a root-level `SKILL.md`, you **must** include the `--full-depth` flag so the CLI scans and discovers all the nested skills.
+> [!NOTE]
+> The root `SKILL.md` is the catalog orchestrator (not a standalone skill). The `--full-depth` flag ensures discovery of all nested skills under `skills/<category>/<name>/`.
 
 #### Project-Level (Local) Installation
 To install skills for your current project workspace:

@@ -183,8 +183,8 @@ gh skill install igmarin/agnostic-planning-skills create-prd --scope user
 
 Requires [skills.sh](https://www.skills.sh/) CLI.
 
-> [!IMPORTANT]
-> Because this repository has a root-level `SKILL.md`, you **must** include the `--full-depth` flag so the CLI scans and discovers all the nested skills.
+> [!NOTE]
+> The root `SKILL.md` is the catalog orchestrator (not a standalone skill). The `--full-depth` flag ensures discovery of all nested skills under `skills/<category>/<name>/`.
 
 ### Project-Level Installation (Local)
 
