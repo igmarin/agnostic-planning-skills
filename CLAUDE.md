@@ -47,7 +47,9 @@ File paths (for reference only):
 - `skills/prd/create-prd/SKILL.md`
 - `skills/task-management/generate-tasks/SKILL.md`
 - `skills/analysis/requirements-clarifier/SKILL.md`
+- `skills/infrastructure/github-issue/SKILL.md`
 - `skills/personas/product-owner/SKILL.md`
+- `skills/personas/delivery-lead/SKILL.md`
 
 ## Ecosystem Context
 

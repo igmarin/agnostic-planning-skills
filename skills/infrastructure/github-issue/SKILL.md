@@ -63,7 +63,7 @@ All labels use kebab-case. New issues always start with stage label `todo`.
 
 ## Stage Lifecycle
 
-```
+```text
 todo → in-progress → in-review → done (closed)
 ```
 
@@ -125,7 +125,7 @@ If templates exist in `.github/ISSUE_TEMPLATE/`, adapt to that format. Otherwise
 
 Present the draft before creating:
 
-```
+```text
 Here's the issue I'm about to create:
 
 **Title:** [title]
@@ -227,6 +227,38 @@ Before moving on, confirm:
 - [ ] Milestone assigned (if applicable)
 - [ ] Issue URL is accessible and shows the expected content
 
+## Output Style
+
+A successfully created GitHub issue must conform to this shape:
+
+```text
+GitHub Issue #<number>
+  Title: "<action-oriented, specific title>"
+  URL:   https://github.com/<owner>/<repo>/issues/<number>
+  State:  open
+  Labels: todo, <type-label>
+  Project: <board-name> → <column-name>
+  Milestone: <milestone-title> (if assigned)
+
+Body:
+  ## Problem / Motivation
+  <concrete description of the current problem>
+
+  ## Expected Outcome / Goal
+  <measurable definition of "done">
+
+  ## Acceptance Criteria
+  - [ ] Given <context> when <action> then <expected result>
+```
+
+**Validation before reporting "done":**
+- Title is specific and action-oriented, not generic
+- Body sections are filled with concrete content (no placeholders)
+- Correct type label is assigned
+- Stage label is `todo` for new issues
+- Project board column matches the current stage
+- Milestone is set when relevant
+
 ---
 
 ## Updating an Existing Issue
@@ -245,14 +277,7 @@ Present results to confirm the right issue.
 
 ### Step 2: Detect Stage Change
 
-**Explicit:** "Move #42 to in-progress", "Mark #42 as done", "Close #42"
-
-**Inferred:**
-- "I'm working on #42" → `in-progress`
-- "#42 is ready for review" → `in-review`
-- "#42 is finished/deployed" → `done`
-
-If ambiguous, ask: "What stage is #42 in now?"
+**User must explicitly state the desired stage change.** Examples: "Move #42 to in-progress", "Mark #42 as done", "Close #42".
 
 ### Step 3: Update Labels
 
@@ -270,7 +295,7 @@ For Projects V2, use the `QueryProjectV2Fields` query (see Creating §Step 5) to
 
 ### Step 5: Confirm Update
 
-```
+```text
 ✓ Issue #42 updated
   Status: todo → in-progress
   Project: Moved to "In Progress" column

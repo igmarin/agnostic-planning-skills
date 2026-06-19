@@ -70,9 +70,9 @@ Agent: "Confirmed. Proceeding to Phase 2: Plan."
 
 ### Phase 1: Scope
 
-1. Activate **analysis/requirements-clarifier** — clarify vague feature descriptions into actionable specifications.
-2. Activate **prd/create-prd** — draft the PRD.
-3. Activate **prd/review-prd** — review for completeness and feasibility.
+1. Run **analysis/requirements-clarifier** to clarify vague feature descriptions into actionable specifications.
+2. Draft the PRD using **prd/create-prd**.
+3. Review for completeness and feasibility with **prd/review-prd**.
 4. Iterate until approved.
 
 **HARD GATE — PRD Approval:** Apply gate row 1. PRD must be explicitly approved before proceeding; if revised, loop back to create-prd before generating any tasks.

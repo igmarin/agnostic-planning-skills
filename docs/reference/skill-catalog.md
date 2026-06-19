@@ -204,7 +204,7 @@ Complete catalog of 12 language-agnostic planning skills and 4 personas.
 
 **Hard Gates:** PRD Approval, Ticket Approval, Sprint Confirmation
 
-**Dependencies:** `create-prd`, `generate-tasks`, `plan-tickets`
+**Dependencies:** `requirements-clarifier`, `create-prd`, `generate-tasks`, `plan-tickets`
 
 ---
 

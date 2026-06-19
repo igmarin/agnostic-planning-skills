@@ -8,7 +8,8 @@
 #
 # Requirements:
 #   - The github-issue skill must be installed at ~/.opencode/skills/github-issue
-#   - Write access to ~/.cursor/rules/, ~/.vscode/skills/, ~/.agents/skills/
+#   - (Optional) Write access to ~/.cursor/rules/, ~/.vscode/skills/, ~/.agents/skills/
+#     for tool-specific symlinks; skipped gracefully if absent
 #
 # What it does:
 #   Creates symbolic links so that OpenCode, Cursor, VSCode, and compatible
