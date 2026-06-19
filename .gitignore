@@ -32,3 +32,10 @@ evals/
 private-evals/
 docs/skill-description-strategy.md
 tessl_generations.log
+.rs-guard/
+report.json
+review-result.txt
+rs-guard-metrics.json
+/rs-guard
+rs-guard-x86_64-unknown-linux-gnu
+rs-guard-x86_64-unknown-linux-gnu.sha256

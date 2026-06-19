@@ -45,6 +45,19 @@ Agent: "Confirmed. Proceeding to next phase."
 
 If the user responds with the revise command, address the noted concerns and re-present without advancing.
 
+**Example — PRD Approval gate in practice:**
+```text
+Agent: "PRD draft is ready for your review. Please respond with:
+  - APPROVED — proceed to planning
+  - NEEDS REVISION: [your notes] — I will revise and re-present"
+User: "NEEDS REVISION: The success metrics section is missing acceptance criteria for the API latency requirement."
+Agent: "Understood. Updating the PRD to add acceptance criteria for API latency (e.g., p99 < 200 ms under 500 rps). Re-presenting revised PRD..."
+[revised PRD presented]
+Agent: "Revised PRD is ready. Please respond with APPROVED or NEEDS REVISION: [notes]."
+User: "APPROVED"
+Agent: "Confirmed. Proceeding to Phase 2: Plan."
+```
+
 ---
 
 ## Persona Phases
@@ -129,7 +142,7 @@ Use gate pattern with: prompt = "Retrospective is ready for sign-off. [N] action
 ## Error Recovery
 
 | Scenario | Recovery |
-|----------|---------|
+|----------|----------|
 | PRD rejected | Return to Phase 1. Do not skip to planning. |
 | Sprint overcommitted | Reduce scope to ≤80% capacity. Defer lowest-priority items. |
 | Mid-sprint scope change | Re-evaluate Phase 3 (prioritize) and Phase 4 (sprint). Update stakeholders. |

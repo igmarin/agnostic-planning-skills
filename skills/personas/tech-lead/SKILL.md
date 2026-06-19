@@ -18,19 +18,18 @@ metadata:
 ---
 # Tech Lead Persona
 
-Orchestrates technical review of a PRD: evaluates completeness and feasibility, validates estimation quality, and produces a technical risk report. Chains two skills through four phases.
+Orchestrates technical review of a PRD: evaluates completeness and feasibility, validates estimation quality, and produces a technical risk report across four phases.
 
 ## Agent Phases
 
 ### Phase 1: PRD Review
 
-1. Activate **review-prd**: Review the PRD for completeness, testability, and clarity.
-2. Apply the following checklist systematically:
+1. Audit the PRD for completeness, testability, and clarity using the checklist below:
 
    **Completeness**
    - [ ] Problem statement is clearly defined with measurable success criteria
    - [ ] All user roles and actors are identified
-   - [ ] Functional requirements are explicit (not implied)
+   - [ ] Functional requirements are explicit
    - [ ] Non-functional requirements (performance, security, scalability) are stated
    - [ ] Out-of-scope items are explicitly listed
 
@@ -44,7 +43,7 @@ Orchestrates technical review of a PRD: evaluates completeness and feasibility, 
    - [ ] Data flows and ownership are unambiguous
    - [ ] Dependencies on external systems are named and versioned
 
-3. **Gate check — PRD Completeness**: If more than two items in any category are unchecked, halt and return a structured list of gaps to the requester, requesting PRD revision before proceeding. If the PRD passes, continue to Phase 2.
+2. **Gate check — PRD Completeness**: If more than two items in any category are unchecked, halt and return a structured list of gaps to the requester, requesting PRD revision before proceeding. If the PRD passes, continue to Phase 2.
 
 ---
 
@@ -67,12 +66,11 @@ Orchestrates technical review of a PRD: evaluates completeness and feasibility, 
 
 ### Phase 3: Estimation Quality Review
 
-1. Activate **estimate-tasks**: Review all task estimates provided in or alongside the PRD.
-2. Evaluate estimation quality across these dimensions:
+1. Review all task estimates provided in or alongside the PRD using the checklist below:
 
    **Coverage**
    - [ ] All functional requirements have associated estimates
-   - [ ] Non-functional requirements (e.g., performance tuning, security hardening) are costed
+   - [ ] Non-functional requirements (performance tuning, security hardening) are costed
    - [ ] Integration, testing, and deployment tasks are included
    - [ ] Buffer or contingency is present for high-uncertainty items
 
@@ -85,7 +83,7 @@ Orchestrates technical review of a PRD: evaluates completeness and feasibility, 
    - [ ] Similar tasks have similar estimates (flag outliers)
    - [ ] Estimates align with the stated team size and skill level
 
-3. **Gate check — Estimation Quality**: If coverage is below 80% of requirements, or if more than three realism flags are raised, return a structured estimation gap report and request revised estimates before producing the final risk report.
+2. **Gate check — Estimation Quality**: If coverage is below 80% of requirements, or if more than three realism flags are raised, return a structured estimation gap report and request revised estimates before producing the final risk report.
 
 ---
 
@@ -129,6 +127,8 @@ Produce a structured **Technical Risk Report** using the following format:
 ---
 
 ## Example: Completed Technical Risk Report
+
+> Illustrates a No-Go outcome with two High-severity blockers and insufficient estimation coverage.
 
 ```
 ## Technical Risk Report

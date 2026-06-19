@@ -1,0 +1,25 @@
+#!/bin/sh
+# Pre-commit hook to run lint, test, and coverage checks
+
+# Exit immediately if any command fails
+set -e
+
+# Resolve the project root directory
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+APP_DIR="$REPO_ROOT/app"
+
+echo "============================================="
+echo "🚀 Running Pre-commit Hooks..."
+echo "============================================="
+
+# 1. Run Linter
+echo "🔍 Running linter..."
+npm --prefix "$APP_DIR" run lint
+
+# 2. Run Tests with Coverage
+echo "🧪 Running tests and checking coverage thresholds..."
+npm --prefix "$APP_DIR" run test:coverage
+
+echo "============================================="
+echo "✅ All pre-commit checks passed successfully!"
+echo "============================================="
