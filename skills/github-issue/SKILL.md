@@ -1,6 +1,13 @@
 ---
 name: github-issue
-description: Create and manage GitHub issues using the gh CLI, with automatic project board integration (Projects V2 and Classic), milestone tracking, and stage lifecycle management (todo → in-progress → in-review → done). Use this skill whenever the user wants to create a new issue, track work, update issue status, move issues between stages, close completed work, or add items to project boards. Also use when the user mentions "create a ticket", "track this work", "what's the status of issue #42", "move this to done", or any variation of issue management. This skill handles the full lifecycle from ideation to completion.
+description: >
+  Use when the user wants to create, track, or manage GitHub issues with
+  automatic project board integration (Projects V2 and Classic), milestone
+  tracking, and stage lifecycle management (todo → in-progress → in-review
+  → done). Covers issue creation with labels/templates, status updates,
+  project board moves, and completion workflows. Also covers "create a
+  ticket", "track this work", "what's the status of issue #42", "move this
+  to done", or any variation of GitHub issue lifecycle management.
 ---
 
 # GitHub Issue Management

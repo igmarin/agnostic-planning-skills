@@ -46,7 +46,7 @@ Agent: "Confirmed. Proceeding to next phase."
 If the user responds with the revise command, address the noted concerns and re-present without advancing.
 
 **Example — PRD Approval gate in practice:**
-```
+```text
 Agent: "PRD draft is ready for your review. Please respond with:
   - APPROVED — proceed to planning
   - NEEDS REVISION: [your notes] — I will revise and re-present"
