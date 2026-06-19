@@ -106,3 +106,4 @@ Load these files only when their specific content is needed:
 |-------|----------------|
 | **generate-tasks** | After tasks exist or in parallel — same initiative can feed ticket breakdown |
 | **create-prd** | When tickets should align with PRD scope and acceptance themes |
+| **github-issue** | After ticket drafts are approved, create them as actual GitHub issues with labels, project board, and milestone tracking |

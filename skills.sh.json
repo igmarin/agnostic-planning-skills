@@ -41,6 +41,20 @@
         "identify-risks",
         "generate-status-report"
       ]
+    },
+    {
+      "title": "Analysis",
+      "description": "Skills for clarifying and transforming vague requirements.",
+      "skills": [
+        "requirements-clarifier"
+      ]
+    },
+    {
+      "title": "Infrastructure",
+      "description": "Skills for managing GitHub issues and tracker integration.",
+      "skills": [
+        "github-issue"
+      ]
     }
   ]
 }

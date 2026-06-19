@@ -13,7 +13,7 @@ metadata:
   hard_gates: "PRD Approval, Sprint Commitment, Retrospective Complete"
   dependencies:
     - source: self
-      skills: [create-prd, review-prd, generate-tasks, plan-tickets, estimate-tasks, identify-risks, generate-status-report, prioritize-backlog, plan-sprint, create-retrospective]
+      skills: [requirements-clarifier, create-prd, review-prd, generate-tasks, plan-tickets, estimate-tasks, identify-risks, generate-status-report, prioritize-backlog, plan-sprint, create-retrospective]
   keywords: delivery, end-to-end, pipeline, orchestration, meta, full cycle, planning, execution, retrospective
 ---
 # Delivery Lead Persona
@@ -24,7 +24,7 @@ Meta-persona orchestrating the full delivery pipeline: from feature idea through
 
 | Phase | Skill Path |
 |-------|------------|
-| Scope | `prd/create-prd`, `prd/review-prd` |
+| Scope | `analysis/requirements-clarifier`, `prd/create-prd`, `prd/review-prd` |
 | Plan | `task-management/generate-tasks`, `task-management/estimate-tasks`, `execution/identify-risks` |
 | Prioritize | `backlog/prioritize-backlog`, `task-management/plan-tickets` |
 | Sprint | `ceremony/plan-sprint` |
@@ -64,9 +64,10 @@ Agent: "Confirmed. Proceeding to Phase 2: Plan."
 
 ### Phase 1: Scope
 
-1. Activate **prd/create-prd** — draft the PRD.
-2. Activate **prd/review-prd** — review for completeness and feasibility.
-3. Iterate until approved.
+1. Activate **analysis/requirements-clarifier** — clarify vague feature descriptions into actionable specifications.
+2. Activate **prd/create-prd** — draft the PRD.
+3. Activate **prd/review-prd** — review for completeness and feasibility.
+4. Iterate until approved.
 
 **HARD GATE — PRD Approval:**
 ```text

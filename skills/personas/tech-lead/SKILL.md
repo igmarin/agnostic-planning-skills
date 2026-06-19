@@ -13,7 +13,7 @@ metadata:
   hard_gates: "PRD Feasibility, Estimation Quality"
   dependencies:
     - source: self
-      skills: [review-prd, estimate-tasks]
+      skills: [review-prd, estimate-tasks, requirements-clarifier]
   keywords: technical, feasibility, architecture, estimation quality, go/no-go, review, tech lead, engineering
 ---
 # Tech Lead Persona

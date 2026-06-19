@@ -18,15 +18,30 @@ agnostic-planning-skills/
 │       ├── skill-catalog.md
 │       └── integration-matrix.md
 ├── skills/                  # Categorized skills and personas
-│   ├── prd/                 # PRD creation skills (atomic)
-│   │   └── create-prd/
-│   ├── task-management/     # Task and ticket skills (atomic)
-│   │   ├── generate-tasks/
-│   │   └── plan-tickets/
-│   ├── requirements-clarifier/ # Analysis skill (atomic)
-│   └── personas/            # Role-based orchestrators (persona)
-│       └── product-owner/
-│           └── SKILL.md
+│   ├── analysis/            # Requirements clarification (atomic)
+│   │   └── requirements-clarifier/
+│   ├── backlog/             # Backlog prioritization (atomic)
+│   │   └── prioritize-backlog/
+│   ├── ceremony/            # Sprint ceremonies (atomic)
+│   │   ├── create-retrospective/
+│   │   └── plan-sprint/
+│   ├── execution/           # Execution tracking (atomic)
+│   │   ├── generate-status-report/
+│   │   └── identify-risks/
+│   ├── infrastructure/      # Tracker integration (atomic)
+│   │   └── github-issue/
+│   ├── personas/            # Role-based orchestrators (persona)
+│   │   ├── delivery-lead/
+│   │   ├── product-owner/
+│   │   ├── project-manager/
+│   │   └── tech-lead/
+│   ├── prd/                 # PRD creation and review (atomic)
+│   │   ├── create-prd/
+│   │   └── review-prd/
+│   └── task-management/     # Task and ticket skills (atomic)
+│       ├── estimate-tasks/
+│       ├── generate-tasks/
+│       └── plan-tickets/
 ├── bin/                     # Pre-built rs-guard binaries for local review
 │   ├── rs-guard-macos-arm64 # macOS arm64 (v1.0.0)
 │   ├── rs-guard-linux-x64   # Linux x86_64 (v1.0.0)
@@ -172,6 +187,7 @@ Single-purpose capabilities. Do one thing well.
 - `generate-tasks` — TDD task checklists from PRDs
 - `plan-tickets` — Tracker-ready ticket drafts
 - `requirements-clarifier` — Transform vague requests into specifications
+- `github-issue` — GitHub issue management with project boards and milestones
 
 ### Personas (`type: persona`)
 
@@ -189,6 +205,8 @@ Skills are referenced by three conventions depending on context:
 | `directory.json` | Full path: `skills/<category>/<name>/SKILL.md` | `skills/prd/create-prd/SKILL.md` |
 | Persona body (activate calls) | Category-path: `<category>/<name>` | `prd/create-prd` |
 | Integration tables | Short name only | `create-prd` |
+
+**Categories:** `prd`, `task-management`, `backlog`, `ceremony`, `execution`, `analysis`, `infrastructure`, `personas`
 
 The category-path format (`<category>/<name>`) drops the `skills/` prefix and the `/SKILL.md` suffix from the full directory.json path. Integration tables use bare names since the surrounding context (which skill file you're in) plus the category taxonomy in the root `SKILL.md` makes disambiguation straightforward.
 

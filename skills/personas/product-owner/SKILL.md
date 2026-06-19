@@ -14,7 +14,7 @@ metadata:
   hard_gates: "PRD Approval, Ticket Approval, Sprint Confirmation"
   dependencies:
     - source: self
-      skills: [create-prd, generate-tasks, plan-tickets]
+      skills: [requirements-clarifier, create-prd, generate-tasks, plan-tickets]
   keywords: product, planning, prd, tickets, sprint, backlog, discovery, requirements, orchestration
 ---
 # Product Owner Persona
@@ -31,7 +31,9 @@ Orchestrates end-to-end product planning: from feature idea to sprint-ready tick
 |-----------|---------|--------|
 | `prd/create-prd` | Generates a structured PRD from a confirmed feature scope | `/tasks/prd-<slug>.md` |
 | `task-management/generate-tasks` | Breaks an approved PRD into TDD-ordered implementation tasks | `/tasks/tasks-<name>.md` |
+| `analysis/requirements-clarifier` | Clarifies vague feature descriptions into actionable specifications | User stories, acceptance criteria, edge cases |
 | `task-management/plan-tickets` | Converts a task list into classified, tracker-ready ticket drafts | Markdown ticket drafts with sprint placement heuristics |
+| `infrastructure/github-issue` | (Optional) Creates actual GitHub issues from approved ticket drafts | GitHub issues with labels, project board, milestone |
 
 > **Bundle files:** Each sub-skill file is expected at its listed path within this bundle. `PRD_TEMPLATE.md` (used in Phase 2) and sprint placement heuristics (used in Phase 6) are defined in `prd/create-prd` and `task-management/plan-tickets` respectively.
 
@@ -42,9 +44,9 @@ Orchestrates end-to-end product planning: from feature idea to sprint-ready tick
 ### Phase 1 — Discovery & Clarification
 
 **Steps:**
-1. Ask the user to describe the feature or product goal in their own words.
-2. Identify and surface ambiguities: target users, success metrics, out-of-scope items, dependencies, and constraints.
-3. Ask clarifying questions one group at a time.
+1. Invoke **`analysis/requirements-clarifier`** with the user's feature description.
+2. The sub-skill surfaces ambiguities and produces clarified requirements with user stories, acceptance criteria, and edge cases.
+3. Ask clarifying questions one group at a time if the clarifier surfaces open issues.
 4. Summarise the agreed scope as a short bullet list.
 5. Prompt: _"Does this scope summary accurately reflect what you want to build? (yes / revise)"_
 
@@ -119,9 +121,10 @@ Proceeding to task breakdown...
 **Steps:**
 1. Invoke **`task-management/plan-tickets`** with the approved task file path.
 2. The sub-skill generates one Markdown ticket draft per task, including: type label (feature / chore / test), title, description, acceptance criteria, dependencies, and estimated points.
-3. Present all ticket drafts inline.
-4. Allow minor wording adjustments; re-generate individual tickets if requested.
-5. Prompt: _"Are these ticket drafts ready for sprint placement? (yes / revise)"_
+3. (Optional) Invoke **`infrastructure/github-issue`** to create the approved tickets as actual GitHub issues with labels, project board integration, and milestone tracking.
+4. Present all ticket drafts inline.
+5. Allow minor wording adjustments; re-generate individual tickets if requested.
+6. Prompt: _"Are these ticket drafts ready for sprint placement? (yes / revise)"_
 
 **Example ticket draft (T-01):**
 

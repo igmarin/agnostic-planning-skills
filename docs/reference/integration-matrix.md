@@ -63,6 +63,8 @@ requirements-clarifier → create-prd → review-prd → [gate: PRD approved] �
 
 ### requirements-clarifier
 
+**Path:** `analysis/requirements-clarifier`
+
 | Next | When |
 |------|------|
 | create-prd | After requirements are clarified and approved, draft the PRD |
@@ -112,6 +114,7 @@ requirements-clarifier → create-prd → review-prd → [gate: PRD approved] �
 |------|------|
 | prioritize-backlog | After tickets drafted, rank them for sprint selection |
 | (Create in tracker) | After ticket drafts approved |
+| github-issue | After ticket drafts approved, create as actual GitHub issues with labels, project board, and milestone |
 | plan-sprint | Selected tickets feed into sprint planning |
 
 ### prioritize-backlog
@@ -136,6 +139,15 @@ requirements-clarifier → create-prd → review-prd → [gate: PRD approved] �
 | (Share with stakeholders) | After report approved |
 | identify-risks | If report reveals new or escalating risks |
 | create-retrospective | Status reports feed into end-of-sprint retrospective |
+
+### github-issue
+
+**Path:** `infrastructure/github-issue`
+
+| Next | When |
+|------|------|
+| generate-status-report | After issues created, report progress to stakeholders |
+| (Begin implementation) | After issues created and tracked |
 
 ### create-retrospective
 

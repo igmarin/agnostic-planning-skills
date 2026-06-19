@@ -5,11 +5,32 @@ All notable changes to `agnostic-planning-skills` will be documented in this fil
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [5.0.0] — Unreleased
 
 ### Added
-- New atomic skill `requirements-clarifier` at `skills/requirements-clarifier/SKILL.md` for transforming vague requests into actionable specifications.
-- `.opencode/agents/` wrappers for opencode subagent support (5 wrappers — 4 personas + 1 skill).
+- New atomic skill `github-issue` at `skills/infrastructure/github-issue/SKILL.md` for creating and managing GitHub issues with project board integration, milestones, and stage lifecycle management.
+- `github-issue` wired into `plan-tickets` Integration section and `product-owner` persona Phase 5 (Ticket Generation).
+- `requirements-clarifier` wired into `product-owner`, `delivery-lead`, and `tech-lead` persona dependency lists.
+- Explicit 16-skill path array in `.tessl-plugin/plugin.json`.
+- Analysis category group in `skills.sh.json`.
+- Infrastructure category group in `skills.sh.json`.
+
+### Changed
+- **Breaking:** Skill count updated from 11 to 12 across all documentation (README, SKILL.md, CLAUDE.md, GEMINI.md, docs).
+- **Breaking:** `requirements-clarifier` moved from `skills/requirements-clarifier/` to `skills/analysis/requirements-clarifier/`.
+- **Breaking:** `github-issue` moved from `skills/github-issue/` to `skills/infrastructure/github-issue/`.
+- **Breaking:** `directory.json` version bumped to `5.0.0`.
+- **Breaking:** `.tessl-plugin/plugin.json` version bumped to `5.0.0`, changed from directory path to explicit skill array.
+- `github-issue` SKILL.md now has `type: atomic` and `license: MIT` frontmatter fields.
+- `docs/architecture.md` directory tree updated to show all 8 categories.
+- `docs/persona-guide.md` updated with `requirements-clarifier` in product-owner Phase 1 and `github-issue` in Phase 5.
+- `docs/reference/integration-matrix.md` added `github-issue` integration and category-path annotations.
+- `delivery-lead` persona sub-skill manifest updated to include `requirements-clarifier` in Scope phase.
+
+### Fixed
+- `.tessl-plugin/plugin.json` now lists all 16 skill directories explicitly instead of a single root path.
+
+## [4.0.0]
 
 ### Changed
 - **Breaking:** `agents/` directory removed. Agents moved to `skills/personas/` with `type: persona` in frontmatter.

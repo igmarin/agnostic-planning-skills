@@ -1,5 +1,7 @@
 ---
 name: github-issue
+type: atomic
+license: MIT
 description: >
   Use when the user wants to create, track, or manage GitHub issues with
   automatic project board integration (Projects V2 and Classic), milestone

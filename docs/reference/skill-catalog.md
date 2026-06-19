@@ -1,12 +1,12 @@
 # Skill Catalog — Agnostic Planning Skills
 
-Complete catalog of 11 language-agnostic planning skills and 4 personas.
+Complete catalog of 12 language-agnostic planning skills and 4 personas.
 
 ---
 
 ## Quick Navigation
 
-**Skills:** [create-prd](#create-prd) · [review-prd](#review-prd) · [requirements-clarifier](#requirements-clarifier) · [generate-tasks](#generate-tasks) · [plan-tickets](#plan-tickets) · [estimate-tasks](#estimate-tasks) · [prioritize-backlog](#prioritize-backlog) · [plan-sprint](#plan-sprint) · [create-retrospective](#create-retrospective) · [identify-risks](#identify-risks) · [generate-status-report](#generate-status-report)
+**Skills:** [create-prd](#create-prd) · [review-prd](#review-prd) · [requirements-clarifier](#requirements-clarifier) · [generate-tasks](#generate-tasks) · [plan-tickets](#plan-tickets) · [estimate-tasks](#estimate-tasks) · [prioritize-backlog](#prioritize-backlog) · [plan-sprint](#plan-sprint) · [create-retrospective](#create-retrospective) · [identify-risks](#identify-risks) · [generate-status-report](#generate-status-report) · [github-issue](#github-issue)
 **Personas:** [product-owner](#product-owner-persona) · [project-manager](#project-manager-persona) · [tech-lead](#tech-lead-persona) · [delivery-lead](#delivery-lead-persona)
 
 ---
@@ -60,7 +60,7 @@ Complete catalog of 11 language-agnostic planning skills and 4 personas.
 
 ### requirements-clarifier
 
-| Path | `skills/requirements-clarifier/SKILL.md` |
+| Path | `skills/analysis/requirements-clarifier/SKILL.md` |
 | Category | Analysis |
 | Description | Transform vague requests into actionable specifications |
 | Trigger Words | "clarify", "requirements", "spec", "define", "scope this", "refine", "unclear task" |
@@ -178,6 +178,21 @@ Complete catalog of 11 language-agnostic planning skills and 4 personas.
 
 ---
 
+### github-issue
+
+| Path | `skills/infrastructure/github-issue/SKILL.md` |
+| Category | Infrastructure |
+| Description | Create, track, and manage GitHub issues with project board integration |
+| Trigger Words | "create a ticket", "track this work", "GitHub issue", "move this to done", "create an issue" |
+
+**What it does:** Creates well-structured GitHub issues with proper labels, descriptions, and acceptance criteria. Manages issue lifecycle through stages (todo → in-progress → in-review → done) with automatic project board integration and milestone tracking.
+
+**HARD-GATE:** Always validate issue drafts with the user before creating. Never create tracker issues without explicit approval.
+
+**Next after use:** Continue tracking or use `generate-status-report` for stakeholder updates.
+
+---
+
 ## Personas
 
 ### product-owner Persona
@@ -228,7 +243,7 @@ Complete catalog of 11 language-agnostic planning skills and 4 personas.
 
 **Hard Gates:** PRD Approval, Sprint Commitment, Retrospective Complete
 
-**Dependencies:** All 10 skills
+**Dependencies:** All 12 skills
 
 ---
 
@@ -246,6 +261,7 @@ Complete catalog of 11 language-agnostic planning skills and 4 personas.
 | **Plan a sprint** | `plan-sprint` |
 | **Retrospective** | `create-retrospective` |
 | **Status report** | `generate-status-report` |
+| **Create GitHub issues** | `github-issue` |
 | **End-to-end planning** | `product-owner` persona |
 | **Execution tracking** | `project-manager` persona |
 | **Technical feasibility** | `tech-lead` persona |

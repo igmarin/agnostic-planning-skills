@@ -1,6 +1,6 @@
 # Agnostic Planning Skills — Docs
 
-11 language-agnostic skills and 4 personas for product planning, estimation, risk assessment, backlog prioritization, sprint planning, retrospectives, requirements clarification, and status reporting.
+12 language-agnostic skills and 4 personas for product planning, estimation, risk assessment, backlog prioritization, sprint planning, retrospectives, requirements clarification, GitHub issue management, and status reporting.
 
 ## Quick Navigation
 
@@ -22,6 +22,7 @@
 | Ceremony | `plan-sprint`, `create-retrospective` |
 | Execution | `identify-risks`, `generate-status-report` |
 | Analysis | `requirements-clarifier` |
+| Infrastructure | `github-issue` |
 
 ## Personas
 
