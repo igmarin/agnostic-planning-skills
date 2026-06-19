@@ -17,18 +17,11 @@ metadata:
 ---
 # Generating a Task List from Requirements
 
-## Quick Reference
-
-- **Task 0.0:** Always create feature branch first
-- **Output:** `/tasks/tasks-[feature-name].md`
-- **Auto-detect:** Test command, source directory, test directory, and doc tool.
-- **Gate:** Test command must pass before full generation
-
 ## Workflow
 
 ### Step 1: Project Detection
 
-**CRITICAL RULE:** Explicitly detect and list the project's conventions before generating tasks:
+Explicitly detect and list the project's conventions before generating tasks:
 
 1. **Test Command Detection** — Use the lookup table below to resolve the concrete command.
 2. **Directory Detection** — Check for common source dirs (`src/`, `lib/`, `app/`) and test dirs (`tests/`, `test/`, `spec/`, `__tests__/`).
@@ -49,7 +42,7 @@ metadata:
 
 ### Step 2: Validation Checkpoint
 
-**CRITICAL:** Verify the detected test command works before proceeding.
+Verify the detected test command works before proceeding.
 
 Run the detected command. If it fails, ask the user to confirm:
 _"Detected test command: [command]. Is this correct?"_
@@ -90,15 +83,11 @@ Each parent group follows the TDD quadruplet: write failing test → confirm fai
 
 - [ ] 0.0 Create feature branch `feat/[feature-name]`
 
-- [ ] 1.0 [Parent behavior group]  e.g. `UserService can create a new user`
+- [ ] 1.0 [Parent behavior group]
   - [ ] 1.1 Write failing test for [smallest behavior slice]
-         e.g. `def test_create_user_returns_user_with_id()` in `tests/services/test_user_service.py`
   - [ ] 1.2 Run `[test command]` — confirm test 1.1 fails
-         e.g. `pytest tests/services/test_user_service.py` → FAILED (AttributeError)
   - [ ] 1.3 Implement [feature code] to make test 1.1 pass
-         e.g. `UserService.create()` in `src/services/user_service.py`
   - [ ] 1.4 Run `[test command]` — confirm all tests pass
-         e.g. `pytest tests/services/test_user_service.py` → 1 passed
 
 - [ ] 2.0 [Next parent behavior group]
   - [ ] 2.1 Write failing test for ...

@@ -39,25 +39,12 @@ user confirmation. User must explicitly state the desired stage change.
 | **Output** | GitHub issues with labels, project board placement, and milestone assignment |
 | **Stage flow** | `todo` → `in-progress` → `in-review` → `done` (closed) |
 | **Type labels** | `bug`, `new-feature`, `improvement`, `refactor`, `security` |
-| **Hard gate** | User must confirm with "yes", "approve", or "create it" before any issue is created |
 
 ## Prerequisites
 
 - `gh` CLI installed and authenticated (`gh auth status`)
 - Working in a git repository with a GitHub remote
-
-## Dependencies
-
-| Skill | Relationship |
-|-------|-------------|
-| `plan-tickets` | Typical predecessor — creates approved ticket drafts that feed into issue creation |
-
-## Preconditions
-
-Before using this skill:
 - Have approved ticket drafts ready (ideally from `plan-tickets`), or a clear feature/bug description
-- Know the target GitHub repository you're working in
-- Confirm the user wants issues created in the tracker (default is draft-only in `plan-tickets`)
 
 ---
 
@@ -171,59 +158,51 @@ ISSUE_NUMBER=$(echo "$ISSUE_URL" | grep -oE '[0-9]+$')
 
 **Add to Projects V2:**
 
-> The GraphQL queries below can be extracted into a shared bundle file (e.g. `PROJECT_BOARD_QUERIES.md`) if you manage multiple skills or repos.
-
 ```bash
-# Add issue to project board
+# Add issue to a Projects V2 board
 gh project item-add PROJECT_NUMBER --owner $OWNER --url $ISSUE_URL
 
-# Query the project's status field ID and option IDs
+# Query field IDs and status option IDs
 gh api graphql -f query='
   query($owner: String!, $number: Int!) {
-    user(login: $owner) {
+    organization(login: $owner) {
       projectV2(number: $number) {
-        id
         fields(first: 20) {
           nodes {
             ... on ProjectV2SingleSelectField {
-              id
-              name
+              id name
               options { id name }
             }
           }
         }
       }
     }
-  }' -f owner=$OWNER -F number=PROJECT_NUMBER
+  }' -F owner=$OWNER -F number=PROJECT_NUMBER
 
-# Update the status field on the project item
+# Set status column via mutation (use field/option IDs from query above)
 gh api graphql -f query='
-  mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
-    updateProjectV2ItemFieldValue(input: {
-      projectId: $projectId
-      itemId: $itemId
-      fieldId: $fieldId
-      value: { singleSelectOptionId: $optionId }
-    }) { projectV2Item { id } }
-  }' -f projectId=PROJECT_ID -f itemId=ITEM_ID -f fieldId=FIELD_ID -f optionId=OPTION_ID
+  mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+    updateProjectV2ItemFieldValue(
+      input: { projectId: $project, itemId: $item,
+               fieldId: $field, value: { singleSelectOptionId: $option } }
+    ) { projectV2Item { id } }
+  }' -F project=PROJECT_ID -F item=ITEM_ID -F field=FIELD_ID -F option=OPTION_ID
 ```
 
-**Add to Classic project:**
+**Add to Classic project board:**
+
 ```bash
-# Query column IDs for a Classic project
+# Query column IDs
 gh api graphql -f query='
   query($owner: String!, $repo: String!) {
     repository(owner: $owner, name: $repo) {
       projects(first: 10) {
-        nodes {
-          id name
-          columns(first: 20) { nodes { id name } }
-        }
+        nodes { name columns(first: 10) { nodes { id name } } }
       }
     }
-  }' -f owner=$OWNER -f repo=$REPO
+  }' -F owner=$OWNER -F repo=$REPO
 
-# Create a card in the target column
+# Create card in target column
 gh api repos/$OWNER/$REPO/projects/columns/COLUMN_ID/cards \
   -f content_id=$ISSUE_NUMBER -f content_type=Issue
 ```
@@ -235,13 +214,7 @@ gh issue edit $ISSUE_NUMBER --milestone "Sprint 6 — Notifications"
 
 ### Step 6: Confirm Creation
 
-```
-✓ Issue created: #42 — "Add password reset email flow with SendGrid integration"
-  URL: https://github.com/owner/repo/issues/42
-  Labels: todo, bug
-  Project: Added to "Product Backlog" (To do column)
-  Milestone: v2.1.0
-```
+Report the created issue number, URL, applied labels, project board column, and milestone assignment.
 
 ### Validate: Issue Creation
 
@@ -253,44 +226,6 @@ Before moving on, confirm:
 - [ ] Project board column is correct (if applicable)
 - [ ] Milestone assigned (if applicable)
 - [ ] Issue URL is accessible and shows the expected content
-
----
-
-## Output Style
-
-A successfully created GitHub issue must conform to this shape:
-
-```text
-GitHub Issue #<number>
-  Title: "<action-oriented, specific title>"
-  URL:   https://github.com/<owner>/<repo>/issues/<number>
-  State:  open
-  Labels: todo, <type-label>
-  Project: <board-name> → <column-name>
-  Milestone: <milestone-title> (if assigned)
-
-Body:
-  ## Problem / Motivation
-  <concrete description of the current problem>
-
-  ## Expected Outcome / Goal
-  <measurable definition of "done">
-
-  ## Proposed Solution (if known)
-  <optional — how this might be solved>
-
-  ## Acceptance Criteria
-  - [ ] Given <context> when <action> then <expected result>
-  - [ ] ...
-```
-
-**Validation before reporting "done":**
-- Title is specific and action-oriented, not generic
-- Body has all sections filled with concrete content (no `[placeholders]`)
-- Correct type label is assigned
-- Stage label is `todo` for new issues, or updated correctly for transitions
-- Project board column matches the current stage
-- Milestone is set when relevant
 
 ---
 
@@ -331,7 +266,7 @@ gh issue close 42 --reason completed
 
 ### Step 4: Update Project Board
 
-For Projects V2, use the GraphQL queries from Step 5 above to look up field/option IDs, then run the `updateProjectV2ItemFieldValue` mutation to move the item to the new status column. For Classic projects, move the card to the target column using the column ID queries above.
+For Projects V2, use the `QueryProjectV2Fields` query (see Creating §Step 5) to look up field/option IDs, then run the `updateProjectV2ItemFieldValue` mutation to move the item to the new status column. For Classic projects, use `QueryClassicProjectColumns` and create a card in the target column.
 
 ### Step 5: Confirm Update
 

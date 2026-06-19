@@ -44,10 +44,8 @@ Before drafting, assign and output a single classification line for every ticket
 Add only when relevant: `coordination_need` (`single-team`|`multi-team`), `external_dependency` (`yes`|`no`), `urgency` (`normal`|`priority`). Backend/API enablers come before dependent client tickets.
 
 ### 3. Apply Sprint Placement Heuristics
-Determine execution sequence and note sequencing dependencies:
-- Place `foundation`/`api` tickets before dependent `client` tickets.
-- Exclude `external` confirmation from active sprints.
-- Set `follow-up` tickets to `ready-to-refine` or `later` until enabling work is done.
+Sequence tickets based on `execution_order` from the classification line:
+- `foundation`/`api` before `client`; exclude `external` from active sprints; `follow-up` → `ready-to-refine` or `later` until enabling work is done.
 - Treat named future sprints (e.g., *Ready to Refine*) as planning buckets, not execution commitments.
 
 ### 4. Apply title conventions

@@ -43,7 +43,7 @@ Orchestrates technical review of a PRD: evaluates completeness and feasibility, 
    - [ ] Data flows and ownership are unambiguous
    - [ ] Dependencies on external systems are named and versioned
 
-2. **Gate check — PRD Completeness**: If more than two items in any category are unchecked, halt and return a structured list of gaps to the requester, requesting PRD revision before proceeding. If the PRD passes, continue to Phase 2.
+2. **Gate check — PRD Completeness**: If >2 items unchecked in any category → halt, return a structured gap list, request PRD revision, and await the revised PRD before continuing to Phase 2.
 
 ---
 
@@ -60,7 +60,7 @@ Orchestrates technical review of a PRD: evaluates completeness and feasibility, 
    - **Medium**: Requires significant rework but is solvable within scope
    - **Low**: Minor risk, addressable during implementation
 
-3. **Gate check — Feasibility**: If any High-severity concern is identified, flag it explicitly, explain the blocker, and recommend either (a) revising the PRD to remove the constraint, (b) reducing scope, or (c) proceeding with a documented risk. Do not silently continue.
+3. **Gate check — Feasibility**: If any High-severity concern is found → flag it explicitly with the blocker and recommend: (a) revise the PRD, (b) reduce scope, or (c) proceed with documented risk. If the requester confirms (c), record the decision and adopt "Go with Conditions" before continuing to Phase 3.
 
 ---
 
@@ -83,7 +83,7 @@ Orchestrates technical review of a PRD: evaluates completeness and feasibility, 
    - [ ] Similar tasks have similar estimates (flag outliers)
    - [ ] Estimates align with the stated team size and skill level
 
-2. **Gate check — Estimation Quality**: If coverage is below 80% of requirements, or if more than three realism flags are raised, return a structured estimation gap report and request revised estimates before producing the final risk report.
+2. **Gate check — Estimation Quality**: If coverage <80% of requirements or >3 realism flags → return a structured estimation gap report and request revised estimates. If revised estimates cannot be provided, note the deficit in the final risk report and adjust the go/no-go recommendation accordingly.
 
 ---
 
@@ -124,56 +124,4 @@ Produce a structured **Technical Risk Report** using the following format:
 - <Actionable step 2>
 ```
 
----
-
-## Example: Completed Technical Risk Report
-
-> Illustrates a No-Go outcome with two High-severity blockers and insufficient estimation coverage.
-
-```
-## Technical Risk Report
-
-### PRD Review Summary
-- Completeness: Conditional Pass
-- Testability: Pass
-- Clarity: Pass
-- Open gaps:
-  - Non-functional requirement for API response time is missing a numeric threshold
-  - Out-of-scope items section is absent
-
-### Feasibility Assessment
-| Concern | Area | Severity | Recommendation |
-|---------|------|----------|----------------|
-| Real-time sync requires sub-100ms latency across regions but no CDN or edge strategy is defined | Architecture | High | Define latency budget per region and add edge caching to scope, or relax the latency requirement |
-| OAuth provider dependency has no fallback if provider is unavailable | Integration | Medium | Add graceful degradation or session persistence fallback |
-| "AI-powered recommendations" referenced with no model or data pipeline specified | Scope Clarity | High | Specify model source, training data ownership, and inference latency target |
-
-### Estimation Quality
-- Coverage: 72% — testing and deployment tasks are not estimated
-- Realism flags: 2 — "Backend API" estimated as a single 10-day task with no decomposition; "Auth integration" has no dependency on third-party availability
-- Consistency issues: Frontend tasks estimated at 0.5x the effort of equivalent backend tasks with no stated justification
-
-### Go / No-Go Recommendation
-**Recommendation**: No-Go
-
-**Rationale**: Two High-severity feasibility blockers exist that cannot be resolved without PRD revision. Estimation coverage is below threshold and the lack of decomposition introduces significant delivery risk. The PRD is not yet ready for engineering kickoff.
-
-**Conditions**:
-- Resolve the real-time latency architecture concern with a defined strategy
-- Specify the AI recommendation pipeline and data ownership
-- Re-estimate with full task decomposition and coverage of non-functional, testing, and deployment work
-
-### Next Steps
-- Product owner to revise NFR section with numeric thresholds (owner: PM)
-- Engineering lead to define edge/CDN strategy and update architecture notes
-- Re-submit revised PRD and estimates for a second Tech Lead review cycle
-```
-
----
-
-## Feedback Loop
-
-- **PRD fails Phase 1 gate**: Return gap list to requester, suspend further phases, and await revised PRD.
-- **Feasibility blocker in Phase 2**: Flag High-severity items immediately. If requester confirms proceeding at risk, document the decision and continue with a "Go with Conditions" posture.
-- **Estimation gaps in Phase 3**: Return estimation gap report. If requester cannot provide revised estimates, note coverage deficit in the final risk report and adjust the recommendation accordingly.
-- **All gates pass**: Proceed directly to Phase 4 and issue a Go recommendation with any Low/Medium concerns listed as watch items.
+When all gates pass, issue a Go recommendation with any Low/Medium concerns listed as watch items.
