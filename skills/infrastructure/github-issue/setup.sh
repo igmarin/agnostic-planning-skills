@@ -1,6 +1,20 @@
 #!/bin/bash
-# Setup script for github-issue skill
-# Creates symlinks across different AI coding tools
+#
+# Name:    setup.sh
+# Purpose: Install symlinks for the github-issue skill across multiple
+#          AI coding assistant tools (OpenCode, Cursor, VSCode, Agents).
+#
+# Usage:   ./setup.sh
+#
+# Requirements:
+#   - The github-issue skill must be installed at ~/.opencode/skills/github-issue
+#   - Write access to ~/.cursor/rules/, ~/.vscode/skills/, ~/.agents/skills/
+#
+# What it does:
+#   Creates symbolic links so that OpenCode, Cursor, VSCode, and compatible
+#   agent runners can discover and load the github-issue SKILL.md from a
+#   single source (~/.opencode/skills/github-issue).
+#   Skipped gracefully when a target directory does not exist.
 
 set -e
 

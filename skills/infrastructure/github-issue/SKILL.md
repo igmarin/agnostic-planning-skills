@@ -14,10 +14,37 @@ description: >
 
 # GitHub Issue Management
 
+Use this skill when you need to create, track, or manage GitHub issues with project board integration and milestone tracking.
+
+**Core principle:** Always validate issue drafts with the user before creating. Never create tracker issues without explicit approval.
+
+## Quick Reference
+
+| Aspect | Rule |
+|--------|------|
+| **Input** | Approved ticket drafts (from `plan-tickets`), feature description, or bug report |
+| **Output** | GitHub issues with labels, project board placement, and milestone assignment |
+| **Stage flow** | `todo` → `in-progress` → `in-review` → `done` |
+| **Labels** | `bug`, `new-feature`, `improvement`, `refactor`, `security` |
+| **Hard gate** | Never create issues without explicit user approval |
+
 ## Prerequisites
 
 - `gh` CLI installed and authenticated (`gh auth status`)
 - Working in a git repository with a GitHub remote
+
+## Dependencies
+
+| Skill | Relationship |
+|-------|-------------|
+| `plan-tickets` | Typical predecessor — creates approved ticket drafts that feed into issue creation |
+
+## Preconditions
+
+Before using this skill:
+- Have approved ticket drafts ready (ideally from `plan-tickets`), or a clear feature/bug description
+- Know the target GitHub repository you're working in
+- Confirm the user wants issues created in the tracker (default is draft-only in `plan-tickets`)
 
 ---
 
@@ -80,26 +107,29 @@ gh api repos/$OWNER/$REPO/milestones?state=open --jq '.[].title'
 
 If templates exist in `.github/ISSUE_TEMPLATE/`, adapt to that format. Otherwise use:
 
-**Title:** Clear, action-oriented (e.g. "Add retry logic to API client for transient failures")
+**Title:** Clear, action-oriented (e.g. "Add password reset email flow with SendGrid integration")
 
-**Body:**
+**Body** (replace bracketed placeholders):
 ```markdown
 ## Problem / Motivation
-[What's the current situation and why is it a problem?]
+Users cannot reset their password without contacting support. This generates
+~15 support tickets/week and blocks user self-service.
 
 ## Expected Outcome / Goal
-[What does "done" look like?]
+Users can request a password reset via email, receive a time-limited reset
+link, and set a new password within 10 minutes of the request.
 
 ## Proposed Solution (if known)
-[Optional — how might this be solved?]
-
-## Examples / References
-[Links, error messages, screenshots, or code snippets]
+Use SendGrid dynamic templates for the reset email. Store reset tokens in
+the `password_resets` table with a 10-minute TTL.
 
 ## Acceptance Criteria
-- [ ] [Specific, testable condition 1]
-- [ ] [Specific, testable condition 2]
-- [ ] [Specific, testable condition 3]
+- [ ] Given an unauthenticated user, when they submit their email on the
+      reset form, then a reset email is sent to that address
+- [ ] Given a valid reset link, when the user clicks it within 10 minutes,
+      then they can set a new password
+- [ ] Given an expired reset link, when the user clicks it, then they see
+      an "expired" message and can request a new link
 ```
 
 ### Step 4: Validate with User
@@ -146,18 +176,29 @@ For Projects V2 status field updates or Classic project card placement, query th
 
 **Add to milestone:**
 ```bash
-gh issue edit $ISSUE_NUMBER --milestone "Milestone Title"
+gh issue edit $ISSUE_NUMBER --milestone "Sprint 6 — Notifications"
 ```
 
 ### Step 6: Confirm Creation
 
 ```
-✓ Issue created: #42 — "Add retry logic to API client"
+✓ Issue created: #42 — "Add password reset email flow with SendGrid integration"
   URL: https://github.com/owner/repo/issues/42
   Labels: todo, bug
-  Project: Added to "Sprint Board" (To do column)
-  Milestone: v1.2.0
+  Project: Added to "Product Backlog" (To do column)
+  Milestone: v2.1.0
 ```
+
+### Validate: Issue Creation
+
+Before moving on, confirm:
+- [ ] Issue title is clear, action-oriented, and specific
+- [ ] Body includes Problem/Motivation, Expected Outcome, and Acceptance Criteria
+- [ ] Correct type label applied (`bug`, `new-feature`, `improvement`, etc.)
+- [ ] Stage label set to `todo`
+- [ ] Project board column is correct (if applicable)
+- [ ] Milestone assigned (if applicable)
+- [ ] Issue URL is accessible and shows the expected content
 
 ---
 
@@ -170,7 +211,7 @@ gh issue edit $ISSUE_NUMBER --milestone "Milestone Title"
 gh issue view 42 --json title,body,labels,milestone
 
 # By search
-gh issue list --search "retry logic API client" --json number,title,labels,state
+gh issue list --search "password reset email flow" --json number,title,labels,state
 ```
 
 Present results to confirm the right issue.
@@ -208,3 +249,12 @@ For Projects V2 status field updates and Classic project card moves, use the Gra
   Project: Moved to "In Progress" column
   URL: https://github.com/owner/repo/issues/42
 ```
+
+### Validate: Issue Updates
+
+Before confirming the update is complete, verify:
+- [ ] Old stage label removed, new stage label added
+- [ ] Project board card moved to the correct column (if applicable)
+- [ ] If closing: issue is closed with the correct reason (`completed` or `not planned`)
+- [ ] Issue URL is accessible and reflects the updated state
+- [ ] No duplicate or contradictory labels (e.g., `todo` + `in-progress` simultaneously)
