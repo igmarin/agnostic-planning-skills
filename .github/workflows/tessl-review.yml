@@ -5,6 +5,7 @@ on:
     paths:
       - 'skills/**'
       - 'tessl.json'
+      - '.tessl-plugin/**'
       - 'scripts/changed-tessl-skill-paths.rb'
       - 'scripts/generate-tessl-evals.rb'
       - 'scripts/validate-tessl-evals.rb'

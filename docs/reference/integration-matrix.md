@@ -54,12 +54,19 @@ graph TD
 ## Full Pipeline
 
 ```text
-create-prd → review-prd → [gate: PRD approved] → generate-tasks → estimate-tasks → identify-risks → prioritize-backlog → plan-tickets → plan-sprint → generate-status-report → create-retrospective
+requirements-clarifier → create-prd → review-prd → [gate: PRD approved] → generate-tasks → estimate-tasks → identify-risks → prioritize-backlog → plan-tickets → plan-sprint → generate-status-report → create-retrospective
 ```
 
 ---
 
 ## Integrations by Skill
+
+### requirements-clarifier
+
+| Next | When |
+|------|------|
+| create-prd | After requirements are clarified and approved, draft the PRD |
+| generate-tasks | If clarification uncovered concrete implementation tasks |
 
 ### create-prd
 

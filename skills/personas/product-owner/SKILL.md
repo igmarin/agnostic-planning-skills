@@ -3,11 +3,9 @@ name: product-owner
 type: persona
 license: MIT
 description: >
-  Orchestrates the full product planning lifecycle: clarifies scope, drafts a PRD,
-  iterates on feedback, breaks work into implementation tasks, generates tracker-ready
-  tickets, and places them in sprints. Language-agnostic — works with any tech stack.
-  Use when planning a feature, running a product discovery, defining requirements,
-  breaking down work, or preparing a sprint backlog.
+  Product planning lifecycle with hard gates at scope confirmation (do not proceed to PRD draft without explicit user sign-off on the clarified scope), PRD approval (do not generate tasks before PRD is explicitly approved, iterate on feedback and re-draft until approved), task breakdown approval (do not generate tickets before task list is approved), and sprint placement (do not assume sprint capacity — ask for points per sprint and number of available sprints); six sequential phases discovery→PRD draft→review and revise→task estimation→ticket generation→sprint placement.
+  Language-agnostic — works with any tech stack.
+  Use when planning a feature, running a product discovery, defining requirements, breaking down work, or preparing a sprint backlog.
 metadata:
   version: 1.0.0
   user-invocable: "true"
