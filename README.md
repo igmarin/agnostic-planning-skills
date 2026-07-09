@@ -45,7 +45,6 @@ See the [Ecosystem Overview](https://github.com/igmarin/agent-mcp-runtime/blob/m
 > [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 > [![skills.sh](https://skills.sh/b/igmarin/agnostic-planning-skills)](https://skills.sh/igmarin/agnostic-planning-skills)
 > [![Smithery](https://img.shields.io/badge/Smithery-orange)](https://smithery.ai/skills/ismael-marin/agnostic-planning-skills)
-> [![tessl](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.tessl.io%2Fv1%2Fbadges%2Figmarin%2Fagnostic-planning-skills)](https://tessl.io/registry/igmarin/agnostic-planning-skills)
 > ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/igmarin/agnostic-planning-skills?utm_source=oss&utm_medium=github&utm_campaign=igmarin%2Fagnostic-planning-skills&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 
 ## Who This Is For

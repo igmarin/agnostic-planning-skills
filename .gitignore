@@ -31,7 +31,6 @@ lean-ctx/
 evals/
 private-evals/
 docs/skill-description-strategy.md
-tessl_generations.log
 .rs-guard/
 report.json
 review-result.txt

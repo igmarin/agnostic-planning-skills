@@ -30,6 +30,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - `.tessl-plugin/plugin.json` now lists all 16 skill directories explicitly instead of a single root path.
 
+### Removed
+- Tessl integration: publish and review GitHub Actions workflows, `.tessl-plugin/`, `tessl.json`, `.tesslignore`, Tessl eval scripts, and the `tessl-evals/` tree.
+- Tessl registry badge from README and Tessl MCP server config (`.mcp.json`).
+- Tessl plugin path check from `.github/review-prompt.md`.
+
 ## [4.0.0]
 
 ### Changed
