@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Bump `rs-guard` pin to **v1.6.0** (`bin/rs-guard.manifest`, vendored `bin/` binaries, install/smoke/pre-commit version hints).
+
 ### Added
 - New atomic skill `requirements-clarifier` at `skills/requirements-clarifier/SKILL.md` for transforming vague requests into actionable specifications.
 - `.opencode/agents/` wrappers for opencode subagent support (5 wrappers — 4 personas + 1 skill).

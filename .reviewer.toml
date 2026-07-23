@@ -1,3 +1,3 @@
 provider = "deepseek"
-model = "deepseek-v4-chat"
+model = "deepseek-v4-flash"
 temperature = 0.1

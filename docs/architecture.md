@@ -28,8 +28,8 @@ agnostic-planning-skills/
 │       └── product-owner/
 │           └── SKILL.md
 ├── bin/                     # Pre-built rs-guard binaries for local review
-│   ├── rs-guard-macos-arm64 # macOS arm64 (v1.0.0)
-│   ├── rs-guard-linux-x64   # Linux x86_64 (v1.0.0)
+│   ├── rs-guard-macos-arm64 # macOS arm64 (v1.6.0)
+│   ├── rs-guard-linux-x64   # Linux x86_64 (v1.6.0)
 │   └── CHECKSUMS.txt        # SHA-256 checksums and provenance
 ├── hooks/                   # Git hook scripts
 │   ├── pre-commit-rs-guard  # Advisory pre-commit review (rs-guard)

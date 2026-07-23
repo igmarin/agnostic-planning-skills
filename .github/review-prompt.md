@@ -73,7 +73,6 @@ Every skill directory must contain a `SKILL.md` file with valid YAML frontmatter
 **Blocking:**
 
 - If a skill file is **added or renamed**: verify that `directory.json` at the repo root is updated with the new entry. Flag if it is missing
-- If a skill file is **added or renamed**: verify that `.tessl-plugin/plugin.json` `skills` array includes the new path. Flag if it is missing
 - If a skill is **added, removed, or significantly changed**: `CHANGELOG.md` must have a new entry in the `[Unreleased]` section (or a new version section). Flag if absent
 - Skills listed in `skills.sh.json` groupings must exist on disk. Flag any broken references
 
