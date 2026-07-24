@@ -41,6 +41,13 @@
         "identify-risks",
         "generate-status-report"
       ]
+    },
+    {
+      "title": "GitHub Issues",
+      "description": "Skills for GitHub issue management and project board integration.",
+      "skills": [
+        "github-issue"
+      ]
     }
   ]
 }

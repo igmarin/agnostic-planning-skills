@@ -1,12 +1,12 @@
 # Skill Catalog — Agnostic Planning Skills
 
-Complete catalog of 11 language-agnostic planning skills and 4 personas.
+Complete catalog of 12 language-agnostic planning skills and 4 personas.
 
 ---
 
 ## Quick Navigation
 
-**Skills:** [create-prd](#create-prd) · [review-prd](#review-prd) · [requirements-clarifier](#requirements-clarifier) · [generate-tasks](#generate-tasks) · [plan-tickets](#plan-tickets) · [estimate-tasks](#estimate-tasks) · [prioritize-backlog](#prioritize-backlog) · [plan-sprint](#plan-sprint) · [create-retrospective](#create-retrospective) · [identify-risks](#identify-risks) · [generate-status-report](#generate-status-report)
+**Skills:** [create-prd](#create-prd) · [review-prd](#review-prd) · [requirements-clarifier](#requirements-clarifier) · [generate-tasks](#generate-tasks) · [plan-tickets](#plan-tickets) · [estimate-tasks](#estimate-tasks) · [prioritize-backlog](#prioritize-backlog) · [plan-sprint](#plan-sprint) · [create-retrospective](#create-retrospective) · [identify-risks](#identify-risks) · [generate-status-report](#generate-status-report) · [github-issue](#github-issue)
 **Personas:** [product-owner](#product-owner-persona) · [project-manager](#project-manager-persona) · [tech-lead](#tech-lead-persona) · [delivery-lead](#delivery-lead-persona)
 
 ---
@@ -84,7 +84,7 @@ Complete catalog of 11 language-agnostic planning skills and 4 personas.
 
 **HARD-GATE:** Do not create tracker issues unless the user explicitly asks. Default is draft-only.
 
-**Next after use:** Sprint placement or begin implementation.
+**Next after use:** Sprint placement, `github-issue` to create tracked issues, or begin implementation.
 
 ---
 
@@ -178,6 +178,21 @@ Complete catalog of 11 language-agnostic planning skills and 4 personas.
 
 ---
 
+### github-issue
+
+| Path | `skills/github-issue/SKILL.md` |
+| Category | GitHub Issues |
+| Description | Create, track, and manage GitHub issues with automatic project board integration (V2 & Classic), milestone tracking, and stage lifecycle (todo → in-progress → in-review → done). |
+| Trigger Words | "github issue", "create issue", "track issue", "manage GitHub issues", "project board" |
+
+**What it does:** Uses the `gh` CLI to create and update GitHub issues with correct labels, project board placement, and stage transitions. Drafts issue bodies from a standard template and validates with the user before creation.
+
+**HARD-GATE:** Do not create an issue without explicit user confirmation. Do not assume tracker credentials, project fields, or sprint IDs.
+
+**Next after use:** `plan-tickets` (draft tickets before creating them), then continue with sprint planning or implementation.
+
+---
+
 ## Personas
 
 ### product-owner Persona
@@ -242,6 +257,7 @@ Complete catalog of 11 language-agnostic planning skills and 4 personas.
 | **Estimate effort** | `generate-tasks` → `estimate-tasks` |
 | **Assess risks** | `estimate-tasks` → `identify-risks` |
 | **Generate tickets** | `plan-tickets` |
+| **Create GitHub issues** | `plan-tickets` → `github-issue` |
 | **Prioritize backlog** | `prioritize-backlog` |
 | **Plan a sprint** | `plan-sprint` |
 | **Retrospective** | `create-retrospective` |

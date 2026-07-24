@@ -27,6 +27,7 @@ In environments like Cursor, Windsurf, or Gemini CLI:
 @identify-risks Scan the login plan for risks
 @prioritize-backlog Rank the remaining feature requests
 @plan-tickets Draft tickets for the search feature
+@github-issue Create a bug report for the login page
 @plan-sprint Select tickets and define the sprint goal
 @generate-status-report Create a status report for stakeholders
 @create-retrospective Generate the sprint retrospective
@@ -91,7 +92,7 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 
 ## Available Skills and Personas
 
-### Skills (11)
+### Skills (12)
 
 | Name | Category | Description |
 |------|----------|-------------|
@@ -106,6 +107,7 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 | `identify-risks` | Execution | Scan plans for dependency and capacity risks |
 | `generate-status-report` | Execution | Generate stakeholder status reports |
 | `requirements-clarifier` | Analysis | Transform vague requests into actionable specifications |
+| `github-issue` | GitHub Issues | Create, track, and manage GitHub issues with project boards |
 
 ### Personas (4)
 

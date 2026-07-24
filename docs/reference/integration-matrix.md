@@ -54,7 +54,7 @@ graph TD
 ## Full Pipeline
 
 ```text
-requirements-clarifier → create-prd → review-prd → [gate: PRD approved] → generate-tasks → estimate-tasks → identify-risks → prioritize-backlog → plan-tickets → plan-sprint → generate-status-report → create-retrospective
+requirements-clarifier → create-prd → review-prd → [gate: PRD approved] → generate-tasks → estimate-tasks → identify-risks → prioritize-backlog → plan-tickets → (github-issue) → plan-sprint → generate-status-report → create-retrospective
 ```
 
 ---
@@ -110,9 +110,17 @@ requirements-clarifier → create-prd → review-prd → [gate: PRD approved] �
 
 | Next | When |
 |------|------|
+| github-issue | Create GitHub issues from approved ticket drafts |
 | prioritize-backlog | After tickets drafted, rank them for sprint selection |
 | (Create in tracker) | After ticket drafts approved |
 | plan-sprint | Selected tickets feed into sprint planning |
+
+### github-issue
+
+| Next | When |
+|------|------|
+| plan-sprint | After issues are created continue with sprint planning |
+| plan-tickets | If issues need to be revised or re-drafted |
 
 ### prioritize-backlog
 
@@ -170,6 +178,9 @@ Full delivery cycle?
 
 Sprint done?
   └─ create-retrospective
+
+Need to create GitHub issues?
+  └─ plan-tickets → github-issue
 ```
 
 ---

@@ -6,7 +6,7 @@ description: >
   activate 11 language-agnostic skills and 4 personas for product planning,
   task breakdown, estimation, risk assessment, ticket generation, backlog
   prioritization, sprint planning, retrospectives, requirements clarification,
-  and status reporting. Personas guide end-to-end workflows.
+  GitHub issue management, and status reporting. Personas guide end-to-end workflows.
   prd, planning, tasks, tickets, estimation, risks, status, backlog, sprint,
   retrospective, tdd, agile, product management, requirements, clarification.
 metadata:
@@ -14,7 +14,7 @@ metadata:
 ---
 # Agnostic Planning Skills
 
-Master entry point. Navigate and activate 11 language-agnostic planning skills plus 4 personas.
+Master entry point. Navigate and activate 12 language-agnostic planning skills plus 4 personas.
 
 **Core principle:** Atomic, task-specific instructions that turn AI coding assistants into reliable product collaborators through structured planning, estimation, risk assessment, and execution tracking.
 
@@ -33,6 +33,7 @@ Master entry point. Navigate and activate 11 language-agnostic planning skills p
 | **Identify risks** | `identify-risks` |
 | **Status report** | `generate-status-report` |
 | **Clarify requirements** | `requirements-clarifier` |
+| **Manage GitHub issues** | `github-issue` |
 | **End-to-end planning** | `product-owner` (persona) |
 | **Execution tracking** | `project-manager` (persona) |
 | **Technical feasibility** | `tech-lead` (persona) |
@@ -51,11 +52,12 @@ The PRD is the single source of truth for scope — everything flows from it.
 1. **Scope** → `create-prd` → `review-prd`
 2. **Plan** → `generate-tasks` → `estimate-tasks` → `identify-risks`
 3. **Prioritize** → `prioritize-backlog` → `plan-tickets`
-4. **Sprint** → `plan-sprint`
-5. **Execute** → `generate-status-report` → `identify-risks`
-6. **Retrospect** → `create-retrospective`
-7. **Clarify** → `requirements-clarifier` (if requirements are vague)
-8. **Orchestrate** → Use `product-owner`, `project-manager`, `tech-lead`, or `delivery-lead` personas
+4. **Issue creation** → (optional) `github-issue`
+5. **Sprint** → `plan-sprint`
+6. **Execute** → `generate-status-report` → `identify-risks`
+7. **Retrospect** → `create-retrospective`
+8. **Clarify** → `requirements-clarifier` (if requirements are vague)
+9. **Orchestrate** → Use `product-owner`, `project-manager`, `tech-lead`, or `delivery-lead` personas
 
 ## Skill Catalog
 
@@ -67,6 +69,7 @@ The PRD is the single source of truth for scope — everything flows from it.
 | **Ceremony** | `plan-sprint`, `create-retrospective` |
 | **Execution** | `generate-status-report`, `identify-risks` |
 | **Analysis** | `requirements-clarifier` |
+| **GitHub Issues** | `github-issue` |
 
 ## Personas
 
