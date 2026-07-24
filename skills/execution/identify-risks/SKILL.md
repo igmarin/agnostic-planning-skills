@@ -2,11 +2,7 @@
 name: identify-risks
 type: atomic
 license: MIT
-description: >
-  Do NOT fabricate risks — every risk MUST reference a specific task or requirement as concrete evidence, then verify every likelihood and impact rating is justified by that evidence before proceeding. Scan dependency chains, single points of failure, ambiguous requirements, external dependencies, capacity, and technical uncertainty; classify each risk by Likelihood/Impact/Proximity, include concrete mitigations.
-  Language-agnostic.
-  Use when asked about risks, risk assessment, blockers, what could go wrong, or
-  to produce a risk register for a plan, PRD, ticket set, or sprint.
+description: Scan dependency chains, single points of failure, ambiguous requirements, external dependencies, capacity, and technical uncertainty. Every risk must reference a specific task/requirement as evidence. Output a risk register with likelihood, impact, and mitigations. Use for risk assessment, what could go wrong, risk register.
 metadata:
   version: 1.0.0
   user-invocable: "true"
@@ -15,67 +11,33 @@ metadata:
 
 Scan plans for risks backed by concrete evidence — not speculation.
 
-## Quick Reference
-
-- **Input:** Task list, PRD, ticket set, or sprint plan.
-- **Output:** Risk register (description, likelihood, impact, mitigation).
-- **Rule:** Every risk cites specific evidence from the plan.
-
 ## HARD-GATE
-
-```text
-DO NOT fabricate risks. Every risk MUST reference a specific task or requirement.
-DO NOT flag everything as high-risk — use the likelihood/impact matrix honestly.
-DO NOT skip mitigations — every risk needs at least one concrete mitigation.
-```
+- Every risk must cite specific evidence (task, requirement).
+- Do not flag everything high-risk; use likelihood/impact matrix honestly.
+- Provide at least one concrete mitigation per risk.
 
 ## Core Process
+1. Receive plan (tasks, tickets, PRD, sprint).
+2. Scan for six patterns: dependency chains, single points of failure, ambiguous requirements, external dependencies, capacity/resource issues, technical uncertainty.
+3. Classify each risk: Likelihood (High/Medium/Low), Impact (High/Medium/Low), Proximity (Immediate/Near-term/Future).
+4. Suggest mitigation (prevention, contingency, owner).
+5. Validate: remove risks lacking direct evidence.
+6. Output risk register.
 
-1. **Receive** — task list, PRD, ticket set, or sprint plan.
-2. **Scan risk patterns** (see Risk Patterns below) — dependency chains, external deps, ambiguity, single points of failure, capacity, technical uncertainty.
-3. **Classify** — Likelihood (High/Medium/Low), Impact (High/Medium/Low), Proximity (Immediate/Near-term/Future).
-4. **Suggest mitigations** — prevention, contingency, owner.
-5. **Validate** — cross-check each risk against the plan:
-   - Remove any risk that lacks direct evidence from the source material
-   - Flag gaps where patterns apply but no risk was identified
-   - Verify likelihood/impact ratings are justified by evidence
-6. **Output** — structured risk register.
+## Risk Patterns (six patterns)
+1. Dependency Chain (task B blocked by task A not done)
+2. Single Point of Failure (only one owner for critical item)
+3. Ambiguous Requirement (TBD, vague acceptance criteria)
+4. External Dependency (third-party API, vendor, regulatory)
+5. Capacity/Resource (team member over-allocated, holiday overlap)
+6. Technical Uncertainty (new tech, unproven integration, no spike)
 
-## Risk Patterns
-
-Apply these six patterns when scanning the plan:
-
-| # | Pattern | Signals |
-|---|---|---|
-| 1 | **Dependency Chain** | Task B cannot start until Task A completes; A is not yet done |
-| 2 | **Single Point of Failure** | Only one person owns a critical path item; no documented backup |
-| 3 | **Ambiguous Requirement** | Acceptance criteria missing, TBD placeholders, or vague verbs ("improve", "enhance") |
-| 4 | **External Dependency** | Third-party API, vendor delivery, regulatory approval, or customer sign-off required |
-| 5 | **Capacity / Resource** | Team member over-allocated; holiday or leave overlaps delivery window |
-| 6 | **Technical Uncertainty** | New technology, unproven integration, or no spike/prototype yet planned |
-
-## Concrete Example
-
-**Sample input task:** "Integrate payment gateway — assigned to Alice, go-live Friday. Vendor sandbox access not yet confirmed."
-
-**Resulting risk register row:**
-
-| ID | Risk | Likelihood | Impact | Proximity | Evidence | Mitigation |
-|----|------|-----------|--------|-----------|----------|------------|
-| R1 | Payment gateway integration blocked by missing vendor sandbox access | High | High | Immediate | Task: "Vendor sandbox access not yet confirmed" | Owner: Alice escalates to vendor by EOD Monday; contingency: mock server for internal testing until access granted |
-
-## Output Style
-
-1. **Risk Register** — `| ID | Risk | Likelihood | Impact | Proximity | Evidence | Mitigation |`
-2. **Summary** — count by severity and proximity.
-3. **Top 3 risks** — detailed mitigation recommendations.
-4. **Assumptions** — about team, timeline, or external factors.
-5. **English only** unless user requests otherwise.
+## Output
+- Risk Register: ID | Risk | Likelihood | Impact | Proximity | Evidence | Mitigation
+- Summary counts by severity and proximity.
+- Top 3 risks with detailed mitigations.
 
 ## Integration
-
-| Skill | When to chain |
-|---|---|
-| **estimate-tasks** | After estimation, assess risks from high-uncertainty tasks |
-| **generate-tasks** | After task breakdown, identify dependency risks |
-| **generate-status-report** | Include risk updates in stakeholder status reports |
+- **estimate-tasks** — high-uncertainty tasks
+- **generate-tasks** — dependency risks after task breakdown
+- **generate-status-report** — include risk updates in stakeholder reports
