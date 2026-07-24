@@ -33,9 +33,9 @@ Scan plans for risks backed by concrete evidence — not speculation.
 6. Technical Uncertainty (new tech, unproven integration, no spike)
 
 ## Output
-- Risk Register: ID | Risk | Likelihood | Impact | Proximity | Evidence | Mitigation
+- Risk Register: ID | Risk | Likelihood | Impact | Proximity | Evidence | Mitigation | Owner
 - Summary counts by severity and proximity.
-- Top 3 risks with detailed mitigations.
+- Top 3 risks with detailed mitigations (including owner).
 
 ## Integration
 - **estimate-tasks** — high-uncertainty tasks

@@ -7,14 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-- Bump `rs-guard` pin to **v1.6.0** (`bin/rs-guard.manifest`, vendored `bin/` binaries, install/smoke/pre-commit version hints).
-
 ### Added
 - New atomic skill `requirements-clarifier` at `skills/requirements-clarifier/SKILL.md` for transforming vague requests into actionable specifications.
 - `.opencode/agents/` wrappers for opencode subagent support (5 wrappers — 4 personas + 1 skill).
+- Registered `github-issue` skill in `directory.json`.
 
 ### Changed
+- Bump `rs-guard` pin to **v1.6.0** (`bin/rs-guard.manifest`, vendored `bin/` binaries, install/smoke/pre-commit version hints).
 - **Breaking:** `agents/` directory removed. Agents moved to `skills/personas/` with `type: persona` in frontmatter.
 - **Breaking:** `agents.json` removed — all entries merged into `directory.json`.
 - **Breaking:** `AGENTS.md` removed — content merged into CLAUDE.md and GEMINI.md.
@@ -27,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `docs/architecture.md` updated with new directory structure and skill types.
 - `docs/calling-skills.md` updated (agents → personas, added requirements-clarifier).
 - `docs/reference/skill-catalog.md` updated with new vocabulary and requirements-clarifier entry.
+- Trimmed `description` fields and simplified content in many SKILL.md files to meet agent description budgets.
 
 ### Fixed
 - Fixed agent dependencies syntax (from string to YAML list of hashes) in `product-owner`, `project-manager`, `tech-lead`, and `delivery-lead` agents to pass ecosystem consistency audit.
+- Added missing `Owner` column to risk register output in `skills/execution/identify-risks/SKILL.md`.
