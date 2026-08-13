@@ -2,7 +2,11 @@
 name: review-prd
 type: atomic
 license: MIT
-description: Review a PRD for completeness, testability, clarity, feasibility, scope, dependencies, and edge cases — classify findings as Critical/Suggestion/Note, cite specific sections, and provide a verdict. Use when reviewing a PRD, PRD review, validate PRD, feasibility check.
+description: >
+  Use when reviewing a PRD for completeness, testability, clarity, or
+  feasibility.
+  Trigger words: review PRD, PRD review, validate PRD, feasibility check,
+  requirements review.
 metadata:
   version: 1.0.0
   user-invocable: "true"

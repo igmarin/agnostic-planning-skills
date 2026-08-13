@@ -1,233 +1,82 @@
 # Agnostic Planning Skills
 
-![Agnostic Planning Skills Logo](https://github.com/user-attachments/assets/05860870-ec3a-4031-ac5f-b0f95e6e6bec)
-
-**Agnostic Planning Skills turns AI coding assistants into disciplined product collaborators.**
-
-> Internal planning workflow for consulting engagements, open-sourced. These skills are used by the maintainer for structured project discovery and PRD workflows. They are not a standalone product.
-
-It is a curated library of **12 language-agnostic planning skills** and **4 personas** that teach AI tools how to write and review PRDs, break down features into TDD tasks, estimate effort, identify risks, prioritize backlogs, plan sprints, run retrospectives, generate status reports, clarify requirements, manage GitHub issues, and create tracker-ready tickets — regardless of tech stack.
-
-The project is built around one non-negotiable rule:
+12 language-agnostic planning skills and 4 personas. Agents use them to write PRDs, break down work, estimate, rank a backlog, plan a sprint, run a retro, and track execution — without tying the process to a stack.
 
 ```text
 No implementation without an approved PRD. The PRD is the single source of truth for scope.
 ```
 
-That planning gate is encoded directly into the skills and personas, so they do not just produce plausible plans. They follow a repeatable product management process.
-
-## Part of the AI Skill Ecosystem
-
-This repo is one of 6 in a composable AI skill ecosystem:
-
-| Repo | Role |
-|------|------|
-| [`ruby-core-skills`](https://github.com/igmarin/ruby-core-skills) | 15 shared Ruby skills + process discipline |
-| [`rails-agent-skills`](https://github.com/igmarin/rails-agent-skills) | 28 Rails-specific skills + 9 agents |
-| [`hanakai-yaku`](https://github.com/igmarin/hanakai-yaku) | 35 Hanami/dry-rb skills + 10 agents |
-| [**`agnostic-planning-skills`**](https://github.com/igmarin/agnostic-planning-skills) | 12 planning skills + 4 personas |
-| [`agent-mcp-runtime`](https://github.com/igmarin/agent-mcp-runtime) | Rust CLI runtime (pack resolution, MCP) |
-| [`ruby-skill-bench`](https://github.com/igmarin/ruby-skill-bench) | Benchmark/eval engine |
-
-See the [Ecosystem Overview](https://github.com/igmarin/agent-mcp-runtime/blob/main/docs/ecosystem.md) for the full architecture.
-
-> Supported agent environments
->
-> [![ChatGPT](https://custom-icon-badges.demolab.com/badge/ChatGPT-74aa9c?logo=openai&logoColor=white)](#)
-> [![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=fff)](#)
-> [![Cursor](https://img.shields.io/badge/Cursor-000000?logo=cursor)](#)
-> [![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-000?logo=githubcopilot&logoColor=fff)](#)
-> [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-886FBF?logo=googlegemini&logoColor=fff)](#)
-> [![OpenCode](https://img.shields.io/badge/OpenCode-4285F4?style=for-the-badge&logoColor=white)](#)
-> [![Windsurf](https://img.shields.io/badge/Windsurf-0B100F?logo=windsurf&logoColor=fff)](#)
-
-> [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/igmarin/agnostic-planning-skills/pulls)
-> [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-> [![skills.sh](https://skills.sh/b/igmarin/agnostic-planning-skills)](https://skills.sh/igmarin/agnostic-planning-skills)
-> ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/igmarin/agnostic-planning-skills?utm_source=oss&utm_medium=github&utm_campaign=igmarin%2Fagnostic-planning-skills&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
-
-## Who This Is For
-
-| Reader | What you get |
-|--------|-------------|
-| Product Managers | AI-assisted PRD generation, backlog prioritization, and sprint planning. |
-| Tech Leads | Risk assessment, estimation quality review, and technical feasibility checks. |
-| Developers | Step-by-step task breakdown, TDD checklists, and effort estimation. |
-| Teams | Execution tracking, status reports, sprint-ready tickets with classification, and GitHub issue management. |
-
-## What Is In The Repository
-
-| Area | Purpose |
-|------|---------|
-| `skills/` | 12 language-agnostic skills across 7 categories: prd, task-management, backlog, ceremony, execution, analysis (requirements-clarifier), and issue management (github-issue). |
-| `skills/personas/` | 4 personas: `product-owner`, `project-manager`, `tech-lead`, `delivery-lead`. |
-| `docs/` | Architecture, skill structure, persona guide, templates, and reference catalog. |
-
-The skills are not long-form tutorials. They are executable instructions for AI agents: when to draft a PRD, when to stop for approval, how to break down a feature into TDD tasks, and how to classify and sequence tickets.
-
-## Start Here
-
-Agnostic Planning Skills can be invoked through chat commands:
-
-| Method | Syntax | Example |
-|--------|--------|---------|
-| **Chat Command** | `@skill-name` | `@create-prd Add Google OAuth login` |
-
-> MCP support is planned but not yet implemented. Currently, skills are invoked via chat commands (`@skill-name` in Cursor, Windsurf, Gemini CLI) or installed via `gh skill install`.
-
-**[Read the complete guide on Calling Skills and Personas](docs/calling-skills.md)** for syntax examples and when to use each method.
-
-## The Planning Pipeline
+Process skills (TDD gates, review, DDD) live in [`ruby-core-skills`](https://github.com/igmarin/ruby-core-skills). After a plan is approved, hand off to a stack pack such as [`rails-agent-skills`](https://github.com/igmarin/rails-agent-skills).
 
 ```mermaid
-graph LR
-    A[create-prd] -->|PRD approved| B[generate-tasks]
-    B --> C[plan-tickets]
-    C -->|optional| D[github-issue]
-    A -->|Direct to tickets| C
+flowchart LR
+  A[Vague ask] --> B[requirements-clarifier]
+  B --> C[create-prd]
+  C --> D{PRD approved?}
+  D -->|no| C
+  D -->|yes| E[generate-tasks]
+  E --> F[plan-tickets]
+  F -.-> G[github-issue]
 ```
-
-### For a new feature from scratch
-
-```text
-create-prd -> [gate: PRD approved] -> generate-tasks -> plan-tickets
-(optionally create GitHub issues via github-issue)
-```
-
-### The full product-owner persona lifecycle
 
 ```mermaid
-graph TD
-    A[Feature Idea] --> B["Phase 1<br/>Discovery & Clarification"]
-    B --> C["Phase 2<br/>PRD Draft"]
-    C --> D{"PRD Approved?"}
-    D -->|No| E["Phase 3<br/>Review & Revise"]
-    E --> C
-    D -->|Yes| F["Phase 4<br/>Task Estimation"]
-    F --> G["Phase 5<br/>Ticket Generation"]
-    G --> H{"Tickets Approved?"}
-    H -->|No| G
-    H -->|Yes| I["Phase 6<br/>Sprint Placement"]
-    I --> J{"Sprint Confirmed?"}
-    J -->|No| I
-    J -->|Yes| K[Ready for Development]
+flowchart TB
+  subgraph thisRepo[agnostic-planning-skills]
+    atomics[12 atomics]
+    personas[4 personas]
+  end
+  core[ruby-core-skills]
+  stack[stack pack]
+  thisRepo --> core
+  thisRepo --> stack
 ```
 
-## Skill Catalog
+Also in the same ecosystem: [`hanakai-yaku`](https://github.com/igmarin/hanakai-yaku), [`agent-mcp-runtime`](https://github.com/igmarin/agent-mcp-runtime), [`ruby-skill-bench`](https://github.com/igmarin/ruby-skill-bench).
 
-| Skill | Category | Description |
-|-------|----------|-------------|
-| `create-prd` | PRD | Generate structured Product Requirements Documents |
-| `review-prd` | PRD | Review PRDs for completeness, testability, and technical feasibility |
-| `generate-tasks` | Task Management | Break features into TDD task checklists with auto-detected paths |
-| `plan-tickets` | Task Management | Draft tracker-ready tickets with classification and sequencing |
-| `estimate-tasks` | Task Management | Assign story points, t-shirt sizes, or time estimates with confidence levels |
-| `prioritize-backlog` | Backlog | Rank backlog items by RICE, MoSCoW, value-vs-effort, or WSJF |
-| `plan-sprint` | Ceremony | Plan a sprint: select tickets, define goal, allocate capacity |
-| `create-retrospective` | Ceremony | Generate sprint retrospectives with action items |
-| `identify-risks` | Execution | Scan plans for dependency, capacity, and technical risks |
-| `generate-status-report` | Execution | Generate stakeholder status reports with honest progress tracking |
-| `requirements-clarifier` | Analysis | Transform vague requests into actionable specifications |
-| `github-issue` | GitHub Issues | Manage GitHub issues with automatic project board integration |
+## Catalog
 
-### Persona
+| Skill | Area |
+|-------|------|
+| `create-prd`, `review-prd` | PRD |
+| `generate-tasks`, `plan-tickets`, `estimate-tasks` | Task management |
+| `prioritize-backlog` | Backlog |
+| `plan-sprint`, `create-retrospective` | Ceremony |
+| `identify-risks`, `generate-status-report` | Execution |
+| `requirements-clarifier` | Analysis |
+| `github-issue` | GitHub issues |
+| `product-owner`, `project-manager`, `tech-lead`, `delivery-lead` | Personas |
 
-| Persona | Description |
-|---------|-------------|
-| `product-owner` | Planning lifecycle: Discovery → PRD → Tasks → Tickets → Sprint |
-| `project-manager` | Execution tracking: Estimation → Risks → Tracking → Status Reports |
-| `tech-lead` | Technical review: PRD Review → Feasibility → Estimation Quality → Risk Report |
-| `delivery-lead` | End-to-end pipeline: Scope → Plan → Prioritize → Sprint → Execute → Retrospect |
+Full list: [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md). Gaps: [docs/reference/gaps.md](docs/reference/gaps.md).
 
-See [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md) for the complete catalog and [docs/reference/integration-matrix.md](docs/reference/integration-matrix.md) for skill chaining.
+Name a persona when you want the whole chain: `product-owner` (scope → tickets), `tech-lead` (feasibility), `project-manager` (execution health), `delivery-lead` (PRD through retro).
 
-## How Skills Work
-
-Each skill is a single `SKILL.md` file with YAML frontmatter and a 6-section body:
-
-```text
-1. Frontmatter (YAML)       — name, description, metadata
-2. Quick Reference          — scannable table for fast lookup
-3. HARD-GATE               — non-negotiable blocking rules
-4. Core Process             — step-by-step procedure
-5. Output Style             — exact shape of artifacts
-6. Integration              — predecessor/successor skills
-```
-
-The `product-owner` persona chains skills with additional phases, hard gates, decision gates, and error recovery.
-
-## Language-Agnostic by Design
-
-This repository is designed to work with any tech stack. Skills auto-detect project conventions:
-
-- **Test command:** Inspects `package.json`, `Gemfile`, `Cargo.toml`, `Makefile`, or `pyproject.toml` — falls back to asking the user.
-- **Source directory:** Detects `src/`, `lib/`, `app/`, or asks the user.
-- **Test directory:** Detects `__tests__/`, `spec/`, `test/`, `tests/`, or mirror convention.
-- **Documentation tool:** Detects JSDoc, YARD, Sphinx, rustdoc, etc.
-
-## Install Selected Skills With GitHub CLI
-
-Requires [GitHub CLI](https://cli.github.com/) v2.90.0+ with `gh skill`.
+## Install
 
 ```bash
-# Install all skills interactively
-gh skill install igmarin/agnostic-planning-skills
-
-# Install a specific skill for the current project
-gh skill install igmarin/agnostic-planning-skills create-prd --scope project
-
-# Install a specific skill globally
-gh skill install igmarin/agnostic-planning-skills create-prd --scope user
-```
-
-## Install With skills.sh
-
-Requires [skills.sh](https://www.skills.sh/) CLI.
-
-> [!NOTE]
-> The root `SKILL.md` is the catalog orchestrator (not a standalone skill). The `--full-depth` flag ensures discovery of all nested skills under `skills/<category>/<name>/`.
-
-### Project-Level Installation (Local)
-
-To install skills for your current project workspace:
-
-```bash
-# Install ALL skills and personas
 npx skills add igmarin/agnostic-planning-skills --full-depth --all
-
-# Install a specific skill (e.g., create-prd)
-npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth
 ```
 
-### Global Installation
-
-To install skills globally for your AI coding assistant:
+Or with GitHub CLI v2.90.0+ (`gh skill`):
 
 ```bash
-# Install ALL skills and personas globally
-npx skills add igmarin/agnostic-planning-skills --full-depth --all --global
-
-# Install a specific skill globally (e.g., create-prd)
-npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
+gh skill install igmarin/agnostic-planning-skills
+gh skill install igmarin/agnostic-planning-skills create-prd --scope project
 ```
 
-## Documentation Map
+The root `SKILL.md` is the catalog, not a standalone skill. `--full-depth` is required so nested skills under `skills/<category>/<name>/` are found.
+
+## Docs
 
 | Need | Document |
 |------|----------|
-| Understand the docs system | [docs/index.md](docs/index.md) |
-| Browse all skills | [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md) |
-| Understand skill chaining | [docs/reference/integration-matrix.md](docs/reference/integration-matrix.md) |
-| Follow persona guides | [docs/persona-guide.md](docs/persona-guide.md) |
-| Understand repository structure | [docs/architecture.md](docs/architecture.md) |
-| Invoke skills and personas | [docs/calling-skills.md](docs/calling-skills.md) |
+| Host context | [AGENTS.md](AGENTS.md) |
+| How to invoke a persona | [docs/persona-guide.md](docs/persona-guide.md) |
+| Skill layout | [docs/architecture.md](docs/architecture.md) |
+| How skills chain | [docs/reference/integration-matrix.md](docs/reference/integration-matrix.md) |
 
 ## Contributing
 
-When contributing skills, personas, or docs:
-
-- Please follow the [Code of Conduct](CODE_OF_CONDUCT.md) in all interactions.
-- Check out the [Contributing Guide](CONTRIBUTING.md) for details on our development and pull request processes.
-- Keep generated artifacts in English unless a user explicitly asks for another language.
-- Preserve the PRD-gates-task-generation rule for every planning skill.
-- Keep public docs consistent with `directory.json` and the latest release.
+- Artifacts in English unless the user asks otherwise.
+- Keep the PRD-before-implementation gate.
+- `description` is when + triggers (≤ 600 chars). Procedure stays in the body.
+- Keep public docs in sync with `directory.json`.

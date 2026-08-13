@@ -3,9 +3,11 @@ name: product-owner
 type: persona
 license: MIT
 description: >
-  Product planning lifecycle with hard gates at scope confirmation (do not proceed to PRD draft without explicit user sign-off on the clarified scope), PRD approval (do not generate tasks before PRD is explicitly approved, iterate on feedback and re-draft until approved), task breakdown approval (do not generate tickets before task list is approved), and sprint placement (do not assume sprint capacity — ask for points per sprint and number of available sprints); six sequential phases discovery→PRD draft→review and revise→task estimation→ticket generation→sprint placement.
-  Language-agnostic — works with any tech stack.
-  Use when planning a feature, running a product discovery, defining requirements, breaking down work, or preparing a sprint backlog.
+  Use when planning a feature, running product discovery, defining
+  requirements, or preparing a sprint backlog. Hard gates sit between
+  phases — do not skip to tasks or tickets without approval.
+  Trigger words: product owner, PRD, discovery, requirements, task
+  breakdown, tickets, sprint backlog, scope a feature.
 metadata:
   version: 1.0.0
   user-invocable: "true"
@@ -23,7 +25,16 @@ Orchestrates end-to-end product planning: from feature idea to sprint-ready tick
 
 **Scope:** Use for features that need scoping, a PRD, and a task breakdown before development. Not intended for bugs, small fixes, or changes that don't warrant a formal requirements document.
 
-> **Approval discipline:** Every phase ends with a hard gate. No phase may be skipped. Each gate requires an explicit user signal before the next phase begins. Inline gate markers below use `🔒 Gate` for brevity.
+## HARD-GATE
+
+```text
+DO NOT skip a phase.
+DO NOT draft a PRD until the user confirms the scope summary.
+DO NOT generate tasks until the PRD is explicitly approved.
+DO NOT generate tickets until the task list is approved.
+DO NOT assume sprint capacity — ask for points per sprint and available sprints.
+Each 🔒 Gate needs an explicit user signal before the next phase.
+```
 
 ## Sub-Skills
 
@@ -174,3 +185,12 @@ Sprint 2 (capacity: 8 pts)
 📋 Tickets ready for import into your tracker
 🏁 Product Owner workflow complete
 ```
+
+## Integration
+
+| Skill | When to chain |
+|-------|---------------|
+| `requirements-clarifier` | Vague ask before Phase 1 |
+| `create-prd` | Phase 2–3 |
+| `generate-tasks` | Phase 4, after PRD approval |
+| `plan-tickets` | Phase 5, after task approval |

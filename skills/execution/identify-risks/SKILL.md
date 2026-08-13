@@ -2,7 +2,11 @@
 name: identify-risks
 type: atomic
 license: MIT
-description: Scan dependency chains, single points of failure, ambiguous requirements, external dependencies, capacity, and technical uncertainty. Every risk must reference a specific task/requirement as evidence. Output a risk register with likelihood, impact, and mitigations. Use for risk assessment, what could go wrong, risk register.
+description: >
+  Use when scanning a plan for risks or building a risk register.
+  Every risk needs evidence from a task or requirement.
+  Trigger words: risks, risk assessment, blockers, what could go
+  wrong, risk register.
 metadata:
   version: 1.0.0
   user-invocable: "true"

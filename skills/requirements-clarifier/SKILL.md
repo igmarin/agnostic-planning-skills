@@ -2,7 +2,12 @@
 name: requirements-clarifier
 type: atomic
 license: MIT
-description: Transform vague task descriptions into actionable specifications with user stories, acceptance criteria, and identified edge cases — NEVER write implementation code. Output requirements only. Use when clarifying, defining scope, refining vague requests.
+description: >
+  Use when a request is vague and needs scope, user stories, or
+  acceptance criteria. Output requirements only — no implementation
+  code.
+  Trigger words: clarify, requirements, spec, define, scope this,
+  refine, unclear task.
 metadata:
   version: 1.0.0
   user-invocable: "true"

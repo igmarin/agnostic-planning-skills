@@ -2,7 +2,11 @@
 name: generate-status-report
 type: atomic
 license: MIT
-description: Generate a stakeholder status report from task data — never fabricate progress, mark unknowns as "needs update". Includes Executive Summary (health, key accomplishment, top concern) and standard sections. Use for status report, sprint update, weekly update, project status.
+description: >
+  Use when writing a stakeholder status report, sprint update, or
+  weekly project update. Do not invent progress.
+  Trigger words: status report, sprint update, weekly update, project
+  status, stakeholder update.
 metadata:
   version: 1.0.0
   user-invocable: "true"

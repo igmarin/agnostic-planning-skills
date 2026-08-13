@@ -3,14 +3,10 @@ name: create-retrospective
 type: atomic
 license: MIT
 description: >
-  Generates a sprint retrospective from sprint data feedback and metrics —
-  cover what went well what didn't and action items, group related feedback into
-  themes, ensure every "what didn't" has at least one specific owned time-bound
-  action item, use the retrospective template when available, include Owner
-  Timeline and Linked Issue columns.
-  Language-agnostic.
-  Trigger words: retrospective, retro, sprint review, what went well, what didn't,
-  improvement items, lessons learned, sprint retrospective.
+  Use when writing a sprint retrospective from team feedback and
+  metrics.
+  Trigger words: retrospective, retro, sprint review, what went well,
+  what didn't, lessons learned, improvement items.
 metadata:
   version: 1.0.0
   user-invocable: "true"
@@ -45,34 +41,11 @@ DO assign an owner and timeline to every action item.
 4. **Draft action items** — specific, owned, time-bound. Use the template in [RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md) if available; otherwise use the minimal template below.
 5. **Review** — verify every "what didn't" maps to an action item.
 
-## Reference Template
+## Output Style
 
-Use **[RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md)** if bundled; otherwise use this minimal fallback:
+Use **[RETROSPECTIVE_TEMPLATE.md](./RETROSPECTIVE_TEMPLATE.md)** when bundled.
 
-```
-## Sprint [Name/Number] Retrospective
-**Dates:** YYYY-MM-DD – YYYY-MM-DD  |  **Goal:** <goal text>  |  **Goal Met:** Yes / No / Partial
-
-### What Went Well
-- **[Theme: CI Pipeline]** Automated tests caught three regressions before merge — saved estimated 4 h of manual QA.
-
-### What Didn't
-- **[Theme: Unclear Requirements]** Two tickets were blocked mid-sprint due to missing acceptance criteria → see Action #1.
-
-### Action Items
-| # | Action | Owner | Timeline | Linked Issue |
-|---|--------|-------|----------|--------------|
-| 1 | Add acceptance criteria checklist to Definition of Ready | Product Owner | Next sprint kickoff | PROJ-42 |
-
-### Metrics
-- Velocity: 34 pts committed / 28 pts completed (82%)
-- Carried over: 2 tickets
-
-### Kudos
-- Alice for unblocking the auth service on short notice.
-```
-
-Section order: header → What Went Well → What Didn't → Action Items → Metrics → Kudos. Use English unless the user requests otherwise.
+Section order: header → What Went Well → What Didn't → Action Items → Metrics → Kudos. Use English unless the user requests otherwise. Every "what didn't" maps to an action item with Owner, Timeline, and Linked Issue.
 
 ## Integration
 

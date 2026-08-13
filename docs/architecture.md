@@ -10,31 +10,31 @@ Conventions and structure for every `SKILL.md` in this library.
 
 ```text
 agnostic-planning-skills/
-├── docs/                    # Documentation
+├── docs/
 │   ├── architecture.md
 │   ├── persona-guide.md
 │   ├── calling-skills.md
 │   └── reference/
 │       ├── skill-catalog.md
-│       └── integration-matrix.md
-├── skills/                  # Categorized skills and personas
-│   ├── prd/                 # PRD creation skills (atomic)
-│   │   └── create-prd/
-│   ├── task-management/     # Task and ticket skills (atomic)
-│   │   ├── generate-tasks/
-│   │   └── plan-tickets/
-│   ├── requirements-clarifier/ # Analysis skill (atomic)
-│   └── personas/            # Role-based orchestrators (persona)
-│       └── product-owner/
-│           └── SKILL.md
-├── bin/                     # Pre-built rs-guard binaries for local review
-│   ├── rs-guard-macos-arm64 # macOS arm64 (v1.6.0)
-│   ├── rs-guard-linux-x64   # Linux x86_64 (v1.6.0)
-│   └── CHECKSUMS.txt        # SHA-256 checksums and provenance
-├── hooks/                   # Git hook scripts
-│   ├── pre-commit-rs-guard  # Advisory pre-commit review (rs-guard)
-│   └── hooks.json           # Hook wiring for agent runtimes
-├── SKILL.md                 # Root orchestrator
+│       ├── integration-matrix.md
+│       └── gaps.md
+├── skills/
+│   ├── prd/                 # create-prd, review-prd
+│   ├── task-management/     # generate-tasks, plan-tickets, estimate-tasks
+│   ├── backlog/             # prioritize-backlog
+│   ├── ceremony/            # plan-sprint, create-retrospective
+│   ├── execution/           # generate-status-report, identify-risks
+│   ├── requirements-clarifier/
+│   ├── github-issue/
+│   └── personas/            # product-owner, project-manager, tech-lead, delivery-lead
+├── scripts/                 # validate-skills.sh, rs-guard helpers
+├── bin/                     # Pre-built rs-guard binaries
+├── hooks/
+├── directory.json           # Canonical skill registry
+├── skills.sh.json
+├── AGENTS.md                # Host-context source
+├── CLAUDE.md                # Thin stub → AGENTS.md
+├── SKILL.md                 # Root catalog
 └── README.md
 ```
 
@@ -47,19 +47,24 @@ Every skill follows this structure:
 ```yaml
 ---
 name: skill-name
+type: atomic          # atomic | persona | catalog
+license: MIT
 description: >
-  Use when [concrete trigger conditions]. Covers [key topics].
-  [Additional trigger words for discovery].
+  Use when [concrete trigger]. [One gate only if skipping the body is dangerous].
+  Trigger words: [nouns, verbs, symptoms].
 ---
 ```
 
 **Rules:**
 
-- `name`: kebab-case, matches directory name
-- `description`: starts with "Use when...", third person
-- Include concrete trigger words (error symptoms, tools, scenarios)
-- Do NOT summarize the workflow (prevents model from skipping the skill body)
-- Max 1024 characters total for frontmatter
+- `name`: kebab-case, **must equal** the directory name
+- `type`: `atomic`, `persona`, or `catalog` only
+- `description`: **when to use + trigger words**. First sentence = when. Body = how.
+- Target ≤ 600 characters (folded). Hard fail at 1024 (Agent Skills spec).
+- Do **not** summarize the workflow, hard-gate list, output shape, or taxonomy in YAML
+- One gate in YAML only if skipping the body would be dangerous (draft-only, no implementation)
+- HITL / HARD-GATE stay in the body
+- Frontmatter as a whole is not a 1024-character budget — only `description` is
 
 ### 2. Title and Core Principle
 
@@ -137,21 +142,21 @@ Table of related skills and when to chain them:
 
 ## Frontmatter Optimization (CSO)
 
-"Claude Search Optimization" — how the description helps AI agents find the right skill:
+How the description helps agents find the right skill:
 
 1. Start with "Use when..." (activation trigger)
-2. Include concrete nouns: "controller", "migration", "factory"
-3. Include action verbs: "reviewing", "creating", "fixing"
-4. Include symptoms: "N+1", "fat model", "flaky tests"
-5. Do NOT summarize the workflow (the model will skip reading the body)
+2. Include concrete nouns and action verbs
+3. End with `Trigger words:` for discovery
+4. Do NOT summarize the workflow (the model will skip the body)
+5. Target ≤ 600 characters; hard fail at 1024
 
 **Good:**
 
 ```yaml
 description: >
   Use when generating a Product Requirements Document, defining feature scope,
-  or writing a product spec. Covers goals, user stories, functional requirements,
-  success metrics, and open questions.
+  or writing a product spec.
+  Trigger words: PRD, product requirements, plan a feature, write a spec.
 ```
 
 **Bad:**

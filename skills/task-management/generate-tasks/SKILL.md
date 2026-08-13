@@ -2,12 +2,24 @@
 name: generate-tasks
 type: atomic
 license: MIT
-description: Break a feature into implementation tasks — always create a feature branch first, detect test command and directories, write failing test → implement → pass (TDD), and save to /tasks/tasks-[name].md. Use for task list, implementation plan, feature breakdown, TDD tasks.
+description: >
+  Use when breaking a feature or approved PRD into an implementation
+  task list.
+  Trigger words: task list, implementation plan, feature breakdown,
+  generate tasks, TDD tasks, break down this PRD.
 metadata:
   version: 1.0.0
   user-invocable: "true"
 ---
 # Generating a Task List from Requirements
+
+## HARD-GATE
+
+```text
+DO NOT skip Task 0.0 (create the feature branch).
+DO NOT combine TDD sub-tasks into a single task.
+DO NOT generate tasks from an unapproved PRD.
+```
 
 ## Quick Reference
 - Task 0.0: create feature branch.

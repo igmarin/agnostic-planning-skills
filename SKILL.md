@@ -2,13 +2,11 @@
 name: agnostic-planning-skills
 type: catalog
 description: >
-  Master orchestrator for the Agnostic Planning Skills library. Use to discover and
-  activate 11 language-agnostic skills and 4 personas for product planning,
-  task breakdown, estimation, risk assessment, ticket generation, backlog
-  prioritization, sprint planning, retrospectives, requirements clarification,
-  GitHub issue management, and status reporting. Personas guide end-to-end workflows.
-  prd, planning, tasks, tickets, estimation, risks, status, backlog, sprint,
-  retrospective, tdd, agile, product management, requirements, clarification.
+  Use when discovering which planning skill or persona to run.
+  Covers PRDs, tasks, tickets, backlog, sprint, retro, status, risks,
+  GitHub issues, and the four personas.
+  Trigger words: planning, PRD, tasks, tickets, estimation, risks,
+  status, backlog, sprint, retrospective, agile, product management.
 metadata:
   internal: true
 ---

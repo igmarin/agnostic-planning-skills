@@ -8,26 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- New atomic skill `requirements-clarifier` at `skills/requirements-clarifier/SKILL.md` for transforming vague requests into actionable specifications.
-- `.opencode/agents/` wrappers for opencode subagent support (5 wrappers — 4 personas + 1 skill).
-- Registered `github-issue` skill in `directory.json`.
+- `scripts/validate-skills.sh` and `.github/workflows/ci.yml` — fail on missing description, description > 600 chars, `SKILL.md` > 500 lines, and `directory.json` ↔ disk drift.
+- `docs/reference/gaps.md` — missing skills, eval ownership, description-strategy conflict with `ruby-core-skills`, CI notes.
 
 ### Changed
-- Bump `rs-guard` pin to **v1.6.0** (`bin/rs-guard.manifest`, vendored `bin/` binaries, install/smoke/pre-commit version hints).
-- **Breaking:** `agents/` directory removed. Agents moved to `skills/personas/` with `type: persona` in frontmatter.
-- **Breaking:** `agents.json` removed — all entries merged into `directory.json`.
-- **Breaking:** `AGENTS.md` removed — content merged into CLAUDE.md and GEMINI.md.
-- **Breaking:** `directory.json` version bumped to `4.0.0`.
-- All 10 pre-existing atomic skills now have `type: atomic` in frontmatter.
-- Root `SKILL.md` now has `type: catalog` and updated references (agents → personas).
-- `README.md` updated to reflect 11 skills + 4 personas.
-- `CLAUDE.md` and `GEMINI.md` updated with new skill/persona vocabulary.
-- `docs/agent-guide.md` renamed to `docs/persona-guide.md` with updated terminology.
-- `docs/architecture.md` updated with new directory structure and skill types.
-- `docs/calling-skills.md` updated (agents → personas, added requirements-clarifier).
-- `docs/reference/skill-catalog.md` updated with new vocabulary and requirements-clarifier entry.
-- Trimmed `description` fields and simplified content in many SKILL.md files to meet agent description budgets.
+- Description contract: when + triggers, target ≤ 600 / spec ceiling 1024. Locked in `docs/architecture.md`. Workflow stays in the body.
+- Slimmed all 17 `SKILL.md` descriptions (personas first). Most now ~150–300 chars.
+- `AGENTS.md` is the single host-context source. `CLAUDE.md` is a stub.
+- README, persona guide, and skill catalog each hold one catalog — not three copies.
+- `skills.sh.json` now groups `requirements-clarifier` and the four personas.
+- `github-issue` has `type: atomic` and points at `references/gh-commands.md`.
 
 ### Fixed
-- Fixed agent dependencies syntax (from string to YAML list of hashes) in `product-owner`, `project-manager`, `tech-lead`, and `delivery-lead` agents to pass ecosystem consistency audit.
-- Added missing `Owner` column to risk register output in `skills/execution/identify-risks/SKILL.md`.
+- Architecture doc no longer treats 1024 as a budget for the entire frontmatter.
+- Docs no longer say “11 skills” (there are 12 atomics + 4 personas).
+- Agent dependencies syntax in personas (YAML list of hashes).
+- Missing `Owner` column on the `identify-risks` register.

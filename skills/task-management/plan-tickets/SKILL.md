@@ -3,7 +3,10 @@ name: plan-tickets
 type: atomic
 license: MIT
 description: >
-  Draft and classify structured tickets with area prefixes and five-section format (Summary, Background, Acceptance Criteria, Dependencies, Technical Notes), plus a readiness checklist. Draft-only by default; create issues only after explicit user approval. Use when breaking a plan into tickets, creating Jira/GitHub issues, classifying work items.
+  Use when breaking a plan into tracker tickets or classifying work
+  items. Draft-only unless the user explicitly asks to create issues.
+  Trigger words: create tickets, Jira, Linear, GitHub Issues, classify
+  work items, ticket drafts.
 metadata:
   version: 1.0.0
   user-invocable: "true"

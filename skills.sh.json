@@ -48,6 +48,23 @@
       "skills": [
         "github-issue"
       ]
+    },
+    {
+      "title": "Analysis",
+      "description": "Skills for clarifying vague requests into specifications.",
+      "skills": [
+        "requirements-clarifier"
+      ]
+    },
+    {
+      "title": "Personas",
+      "description": "Role orchestrators that chain atomic skills with approval gates.",
+      "skills": [
+        "product-owner",
+        "project-manager",
+        "tech-lead",
+        "delivery-lead"
+      ]
     }
   ]
 }

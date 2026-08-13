@@ -1,10 +1,23 @@
 ---
 name: github-issue
+type: atomic
+license: MIT
 description: >
-  Use to create, track, or manage GitHub issues with automatic project board integration (V2 and Classic), milestone tracking, and stage lifecycle (todo → in-progress → in-review → done). Covers issue creation, status updates, project board moves, and completion workflows.
+  Use when creating, updating, or closing GitHub issues, or moving
+  them on a project board. Confirm with the user before creating an
+  issue.
+  Trigger words: github issue, create issue, track issue, project
+  board, milestone.
 ---
 
 # GitHub Issue Management
+
+## HARD-GATE
+
+```text
+DO NOT create an issue without explicit user confirmation.
+DO NOT assume tracker credentials, project fields, or sprint IDs.
+```
 
 ## Prerequisites
 - `gh` CLI installed and authenticated.
@@ -40,4 +53,12 @@ Any stage can revert to `todo` if blocked.
 4. Move on project board (V2/Classic) using GraphQL mutations.
 5. Confirm update.
 
-For exact GraphQL queries and project board integration details, see PROJECTS_REFERENCE.md (loaded on demand).
+For exact GraphQL queries and project board integration details, see [references/gh-commands.md](references/gh-commands.md) (loaded on demand).
+
+## Integration
+
+| Skill | When to chain |
+|-------|---------------|
+| `plan-tickets` | Draft tickets before creating issues |
+| `plan-sprint` | After issues exist, select a sprint |
+

@@ -27,7 +27,7 @@ Every skill directory must contain a `SKILL.md` file with valid YAML frontmatter
 **Suggestions:**
 
 - `license` field present (e.g. `license: MIT`)
-- `description` should be a single well-formed paragraph with concrete trigger keywords (PRD, sprint, backlog, estimation, etc.)
+- `description` is when to use + trigger words (target ≤ 600 characters; spec ceiling 1024). Do not pack the workflow, hard gates, or output shape into YAML.
 - `metadata.user-invocable` present for skills the user can invoke directly
 
 ---

@@ -2,7 +2,11 @@
 name: create-prd
 type: atomic
 license: MIT
-description: Draft a clear actionable PRD from a feature — focus on what/why, no code, save to /tasks/prd-SLUG.md. Use when the user wants a PRD, product requirements, plan a feature, write a spec.
+description: >
+  Use when the user wants a PRD, product requirements, a feature spec,
+  or a written scope. No implementation code.
+  Trigger words: PRD, product requirements, plan a feature, write a spec,
+  requirements document.
 metadata:
   version: 1.0.0
   user-invocable: "true"

@@ -90,6 +90,7 @@ The review criteria live in `.github/review-prompt.md`. It checks skill YAML fro
 
 - All generated artifacts in English unless the user explicitly requests another language
 - Skill names match directory names (kebab-case)
-- Frontmatter `description` starts with action-oriented trigger language
+- Frontmatter `description` is when + triggers (≤ 600 chars). Do not pack the workflow into YAML. See [docs/architecture.md](docs/architecture.md).
 - HARD-GATE rules go in fenced code blocks
 - Keep public docs consistent with `directory.json`
+- Run `./scripts/validate-skills.sh` before opening a PR

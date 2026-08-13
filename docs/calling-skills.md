@@ -90,30 +90,4 @@ npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth --global
 
 ---
 
-## Available Skills and Personas
-
-### Skills (12)
-
-| Name | Category | Description |
-|------|----------|-------------|
-| `create-prd` | PRD | Generate Product Requirements Documents |
-| `review-prd` | PRD | Review PRDs for completeness and feasibility |
-| `generate-tasks` | Task Management | Break features into TDD task checklists |
-| `plan-tickets` | Task Management | Draft tracker-ready tickets |
-| `estimate-tasks` | Task Management | Assign effort estimates with confidence levels |
-| `prioritize-backlog` | Backlog | Rank items using RICE, MoSCoW, or value-vs-effort |
-| `plan-sprint` | Ceremony | Select tickets, define goal, allocate capacity |
-| `create-retrospective` | Ceremony | Generate sprint retrospectives with action items |
-| `identify-risks` | Execution | Scan plans for dependency and capacity risks |
-| `generate-status-report` | Execution | Generate stakeholder status reports |
-| `requirements-clarifier` | Analysis | Transform vague requests into actionable specifications |
-| `github-issue` | GitHub Issues | Create, track, and manage GitHub issues with project boards |
-
-### Personas (4)
-
-| Name | Phases | Focus |
-|------|--------|-------|
-| `product-owner` | Discovery → PRD → Tasks → Tickets → Sprint | Scope & planning |
-| `project-manager` | Estimation → Risks → Tracking → Reports | Execution tracking |
-| `tech-lead` | PRD Review → Feasibility → Estimation Quality → Report | Technical feasibility |
-| `delivery-lead` | Scope → Plan → Prioritize → Sprint → Execute → Retrospect | End-to-end pipeline |
+Names and paths: [skill catalog](reference/skill-catalog.md).

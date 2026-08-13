@@ -2,7 +2,7 @@
 
 Instructions for AI coding agents working in this repository.
 
-Human-facing overview: [README.md](README.md). Architecture details: [docs/architecture.md](docs/architecture.md). Claude-specific loader notes: [CLAUDE.md](CLAUDE.md).
+Human-facing overview: [README.md](README.md). Architecture details: [docs/architecture.md](docs/architecture.md). Host stubs: [CLAUDE.md](CLAUDE.md) points here.
 
 ---
 
@@ -71,21 +71,12 @@ There is no app build. Validation is structural and review-based.
 ### Validate skill registry
 
 ```bash
-# directory.json must be valid JSON
+# Full catalog check (JSON, disk sync, description ≤ 600, body ≤ 500 lines)
+./scripts/validate-skills.sh
+
+# directory.json / skills.sh.json must be valid JSON
 python3 -m json.tool directory.json > /dev/null
-
-# skills.sh.json must be valid JSON
 python3 -m json.tool skills.sh.json > /dev/null
-
-# Every path in directory.json must exist
-python3 -c "
-import json
-from pathlib import Path
-d = json.loads(Path('directory.json').read_text())
-missing = [f\"{n}: {m['path']}\" for n, m in d['skills'].items() if not Path(m['path']).is_file()]
-assert not missing, missing
-print(f\"OK: {len(d['skills'])} skills registered\")
-"
 ```
 
 ### Local AI review (rs-guard)
@@ -198,9 +189,10 @@ Rules:
 
 - `description` starts with action-oriented trigger language (`Use when…` / `Use for…` / `Trigger words:`)
 - Do **not** summarize the full workflow in `description` (forces body skip)
-- Frontmatter max ~1024 characters
+- `description` target ≤ 600 characters; hard fail at 1024 (Agent Skills spec)
 - `type` must be `atomic`, `persona`, or `catalog` only
 - HARD-GATE rules in fenced blocks or a `## HARD-GATE` section
+- Contract details: [docs/architecture.md](docs/architecture.md)
 - Prefer `## Quick Reference`, `## Common Mistakes`, `## Integration` tables
 - No placeholders: `TODO`, `FIXME`, `[INSERT]`, `<your content here>`
 
@@ -265,4 +257,5 @@ Document hard gates, skill registry rules, and rs-guard validation.
 - [ ] No placeholder text
 - [ ] Cross-skill links use canonical names
 - [ ] `python3 -m json.tool directory.json` succeeds
+- [ ] `./scripts/validate-skills.sh` succeeds
 - [ ] Staged changes reviewed with rs-guard when API key available

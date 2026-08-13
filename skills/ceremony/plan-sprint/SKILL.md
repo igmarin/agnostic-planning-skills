@@ -3,15 +3,10 @@ name: plan-sprint
 type: atomic
 license: MIT
 description: >
-  Plans a sprint by selecting tickets from a prioritized backlog based on team
-  capacity and historical velocity — start from top stop at ≤80% capacity,
-  define a single sprint goal that all selected tickets support, use
-  theoretical_capacity × 0.6 when no history or use the most recent sprint for
-  declining trends, produce a table with Rank Ticket Estimate Confidence Notes,
-  and use the capacity heuristics section when data is unavailable.
-  Language-agnostic — works with any tracker or estimation framework.
-  Trigger words: plan sprint, sprint planning, sprint goal, sprint capacity,
-  what should we work on this sprint, sprint backlog.
+  Use when selecting tickets for a sprint from a prioritized backlog,
+  setting a sprint goal, or allocating capacity.
+  Trigger words: plan sprint, sprint planning, sprint goal, sprint
+  capacity, sprint backlog, what should we work on this sprint.
 metadata:
   version: 1.0.0
   user-invocable: "true"
@@ -74,32 +69,7 @@ DO set a single, clear sprint goal that every selected ticket supports.
 5. **Deferred** — top 3 items that didn't fit, for next sprint visibility.
 6. **English only** unless user requests otherwise.
 
-## Example Sprint Plan
-
-```
-Sprint 14 | 2025-08-04 → 2025-08-15 | 10 days | Team: 4 engineers
-Capacity: 4 × 10 × 6h × 0.8 = 192h | Velocity baseline: 38 pts
-
-Sprint Goal: Enable customers to reset their own passwords without support intervention.
-
-| Rank | Ticket  | Estimate | Confidence | Notes                        |
-|------|---------|----------|------------|------------------------------|
-| 1    | AUTH-42 | 8 pts    | High       | Core reset flow              |
-| 2    | AUTH-43 | 5 pts    | High       | Email token service          |
-| 3    | AUTH-44 | 3 pts    | High       | Rate-limiting middleware     |
-| 4    | UI-88   | 5 pts    | Medium     | Reset UI — design ready      |
-| 5    | AUTH-47 | 5 pts    | Medium     | Audit logging                |
-| 6    | TEST-12 | 3 pts    | High       | E2E tests for reset flow     |
-
-Total committed: 29 pts (76% of velocity — within 80% cap)
-Buffer: 9 pts (24%)
-Stretch goal: AUTH-50 (3 pts) — token expiry config, pull in if buffer allows.
-
-Deferred (top candidates for Sprint 15):
-1. AUTH-51 — SSO integration (13 pts) — too large, split first.
-2. UI-90  — Account settings redesign (8 pts) — blocked on design review.
-3. PERF-05 — Login latency optimisation (5 pts) — lower priority this cycle.
-```
+Worked example: [assets/example-sprint-plan.md](assets/example-sprint-plan.md).
 
 ## Integration
 
