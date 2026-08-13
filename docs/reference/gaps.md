@@ -21,7 +21,6 @@ Do not add these in the same change as a quality pass.
 | Host context | `AGENTS.md` is the source. `CLAUDE.md` is a stub. `GEMINI.md` is absent. |
 | Evals | No `personal-evals/` in this repo. Do not import core or rails evals. |
 | `rs-guard` on Dependabot PRs | That job needs `DEEPSEEK_API_KEY`. Missing secret on fork/Dependabot PRs is GitHub, not a pack bug. Do not “fix” with `pull_request_target`. |
-| `docs/04-flatten-agents-into-skills.md` | Historical. Leave it. |
 | `.claude/worktrees/` | Leftover copies if present. Not in `directory.json`. Ignore. |
 
 ## Description strategy conflict

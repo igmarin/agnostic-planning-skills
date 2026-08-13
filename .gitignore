@@ -1,18 +1,7 @@
 .DS_Store
-evals/
-# Public root-level skill. Override common global build/ ignores.
-!build/
-!build/SKILL.md
-LEAN-CTX.md
-AGENTS.md.lean-ctx.bak
-
-# Plugin manifests (required by CI - shared)
-# .cursor-plugin/ and .windsurf-plugin/ are NOT ignored - CI needs these
 
 # Node
 node_modules/
-.windsurfrules
-.markdownlint.yaml
 
 # IDE / AI assistant configs (personal, not shared)
 .crush/
@@ -22,15 +11,12 @@ node_modules/
 .gemini-plugin/
 .cursor/
 .windsurf/
-tmp/
-.lean-ctx/
-lean-ctx/
 .claude/
 .antigravitycli/
 .agents/
-evals/
-private-evals/
-docs/skill-description-strategy.md
+tmp/
+
+# Local review artifacts
 .rs-guard/
 report.json
 review-result.txt
@@ -38,4 +24,3 @@ rs-guard-metrics.json
 /rs-guard
 rs-guard-x86_64-unknown-linux-gnu
 rs-guard-x86_64-unknown-linux-gnu.sha256
-.rs-guard/cache/

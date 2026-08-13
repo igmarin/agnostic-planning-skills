@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `skills.sh.json` now groups `requirements-clarifier` and the four personas.
 - `github-issue` has `type: atomic` and points at `references/gh-commands.md`.
 
+### Removed
+- `merge-to-main.sh` — unused local merge shortcut.
+- `docs/04-flatten-agents-into-skills.md` — finished migration plan, now stale.
+- `skills/github-issue/README.md` and `setup.sh` — leftover OpenCode install wrappers.
+
 ### Fixed
 - Architecture doc no longer treats 1024 as a budget for the entire frontmatter.
 - Docs no longer say “11 skills” (there are 12 atomics + 4 personas).
