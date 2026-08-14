@@ -18,6 +18,9 @@ tmp/
 
 # Local review artifacts
 .rs-guard/
+
+# skills.sh install lockfile (regenerated per-machine by `npx skills add`)
+skills-lock.json
 report.json
 review-result.txt
 rs-guard-metrics.json

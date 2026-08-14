@@ -29,3 +29,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Docs no longer say “11 skills” (there are 12 atomics + 4 personas).
 - Agent dependencies syntax in personas (YAML list of hashes).
 - Missing `Owner` column on the `identify-risks` register.
+- Install docs now make the `--full-depth` requirement explicit and document the interactive picker (`npx skills add` without `--all`). Without `--full-depth`, the root catalog `SKILL.md` short-circuits discovery and only 1 skill is found.

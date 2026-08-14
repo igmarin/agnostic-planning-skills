@@ -65,14 +65,19 @@ gh skill install igmarin/agnostic-planning-skills
 
 ### Via skills.sh
 
-> [!NOTE]
-> The root `SKILL.md` is the catalog orchestrator (not a standalone skill). The `--full-depth` flag ensures discovery of all nested skills under `skills/<category>/<name>/`.
+> [!IMPORTANT]
+> **`--full-depth` is required.** The root `SKILL.md` is a catalog (`type: catalog`), not a standalone skill. Without `--full-depth`, the `skills` CLI treats that root file as the only skill for the repo and stops — you get 1 skill (the catalog) instead of all 16. `--full-depth` makes the CLI recurse into `skills/<category>/<name>/`.
+>
+> Without `--all`, the CLI opens an interactive multi-select picker listing all 16 skills. Omit `--all` when you want to choose a subset.
 
 #### Project-Level (Local) Installation
 To install skills for your current project workspace:
 ```bash
-# Install ALL skills and personas
+# Install ALL skills and personas (non-interactive)
 npx skills add igmarin/agnostic-planning-skills --full-depth --all
+
+# Interactive: pick which skills to install (multi-select picker)
+npx skills add igmarin/agnostic-planning-skills
 
 # Install a specific skill (e.g., create-prd)
 npx skills add igmarin/agnostic-planning-skills@create-prd --full-depth
