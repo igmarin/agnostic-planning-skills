@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `docs/reference/gaps.md` — missing skills, eval ownership, description-strategy conflict with `ruby-core-skills`, CI notes.
 
 ### Changed
+- `requirements-clarifier` moved to `skills/analysis/` and `github-issue` moved to `skills/github-issues/` so all 16 skills follow the uniform `skills/<category>/<name>/SKILL.md` layout. Aligns the filesystem with the existing `skills.sh.json` groupings. Updated `directory.json`, AGENTS.md, architecture, and skill-catalog paths.
 - Description contract: when + triggers, target ≤ 600 / spec ceiling 1024. Locked in `docs/architecture.md`. Workflow stays in the body.
 - Slimmed all 17 `SKILL.md` descriptions (personas first). Most now ~150–300 chars.
 - `AGENTS.md` is the single host-context source. `CLAUDE.md` is a stub.

@@ -24,8 +24,8 @@ agnostic-planning-skills/
 │   ├── backlog/             # prioritize-backlog
 │   ├── ceremony/            # plan-sprint, create-retrospective
 │   ├── execution/           # generate-status-report, identify-risks
-│   ├── requirements-clarifier/
-│   ├── github-issue/
+│   ├── analysis/            # requirements-clarifier
+│   ├── github-issues/       # github-issue
 │   └── personas/            # product-owner, project-manager, tech-lead, delivery-lead
 ├── scripts/                 # validate-skills.sh, rs-guard helpers
 ├── bin/                     # Pre-built rs-guard binaries

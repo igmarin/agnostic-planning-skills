@@ -35,10 +35,10 @@
       "path": "skills/execution/identify-risks/SKILL.md"
     },
     "requirements-clarifier": {
-      "path": "skills/requirements-clarifier/SKILL.md"
+      "path": "skills/analysis/requirements-clarifier/SKILL.md"
     },
     "github-issue": {
-      "path": "skills/github-issue/SKILL.md"
+      "path": "skills/github-issues/github-issue/SKILL.md"
     },
     "product-owner": {
       "path": "skills/personas/product-owner/SKILL.md"

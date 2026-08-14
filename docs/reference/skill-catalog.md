@@ -14,8 +14,8 @@
 | `create-retrospective` | atomic | Ceremony | Writing a sprint retro | `skills/ceremony/create-retrospective/SKILL.md` |
 | `identify-risks` | atomic | Execution | Building a risk register | `skills/execution/identify-risks/SKILL.md` |
 | `generate-status-report` | atomic | Execution | Writing a stakeholder status update | `skills/execution/generate-status-report/SKILL.md` |
-| `requirements-clarifier` | atomic | Analysis | Turning a vague ask into requirements | `skills/requirements-clarifier/SKILL.md` |
-| `github-issue` | atomic | GitHub issues | Creating or updating GitHub issues | `skills/github-issue/SKILL.md` |
+| `requirements-clarifier` | atomic | Analysis | Turning a vague ask into requirements | `skills/analysis/requirements-clarifier/SKILL.md` |
+| `github-issue` | atomic | GitHub issues | Creating or updating GitHub issues | `skills/github-issues/github-issue/SKILL.md` |
 | `product-owner` | persona | Personas | Discovery through sprint-ready tickets | `skills/personas/product-owner/SKILL.md` |
 | `project-manager` | persona | Personas | Estimates, risks, and status | `skills/personas/project-manager/SKILL.md` |
 | `tech-lead` | persona | Personas | Technical go/no-go on a PRD | `skills/personas/tech-lead/SKILL.md` |

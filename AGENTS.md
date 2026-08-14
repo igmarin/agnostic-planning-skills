@@ -53,8 +53,8 @@ When *editing this repo*: you are authoring skill instructions and docs — foll
 │   ├── backlog/
 │   ├── ceremony/
 │   ├── execution/
-│   ├── requirements-clarifier/
-│   ├── github-issue/
+│   ├── analysis/             # requirements-clarifier
+│   ├── github-issues/        # github-issue
 │   └── personas/             # product-owner, project-manager, tech-lead, delivery-lead
 ├── docs/                     # Architecture, persona guide, catalogs
 ├── bin/                      # Bundled rs-guard binaries
@@ -129,8 +129,8 @@ Use these names exactly (from `directory.json`):
 | `create-retrospective` | atomic | `skills/ceremony/create-retrospective/SKILL.md` |
 | `generate-status-report` | atomic | `skills/execution/generate-status-report/SKILL.md` |
 | `identify-risks` | atomic | `skills/execution/identify-risks/SKILL.md` |
-| `requirements-clarifier` | atomic | `skills/requirements-clarifier/SKILL.md` |
-| `github-issue` | atomic | `skills/github-issue/SKILL.md` |
+| `requirements-clarifier` | atomic | `skills/analysis/requirements-clarifier/SKILL.md` |
+| `github-issue` | atomic | `skills/github-issues/github-issue/SKILL.md` |
 | `product-owner` | persona | `skills/personas/product-owner/SKILL.md` |
 | `project-manager` | persona | `skills/personas/project-manager/SKILL.md` |
 | `tech-lead` | persona | `skills/personas/tech-lead/SKILL.md` |
