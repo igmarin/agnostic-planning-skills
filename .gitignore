@@ -24,3 +24,9 @@ rs-guard-metrics.json
 /rs-guard
 rs-guard-x86_64-unknown-linux-gnu
 rs-guard-x86_64-unknown-linux-gnu.sha256
+
+# AI code intelligence artifacts
+.codegraph/
+graphify-out/
+repomix-output.xml
+repomix-output.md
