@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `docs/reference/gaps.md` — missing skills, eval ownership, description-strategy conflict with `ruby-core-skills`, CI notes.
 
 ### Changed
-- `requirements-clarifier` moved to `skills/analysis/` and `github-issue` moved to `skills/github-issues/` so all 16 skills follow the uniform `skills/<category>/<name>/SKILL.md` layout. Aligns the filesystem with the existing `skills.sh.json` groupings. Updated `directory.json`, AGENTS.md, architecture, and skill-catalog paths.
+- Flattened skills to `skills/<name>/SKILL.md` so `npx skills add` can pick all or one. Catalog moved from root `SKILL.md` to `skills/agnostic-planning-skills/`.
 - Description contract: when + triggers, target ≤ 600 / spec ceiling 1024. Locked in `docs/architecture.md`. Workflow stays in the body.
 - Slimmed all 17 `SKILL.md` descriptions (personas first). Most now ~150–300 chars.
 - `AGENTS.md` is the single host-context source. `CLAUDE.md` is a stub.
@@ -30,4 +30,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Docs no longer say “11 skills” (there are 12 atomics + 4 personas).
 - Agent dependencies syntax in personas (YAML list of hashes).
 - Missing `Owner` column on the `identify-risks` register.
-- Install docs now make the `--full-depth` requirement explicit and document the interactive picker (`npx skills add` without `--all`). Without `--full-depth`, the root catalog `SKILL.md` short-circuits discovery and only 1 skill is found.
+- `validate-skills.sh` no longer hangs on version-manager Python shims.

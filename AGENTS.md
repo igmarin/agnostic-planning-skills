@@ -44,18 +44,9 @@ When *editing this repo*: you are authoring skill instructions and docs — foll
 .
 ├── AGENTS.md                 # This file (agent operating manual)
 ├── CLAUDE.md                 # Claude Code discovery/invocation notes
-├── SKILL.md                  # Root catalog / orchestrator entry
 ├── directory.json            # Canonical skill registry (required on skill changes)
 ├── skills.sh.json            # skills.sh groupings for marketplace UI
-├── skills/                   # All skills and personas
-│   ├── prd/
-│   ├── task-management/
-│   ├── backlog/
-│   ├── ceremony/
-│   ├── execution/
-│   ├── analysis/             # requirements-clarifier
-│   ├── github-issues/        # github-issue
-│   └── personas/             # product-owner, project-manager, tech-lead, delivery-lead
+├── skills/<name>/SKILL.md    # Flat layout (catalog, atomics, personas)
 ├── docs/                     # Architecture, persona guide, catalogs
 ├── bin/                      # Bundled rs-guard binaries
 ├── hooks/                    # pre-commit-rs-guard (advisory)
@@ -119,22 +110,22 @@ Use these names exactly (from `directory.json`):
 
 | Name | Type | Path |
 |------|------|------|
-| `create-prd` | atomic | `skills/prd/create-prd/SKILL.md` |
-| `review-prd` | atomic | `skills/prd/review-prd/SKILL.md` |
-| `generate-tasks` | atomic | `skills/task-management/generate-tasks/SKILL.md` |
-| `plan-tickets` | atomic | `skills/task-management/plan-tickets/SKILL.md` |
-| `estimate-tasks` | atomic | `skills/task-management/estimate-tasks/SKILL.md` |
-| `prioritize-backlog` | atomic | `skills/backlog/prioritize-backlog/SKILL.md` |
-| `plan-sprint` | atomic | `skills/ceremony/plan-sprint/SKILL.md` |
-| `create-retrospective` | atomic | `skills/ceremony/create-retrospective/SKILL.md` |
-| `generate-status-report` | atomic | `skills/execution/generate-status-report/SKILL.md` |
-| `identify-risks` | atomic | `skills/execution/identify-risks/SKILL.md` |
-| `requirements-clarifier` | atomic | `skills/analysis/requirements-clarifier/SKILL.md` |
-| `github-issue` | atomic | `skills/github-issues/github-issue/SKILL.md` |
-| `product-owner` | persona | `skills/personas/product-owner/SKILL.md` |
-| `project-manager` | persona | `skills/personas/project-manager/SKILL.md` |
-| `tech-lead` | persona | `skills/personas/tech-lead/SKILL.md` |
-| `delivery-lead` | persona | `skills/personas/delivery-lead/SKILL.md` |
+| `create-prd` | atomic | `skills/create-prd/SKILL.md` |
+| `review-prd` | atomic | `skills/review-prd/SKILL.md` |
+| `generate-tasks` | atomic | `skills/generate-tasks/SKILL.md` |
+| `plan-tickets` | atomic | `skills/plan-tickets/SKILL.md` |
+| `estimate-tasks` | atomic | `skills/estimate-tasks/SKILL.md` |
+| `prioritize-backlog` | atomic | `skills/prioritize-backlog/SKILL.md` |
+| `plan-sprint` | atomic | `skills/plan-sprint/SKILL.md` |
+| `create-retrospective` | atomic | `skills/create-retrospective/SKILL.md` |
+| `generate-status-report` | atomic | `skills/generate-status-report/SKILL.md` |
+| `identify-risks` | atomic | `skills/identify-risks/SKILL.md` |
+| `requirements-clarifier` | atomic | `skills/requirements-clarifier/SKILL.md` |
+| `github-issue` | atomic | `skills/github-issue/SKILL.md` |
+| `product-owner` | persona | `skills/product-owner/SKILL.md` |
+| `project-manager` | persona | `skills/project-manager/SKILL.md` |
+| `tech-lead` | persona | `skills/tech-lead/SKILL.md` |
+| `delivery-lead` | persona | `skills/delivery-lead/SKILL.md` |
 
 Full descriptions and triggers: [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md).
 
@@ -162,7 +153,7 @@ After planning is approved, hand off implementation to a stack pack (`rails-agen
 
 ### Adding or changing a skill
 
-1. Path: `skills/<category>/<skill-name>/SKILL.md` (personas: `skills/personas/<name>/SKILL.md`)
+1. Path: `skills/<skill-name>/SKILL.md`
 2. `name` in frontmatter **must equal** the directory name (kebab-case)
 3. Register in `directory.json`
 4. Update `docs/reference/skill-catalog.md` and `docs/reference/integration-matrix.md`

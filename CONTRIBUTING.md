@@ -9,7 +9,7 @@ Contributions are welcome. This repository follows a Markdown + YAML frontmatter
 
 ## Adding a New Skill
 
-1. Create the directory: `skills/<category>/<skill-name>/`
+1. Create the directory: `skills/<skill-name>/`
 2. Create `SKILL.md` following the conventions in [docs/architecture.md](docs/architecture.md)
 3. Add companion files (templates, examples, heuristics) as needed
 4. Register the skill in `directory.json`
@@ -18,7 +18,7 @@ Contributions are welcome. This repository follows a Markdown + YAML frontmatter
 
 ## Adding a New Persona
 
-1. Create the directory: `skills/personas/<persona-name>/`
+1. Create the directory: `skills/<persona-name>/`
 2. Create `SKILL.md` with `type: persona` in frontmatter
 3. Register the persona in `directory.json`
 4. Add the persona to `docs/reference/skill-catalog.md`

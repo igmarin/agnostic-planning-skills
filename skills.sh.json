@@ -3,6 +3,13 @@
   "notGrouped": "bottom",
   "groupings": [
     {
+      "title": "Catalog",
+      "description": "Pack entry point. Routes to planning skills and personas.",
+      "skills": [
+        "agnostic-planning-skills"
+      ]
+    },
+    {
       "title": "PRD",
       "description": "Skills for creating and reviewing Product Requirements Documents.",
       "skills": [
@@ -43,17 +50,17 @@
       ]
     },
     {
+      "title": "Analysis",
+      "description": "Skills for clarifying vague requests into requirements.",
+      "skills": [
+        "requirements-clarifier"
+      ]
+    },
+    {
       "title": "GitHub Issues",
       "description": "Skills for GitHub issue management and project board integration.",
       "skills": [
         "github-issue"
-      ]
-    },
-    {
-      "title": "Analysis",
-      "description": "Skills for clarifying vague requests into specifications.",
-      "skills": [
-        "requirements-clarifier"
       ]
     },
     {
