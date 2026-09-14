@@ -4,10 +4,10 @@ Index of the four orchestrators. Phase steps and gates live in each persona `SKI
 
 | Persona | Use when | Path |
 |---------|----------|------|
-| `product-owner` | Feature needs discovery → PRD → tasks → tickets → sprint | [SKILL.md](../skills/personas/product-owner/SKILL.md) |
-| `project-manager` | Sprint or project needs estimates, risks, and a status report | [SKILL.md](../skills/personas/project-manager/SKILL.md) |
-| `tech-lead` | PRD needs a technical go/no-go | [SKILL.md](../skills/personas/tech-lead/SKILL.md) |
-| `delivery-lead` | Full cycle from PRD through retrospective | [SKILL.md](../skills/personas/delivery-lead/SKILL.md) |
+| `product-owner` | Feature needs discovery → PRD → tasks → tickets → sprint | [SKILL.md](../skills/product-owner/SKILL.md) |
+| `project-manager` | Sprint or project needs estimates, risks, and a status report | [SKILL.md](../skills/project-manager/SKILL.md) |
+| `tech-lead` | PRD needs a technical go/no-go | [SKILL.md](../skills/tech-lead/SKILL.md) |
+| `delivery-lead` | Full cycle from PRD through retrospective | [SKILL.md](../skills/delivery-lead/SKILL.md) |
 
 ## product-owner
 
