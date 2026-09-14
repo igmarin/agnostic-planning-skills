@@ -3,7 +3,7 @@
 12 language-agnostic planning skills and 4 personas. Agents use them to write PRDs, break down work, estimate, rank a backlog, plan a sprint, run a retro, and track execution — without tying the process to a stack.
 
 ```text
-No implementation without an approved PRD. The PRD is the single source of truth for scope.
+Use an approved PRD or concrete user-authorized brief as scope. Small bugs and local fixes go directly to the stack workflow; create a PRD when product scope needs discovery.
 ```
 
 Process skills (TDD gates, review, DDD) live in [`ruby-core-skills`](https://github.com/igmarin/ruby-core-skills). After a plan is approved, hand off to a stack pack such as [`rails-agent-skills`](https://github.com/igmarin/rails-agent-skills).
@@ -83,6 +83,6 @@ gh skill install igmarin/agnostic-planning-skills create-prd --scope project
 ## Contributing
 
 - Artifacts in English unless the user asks otherwise.
-- Keep the PRD-before-implementation gate.
+- Keep scope authorization and evidence gates; a small fix does not require a PRD.
 - `description` is when + triggers (≤ 600 chars). Procedure stays in the body.
 - Keep public docs in sync with `directory.json`.

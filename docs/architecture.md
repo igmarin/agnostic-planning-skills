@@ -180,7 +180,7 @@ Single-purpose capabilities. Do one thing well.
 
 ### Personas (`type: persona`)
 
-Role-based orchestrators that sequence atomic skills with approval gates.
+Role-based orchestrators that sequence atomic skills with scope and evidence gates. Legacy `type: persona` and catalog paths remain stable; in composed roles, product-owner, project-manager, and tech-lead own outcomes while delivery-lead coordinates the delivery workflow.
 
 - `product-owner` — Full planning lifecycle: Discovery → PRD → Tasks → Tickets → Sprint
 - `delivery-lead` — End-to-end pipeline: Scope → Plan → Prioritize → Sprint → Execute → Retrospect
@@ -199,19 +199,19 @@ The category-path format (`<category>/<name>`) drops the `skills/` prefix and th
 
 ## Approval Gates
 
-Planning skills use **hard gates** — explicit user approval checkpoints that block progress until confirmed:
+Planning skills use **hard gates** for scope, evidence, and external authorization. The current request or a prior decision satisfies approval when it covers the action; repeat a question only when scope materially changes.
 
 ### PRD Approval Gate
 
 Defined in: `create-prd`, `product-owner` persona.
 
-Purpose: The PRD must be explicitly approved before any task generation or implementation. This prevents feature work on unapproved scope.
+Purpose: Resolve new product scope before implementation. An approved PRD or concrete authorized brief is sufficient; a small bug routes directly to the implementation pack. Draft tasks within the requested planning scope.
 
 ### Ticket Approval Gate
 
 Defined in: `plan-tickets`, `product-owner` persona.
 
-Purpose: Ticket drafts must be reviewed and approved before creating issues in a tracker. Default mode is draft-only.
+Purpose: Tracker publication needs an explicit request; existing authorization is sufficient. Default planning output remains draft-only.
 
 ### Sprint Confirmation Gate
 

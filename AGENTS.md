@@ -18,10 +18,10 @@ This repo is a **Markdown skill library**, not an application.
 **Non-negotiable product rule:**
 
 ```text
-No implementation without an approved PRD. The PRD is the single source of truth for scope.
+Use an approved PRD or concrete user-authorized brief as scope. Small bugs and local fixes go directly to the stack workflow; create a PRD when product scope needs discovery.
 ```
 
-When *using* these skills against a target project: plan first, wait for explicit user approval gates, then hand off to framework skill packs (e.g. `rails-agent-skills`) for code.
+When *using* these skills against a target project: resolve material scope, preserve existing authorization, then hand off to framework skill packs (e.g. `rails-agent-skills`) for code.
 
 When *editing this repo*: you are authoring skill instructions and docs — follow the skill architecture rules below.
 
@@ -30,7 +30,7 @@ When *editing this repo*: you are authoring skill instructions and docs — foll
 ## Hard gates (never skip)
 
 1. **Read the skill before applying it.** Match on frontmatter `name` / `description`, then load full `SKILL.md`.
-2. **Honor HARD-GATE blocks** inside each skill (fenced code or section). Do not proceed past an approval gate without an explicit user signal.
+2. **Honor HARD-GATE blocks** inside each skill (fenced code or section). A current request or prior decision covering the action satisfies authorization; preserve objective test and evidence gates.
 3. **Default draft-only for trackers.** Do not create GitHub/Jira/Linear issues unless the user explicitly asks (`plan-tickets`, `github-issue`).
 4. **No stack leakage.** Skills must not require a specific language, framework, or ORM. Examples stay language-agnostic unless illustrating a handoff.
 5. **English artifacts** unless the user explicitly requests another language.
@@ -228,7 +228,7 @@ Document hard gates, skill registry rules, and rs-guard validation.
 
 - Edit `skills/**`, `docs/**`, `directory.json`, `skills.sh.json`, `CHANGELOG.md`, review prompts, hooks
 - Chain skills using canonical names from `directory.json`
-- Stop at approval gates and ask the user
+- Continue authorized work; ask only for material unresolved scope or unauthorized external actions
 
 **Do not**
 

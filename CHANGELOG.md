@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Agentic execution contract
+- Preserve all 16 catalog names and paths. Keep the legacy `persona` type while distinguishing outcome-owning planning roles from the delivery workflow in composition.
+- Accept an approved PRD or concrete user-authorized brief; small bugs and local fixes bypass formal product planning. Reuse prior authorization rather than requesting it at every draft phase.
+- Delivery lead now persists objective, acceptance criteria, authorization, qualified skill identities, phase progress, artifacts, check evidence, blockers, and next action in a repository-relative checkpoint. Stack developers verify and update that checkpoint on handoff/resume.
+- Keep tracker operations and stakeholder messages within explicit authorization. Preserve real team commitments and evidence gates; never fabricate progress or acceptance.
+- Audited Markdown resource links across all 16 skill trees: no missing local link targets. Existing free validator passes; structural evidence does not substitute for behavioral execution evaluations.
+
+
 ### Added
 - `scripts/validate-skills.sh` and `.github/workflows/ci.yml` — fail on missing description, description > 600 chars, `SKILL.md` > 500 lines, and `directory.json` ↔ disk drift.
 - `docs/reference/gaps.md` — missing skills, eval ownership, description-strategy conflict with `ruby-core-skills`, CI notes.

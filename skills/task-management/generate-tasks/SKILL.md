@@ -16,9 +16,9 @@ metadata:
 ## HARD-GATE
 
 ```text
-DO NOT skip Task 0.0 (create the feature branch).
+Task 0.0 records or creates an isolated feature branch according to project policy.
 DO NOT combine TDD sub-tasks into a single task.
-DO NOT generate tasks from an unapproved PRD.
+Generate tasks from an approved PRD or concrete user-authorized brief. Mark unresolved scope decisions; small bug fixes do not require a PRD.
 ```
 
 ## Quick Reference
@@ -33,7 +33,7 @@ DO NOT generate tasks from an unapproved PRD.
 Detect conventions using config files (see [TEST_COMMANDS.md](./TEST_COMMANDS.md)). Identify source and test directories.
 
 ### 2. Validation
-Run detected test command; if it fails, confirm with user.
+Run the detected test command when available; record baseline failures and distinguish environment failures from assertion failures. Continue planning with explicit constraints; ask only for a material decision.
 
 ### 3. Requirements Analysis
 Break down the feature/PRD:
