@@ -4,8 +4,7 @@ type: persona
 license: MIT
 description: >
   Use when planning a feature, running product discovery, defining
-  requirements, or preparing a sprint backlog. Hard gates sit between
-  phases — do not skip to tasks or tickets without approval.
+  requirements, or preparing a sprint backlog.
   Trigger words: product owner, PRD, discovery, requirements, task
   breakdown, tickets, sprint backlog, scope a feature.
 metadata:
@@ -21,19 +20,19 @@ metadata:
 ---
 # Product Owner Persona
 
-Orchestrates end-to-end product planning: from feature idea to sprint-ready tickets. Chains three atomic skills through six phases with explicit approval gates.
+Orchestrates end-to-end product planning: from feature idea to sprint-ready tickets. Chains three atomic skills through six phases with scope and evidence gates. Reuse confirmed scope, approved plans, and existing artifacts; a request to implement a concrete plan authorizes its unchanged scope.
 
 **Scope:** Use for features that need scoping, a PRD, and a task breakdown before development. Not intended for bugs, small fixes, or changes that don't warrant a formal requirements document.
 
 ## HARD-GATE
 
 ```text
-DO NOT skip a phase.
-DO NOT draft a PRD until the user confirms the scope summary.
-DO NOT generate tasks until the PRD is explicitly approved.
-DO NOT generate tickets until the task list is approved.
+Run phases needed for the requested outcome; reuse completed artifacts.
+Draft from known scope and surface material ambiguities.
+Generate tasks and ticket drafts within the authorized scope.
+Before implementing new scope, resolve material product decisions.
 DO NOT assume sprint capacity — ask for points per sprint and available sprints.
-Each 🔒 Gate needs an explicit user signal before the next phase.
+Each scope gate is satisfied by the current request or a prior decision covering that scope. Ask again only when scope materially changes. Tracker publication and real team commitments need their own authorization.
 ```
 
 ## Sub-Skills
@@ -53,11 +52,11 @@ Each 🔒 Gate needs an explicit user signal before the next phase.
 ### Phase 1 — Discovery & Clarification
 
 **Steps:**
-1. Ask the user to describe the feature or product goal in their own words.
+1. Read the supplied goal and project context; ask only for missing material intent.
 2. Identify and surface ambiguities: target users, success metrics, out-of-scope items, dependencies, and constraints.
 3. Ask clarifying questions one group at a time.
 4. Summarise the agreed scope as a short bullet list.
-5. Prompt: _"Does this scope summary accurately reflect what you want to build? (yes / revise)"_
+5. Present the scope summary; ask for a decision only on unresolved material scope.
 
 **Example scope summary (waitlist feature):**
 - Visitors can submit their email via a public waitlist form
@@ -65,7 +64,7 @@ Each 🔒 Gate needs an explicit user signal before the next phase.
 - Admin dashboard lists entries with CSV export
 - No CRM sync in this iteration
 
-🔒 **Gate — Scope Confirmation:** Do not proceed to Phase 2 until the user confirms the scope summary.
+🔒 **Gate — Scope Confirmation:** Proceed when the request establishes scope; otherwise resolve the material ambiguity.
 
 ---
 
@@ -75,11 +74,11 @@ Each 🔒 Gate needs an explicit user signal before the next phase.
 1. Invoke **`create-prd`** with the confirmed scope summary as input.
 2. The sub-skill writes the PRD to `/tasks/prd-<slug>.md` using `PRD_TEMPLATE.md`.
 3. Present a brief summary of what was generated.
-4. Prompt: _"Please review the PRD at `/tasks/prd-<slug>.md`. Reply with any changes or 'approved' to continue."_
+4. Present the PRD; reuse existing scope approval and ask only for newly introduced product decisions.
 
 **Example output path:** `/tasks/prd-waitlist.md`
 
-🔒 **Gate — PRD Review:** Do not proceed to Phase 3 until the user responds.
+🔒 **Gate — PRD Review:** Review the draft within the requested planning work; ask only for new product decisions.
 
 ---
 
@@ -89,9 +88,9 @@ Each 🔒 Gate needs an explicit user signal before the next phase.
 1. Accept free-form feedback (section edits, additions, removals).
 2. Re-invoke **`create-prd`** in revision mode with the delta instructions, overwriting the existing file.
 3. Summarise what changed.
-4. Repeat until the user replies with an unambiguous approval signal (e.g., "approved", "looks good", "LGTM").
+4. Resolve material feedback. Existing scope authorization stays valid when the requested outcome has not changed.
 
-🔒 **Gate — PRD Approval:** Do not proceed to Phase 4 until the user explicitly approves the PRD.
+🔒 **Gate — PRD Approval:** Use existing approval or a concrete authorized brief; resolve newly introduced scope before implementation.
 
 ```
 ✅ PRD approved by user
@@ -107,7 +106,7 @@ Proceeding to task breakdown...
 1. Invoke **`generate-tasks`** with the approved PRD file path.
 2. The sub-skill produces `/tasks/tasks-<name>.md` with TDD-ordered tasks, each containing: task ID, title, description, acceptance criteria, and effort estimate.
 3. Present a summary table of tasks (ID, title, estimate).
-4. Prompt: _"Does this task breakdown look correct? Reply with any adjustments or 'approved'."_
+4. Present the task breakdown and continue authorized draft work; flag material scope changes.
 
 **Example task summary table:**
 
@@ -121,7 +120,7 @@ Proceeding to task breakdown...
 | T-06 | Admin dashboard — CSV export | 1 pt |
 | T-07 | Write integration tests | 2 pts |
 
-🔒 **Gate — Task Approval:** Do not proceed to Phase 5 until the task list is approved.
+🔒 **Gate — Task Approval:** Continue to ticket drafts within authorized scope; surface changes that alter the agreed outcome.
 
 ---
 
@@ -132,7 +131,7 @@ Proceeding to task breakdown...
 2. The sub-skill generates one Markdown ticket draft per task, including: type label (feature / chore / test), title, description, acceptance criteria, dependencies, and estimated points.
 3. Present all ticket drafts inline.
 4. Allow minor wording adjustments; re-generate individual tickets if requested.
-5. Prompt: _"Are these ticket drafts ready for sprint placement? (yes / revise)"_
+5. Present the ticket drafts; proceed to a proposed sprint placement when requested.
 
 **Example ticket draft (T-01):**
 
@@ -151,15 +150,15 @@ Create the `waitlist_entries` table with fields: id, email, created_at, status.
 - [ ] Rollback migration tested
 ```
 
-🔒 **Gate — Ticket Approval:** Do not proceed to Phase 6 until tickets are approved.
+🔒 **Gate — Ticket Approval:** Ticket drafts may proceed to proposed sprint placement; publication requires authorization.
 
 ---
 
 ### Phase 6 — Sprint Placement
 
 **Steps:**
-1. Ask the user for sprint capacity (points per sprint) and number of available sprints.
-2. Apply sprint placement heuristics from **`plan-tickets`**: respect dependency ordering, balance load across sprints, flag tickets that exceed a single sprint's capacity.
+1. Read recorded capacity and available sprints; ask only when these facts are unavailable.
+2. Apply sprint placement heuristics from **`task-management/plan-tickets`**: respect dependency ordering, balance load across sprints, flag tickets that exceed a single sprint's capacity.
 3. Present the sprint plan:
 
 ```
@@ -178,7 +177,7 @@ Sprint 2 (capacity: 8 pts)
 
 4. Prompt: _"Does this sprint plan work for your team? (confirm / adjust)"_
 
-🔒 **Gate — Sprint Confirmation:** The workflow is complete only after the user confirms the sprint plan.
+🔒 **Gate — Sprint Confirmation:** Report a proposed sprint plan when commitment is not yet known; claim commitment only with actual team confirmation.
 
 ```
 ✅ Sprint plan confirmed

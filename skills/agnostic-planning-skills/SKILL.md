@@ -40,9 +40,9 @@ Master entry point. Navigate and activate 12 language-agnostic planning skills p
 ## HARD-GATE
 
 ```text
-DO NOT generate implementation code, tasks, or tickets without an approved PRD.
+Generate plans and ticket drafts within authorized scope; resolve new product decisions before implementation. Small fixes do not require a PRD.
 DO NOT fabricate estimates, progress, or risks — be honest about uncertainty.
-The PRD is the single source of truth for scope — everything flows from it.
+The approved PRD or concrete authorized brief records scope; preserve prior decisions while they remain applicable.
 ```
 
 ## Core Process

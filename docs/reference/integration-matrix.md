@@ -204,3 +204,7 @@ Need to create GitHub issues?
 
 - [Skill Catalog](skill-catalog.md) — Complete skills list with descriptions and trigger words
 - [Persona Guide](../persona-guide.md) — Persona workflows with Mermaid diagrams
+
+## Developer handoff
+
+Use the delivery-lead checkpoint for multi-stage handoffs: authorized scope, acceptance criteria, qualified skill identities, artifacts, check evidence, blockers, and next action. The receiving stack role verifies current repository state and executes its workflow. Small bugs use the developer bug-fix workflow directly; no PRD is required.

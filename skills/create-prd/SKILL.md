@@ -17,18 +17,18 @@ metadata:
 
 ## HARD-GATE
 - No code, pseudo-code, SQL, class names, or method signatures.
-- Do not generate tasks or code until the PRD is explicitly approved.
+- Resolve newly introduced product scope before implementation. Existing approval or a concrete user-authorized brief remains valid; this skill produces a PRD, not implementation code.
 
 ## Core Process
 1. Receive feature description.
 2. Clarify only if ambiguous — use up to 5 questions from [assets/prd_questions.md](./assets/prd_questions.md).
 3. Draft using [PRD_TEMPLATE.md](./PRD_TEMPLATE.md) section by section.
-4. Validate — present the PRD; get **explicit approval** before any implementation.
+4. Validate — present the PRD; request a decision on unresolved product scope before implementation.
 
 ## Output
 - Save to `/tasks/prd-<slug>.md` (kebab-case).
 - Write requirements in natural language — no code.
-- Request explicit approval; include next steps (e.g., "Run `generate-tasks` once approved").
+- Reuse prior approval when scope is unchanged; otherwise request the specific scope decision; include next steps (e.g., "Run `generate-tasks` once approved").
 
 ## Integration
 | Skill | When |
