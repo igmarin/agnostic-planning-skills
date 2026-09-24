@@ -1,6 +1,6 @@
 # Agnostic Planning Skills
 
-12 language-agnostic planning skills and 4 personas. Agents use them to write PRDs, break down work, estimate, rank a backlog, plan a sprint, run a retro, and track execution — without tying the process to a stack.
+14 language-agnostic planning skills and 4 personas. Agents use them to write PRDs, break down work, estimate, rank a backlog, plan a sprint, run a retro, and track execution — without tying the process to a stack.
 
 ```text
 Use an approved PRD or concrete user-authorized brief as scope. Small bugs and local fixes go directly to the stack workflow; create a PRD when product scope needs discovery.
@@ -22,7 +22,7 @@ flowchart LR
 ```mermaid
 flowchart TB
   subgraph thisRepo[agnostic-planning-skills]
-    atomics[12 atomics]
+    atomics[14 atomics]
     personas[4 personas]
   end
   core[ruby-core-skills]

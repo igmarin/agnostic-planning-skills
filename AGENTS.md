@@ -10,7 +10,7 @@ Human-facing overview: [README.md](README.md). Architecture details: [docs/archi
 
 This repo is a **Markdown skill library**, not an application.
 
-- **12 atomic planning skills** + **4 personas** (role orchestrators)
+- **14 atomic planning skills** + **4 personas** (role orchestrators)
 - Language-agnostic: no stack-specific implementation code
 - Version: see `directory.json` (`name`: `igmarin/agnostic-planning-skills`)
 - Canonical skill registry: `directory.json` (source of truth for skill names and paths)

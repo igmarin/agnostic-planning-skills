@@ -12,7 +12,7 @@ metadata:
 ---
 # Agnostic Planning Skills
 
-Master entry point. Navigate and activate 12 language-agnostic planning skills plus 4 personas.
+Master entry point. Navigate and activate 14 language-agnostic planning skills plus 4 personas.
 
 **Core principle:** Atomic, task-specific instructions that turn AI coding assistants into reliable product collaborators through structured planning, estimation, risk assessment, and execution tracking.
 
