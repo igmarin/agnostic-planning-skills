@@ -42,8 +42,9 @@ Also in the same ecosystem: [`hanakai-yaku`](https://github.com/igmarin/hanakai-
 | `prioritize-backlog` | Backlog |
 | `plan-sprint`, `create-retrospective` | Ceremony |
 | `identify-risks`, `generate-status-report` | Execution |
-| `requirements-clarifier` | Analysis |
+| `requirements-clarifier`, `judgment-gate` | Analysis |
 | `github-issue` | GitHub issues |
+| `llm-judgment-layer` | Patterns |
 | `product-owner`, `project-manager`, `tech-lead`, `delivery-lead` | Personas |
 
 Full list: [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md). Gaps: [docs/reference/gaps.md](docs/reference/gaps.md).

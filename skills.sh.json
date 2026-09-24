@@ -53,7 +53,8 @@
       "title": "Analysis",
       "description": "Skills for clarifying vague requests into requirements.",
       "skills": [
-        "requirements-clarifier"
+        "requirements-clarifier",
+        "judgment-gate"
       ]
     },
     {
@@ -71,6 +72,13 @@
         "project-manager",
         "tech-lead",
         "delivery-lead"
+      ]
+    },
+    {
+      "title": "Patterns",
+      "description": "Reusable architecture patterns for AI-assisted features.",
+      "skills": [
+        "llm-judgment-layer"
       ]
     }
   ]

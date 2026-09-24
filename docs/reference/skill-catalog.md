@@ -1,6 +1,6 @@
 # Skill Catalog
 
-12 atomic planning skills and 4 personas. `directory.json` is the source of truth.
+14 atomic planning skills and 4 personas. `directory.json` is the source of truth.
 
 | Name | Type | Area | Use when | Path |
 |------|------|------|----------|------|
@@ -15,6 +15,8 @@
 | `identify-risks` | atomic | Execution | Building a risk register | `skills/identify-risks/SKILL.md` |
 | `generate-status-report` | atomic | Execution | Writing a stakeholder status update | `skills/generate-status-report/SKILL.md` |
 | `requirements-clarifier` | atomic | Analysis | Turning a vague ask into requirements | `skills/requirements-clarifier/SKILL.md` |
+| `judgment-gate` | atomic | Analysis | Independent go/no-go judgments on plans and rankings | `skills/judgment-gate/SKILL.md` |
+| `llm-judgment-layer` | atomic | Patterns | Adding an LLM judgment/recommendation layer to an app | `skills/llm-judgment-layer/SKILL.md` |
 | `github-issue` | atomic | GitHub issues | Creating or updating GitHub issues | `skills/github-issue/SKILL.md` |
 | `product-owner` | persona | Personas | Discovery through sprint-ready tickets | `skills/product-owner/SKILL.md` |
 | `project-manager` | persona | Personas | Estimates, risks, and status | `skills/project-manager/SKILL.md` |
@@ -26,6 +28,8 @@
 | You need | Skill |
 |----------|-------|
 | Clarify a vague ask | `requirements-clarifier` |
+| Independent go/no-go on a plan | `judgment-gate` |
+| Add an LLM judgment layer to an app | `llm-judgment-layer` |
 | Write or review a PRD | `create-prd` → `review-prd` |
 | Break down approved scope | `generate-tasks` → `estimate-tasks` |
 | Draft tickets or GitHub issues | `plan-tickets` → `github-issue` |

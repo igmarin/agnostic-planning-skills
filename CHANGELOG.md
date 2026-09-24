@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `judgment-gate` (analysis) — explicit independent go/no-go judgments on plans, backlogs, and designs; planning counterpart to `judgment-day`, bounded two-round budget, human keeps policy.
+- `llm-judgment-layer` (patterns) — app-integration pattern for LLM judgment/recommendation features: model ranks and scores, code decides; confidence gates; silent deterministic fallback; server-side key via proxy. Distilled from a production iOS integration.
+
 ### Agentic execution contract
 - Preserve all 16 catalog names and paths. Keep the legacy `persona` type while distinguishing outcome-owning planning roles from the delivery workflow in composition.
 - Accept an approved PRD or concrete user-authorized brief; small bugs and local fixes bypass formal product planning. Reuse prior authorization rather than requesting it at every draft phase.

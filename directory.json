@@ -1,8 +1,8 @@
 {
   "name": "igmarin/agnostic-planning-skills",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "license": "MIT",
-  "summary": "A curated library of 12 language-agnostic planning skills and 4 personas for technical project management, product planning, and agile execution. Skills are typed as `atomic` (single-purpose) or `persona` (role-based orchestrator).",
+  "summary": "A curated library of 14 language-agnostic planning skills and 4 personas for technical project management, product planning, and agile execution. Skills are typed as `atomic` (single-purpose) or `persona` (role-based orchestrator).",
   "skills": {
     "create-prd": {
       "path": "skills/create-prd/SKILL.md"
@@ -37,8 +37,14 @@
     "requirements-clarifier": {
       "path": "skills/requirements-clarifier/SKILL.md"
     },
+    "judgment-gate": {
+      "path": "skills/judgment-gate/SKILL.md"
+    },
     "github-issue": {
       "path": "skills/github-issue/SKILL.md"
+    },
+    "llm-judgment-layer": {
+      "path": "skills/llm-judgment-layer/SKILL.md"
     },
     "product-owner": {
       "path": "skills/product-owner/SKILL.md"
