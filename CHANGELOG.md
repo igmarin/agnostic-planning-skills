@@ -1,4 +1,18 @@
 # Changelog
+## [5.0.0] - 2026-09-26
+
+### Added
+- `work-router` selects one next skill using a profile and only the necessary proof/risk checkpoint.
+- Profile installer activates a clean set of skills in Codex's standard user directory; profile switches preserve unrelated skills and archive replaced generated copies.
+
+### Changed
+- Planning, Ruby/Rails, Elixir/Phoenix, and Rust skills are selected through one profile manifest.
+- README and migration guide document the one-command setup for this computer and a second computer.
+
+### Removed
+- Per-role planning personas and orchestration wrappers; use `work-router` intents instead.
+- Tracked machine-specific MCP/editor configs and bundled review binaries.
+
 
 All notable changes to `agnostic-planning-skills` will be documented in this file.
 

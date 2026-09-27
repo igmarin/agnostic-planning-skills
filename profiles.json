@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "profiles": {
+    "foundation": {
+      "repositories": {
+        "agnostic-planning-skills": [
+          "work-router", "requirements-clarifier",
+          "create-prd", "review-prd", "plan-tickets", "estimate-tasks",
+          "prioritize-backlog", "plan-sprint", "create-retrospective",
+          "identify-risks", "generate-status-report", "github-issue"
+        ]
+      }
+    },
+    "ruby-rails": {
+      "extends": "foundation",
+      "repositories": {
+        "ruby-core-skills": [
+          "code-workflow", "define-domain-language", "review-domain-boundaries",
+          "model-domain", "create-service-object", "implement-calculator-pattern",
+          "integrate-api-client", "write-yard-docs", "triage-bug", "generate-tdd-tasks"
+        ],
+        "rails-agent-skills": [
+          "rails-feature", "rails-review", "rails-maintenance", "load-context",
+          "setup-environment", "plan-tests", "write-tests", "test-service",
+          "code-review", "security-check", "review-architecture", "review-migration",
+          "apply-code-conventions", "apply-stack-conventions", "implement-authorization",
+          "implement-background-job", "implement-graphql", "implement-hotwire",
+          "optimize-performance", "version-api", "seed-database", "refactor-code",
+          "generate-api-collection", "create-engine", "create-engine-installer",
+          "document-engine", "test-engine", "review-engine", "release-engine",
+          "extract-engine", "upgrade-engine"
+        ]
+      }
+    },
+    "elixir-phoenix": {
+      "extends": "foundation",
+      "repositories": {
+        "elixir-phoenix-skills": [
+          "elixir-essentials", "otp-essentials", "typespec-dialyzer",
+          "phoenix-liveview-essentials", "liveview-streams", "phoenix-channels-essentials",
+          "phoenix-json-api", "phoenix-pubsub-patterns", "phoenix-uploads",
+          "apply-phoenix-controller-conventions", "ecto-essentials", "ecto-changeset-patterns",
+          "ecto-nested-associations", "ecto-migration", "phoenix-authentication",
+          "phoenix-authorization-patterns", "security-essentials", "oban-essentials",
+          "broadway-data-pipelines", "deployment-gotchas", "cachex-caching",
+          "req-http-client", "swoosh-emails", "gettext-i18n", "ash-framework",
+          "testing-essentials", "property-based-testing", "benchee-profiling",
+          "telemetry-essentials", "code-quality", "code-review", "refactor-code",
+          "respond-to-review", "mix-tasks-generators"
+        ]
+      }
+    },
+    "rust": {
+      "extends": "foundation",
+      "repositories": {
+        "rust-core-skills": [
+          "rust-essentials", "ownership-borrowing", "type-driven-design", "error-handling"
+        ]
+      }
+    }
+  }
+}

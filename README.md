@@ -1,90 +1,29 @@
 # Agnostic Planning Skills
 
-14 language-agnostic planning skills and 4 personas. Agents use them to write PRDs, break down work, estimate, rank a backlog, plan a sprint, run a retro, and track execution — without tying the process to a stack.
+Planning skills for personal and client work. The active profile combines the planning foundation with one stack: `ruby-rails`, `elixir-phoenix`, or `rust`.
 
-```text
-Use an approved PRD or concrete user-authorized brief as scope. Small bugs and local fixes go directly to the stack workflow; create a PRD when product scope needs discovery.
+## Use
+
+Choose one active profile per Codex skills directory: `foundation`, `ruby-rails`, `elixir-phoenix`, or `rust`. Use the user directory for one default stack, or install per project when you work across stacks at once. Each profile installs only its skills, avoiding same-name collisions. Start uncertain or cross-role requests with `work-router`; invoke a specialist directly when the task is clear.
+
+Install or switch profiles with one command from this repo. It updates clean `main` checkouts of all five sibling repos, then activates the selected profile:
+
+```sh
+bash scripts/setup-profile.sh ruby-rails
 ```
 
-Process skills (TDD gates, review, DDD) live in [`ruby-core-skills`](https://github.com/igmarin/ruby-core-skills). After a plan is approved, hand off to a stack pack such as [`rails-agent-skills`](https://github.com/igmarin/rails-agent-skills).
+See [profile setup](docs/profile-migration.md) to configure another computer or use a project-specific skills directory.
 
-```mermaid
-flowchart LR
-  A[Vague ask] --> B[requirements-clarifier]
-  B --> C[create-prd]
-  C --> D{PRD approved?}
-  D -->|no| C
-  D -->|yes| E[generate-tasks]
-  E --> F[plan-tickets]
-  F -.-> G[github-issue]
-```
+## Skills
 
-```mermaid
-flowchart TB
-  subgraph thisRepo[agnostic-planning-skills]
-    atomics[14 atomics]
-    personas[4 personas]
-  end
-  core[ruby-core-skills]
-  stack[stack pack]
-  thisRepo --> core
-  thisRepo --> stack
-```
+The profiles cover clarification, PRDs, draft tickets, estimation, prioritization, sprints, retrospectives, risk, status, GitHub issues, and routing. `plan-tickets` is draft-only; `github-issue` is the only issue-mutation skill. `judgment-gate` and `llm-judgment-layer` remain specialist source cards and are not installed by a profile.
 
-Also in the same ecosystem: [`hanakai-yaku`](https://github.com/igmarin/hanakai-yaku), [`agent-mcp-runtime`](https://github.com/igmarin/agent-mcp-runtime), [`ruby-skill-bench`](https://github.com/igmarin/ruby-skill-bench).
+## Migration
 
-## Catalog
+| Old entry | Use |
+|---|---|
+| `product-owner`, `project-manager`, `tech-lead`, `delivery-lead` | `work-router` with the matching role intent |
+| `generate-tasks` | Stack profile task planning; Ruby has `generate-tdd-tasks` |
+| `plan-tickets` create mode | Draft with `plan-tickets`; use `github-issue` only when issue mutation is requested |
 
-| Skill | Area |
-|-------|------|
-| `create-prd`, `review-prd` | PRD |
-| `generate-tasks`, `plan-tickets`, `estimate-tasks` | Task management |
-| `prioritize-backlog` | Backlog |
-| `plan-sprint`, `create-retrospective` | Ceremony |
-| `identify-risks`, `generate-status-report` | Execution |
-| `requirements-clarifier`, `judgment-gate` | Analysis |
-| `github-issue` | GitHub issues |
-| `llm-judgment-layer` | Patterns |
-| `product-owner`, `project-manager`, `tech-lead`, `delivery-lead` | Personas |
-
-Full list: [docs/reference/skill-catalog.md](docs/reference/skill-catalog.md). Gaps: [docs/reference/gaps.md](docs/reference/gaps.md).
-
-Name a persona when you want the whole chain: `product-owner` (scope → tickets), `tech-lead` (feasibility), `project-manager` (execution health), `delivery-lead` (PRD through retro).
-
-## Install
-
-There is **no** root `SKILL.md`. The catalog lives at `skills/agnostic-planning-skills/`. Each folder under `skills/` is its own skill, so the CLI can prompt for **all** or **one**.
-
-```bash
-# picker: all skills, or a subset
-npx skills add igmarin/agnostic-planning-skills
-
-# all skills, skip prompts
-npx skills add igmarin/agnostic-planning-skills --skill '*'
-
-# one skill
-npx skills add igmarin/agnostic-planning-skills --skill create-prd
-```
-
-Or with GitHub CLI v2.90.0+ (`gh skill`):
-
-```bash
-gh skill install igmarin/agnostic-planning-skills
-gh skill install igmarin/agnostic-planning-skills create-prd --scope project
-```
-
-## Docs
-
-| Need | Document |
-|------|----------|
-| Host context | [AGENTS.md](AGENTS.md) |
-| How to invoke a persona | [docs/persona-guide.md](docs/persona-guide.md) |
-| Skill layout | [docs/architecture.md](docs/architecture.md) |
-| How skills chain | [docs/reference/integration-matrix.md](docs/reference/integration-matrix.md) |
-
-## Contributing
-
-- Artifacts in English unless the user asks otherwise.
-- Keep scope authorization and evidence gates; a small fix does not require a PRD.
-- `description` is when + triggers (≤ 600 chars). Procedure stays in the body.
-- Keep public docs in sync with `directory.json`.
+Validate profiles with `python3 scripts/validate-profiles.py`; validate this pack with `scripts/validate-skills.sh`.

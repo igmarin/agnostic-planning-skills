@@ -1,0 +1,7 @@
+[
+  {"id":"planning-prd","profile":"foundation","task":"Turn these notes into a concise product brief","repository":"agnostic-planning-skills","skill":"create-prd","checkpoint":"none"},
+  {"id":"rails-feature","profile":"ruby-rails","task":"Add an export endpoint to the Rails app","repository":"rails-agent-skills","skill":"rails-feature","checkpoint":"none"},
+  {"id":"ecto-feature","profile":"elixir-phoenix","task":"Add an Ecto query with a preload for invoices","repository":"elixir-phoenix-skills","skill":"ecto-essentials","checkpoint":"none"},
+  {"id":"rust-crate-api","profile":"rust","task":"Use a new crate API from the pinned dependency","repository":"rust-core-skills","skill":"rust-essentials","checkpoint":"verify-api"},
+  {"id":"production-migration","profile":"ruby-rails","task":"Change a production table with existing rows","repository":"rails-agent-skills","skill":"review-migration","checkpoint":"high-risk"}
+]

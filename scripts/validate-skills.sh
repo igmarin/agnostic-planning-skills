@@ -170,28 +170,6 @@ while IFS= read -r entry; do
   fi
 done < <(jq -r '.skills | to_entries[] | "\(.key)|\(.value.path)"' "$DIRECTORY_FILE")
 
-PERSONA_PATHS=$(find skills -name SKILL.md | while IFS= read -r f; do
-  grep -q '^type: persona' "$f" && echo "$f"
-done | sort)
-if [ -n "$PERSONA_PATHS" ]; then
-  info "Persona SKILL.md files:"
-  persona_count=0
-  persona_type_matches=0
-  while IFS= read -r path; do
-    [ -z "$path" ] && continue
-    info "  $path"
-    persona_count=$((persona_count + 1))
-    if grep -q "^type: persona" "$path" 2>/dev/null; then
-      persona_type_matches=$((persona_type_matches + 1))
-    fi
-  done <<< "$PERSONA_PATHS"
-  if [ "$persona_type_matches" -eq "$persona_count" ]; then
-    check_pass "All persona SKILL.md files have type: persona"
-  else
-    check_fail "Some persona SKILL.md files missing type: persona ($persona_type_matches/$persona_count)"
-  fi
-fi
-
 section "Description size and structure"
 
 # 600 is the pack target. 1024 is the Agent Skills spec ceiling.
@@ -240,16 +218,6 @@ PY
     check_pass "$skill_name: SKILL.md ${body_lines} lines"
   fi
 
-  for heading in "Quick Reference" "HARD-GATE" "Core Process" "Output Style" "Integration"; do
-    if grep -Eq "^## ${heading}" "$skill_file" || \
-       { [ "$heading" = "Core Process" ] && grep -Eq "^## (Workflow|Process|Steps)" "$skill_file"; } || \
-       { [ "$heading" = "Output Style" ] && grep -Eq "^## Output" "$skill_file"; } || \
-       { [ "$heading" = "HARD-GATE" ] && grep -Eq "HARD GATE|HARD-GATE|🔒 \*\*Gate" "$skill_file"; }; then
-      check_pass "$skill_name: has ${heading}"
-    else
-      warn "$skill_name: missing ## ${heading} (warning)"
-    fi
-  done
 done < <(printf '%s\n' "$DISK_SKILL_FILES_CACHE")
 
 section "skills.sh.json ↔ directory.json Sync"
