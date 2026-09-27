@@ -42,16 +42,24 @@ for repository in "${repositories[@]}"; do
       echo "Setup stopped: $checkout exists but is not a Git checkout." >&2
       exit 1
     fi
-    branch="$(git -C "$checkout" branch --show-current)"
-    if [[ "$branch" != "main" ]]; then
-      echo "Setup stopped: $repository is on '$branch'; switch to main after its PR is merged." >&2
-      exit 1
-    fi
     if [[ -n "$(git -C "$checkout" status --porcelain -- . ':(exclude).clinerules')" ]]; then
       echo "Setup stopped: $repository has local changes. Commit, stash, or resolve them first." >&2
       exit 1
     fi
+    branch="$(git -C "$checkout" branch --show-current)"
+    if [[ "$branch" != "main" ]]; then
+      if ! git -C "$checkout" show-ref --verify --quiet refs/heads/main; then
+        echo "Setup stopped: $repository has no local main branch." >&2
+        exit 1
+      fi
+      echo "Switching clean $repository checkout from '${branch:-detached HEAD}' to main."
+      git -C "$checkout" switch main
+    fi
     git -C "$checkout" pull --ff-only
+    if [[ "$repository" == "agnostic-planning-skills" && ! -f "$planning_repo/scripts/install-profile.py" ]]; then
+      echo "Setup stopped: merge the profile setup PR before installing profiles." >&2
+      exit 1
+    fi
   else
     git clone "https://github.com/igmarin/$repository.git" "$checkout"
   fi
