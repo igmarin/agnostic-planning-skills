@@ -6,6 +6,7 @@ Tests cover class mapping, threshold handling, malformed responses,
 provider failure, key handling, and command output without live API.
 """
 
+import copy
 import json
 import os
 import sys
@@ -76,7 +77,7 @@ class TestClassifyTask(unittest.TestCase):
 
     def test_empty_task(self):
         """Test classification of empty task."""
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("", config, None)
         self.assertEqual(result["classification"], config["thresholds"]["fallback_class"])
         self.assertTrue(result["fallback_used"])
@@ -84,14 +85,14 @@ class TestClassifyTask(unittest.TestCase):
 
     def test_whitespace_only_task(self):
         """Test classification of whitespace-only task."""
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("   \n\t  ", config, None)
         self.assertEqual(result["classification"], config["thresholds"]["fallback_class"])
         self.assertTrue(result["fallback_used"])
 
     def test_no_api_key(self):
         """Test classification when no API key is configured."""
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("Fix a bug", config, None)
         self.assertEqual(result["classification"], config["thresholds"]["fallback_class"])
         self.assertTrue(result["fallback_used"])
@@ -99,7 +100,7 @@ class TestClassifyTask(unittest.TestCase):
 
     def test_dry_run(self):
         """Test dry run mode."""
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("Test task", config, None, dry_run=True)
         self.assertEqual(result["classification"], "standard")
         self.assertFalse(result["fallback_used"])
@@ -122,10 +123,10 @@ class TestClassifyTask(unittest.TestCase):
         mock_answer.choice = "standard"
         mock_answer.probabilities = {"routine": 0.1, "standard": 0.8, "complex": 0.1}
         mock_answer.confidence = 0.85
-        mock_response.answers = {"complexity": mock_answer}
-        mock_client.ask.return_value = mock_response
+        mock_response.choices = {"complexity": mock_answer}
+        mock_client.system_one.return_value = mock_response
 
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("Add a feature", config, "test-key")
 
         self.assertEqual(result["classification"], "standard")
@@ -147,10 +148,10 @@ class TestClassifyTask(unittest.TestCase):
         mock_answer.choice = "standard"
         mock_answer.probabilities = {"routine": 0.4, "standard": 0.5, "complex": 0.1}
         mock_answer.confidence = 0.5
-        mock_response.answers = {"complexity": mock_answer}
-        mock_client.ask.return_value = mock_response
+        mock_response.choices = {"complexity": mock_answer}
+        mock_client.system_one.return_value = mock_response
 
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("Add a feature", config, "test-key")
 
         self.assertEqual(result["classification"], config["thresholds"]["fallback_class"])  # fallback
@@ -165,7 +166,7 @@ class TestClassifyTask(unittest.TestCase):
 
         mock_client_class.side_effect = Exception("API error")
 
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("Add a feature", config, "test-key")
 
         self.assertEqual(result["classification"], config["thresholds"]["fallback_class"])
@@ -180,7 +181,7 @@ class TestClassifyTask(unittest.TestCase):
 
         mock_client_class.side_effect = Exception("Unexpected error")
 
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("Add a feature", config, "test-key")
 
         self.assertEqual(result["classification"], config["thresholds"]["fallback_class"])
@@ -197,10 +198,10 @@ class TestClassifyTask(unittest.TestCase):
         mock_client_class.return_value = mock_client
 
         mock_response = MagicMock()
-        mock_response.answers = {}  # No complexity answer
-        mock_client.ask.return_value = mock_response
+        mock_response.choices = {}  # No complexity answer
+        mock_client.system_one.return_value = mock_response
 
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("Add a feature", config, "test-key")
 
         self.assertEqual(result["classification"], config["thresholds"]["fallback_class"])
@@ -208,7 +209,7 @@ class TestClassifyTask(unittest.TestCase):
 
     def test_custom_fallback_class(self):
         """Test using a custom fallback class."""
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         config["thresholds"]["fallback_class"] = "standard"
 
         result = classify_task("", config, None)
@@ -229,10 +230,10 @@ class TestClassifyTask(unittest.TestCase):
         mock_answer.choice = "standard"
         mock_answer.probabilities = {"routine": 0.1, "standard": 0.85, "complex": 0.05}
         mock_answer.confidence = 0.9
-        mock_response.answers = {"complexity": mock_answer}
-        mock_client.ask.return_value = mock_response
+        mock_response.choices = {"complexity": mock_answer}
+        mock_client.system_one.return_value = mock_response
 
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         config["thresholds"]["min_probability"] = 0.9  # Higher threshold
 
         result = classify_task("Add a feature", config, "test-key")
@@ -247,7 +248,7 @@ class TestOutputFormat(unittest.TestCase):
 
     def test_fallback_output_structure(self):
         """Test that fallback output has correct structure."""
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("", config, None)
 
         required_fields = [
@@ -275,10 +276,10 @@ class TestOutputFormat(unittest.TestCase):
         mock_answer.choice = "standard"
         mock_answer.probabilities = {"routine": 0.1, "standard": 0.8, "complex": 0.1}
         mock_answer.confidence = 0.85
-        mock_response.answers = {"complexity": mock_answer}
-        mock_client.ask.return_value = mock_response
+        mock_response.choices = {"complexity": mock_answer}
+        mock_client.system_one.return_value = mock_response
 
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         result = classify_task("Add a feature", config, "test-key")
 
         distribution = result["distribution"]

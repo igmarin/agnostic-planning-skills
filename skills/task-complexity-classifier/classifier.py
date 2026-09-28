@@ -7,6 +7,7 @@ Completely agnostic - outputs classification data only.
 """
 
 import argparse
+import copy
 import json
 import os
 import sys
@@ -14,13 +15,14 @@ from pathlib import Path
 from typing import Dict, Any, Optional
 
 try:
-    from typesafe import Client, Error as TypesafeError
+    from typesafe_sdk import Choice, TypeSafeClient as Client, TypeSafeError as TypesafeError
     from dotenv import load_dotenv
     TYPESAFE_AVAILABLE = True
 except ImportError:
     # Dependencies not installed - will fail gracefully at runtime
     TYPESAFE_AVAILABLE = False
     Client = None
+    Choice = None
     TypesafeError = Exception
 
 
@@ -48,7 +50,7 @@ def load_config(config_path: Optional[str] = None) -> Dict[str, Any]:
         with open(config_path, 'r') as f:
             user_config = json.load(f)
         # Merge with defaults
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         config.update(user_config)
         return config
 
@@ -57,7 +59,7 @@ def load_config(config_path: Optional[str] = None) -> Dict[str, Any]:
     if default_config_path.exists():
         with open(default_config_path, 'r') as f:
             user_config = json.load(f)
-        config = DEFAULT_CONFIG.copy()
+        config = copy.deepcopy(DEFAULT_CONFIG)
         config.update(user_config)
         return config
 
@@ -147,32 +149,28 @@ def classify_task(
 
     try:
         # Initialize Jev client
-        client = Client(api_key=api_key)
+        client = Client(api_key=api_key, timeout=float(config["api"].get("timeout", 30)))
 
-        # Build the classification question
-        questions = {
-            "complexity": {
-                "type": "choice",
-                "instructions": "Classify the complexity of this task based on effort, domain knowledge required, and number of components involved.",
-                "criteria": classes
-            }
-        }
-
-        # Call Jev API
-        response = client.ask(
-            model=config["api"]["model"],
+        # Call Jev API with a single choice question
+        response = client.system_one(
             state=task_description,
-            questions=questions
+            questions={
+                "complexity": Choice(
+                    instructions="Classify the complexity of this task based on effort, domain knowledge required, and number of components involved.",
+                    criteria=classes,
+                )
+            },
+            model=config["api"]["model"],
         )
 
         # Parse response
-        answer = response.answers.get("complexity")
+        answer = response.choices.get("complexity")
         if not answer:
             raise ValueError("No complexity answer in response")
 
         selected_class = answer.choice
         probability = answer.probabilities.get(selected_class, 0.0)
-        confidence = answer.confidence if hasattr(answer, 'confidence') else probability
+        confidence = answer.confidence
 
         # Check threshold
         min_probability = config["thresholds"]["min_probability"]
