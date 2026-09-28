@@ -1,27 +1,70 @@
-# Install or switch your active profile
+# Install skills on this computer or another one
 
-`profiles.json` defines one active project profile: `foundation`, `ruby-rails`, `elixir-phoenix`, or `rust`. Each language profile includes `foundation`.
+## The simple rule
 
-On a new computer, clone this repository once, then run the setup command. It clones the other four repositories beside it if needed, updates clean `main` checkouts, and activates the chosen profile:
+Edit skills in their source repositories under `~/Developer/Projects`. The installer copies the profile you choose into `~/.agents/skills`. Do not edit that generated copy.
+
+[Codex](https://learn.chatgpt.com/docs/build-skills), [Pi](https://pi.dev/docs/latest/skills), and [Kilo](https://kilo.ai/docs/customize/skills) all document support for `~/.agents/skills` and the project-level `.agents/skills` directory. Keep each skill in a folder whose name matches its `SKILL.md` frontmatter `name`; include a clear `description`. To use a skill, ask for it by name, for example: “Use `rails-feature` to add an export endpoint.” Each tool may also have its own shortcut for invoking skills.
+
+[Devin's setup docs](https://docs.devin.ai/onboard-devin/repo-setup) mention `.agents/skills` for repository scripts, but do not clearly describe automatic discovery of general Agent Skills. Check that Devin loads a test skill in its workspace before relying on this path there. Other tools may need their own install path; keep the skill source the same and configure only where the files are installed.
+
+## Choose a profile
+
+Choose one profile for each skills directory. Pick the profile that contains the stacks you want available together:
+
+| Profile | Includes |
+|---|---|
+| `foundation` | Planning and workflow skills |
+| `ruby-rails` | Foundation, Ruby, and Rails |
+| `ruby-rails-rust` | Foundation, Ruby, Rails, and Rust |
+| `elixir-phoenix` | Foundation and Elixir/Phoenix |
+| `rust` | Foundation and Rust |
+
+For example, use `ruby-rails-rust` on a computer where you work in both stacks. This keeps both available in Codex, Pi, and Kilo through their shared user skills directory. Use a project-level install only when it does not duplicate skills from your user profile. Each stack profile includes the same foundation skills, so the combined user profile is simpler when you switch stacks often.
+
+## Set up this computer
+
+From the Planning repository, install or switch the profile with one command:
+
+```sh
+cd ~/Developer/Projects/agnostic-planning-skills
+bash scripts/setup-profile.sh ruby-rails-rust
+```
+
+Use `foundation`, `ruby-rails`, `elixir-phoenix`, or `rust` in place of `ruby-rails-rust` when you want a different profile. The setup script updates the five source repositories from their `main` branches, then installs the selected profile into `~/.agents/skills`. It stops if it finds uncommitted changes in those repositories, except for the existing local `.clinerules` files.
+
+Run this after the profile changes have been merged to the repositories' `main` branches. If Codex, Pi, or Kilo does not show a newly installed skill, reload or restart that tool.
+
+The installer leaves unrelated skills in `~/.agents/skills` alone. If it finds a same-named skill that it does not manage, it stops rather than replace it. Use `--backup-conflicts` with `install-profile.py` only when you want that existing folder backed up before installation.
+
+Keep all five source repositories together as sibling folders. The default parent is `~/Developer/Projects`. If you use a different parent, pass it as the second argument to `setup-profile.sh`; this checkout must still be named `agnostic-planning-skills`.
+
+## Set up another computer
+
+Clone the Planning repository, then run the same setup command. The script clones the other four repositories beside it if they are missing:
 
 ```sh
 git clone https://github.com/igmarin/agnostic-planning-skills.git ~/Developer/Projects/agnostic-planning-skills
 cd ~/Developer/Projects/agnostic-planning-skills
-bash scripts/setup-profile.sh ruby-rails
+bash scripts/setup-profile.sh ruby-rails-rust
 ```
 
-This copies only the selected profile's skills into Codex's personal skills directory, `~/.agents/skills`, where Codex discovers them. Source repositories remain the source of truth; do not edit installed copies. To switch profiles, rerun the command with `foundation`, `elixir-phoenix`, or `rust`.
+Git syncs the five source repositories. Each computer has its own generated `~/.agents/skills` directory, so run setup on each computer after changing profiles or merging skill updates.
 
-For this rollout, merge the Ruby, Rails, Elixir, and Rust PRs before the Planning PR. The setup script switches clean sibling checkouts to `main` and pulls only from the matching `igmarin/<repository>` GitHub remote; it stops if other local changes are present. The existing local `.clinerules` edits are preserved.
+## Project-level install
 
-The installer records its active profile and removes only the prior profile copies it owns. Other skills in `~/.agents/skills` are left alone. On first use, it recognizes old suite entries listed in `.dotskills-manifest.json` and moves those generated mirrors into a timestamped backup at `~/.agents/skill-profile-backups/`. If a same-named skill is not known to the installer, it stops rather than overwrite it; use `--backup-conflicts` only if you want that folder preserved in the same backup location. Profile switches are serialized; rerun the setup command after an interruption to recover from its pending manifest.
+Use this when a project needs a profile that differs from your user-level profile:
 
-For a custom shared parent, keep all five repositories as direct siblings and name this checkout `agnostic-planning-skills`; pass their parent directory as the second argument to `setup-profile.sh`. Non-sibling layouts are not supported. To install into a project-specific Codex directory instead, run `python3 scripts/install-profile.py ruby-rails --projects-root PATH --output /path/to/project/.agents/skills`.
+```sh
+python3 scripts/install-profile.py elixir-phoenix \
+  --projects-root ~/Developer/Projects \
+  --output /path/to/project/.agents/skills
+```
 
-Use project-specific installs when you have different stacks open at the same time. Codex discovers `.agents/skills` in the project tree; keep the generated directory untracked if you do not want to commit skill copies.
+Codex, Pi, and Kilo scan project `.agents/skills` directories. Keep generated skill folders out of the project commit unless that project intentionally shares them. The project and user directories may both load skills. Since the stack profiles share foundation skills, prefer the combined user profile when you regularly switch stacks.
 
-On this computer, run `bash scripts/setup-profile.sh ruby-rails` to update the clean source checkouts and regenerate the profile. Profiles and generated copies are local to each computer; Git syncs the source repositories, not the generated install or Codex settings.
+## Updating a skill
 
-Old persona names are router intents: `product-owner`, `project-manager`, `tech-lead`, and `delivery-lead` map to `work-router` with that role context. The Rails, Ruby, Elixir, and Rust routers are replaced by this shared entry point.
+Edit the skill in its source repository, commit and merge the change, then rerun setup on each computer that uses it. This refreshes the generated copies without changing unrelated skills.
 
-Validate routing and clean, Codex-discoverable profile installs with `python3 scripts/validate-profiles.py`.
+See [daily skill use](calling-skills.md) for choosing a direct skill or using `work-router`.

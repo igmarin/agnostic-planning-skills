@@ -32,6 +32,14 @@
         ]
       }
     },
+    "ruby-rails-rust": {
+      "extends": "ruby-rails",
+      "repositories": {
+        "rust-core-skills": [
+          "rust-essentials", "ownership-borrowing", "type-driven-design", "error-handling"
+        ]
+      }
+    },
     "elixir-phoenix": {
       "extends": "foundation",
       "repositories": {

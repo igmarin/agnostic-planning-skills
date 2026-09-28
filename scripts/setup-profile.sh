@@ -2,14 +2,14 @@
 set -euo pipefail
 
 usage() {
-  echo "Usage: bash scripts/setup-profile.sh <foundation|ruby-rails|elixir-phoenix|rust> [projects-root]" >&2
+  echo "Usage: bash scripts/setup-profile.sh <foundation|ruby-rails|ruby-rails-rust|elixir-phoenix|rust> [projects-root]" >&2
   exit 2
 }
 
 profile="${1:-}"
 projects_root_arg="${2:-}"
 case "$profile" in
-  foundation|ruby-rails|elixir-phoenix|rust) ;;
+  foundation|ruby-rails|ruby-rails-rust|elixir-phoenix|rust) ;;
   *) usage ;;
 esac
 
