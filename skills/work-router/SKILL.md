@@ -1,6 +1,7 @@
 ---
 name: work-router
-type: orchestrator
+type: catalog
+license: MIT
 description: Route a work request to one skill in the active project profile. Use when the task crosses product, delivery, and engineering roles or the next skill is unclear.
 metadata:
   user-invocable: "true"
@@ -8,28 +9,36 @@ metadata:
 
 # Work Router
 
-Input: the request and one active profile from `profiles.json`. Read only the selected profile's skills.
+Input: the request and one active profile from `profiles.json`. Select only from that profile's expanded skill set. `directory.json` registers skills owned by this repository; stack skills are registered by their own repositories in `profiles.json`.
 
-Return exactly one next skill in this form:
+Output exactly one next-skill line:
 
-`Next skill: <profile>/<skill>`
+`Next skill: <repository>/<skill>`
 
-Add a checkpoint only when the work changes production data, security or authorization, deployment, performs an irreversible action, or depends on an unverified external API. Routine work continues without a human handoff.
+For behavior changes, add `Proof: <focused test or check>`. Add `Block: <risk>` only for migrations, security or authorization, deployment, destructive actions, or an unverified external API. Omit unused lines; routine work does not need a human handoff.
 
 ## Route by intent
 
 | Request | Select |
 |---|---|
 | Clarify a rough request or acceptance criteria | `requirements-clarifier` |
-| Draft or review a product brief | `create-prd` or `review-prd` |
-| Rank backlog, size work, plan a sprint, or report delivery | `prioritize-backlog`, `estimate-tasks`, `plan-sprint`, or `generate-status-report` |
+| Draft a product brief | `create-prd` |
+| Review a product brief | `review-prd` |
+| Rank a backlog | `prioritize-backlog` |
+| Estimate work | `estimate-tasks` |
+| Plan a sprint | `plan-sprint` |
+| Report delivery status | `generate-status-report` |
 | Draft tracker tickets | `plan-tickets` |
 | Create or update GitHub issues | `github-issue` |
-| Rails feature, review, or routine maintenance | `rails-feature`, `rails-review`, or `rails-maintenance` |
-| Elixir/Phoenix implementation | The narrowest matching domain skill; Ecto uses `ecto-essentials` |
-| Rust implementation or crate API question | `rust-essentials`; use `ownership-borrowing`, `type-driven-design`, or `error-handling` for a focused question |
-| Plain Ruby implementation | The matching Ruby pattern skill or `code-workflow` |
+| Implement a Rails feature | `rails-feature` |
+| Review Rails code | `rails-review` |
+| Perform routine Rails maintenance | `rails-maintenance` |
+| Implement Ecto/database work | `ecto-essentials` |
+| Implement other Elixir/Phoenix work | The narrowest matching domain skill; use `elixir-essentials` for general Elixir work |
+| Implement Rust work or verify a crate API | `rust-essentials` |
+| Diagnose an ownership or borrowing issue | `ownership-borrowing` |
+| Design Rust types for domain constraints | `type-driven-design` |
+| Handle Rust errors | `error-handling` |
+| Implement plain Ruby work | `code-workflow` |
 
-If a task names a specific skill, use it when it belongs to the active profile. Role words such as product owner, project manager, and tech lead refine intent; they do not start a separate workflow.
-
-Do not emit multiple next skills. The selected skill owns the task and can consult a specialist when the request actually needs one.
+If the request names a skill, use it when it belongs to the active profile. Role words such as product owner, project manager, and tech lead refine intent; they do not start a separate workflow. Do not emit alternatives or multiple next skills. The selected skill owns the task and can consult a specialist when needed.

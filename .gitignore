@@ -5,6 +5,12 @@ node_modules/
 
 # IDE / AI assistant configs (personal, not shared)
 .crush/
+.aider.conf.yml
+.cline_mcp_servers.json
+.devin/mcp_config.json
+.grok/config.toml
+.mcp.json
+.zed/settings.json
 .codex/
 .codex-plugin/
 .gemini/

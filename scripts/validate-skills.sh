@@ -127,6 +127,12 @@ while IFS= read -r skill_file; do
     check_fail "$skill_name: Missing 'type' field"
   fi
 
+  fm_type=$(awk 'BEGIN{n=0} /^---$/{n++; next} n==1 && /^type:/{sub(/^type:[[:space:]]*/, ""); print; exit}' "$skill_file")
+  case "$fm_type" in
+    atomic|catalog|persona) check_pass "$skill_name: Valid type '$fm_type'" ;;
+    *) check_fail "$skill_name: Invalid type '$fm_type' (expected atomic, catalog, or persona)" ;;
+  esac
+
   fm_name=$(awk '/^---$/{f++; next} f==1 && /^name:/{sub(/^name:[[:space:]]*/, ""); gsub(/^["'"'"']|["'"'"']$/, ""); print; exit}' "$skill_file")
   if [ -n "$fm_name" ] && [ "$fm_name" != "$skill_name" ]; then
     check_fail "$skill_name: frontmatter name ('$fm_name') does not match directory name"

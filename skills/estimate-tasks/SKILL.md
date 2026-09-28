@@ -16,7 +16,7 @@ Assign relative complexity estimates. Focus on comparison, not calendar time.
 
 ## Quick Reference
 
-- **Input:** Task list (from `generate-tasks`) or PRD requirements.
+- **Input:** A draft work-item list from `plan-tickets` or PRD requirements.
 - **Frameworks:** Story points, t-shirt sizes, time ranges.
 - **Output:** Each task annotated with estimate + confidence.
 - **Rule:** Flag uncertainty - never fabricate precision.
@@ -61,7 +61,7 @@ DO state confidence (high/medium/low) for every estimate.
 
 | Skill | When to chain |
 |-------|---------------|
-| **generate-tasks** | Estimate tasks immediately after generation |
+| `plan-tickets` | Estimate draft work items after decomposition |
 | **identify-risks** | After estimation, assess dependency and uncertainty risks |
 | **plan-sprint** | Select tickets based on capacity vs estimates |
 

@@ -1,5 +1,3 @@
 # Agnostic Planning Skills — Claude Code
 
-Read [AGENTS.md](AGENTS.md) and follow it.
-
-When a task matches a skill or persona in AGENTS.md, open that `SKILL.md` before acting.
+Follow the repository operating rules in [AGENTS.md](AGENTS.md). Use `profiles.json` and `work-router` to select skills; do not treat this file as a skill catalog.

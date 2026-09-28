@@ -43,5 +43,5 @@ Scan plans for risks backed by concrete evidence — not speculation.
 
 ## Integration
 - **estimate-tasks** — high-uncertainty tasks
-- **generate-tasks** — dependency risks after task breakdown
+- `plan-tickets` — dependency risks after draft work-item breakdown
 - **generate-status-report** — include risk updates in stakeholder reports

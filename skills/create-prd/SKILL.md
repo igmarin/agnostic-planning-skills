@@ -28,10 +28,9 @@ metadata:
 ## Output
 - Save to `/tasks/prd-<slug>.md` (kebab-case).
 - Write requirements in natural language — no code.
-- Reuse prior approval when scope is unchanged; otherwise request the specific scope decision; include next steps (e.g., "Run `generate-tasks` once approved").
+- Reuse prior approval when scope is unchanged; otherwise request the specific scope decision. After approval, use `plan-tickets` to draft tracker-ready work items.
 
 ## Integration
 | Skill | When |
 |-------|------|
-| **generate-tasks** | After PRD approved |
-| **plan-tickets** | When tracker tickets are needed from approved scope |
+| `plan-tickets` | Draft tracker-ready work items after PRD approval |

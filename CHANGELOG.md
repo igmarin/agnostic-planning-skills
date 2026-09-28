@@ -1,62 +1,44 @@
 # Changelog
-## [5.0.0] - 2026-09-26
 
-### Added
-- `work-router` selects one next skill using a profile and only the necessary proof/risk checkpoint.
-- Profile installer activates a clean set of skills in Codex's standard user directory; profile switches preserve unrelated skills and archive replaced generated copies.
+All notable changes to `agnostic-planning-skills` are recorded here.
 
-### Changed
-- Planning, Ruby/Rails, Elixir/Phoenix, and Rust skills are selected through one profile manifest.
-- README and migration guide document the one-command setup for this computer and a second computer.
-
-### Removed
-- Per-role planning personas and orchestration wrappers; use `work-router` intents instead.
-- Tracked machine-specific MCP/editor configs and bundled review binaries.
-
-
-All notable changes to `agnostic-planning-skills` will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Changed
-- Setup verifies each clean checkout's tracked upstream before pulling; profile installs serialize switches and recover after an interrupted install.
+## [5.0.0] - 2026-09-26
 
 ### Added
-- `judgment-gate` (analysis) — explicit independent go/no-go judgments on plans, backlogs, and designs; planning counterpart to `judgment-day`, bounded two-round budget, human keeps policy.
-- `llm-judgment-layer` (patterns) — app-integration pattern for LLM judgment/recommendation features: model ranks and scores, code decides; confidence gates; silent deterministic fallback; server-side key via proxy. Distilled from a production iOS integration.
-
-### Agentic execution contract
-- Preserve all 16 catalog names and paths. Keep the legacy `persona` type while distinguishing outcome-owning planning roles from the delivery workflow in composition.
-- Accept an approved PRD or concrete user-authorized brief; small bugs and local fixes bypass formal product planning. Reuse prior authorization rather than requesting it at every draft phase.
-- Delivery lead now persists objective, acceptance criteria, authorization, qualified skill identities, phase progress, artifacts, check evidence, blockers, and next action in a repository-relative checkpoint. Stack developers verify and update that checkpoint on handoff/resume.
-- Keep tracker operations and stakeholder messages within explicit authorization. Preserve real team commitments and evidence gates; never fabricate progress or acceptance.
-- Audited Markdown resource links across all 16 skill trees: no missing local link targets. Existing free validator passes; structural evidence does not substitute for behavioral execution evaluations.
-
-
-### Added
-- `scripts/validate-skills.sh` and `.github/workflows/ci.yml` — fail on missing description, description > 600 chars, `SKILL.md` > 500 lines, and `directory.json` ↔ disk drift.
-- `docs/reference/gaps.md` — missing skills, eval ownership, description-strategy conflict with `ruby-core-skills`, CI notes.
+- `work-router` selects one skill from the active profile and reports only the relevant behavior proof or high-risk checkpoint.
+- Profile installer for the planning, Ruby/Rails, Elixir/Phoenix, and Rust repositories.
 
 ### Changed
-- Flattened skills to `skills/<name>/SKILL.md` so `npx skills add` can pick all or one. Catalog moved from root `SKILL.md` to `skills/agnostic-planning-skills/`.
-- Description contract: when + triggers, target ≤ 600 / spec ceiling 1024. Locked in `docs/architecture.md`. Workflow stays in the body.
-- Slimmed all 17 `SKILL.md` descriptions (personas first). Most now ~150–300 chars.
-- `AGENTS.md` is the single host-context source. `CLAUDE.md` is a stub.
-- README, persona guide, and skill catalog each hold one catalog — not three copies.
-- `skills.sh.json` now groups `requirements-clarifier` and the four personas.
-- `github-issue` has `type: atomic` and points at `references/gh-commands.md`.
+- `profiles.json` is the install allowlist; the installer supports a clean user-level setup or project-specific skills directory.
+- `plan-tickets` drafts only; `github-issue` owns GitHub issue mutations.
+- README and migration guide explain setup and switching profiles on another computer.
 
 ### Removed
-- `merge-to-main.sh` — unused local merge shortcut.
-- `docs/04-flatten-agents-into-skills.md` — finished migration plan, now stale.
-- `skills/github-issue/README.md` and `setup.sh` — leftover OpenCode install wrappers.
+- Per-role planning personas and orchestration wrappers; use `work-router` intents.
+- Tracked machine-specific MCP/editor configs and bundled review binaries.
 
 ### Fixed
-- Architecture doc no longer treats 1024 as a budget for the entire frontmatter.
-- Docs no longer say “11 skills” (there are 12 atomics + 4 personas).
-- Agent dependencies syntax in personas (YAML list of hashes).
-- Missing `Owner` column on the `identify-risks` register.
-- `validate-skills.sh` no longer hangs on version-manager Python shims.
+- Profile switching preserves unrelated skills, archives replaced generated copies, and recovers after an interrupted install.
+
+## [4.1.0] - 2026-09-23
+
+### Added
+- `judgment-gate` for independent go/no-go judgments on plans, backlogs, and designs.
+- `llm-judgment-layer` for app integration patterns where code retains decision authority.
+- `scripts/validate-skills.sh` and CI checks for frontmatter, description size, file length, and registry-to-disk drift.
+- `docs/reference/gaps.md` for missing skills, evaluation ownership, and CI notes.
+
+### Changed
+- Flattened skills to `skills/<name>/SKILL.md` and grouped the install catalog in `skills.sh.json`.
+- Kept workflow guidance in skill bodies and shortened descriptions.
+- Consolidated host guidance and updated the skill catalog, calling docs, and profile references.
+
+### Removed
+- Unused local merge shortcuts, completed migration notes, and OpenCode install wrappers.
+
+### Fixed
+- Clarified frontmatter size limits, agent dependency syntax, risk-register ownership, and Python version-manager handling in validation.

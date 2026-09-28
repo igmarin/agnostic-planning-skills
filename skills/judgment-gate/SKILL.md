@@ -76,6 +76,6 @@ terminal line: `DECISION: PROCEED ✅`, `DECISION: REVISE 🔁`, or
 
 | Skill | When to chain |
 |-------|---------------|
-| `review-prd` | Gate a PRD before `generate-tasks` |
+| `review-prd` | Gate a PRD before `plan-tickets` drafts work items |
 | `prioritize-backlog` | Independent judgment on a ranking |
 | `llm-judgment-layer` | Same discipline applied inside an app |
