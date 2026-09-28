@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Setup verifies each clean checkout's tracked upstream before pulling; profile installs serialize switches and recover after an interrupted install.
+
 ### Added
 - `judgment-gate` (analysis) — explicit independent go/no-go judgments on plans, backlogs, and designs; planning counterpart to `judgment-day`, bounded two-round budget, human keeps policy.
 - `llm-judgment-layer` (patterns) — app-integration pattern for LLM judgment/recommendation features: model ranks and scores, code decides; confidence gates; silent deterministic fallback; server-side key via proxy. Distilled from a production iOS integration.

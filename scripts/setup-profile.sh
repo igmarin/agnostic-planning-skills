@@ -35,6 +35,31 @@ repositories=(
   rails-agent-skills
 )
 
+verify_trusted_upstream() {
+  local checkout="$1" repository="$2" upstream remote remote_url expected
+  expected="igmarin/$repository"
+
+  if ! upstream="$(git -C "$checkout" rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null)"; then
+    echo "Setup stopped: $repository/main has no configured upstream." >&2
+    exit 1
+  fi
+  remote="${upstream%%/*}"
+  if ! remote_url="$(git -C "$checkout" remote get-url "$remote" 2>/dev/null)"; then
+    echo "Setup stopped: cannot read the $remote remote for $repository." >&2
+    exit 1
+  fi
+
+  case "$remote_url" in
+    "https://github.com/$expected"|"https://github.com/$expected.git"|\
+    "git@github.com:$expected"|"git@github.com:$expected.git"|\
+    "ssh://git@github.com/$expected"|"ssh://git@github.com/$expected.git") ;;
+    *)
+      echo "Setup stopped: $repository/main tracks a non-canonical source; expected igmarin/$repository on GitHub." >&2
+      exit 1
+      ;;
+  esac
+}
+
 for repository in "${repositories[@]}"; do
   checkout="$projects_root/$repository"
   if [[ -e "$checkout" ]]; then
@@ -55,6 +80,7 @@ for repository in "${repositories[@]}"; do
       echo "Switching clean $repository checkout from '${branch:-detached HEAD}' to main."
       git -C "$checkout" switch main
     fi
+    verify_trusted_upstream "$checkout" "$repository"
     git -C "$checkout" pull --ff-only
     if [[ "$repository" == "agnostic-planning-skills" && ! -f "$planning_repo/scripts/install-profile.py" ]]; then
       echo "Setup stopped: merge the profile setup PR before installing profiles." >&2

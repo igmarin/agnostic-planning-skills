@@ -2,6 +2,7 @@
 """Install one skill profile into a Codex-discoverable skills directory."""
 
 import argparse
+import contextlib
 import json
 import os
 import shutil
@@ -12,6 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ACTIVE_MANIFEST = ".skill-profile.json"
+PENDING_MANIFEST = ".skill-profile-pending.json"
 LEGACY_MANIFEST = ".dotskills-manifest.json"
 
 
@@ -77,12 +79,66 @@ def read_manifest(path, label):
         data = json.loads(path.read_text())
     except (OSError, json.JSONDecodeError) as error:
         raise ValueError(f"cannot read {label}: {path}") from error
+    if not isinstance(data, dict):
+        raise ValueError(f"invalid {label}: {path}")
     skills = data.get("skills")
     if not isinstance(skills, list) or not all(isinstance(name, str) for name in skills):
         raise ValueError(f"invalid skills list in {label}: {path}")
     if any(not name or Path(name).name != name or name in {".", ".."} for name in skills):
         raise ValueError(f"invalid skill directory name in {label}: {path}")
     return data
+
+
+@contextlib.contextmanager
+def install_lock(output_root):
+    """Serialize profile switches that target the same skills directory."""
+    lock_path = output_root.parent / f".{output_root.name}.profile-install.lock"
+    # Keep this inode: removing it can split concurrent waiters across lock files.
+    if lock_path.is_symlink():
+        raise ValueError(f"profile install lock must not be a symlink: {lock_path}")
+    descriptor = os.open(
+        lock_path,
+        os.O_CREAT | os.O_RDWR | getattr(os, "O_NOFOLLOW", 0),
+        0o600,
+    )
+    with os.fdopen(descriptor, "r+") as lock_file:
+        if os.name == "nt":
+            import msvcrt
+
+            lock_file.seek(0, os.SEEK_END)
+            if lock_file.tell() == 0:
+                lock_file.write("\0")
+                lock_file.flush()
+            lock_file.seek(0)
+            msvcrt.locking(lock_file.fileno(), msvcrt.LK_LOCK, 1)
+            unlock = lambda: msvcrt.locking(lock_file.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
+            unlock = lambda: fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
+        try:
+            yield
+        finally:
+            unlock()
+
+
+def write_json_atomic(path, data):
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            delete=False,
+        ) as file:
+            temporary = Path(file.name)
+            file.write(json.dumps(data, indent=2) + "\n")
+        temporary.replace(path)
+    finally:
+        if temporary and temporary.exists():
+            temporary.unlink()
 
 
 def legacy_skill_names(output_root, repositories):
@@ -120,12 +176,6 @@ def archive_paths(output_root, names):
 
 def install(profile_name, output_root, projects_root, backup_conflicts=False):
     profiles = load_profiles()
-    sources = source_directories(profile_name, projects_root)
-    repositories = {repository for profile in profiles.values() for repository in profile.get("repositories", {})}
-    # Include inherited repositories when finding legacy entries.
-    for name in profiles:
-        repositories.update(expand(name, profiles))
-
     output_root = output_root.expanduser()
     if output_root.is_symlink():
         raise ValueError("Codex skills directory must not be a symlink")
@@ -133,15 +183,31 @@ def install(profile_name, output_root, projects_root, backup_conflicts=False):
         raise ValueError(f"Codex skills path is not a directory: {output_root}")
     output_root.mkdir(parents=True, exist_ok=True)
 
+    with install_lock(output_root):
+        return install_locked(profile_name, output_root, projects_root, backup_conflicts, profiles)
+
+
+def install_locked(profile_name, output_root, projects_root, backup_conflicts, profiles):
+    sources = source_directories(profile_name, projects_root)
+    repositories = {repository for profile in profiles.values() for repository in profile.get("repositories", {})}
+    # Include inherited repositories when finding legacy entries.
+    for name in profiles:
+        repositories.update(expand(name, profiles))
+
     active_path = output_root / ACTIVE_MANIFEST
+    pending_path = output_root / PENDING_MANIFEST
     if active_path.is_symlink():
         raise ValueError(f"active profile manifest must not be a symlink: {active_path}")
+    if pending_path.is_symlink():
+        raise ValueError(f"pending profile manifest must not be a symlink: {pending_path}")
     previous = read_manifest(active_path, "active profile manifest") if active_path.exists() else None
+    pending = read_manifest(pending_path, "pending profile manifest") if pending_path.exists() else None
     previous_names = set(previous["skills"]) if previous else set()
+    pending_names = set(pending["skills"]) if pending else set()
     selected_names = {name for name, _ in sources}
 
-    legacy_names = legacy_skill_names(output_root, repositories) - previous_names
-    managed_names = previous_names | legacy_names
+    legacy_names = legacy_skill_names(output_root, repositories) - previous_names - pending_names
+    managed_names = previous_names | pending_names | legacy_names
     conflicts = {
         name for name in selected_names
         if (output_root / name).exists() or (output_root / name).is_symlink()
@@ -153,7 +219,7 @@ def install(profile_name, output_root, projects_root, backup_conflicts=False):
             "Move them aside yourself or rerun with --backup-conflicts to preserve them in a backup."
         )
 
-    archive_names = (previous_names - selected_names) | legacy_names
+    archive_names = managed_names - selected_names
     if backup_conflicts:
         archive_names |= conflicts
 
@@ -162,6 +228,10 @@ def install(profile_name, output_root, projects_root, backup_conflicts=False):
         for name, source in sources:
             shutil.copytree(source, staged / name)
 
+        recovery_names = managed_names | selected_names
+        if backup_conflicts:
+            recovery_names |= conflicts
+        write_json_atomic(pending_path, {"profile": profile_name, "skills": sorted(recovery_names)})
         archived = archive_paths(output_root, archive_names)
         for name, source in sources:
             destination = output_root / name
@@ -178,9 +248,8 @@ def install(profile_name, output_root, projects_root, backup_conflicts=False):
         "profile": profile_name,
         "skills": sorted(selected_names),
     }
-    temporary_manifest = output_root / f"{ACTIVE_MANIFEST}.tmp"
-    temporary_manifest.write_text(json.dumps(manifest, indent=2) + "\n")
-    temporary_manifest.replace(active_path)
+    write_json_atomic(active_path, manifest)
+    pending_path.unlink(missing_ok=True)
     return output_root, len(sources), archived
 
 

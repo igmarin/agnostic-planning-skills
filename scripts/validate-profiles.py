@@ -211,8 +211,31 @@ with tempfile.TemporaryDirectory(prefix="skill-profile-switch-check-") as temp_d
             expected = set(active["skills"]) | {"personal-tool"}
             if installed != expected:
                 errors.append("profile switch left old profile skills active or removed an unrelated skill")
-            if not list((output.parent / "skill-profile-backups").glob("*/rails-feature")):
-                errors.append("profile switch did not archive retired profile skills")
+        if not list((output.parent / "skill-profile-backups").glob("*/rails-feature")):
+            errors.append("profile switch did not archive retired profile skills")
+
+        interrupted_skill = output / "rails-feature"
+        interrupted_skill.mkdir(exist_ok=True)
+        (interrupted_skill / "SKILL.md").write_text("partially installed skill\n")
+        (output / ".skill-profile-pending.json").write_text(json.dumps({
+            "profile": "ruby-rails",
+            "skills": ["rails-feature", "rails-review"],
+        }))
+
+        recovered = activate("foundation")
+        if recovered.returncode:
+            errors.append(f"profile recovery: {recovered.stderr.strip()}")
+        else:
+            active = json.loads((output / ".skill-profile.json").read_text())
+            installed = {path.name for path in output.iterdir() if path.is_dir() and (path / "SKILL.md").is_file()}
+            expected = set(active["skills"]) | {"personal-tool"}
+            if active.get("profile") != "foundation" or installed != expected:
+                errors.append("profile recovery left a mixed or incomplete skill set")
+            if (output / ".skill-profile-pending.json").exists():
+                errors.append("profile recovery left its pending marker behind")
+            recovered_backups = (output.parent / "skill-profile-backups").glob("*/rails-feature/SKILL.md")
+            if not any(path.read_text() == "partially installed skill\n" for path in recovered_backups):
+                errors.append("profile recovery did not archive the interrupted skill")
 
 elixir_skills = PROJECTS / "elixir-phoenix-skills" / "skills"
 fp_copies = sum(path.read_text(errors="ignore").count("Canonical FP bar:") for path in elixir_skills.glob("*/SKILL.md"))
