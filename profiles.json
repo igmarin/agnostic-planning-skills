@@ -7,7 +7,8 @@
           "work-router", "requirements-clarifier",
           "create-prd", "review-prd", "plan-tickets", "estimate-tasks",
           "prioritize-backlog", "plan-sprint", "create-retrospective",
-          "identify-risks", "generate-status-report", "github-issue"
+          "identify-risks", "generate-status-report", "github-issue",
+          "task-complexity-classifier"
         ]
       }
     },

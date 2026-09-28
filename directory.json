@@ -1,8 +1,8 @@
 {
   "name": "igmarin/agnostic-planning-skills",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "license": "MIT",
-  "summary": "A profile-scoped set of 12 planning skills with two optional specialist cards.",
+  "summary": "A profile-scoped set of 13 planning skills with two optional specialist cards.",
   "skills": {
     "create-prd": { "path": "skills/create-prd/SKILL.md" },
     "review-prd": { "path": "skills/review-prd/SKILL.md" },
@@ -17,6 +17,7 @@
     "github-issue": { "path": "skills/github-issue/SKILL.md" },
     "judgment-gate": { "path": "skills/judgment-gate/SKILL.md" },
     "llm-judgment-layer": { "path": "skills/llm-judgment-layer/SKILL.md" },
+    "task-complexity-classifier": { "path": "skills/task-complexity-classifier/SKILL.md" },
     "work-router": { "path": "skills/work-router/SKILL.md" }
   }
 }

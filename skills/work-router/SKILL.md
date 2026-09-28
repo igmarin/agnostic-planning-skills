@@ -45,3 +45,7 @@ Use a narrower domain skill from the active profile when one matches; otherwise 
 | Implement plain Ruby work | `code-workflow` |
 
 If the request names a skill, use it when it belongs to the active profile. Role words such as product owner, project manager, and tech lead refine intent; they do not start a separate workflow. Do not emit alternatives or multiple next skills. The selected skill owns the task and can consult a specialist when needed.
+
+## Optional Complexity Classification
+
+When the request includes "Classify complexity before routing" or similar intent, optionally call `task-complexity-classifier` before routing to inform the routing decision. Use the classification output to refine skill selection (e.g., complex tasks may warrant specialist skills). This is optional; proceed with normal routing if classification is unavailable or the request does not specify it.

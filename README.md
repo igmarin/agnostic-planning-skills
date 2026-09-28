@@ -16,7 +16,7 @@ See [profile setup](docs/profile-migration.md) for another computer, profile swi
 
 ## Skills
 
-The profiles cover clarification, PRDs, draft tickets, estimation, prioritization, sprints, retrospectives, risk, status, GitHub issues, and routing. `plan-tickets` is draft-only; `github-issue` is the only issue-mutation skill. `judgment-gate` and `llm-judgment-layer` remain specialist source cards and are not installed by a profile.
+The profiles cover clarification, PRDs, draft tickets, estimation, prioritization, sprints, retrospectives, risk, status, GitHub issues, routing, and task complexity classification. `plan-tickets` is draft-only; `github-issue` is the only issue-mutation skill. `task-complexity-classifier` uses Jev (TypeSafe AI) to assess task complexity and works across all AI agents. `judgment-gate` and `llm-judgment-layer` remain specialist source cards and are not installed by a profile.
 
 ## Migration
 

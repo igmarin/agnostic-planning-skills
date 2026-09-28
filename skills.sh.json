@@ -25,7 +25,7 @@
     {
       "title": "Specialists",
       "description": "Optional independent-judgment and LLM integration cards.",
-      "skills": ["judgment-gate", "llm-judgment-layer"]
+      "skills": ["judgment-gate", "llm-judgment-layer", "task-complexity-classifier"]
     }
   ]
 }

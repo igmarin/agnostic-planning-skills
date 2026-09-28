@@ -1,0 +1,15 @@
+{
+  "classes": {
+    "routine": "Simple, mechanical work with clear steps and minimal domain knowledge",
+    "standard": "Moderate complexity requiring some domain knowledge or multiple components",
+    "complex": "High complexity requiring deep reasoning, multiple domains, or significant refactoring"
+  },
+  "thresholds": {
+    "min_probability": 0.8,
+    "fallback_class": "complex"
+  },
+  "api": {
+    "model": "jev-latest",
+    "timeout": 30
+  }
+}
