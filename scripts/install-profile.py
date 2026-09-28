@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install one skill profile into a Codex-discoverable skills directory."""
+"""Install one skill profile into an Agent Skills directory."""
 
 import argparse
 import contextlib
@@ -183,9 +183,9 @@ def install(profile_name, output_root, projects_root, backup_conflicts=False):
     profiles = load_profiles()
     output_root = output_root.expanduser()
     if output_root.is_symlink():
-        raise ValueError("Codex skills directory must not be a symlink")
+        raise ValueError("Agent Skills directory must not be a symlink")
     if output_root.exists() and not output_root.is_dir():
-        raise ValueError(f"Codex skills path is not a directory: {output_root}")
+        raise ValueError(f"Agent Skills path is not a directory: {output_root}")
     output_root.mkdir(parents=True, exist_ok=True)
 
     with install_lock(output_root):
@@ -280,7 +280,7 @@ def main():
         "--output",
         type=Path,
         default=Path.home() / ".agents" / "skills",
-        help="Codex skills directory (default: ~/.agents/skills)",
+        help="Agent Skills directory (default: ~/.agents/skills)",
     )
     parser.add_argument(
         "--projects-root",

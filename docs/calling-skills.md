@@ -1,13 +1,16 @@
 # Daily invocation
 
-1. Set the active profile to `foundation`, `ruby-rails`, `elixir-phoenix`, or `rust` by running `python3 scripts/install-profile.py <profile>` once.
-2. If the task is clear, invoke one skill from that profile directly.
-3. If role or domain is unclear, give the task and profile to `work-router`; it returns one next skill and only a necessary proof/risk checkpoint.
+Install one profile for the stacks you use. It stays active until you switch it; you do not need to name the profile on every task.
+
+- If you know the right skill, ask for it directly: “Use `rails-feature` to add an export endpoint.”
+- If you do not know where to start, ask `work-router` with the active profile. It names one skill. Then ask that skill to do the work.
+- Say the skill name in your request when you want a specific skill. Command shortcuts differ between tools, but the skill files are shared.
 
 Examples:
 
-- “Profile `ruby-rails`: add an export endpoint.” → `rails-feature`
-- “Profile `elixir-phoenix`: add an Ecto preload.” → `ecto-essentials`
-- “Profile `rust`: use this new crate API.” → `rust-essentials`, verify the exact-version API before using it.
+- “Use `rails-feature` to add an export endpoint.”
+- “Use `work-router` with profile `ruby-rails-rust` to diagnose this borrow checker error.” It selects `ownership-borrowing`; then ask that skill to handle the issue.
+- “Use `ecto-essentials` to add an Ecto preload.”
+- “Use `rust-essentials` to integrate this new crate API.” Verify the API against the exact crate version before using it.
 
-Do not install the full flat catalog. The installer writes the chosen profile as direct skill folders under Codex's standard user skills directory. Read optional references only when the selected skill asks for them.
+Read optional references only when the selected skill asks for them.

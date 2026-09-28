@@ -1,18 +1,18 @@
 # Agnostic Planning Skills
 
-Planning skills for personal and client work. The active profile combines the planning foundation with one stack: `ruby-rails`, `elixir-phoenix`, or `rust`.
+Planning skills for personal and client work. Profiles combine the planning foundation with the language skills you want available. Choose one stack, or use `ruby-rails-rust` to keep Ruby/Rails and Rust available together.
 
 ## Use
 
-Choose one active profile per Codex skills directory: `foundation`, `ruby-rails`, `elixir-phoenix`, or `rust`. Use the user directory for one default stack, or install per project when you work across stacks at once. Each profile installs only its skills, avoiding same-name collisions. Start uncertain or cross-role requests with `work-router`; invoke a specialist directly when the task is clear.
+Choose one active profile per skills directory: `foundation`, `ruby-rails`, `ruby-rails-rust`, `elixir-phoenix`, or `rust`. For the same skills in multiple coding agents, install once to `~/.agents/skills`; Codex, Pi, and Kilo document support for this shared location. Use `work-router` when the next skill is unclear; invoke a specialist directly when the task is clear.
 
 Install or switch profiles with one command from this repo. It updates clean `main` checkouts of all five sibling repos, then activates the selected profile:
 
 ```sh
-bash scripts/setup-profile.sh ruby-rails
+bash scripts/setup-profile.sh ruby-rails-rust
 ```
 
-See [profile setup](docs/profile-migration.md) to configure another computer or use a project-specific skills directory.
+See [profile setup](docs/profile-migration.md) for another computer, profile switching, and tool compatibility.
 
 ## Skills
 
