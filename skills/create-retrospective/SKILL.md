@@ -53,4 +53,4 @@ Section order: header → What Went Well → What Didn't → Action Items → Me
 |-------|---------------|
 | **plan-sprint** | Review the sprint plan vs what was actually delivered |
 | **generate-status-report** | Include retrospective insights in the next status report |
-| **project-manager** | Feed action items into the execution tracking pipeline |
+| `work-router` with `project-manager` intent | Focus the retrospective on delivery follow-through; it does not select a separate persona |

@@ -46,6 +46,6 @@ Refer to the full checklist in the skill’s reference documentation.
 ## Integration
 | Skill | When |
 |-------|------|
-| **create-prd** | Review immediately after PRD generation |
-| **generate-tasks** | After review passes |
-| **tech-lead** persona | For deeper feasibility assessment |
+| `create-prd` | Review after drafting |
+| `plan-tickets` | Draft tracker-ready tickets after review passes |
+| `work-router` with `tech-lead` intent | Add a feasibility focus to the review; it does not select a separate persona |

@@ -90,4 +90,4 @@ the key server-side and forwards verbatim — no rewriting, no logging.
 | Skill | When to chain |
 |-------|---------------|
 | `judgment-gate` | Apply the same discipline to planning decisions |
-| `tech-lead` | Feasibility review of the proposed integration |
+| `work-router` with `tech-lead` intent | Feasibility review of the proposed integration from the active profile |

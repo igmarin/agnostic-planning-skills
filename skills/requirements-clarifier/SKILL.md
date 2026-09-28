@@ -63,4 +63,4 @@ One-paragraph synthesis.
 
 ## Integration
 - **create-prd** after clarification
-- **product-owner** persona for discovery phase
+- The `product-owner` intent in `work-router` can focus discovery goals; `requirements-clarifier` owns the clarification output.

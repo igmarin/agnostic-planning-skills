@@ -1,65 +1,22 @@
 {
   "name": "igmarin/agnostic-planning-skills",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "license": "MIT",
-  "summary": "A curated library of 14 language-agnostic planning skills and 4 personas for technical project management, product planning, and agile execution. Skills are typed as `atomic` (single-purpose) or `persona` (role-based orchestrator).",
+  "summary": "A profile-scoped set of 12 planning skills with two optional specialist cards.",
   "skills": {
-    "create-prd": {
-      "path": "skills/create-prd/SKILL.md"
-    },
-    "review-prd": {
-      "path": "skills/review-prd/SKILL.md"
-    },
-    "generate-tasks": {
-      "path": "skills/generate-tasks/SKILL.md"
-    },
-    "plan-tickets": {
-      "path": "skills/plan-tickets/SKILL.md"
-    },
-    "estimate-tasks": {
-      "path": "skills/estimate-tasks/SKILL.md"
-    },
-    "prioritize-backlog": {
-      "path": "skills/prioritize-backlog/SKILL.md"
-    },
-    "plan-sprint": {
-      "path": "skills/plan-sprint/SKILL.md"
-    },
-    "create-retrospective": {
-      "path": "skills/create-retrospective/SKILL.md"
-    },
-    "generate-status-report": {
-      "path": "skills/generate-status-report/SKILL.md"
-    },
-    "identify-risks": {
-      "path": "skills/identify-risks/SKILL.md"
-    },
-    "requirements-clarifier": {
-      "path": "skills/requirements-clarifier/SKILL.md"
-    },
-    "judgment-gate": {
-      "path": "skills/judgment-gate/SKILL.md"
-    },
-    "github-issue": {
-      "path": "skills/github-issue/SKILL.md"
-    },
-    "llm-judgment-layer": {
-      "path": "skills/llm-judgment-layer/SKILL.md"
-    },
-    "product-owner": {
-      "path": "skills/product-owner/SKILL.md"
-    },
-    "project-manager": {
-      "path": "skills/project-manager/SKILL.md"
-    },
-    "tech-lead": {
-      "path": "skills/tech-lead/SKILL.md"
-    },
-    "delivery-lead": {
-      "path": "skills/delivery-lead/SKILL.md"
-    },
-    "agnostic-planning-skills": {
-      "path": "skills/agnostic-planning-skills/SKILL.md"
-    }
+    "create-prd": { "path": "skills/create-prd/SKILL.md" },
+    "review-prd": { "path": "skills/review-prd/SKILL.md" },
+    "plan-tickets": { "path": "skills/plan-tickets/SKILL.md" },
+    "estimate-tasks": { "path": "skills/estimate-tasks/SKILL.md" },
+    "prioritize-backlog": { "path": "skills/prioritize-backlog/SKILL.md" },
+    "plan-sprint": { "path": "skills/plan-sprint/SKILL.md" },
+    "create-retrospective": { "path": "skills/create-retrospective/SKILL.md" },
+    "generate-status-report": { "path": "skills/generate-status-report/SKILL.md" },
+    "identify-risks": { "path": "skills/identify-risks/SKILL.md" },
+    "requirements-clarifier": { "path": "skills/requirements-clarifier/SKILL.md" },
+    "github-issue": { "path": "skills/github-issue/SKILL.md" },
+    "judgment-gate": { "path": "skills/judgment-gate/SKILL.md" },
+    "llm-judgment-layer": { "path": "skills/llm-judgment-layer/SKILL.md" },
+    "work-router": { "path": "skills/work-router/SKILL.md" }
   }
 }

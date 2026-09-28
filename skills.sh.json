@@ -3,83 +3,29 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Catalog",
-      "description": "Pack entry point. Routes to planning skills and personas.",
-      "skills": [
-        "agnostic-planning-skills"
-      ]
+      "title": "Router",
+      "description": "Routes one task to one skill in the active profile.",
+      "skills": ["work-router"]
     },
     {
-      "title": "PRD",
-      "description": "Skills for creating and reviewing Product Requirements Documents.",
-      "skills": [
-        "create-prd",
-        "review-prd"
-      ]
+      "title": "Requirements",
+      "description": "Clarify, create, and review product requirements.",
+      "skills": ["requirements-clarifier", "create-prd", "review-prd"]
     },
     {
-      "title": "Task Management",
-      "description": "Skills for task generation, ticket planning, and effort estimation.",
-      "skills": [
-        "generate-tasks",
-        "plan-tickets",
-        "estimate-tasks"
-      ]
+      "title": "Planning",
+      "description": "Draft and prioritize work, plan sprints, and estimate delivery.",
+      "skills": ["plan-tickets", "estimate-tasks", "prioritize-backlog", "plan-sprint"]
     },
     {
-      "title": "Backlog",
-      "description": "Skills for backlog prioritization.",
-      "skills": [
-        "prioritize-backlog"
-      ]
+      "title": "Delivery",
+      "description": "Retrospectives, risks, status, and GitHub issue operations.",
+      "skills": ["create-retrospective", "identify-risks", "generate-status-report", "github-issue"]
     },
     {
-      "title": "Ceremony",
-      "description": "Skills for sprint planning and retrospectives.",
-      "skills": [
-        "plan-sprint",
-        "create-retrospective"
-      ]
-    },
-    {
-      "title": "Execution",
-      "description": "Skills for risk identification and status reporting.",
-      "skills": [
-        "identify-risks",
-        "generate-status-report"
-      ]
-    },
-    {
-      "title": "Analysis",
-      "description": "Skills for clarifying vague requests into requirements.",
-      "skills": [
-        "requirements-clarifier",
-        "judgment-gate"
-      ]
-    },
-    {
-      "title": "GitHub Issues",
-      "description": "Skills for GitHub issue management and project board integration.",
-      "skills": [
-        "github-issue"
-      ]
-    },
-    {
-      "title": "Personas",
-      "description": "Role orchestrators that chain atomic skills with approval gates.",
-      "skills": [
-        "product-owner",
-        "project-manager",
-        "tech-lead",
-        "delivery-lead"
-      ]
-    },
-    {
-      "title": "Patterns",
-      "description": "Reusable architecture patterns for AI-assisted features.",
-      "skills": [
-        "llm-judgment-layer"
-      ]
+      "title": "Specialists",
+      "description": "Optional independent-judgment and LLM integration cards.",
+      "skills": ["judgment-gate", "llm-judgment-layer"]
     }
   ]
 }

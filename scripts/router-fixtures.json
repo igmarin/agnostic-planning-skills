@@ -1,0 +1,11 @@
+[
+  {"id":"planning-prd","profile":"foundation","task":"Turn these notes into a concise product brief","expected_intent":"Draft a product brief","repository":"agnostic-planning-skills","expected_skill":"create-prd","checkpoint":"none"},
+  {"id":"planning-prd-review","profile":"foundation","task":"Review this product brief for clarity and testability","expected_intent":"Review a product brief","repository":"agnostic-planning-skills","expected_skill":"review-prd","checkpoint":"none"},
+  {"id":"rails-feature","profile":"ruby-rails","task":"Add a CSV export endpoint to the Rails app","expected_intent":"Implement a Rails feature","repository":"rails-agent-skills","expected_skill":"rails-feature","checkpoint":"none"},
+  {"id":"rails-maintenance","profile":"ruby-rails","task":"Refactor a Rails service for readability without changing behavior","expected_intent":"Perform routine Rails maintenance","repository":"rails-agent-skills","expected_skill":"rails-maintenance","checkpoint":"none"},
+  {"id":"rails-review","profile":"ruby-rails","task":"Review the Rails export endpoint for authorization and edge cases","expected_intent":"Review Rails code","repository":"rails-agent-skills","expected_skill":"rails-review","checkpoint":"high-risk"},
+  {"id":"ecto-feature","profile":"elixir-phoenix","task":"Add an Ecto query with a preload for invoices","expected_intent":"Implement Ecto/database work","repository":"elixir-phoenix-skills","expected_skill":"ecto-essentials","checkpoint":"none"},
+  {"id":"elixir-baseline","profile":"elixir-phoenix","task":"Add an Elixir module to normalize invoice labels","expected_intent":"Implement other Elixir/Phoenix work","repository":"elixir-phoenix-skills","expected_skill":"elixir-essentials","checkpoint":"none"},
+  {"id":"rust-crate-api","profile":"rust","task":"Use a new crate API from the pinned dependency","expected_intent":"Implement Rust work or verify a crate API","repository":"rust-core-skills","expected_skill":"rust-essentials","checkpoint":"verify-api"},
+  {"id":"production-migration","profile":"ruby-rails","task":"Review a production Rails migration that changes a table with existing rows","expected_intent":"Plan or review a Rails migration","repository":"rails-agent-skills","expected_skill":"review-migration","checkpoint":"high-risk"}
+]

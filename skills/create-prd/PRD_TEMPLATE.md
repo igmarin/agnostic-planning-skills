@@ -59,6 +59,4 @@ Areas this feature will likely touch (no code — discovery only):
 
 ## Next Steps
 
-Recommended next step: **generate-tasks** — break this PRD into implementation tasks with TDD gates.
-
-Alternative chain targets: `plan-tickets` (tracker-ready tickets).
+Recommended next step: **plan-tickets** — draft tracker-ready work items from the approved PRD. This does not create tracker issues.

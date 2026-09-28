@@ -127,6 +127,12 @@ while IFS= read -r skill_file; do
     check_fail "$skill_name: Missing 'type' field"
   fi
 
+  fm_type=$(awk 'BEGIN{n=0} /^---$/{n++; next} n==1 && /^type:/{sub(/^type:[[:space:]]*/, ""); print; exit}' "$skill_file")
+  case "$fm_type" in
+    atomic|catalog|persona) check_pass "$skill_name: Valid type '$fm_type'" ;;
+    *) check_fail "$skill_name: Invalid type '$fm_type' (expected atomic, catalog, or persona)" ;;
+  esac
+
   fm_name=$(awk '/^---$/{f++; next} f==1 && /^name:/{sub(/^name:[[:space:]]*/, ""); gsub(/^["'"'"']|["'"'"']$/, ""); print; exit}' "$skill_file")
   if [ -n "$fm_name" ] && [ "$fm_name" != "$skill_name" ]; then
     check_fail "$skill_name: frontmatter name ('$fm_name') does not match directory name"
@@ -169,28 +175,6 @@ while IFS= read -r entry; do
     check_fail "directory.json key '$name' does not match path dir '$dir_name' ($path)"
   fi
 done < <(jq -r '.skills | to_entries[] | "\(.key)|\(.value.path)"' "$DIRECTORY_FILE")
-
-PERSONA_PATHS=$(find skills -name SKILL.md | while IFS= read -r f; do
-  grep -q '^type: persona' "$f" && echo "$f"
-done | sort)
-if [ -n "$PERSONA_PATHS" ]; then
-  info "Persona SKILL.md files:"
-  persona_count=0
-  persona_type_matches=0
-  while IFS= read -r path; do
-    [ -z "$path" ] && continue
-    info "  $path"
-    persona_count=$((persona_count + 1))
-    if grep -q "^type: persona" "$path" 2>/dev/null; then
-      persona_type_matches=$((persona_type_matches + 1))
-    fi
-  done <<< "$PERSONA_PATHS"
-  if [ "$persona_type_matches" -eq "$persona_count" ]; then
-    check_pass "All persona SKILL.md files have type: persona"
-  else
-    check_fail "Some persona SKILL.md files missing type: persona ($persona_type_matches/$persona_count)"
-  fi
-fi
 
 section "Description size and structure"
 
@@ -240,16 +224,6 @@ PY
     check_pass "$skill_name: SKILL.md ${body_lines} lines"
   fi
 
-  for heading in "Quick Reference" "HARD-GATE" "Core Process" "Output Style" "Integration"; do
-    if grep -Eq "^## ${heading}" "$skill_file" || \
-       { [ "$heading" = "Core Process" ] && grep -Eq "^## (Workflow|Process|Steps)" "$skill_file"; } || \
-       { [ "$heading" = "Output Style" ] && grep -Eq "^## Output" "$skill_file"; } || \
-       { [ "$heading" = "HARD-GATE" ] && grep -Eq "HARD GATE|HARD-GATE|🔒 \*\*Gate" "$skill_file"; }; then
-      check_pass "$skill_name: has ${heading}"
-    else
-      warn "$skill_name: missing ## ${heading} (warning)"
-    fi
-  done
 done < <(printf '%s\n' "$DISK_SKILL_FILES_CACHE")
 
 section "skills.sh.json ↔ directory.json Sync"
