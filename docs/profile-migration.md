@@ -52,6 +52,16 @@ grep -c '"<skill-name>"' ~/.agents/.skill-lock.json
 
 A count of `0` means the skill was never installed.
 
+## Personal defaults on every computer
+
+One command installs the default skills (`task-complexity-classifier`, `github-issue`, `i-have-adhd`, and all `ponytail*`) for Claude Code, Codex, Devin, Antigravity, Cline, Kilo, Pi, and Zed, and installs the classifier's Python dependencies. It is safe to re-run.
+
+```sh
+bash scripts/bootstrap-defaults.sh
+```
+
+Override the agents with `SKILLS_AGENTS="claude-code codex"`. Skip the Python step with `--no-python-deps`. The script never writes `TYPESAFE_API_KEY`; export it in `~/.zshrc` on each computer.
+
 ## Skills that need setup: `task-complexity-classifier`
 
 This skill calls Jev (TypeSafe AI). Installing it is not enough to get real classifications:
