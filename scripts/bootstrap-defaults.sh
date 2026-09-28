@@ -10,6 +10,8 @@ agents="${SKILLS_AGENTS:-claude-code codex devin antigravity cline kilo pi zed}"
 install_python_deps=1
 [[ "${1:-}" == "--no-python-deps" ]] && install_python_deps=0
 
+read -ra agent_list <<<"$agents"
+
 command -v npx >/dev/null || { echo "npx not found: install Node.js first." >&2; exit 1; }
 
 # source | skills ('*' = every skill in the repo)
@@ -20,22 +22,24 @@ defaults=(
 )
 
 for entry in "${defaults[@]}"; do
-  source="${entry%%|*}"
+  repo="${entry%%|*}"
   names="${entry#*|}"
   args=()
   read -ra list <<<"$names"  # read, not word-splitting: keeps "*" from globbing
   for name in "${list[@]}"; do args+=(--skill "$name"); done
-  echo "==> $source ($names)"
-  # shellcheck disable=SC2086
-  npx -y skills add "$source" -g "${args[@]}" -a $agents -y
+  echo "==> $repo ($names)"
+  npx -y skills add "$repo" -g "${args[@]}" -a "${agent_list[@]}" -y
 done
 
 if [[ "$install_python_deps" == 1 ]]; then
   echo "==> Python deps for task-complexity-classifier"
   if command -v uv >/dev/null; then
     uv pip install --system typesafe-sdk python-dotenv
-  else
+  elif command -v python3 >/dev/null; then
     python3 -m pip install --user typesafe-sdk python-dotenv
+  else
+    echo "Neither uv nor python3 found: install one, then re-run." >&2
+    exit 1
   fi
 fi
 
