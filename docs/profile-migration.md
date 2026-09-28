@@ -22,6 +22,46 @@ Choose one profile for each skills directory. Pick the profile that contains the
 
 For example, use `ruby-rails-rust` on a computer where you work in both stacks. This keeps both available in Codex, Pi, and Kilo through their shared user skills directory. Use a project-level install only when it does not duplicate skills from your user profile. Each stack profile includes the same foundation skills, so the combined user profile is simpler when you switch stacks often.
 
+## Install with `npx skills`
+
+Use this when you want the skills without cloning the five repositories. It installs to `~/.agents/skills` and links or copies into each agent you name.
+
+```sh
+npx skills add igmarin/agnostic-planning-skills -g --skill '*' \
+  -a claude-code codex devin antigravity cline kilo pi zed -y
+```
+
+Replace `'*'` with a skill name, such as `task-complexity-classifier`, to install one skill. Agent ids come from the CLI; run `npx skills add --help` for options.
+
+What the installer did on a verified run:
+
+| Agent | Result |
+|---|---|
+| Codex, Antigravity, Cline, Kilo, Zed | Read `~/.agents/skills` directly (universal) |
+| Claude Code, Devin, Pi | Symlink to `~/.agents/skills/<skill>` |
+
+### `add` vs `update`
+
+`npx skills update -g` refreshes only skills already recorded in `~/.agents/.skill-lock.json`. It never installs a skill that was added to the repository later. After you push a new skill, run `npx skills add ... --skill <name>` once. Later `update -g` runs then keep it current.
+
+If `update -g` does not show a new skill, check the lock file first:
+
+```sh
+grep -c '"<skill-name>"' ~/.agents/.skill-lock.json
+```
+
+A count of `0` means the skill was never installed.
+
+## Skills that need setup: `task-complexity-classifier`
+
+This skill calls Jev (TypeSafe AI). Installing it is not enough to get real classifications:
+
+1. `pip install typesafe-sdk python-dotenv` (or `uv add`).
+2. Set `TYPESAFE_API_KEY` in your environment or in `~/.config/task-complexity-classifier/.env` (mode 600).
+3. Check the wiring without an API call: `python3 ~/.agents/skills/task-complexity-classifier/classifier.py --dry-run "Fix a typo"`.
+
+Without a key it returns `classification: complex` with `fallback_used: true`. Treat that result as "unknown", not as a real classification.
+
 ## Set up this computer
 
 From the Planning repository, install or switch the profile with one command:
