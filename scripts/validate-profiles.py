@@ -46,15 +46,90 @@ for profile_name, repositories in expanded.items():
             elif not (repo / registry[name]["path"]).is_file():
                 errors.append(f"{profile_name}: {repository}/{name} has no SKILL.md")
 
+def read_router_routes():
+    router_path = ROOT / "skills/work-router/SKILL.md"
+    try:
+        router_text = router_path.read_text(encoding="utf-8")
+    except OSError as error:
+        errors.append(f"work-router: cannot read route contract: {error}")
+        return {}
+
+    section = re.search(r"^## Route by intent\s*$([\s\S]*?)(?=^## |\Z)", router_text, re.MULTILINE)
+    if not section:
+        errors.append("work-router: missing 'Route by intent' table")
+        return {}
+
+    routes = {}
+    for line in section.group(1).splitlines():
+        row = re.match(r"^\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*$", line)
+        if not row:
+            continue
+        intent, target = row.groups()
+        if intent == "Request" or re.fullmatch(r"-+", intent):
+            continue
+        skills = re.findall(r"`([a-z][a-z0-9-]*)`", target)
+        if len(skills) != 1:
+            errors.append(f"work-router: route '{intent}' must name exactly one skill")
+            continue
+        if intent in routes:
+            errors.append(f"work-router: duplicate route intent '{intent}'")
+        routes[intent] = skills[0]
+    return routes
+
+
+def infer_task_intent(task, profile_name):
+    task = task.lower()
+    if profile_name == "foundation":
+        if re.search(r"\b(review|audit)\b", task) and re.search(r"\b(brief|prd)\b", task):
+            return "Review a product brief"
+        if re.search(r"\b(brief|prd)\b", task):
+            return "Draft a product brief"
+    elif profile_name == "ruby-rails" and re.search(r"\brails\b", task):
+        if re.search(r"\bmigration\b", task):
+            return "Plan or review a Rails migration"
+        if re.search(r"\b(review|audit)\b", task):
+            return "Review Rails code"
+        if re.search(r"\b(refactor|maintenance|maintain|cleanup)\b", task):
+            return "Perform routine Rails maintenance"
+        if re.search(r"\b(add|implement|build|create|feature|endpoint)\b", task):
+            return "Implement a Rails feature"
+    elif profile_name == "elixir-phoenix":
+        if re.search(r"\b(ecto|database|query)\b", task):
+            return "Implement Ecto/database work"
+        if re.search(r"\b(elixir|phoenix)\b", task):
+            return "Implement other Elixir/Phoenix work"
+    elif profile_name == "rust" and re.search(r"\b(rust|crate|cargo)\b", task):
+        return "Implement Rust work or verify a crate API"
+    return None
+
+
+router_routes = read_router_routes()
 fixture_ids = set()
 for fixture in fixtures:
     if fixture["id"] in fixture_ids:
         errors.append(f"duplicate router fixture id: {fixture['id']}")
     fixture_ids.add(fixture["id"])
     available = expanded.get(fixture["profile"], {}).get(fixture["repository"], [])
-    if not isinstance(fixture.get("skill"), str) or fixture["skill"] not in available:
+    expected_skill = fixture.get("expected_skill")
+    if not isinstance(expected_skill, str) or expected_skill not in available:
         errors.append(f"fixture {fixture['id']}: expected skill is outside its profile")
     task = fixture.get("task", "").lower()
+    expected_intent = fixture.get("expected_intent")
+    task_intent = infer_task_intent(task, fixture.get("profile"))
+    if task_intent is None:
+        errors.append(f"fixture {fixture['id']}: cannot infer a route intent from task")
+    elif task_intent != expected_intent:
+        errors.append(
+            f"fixture {fixture['id']}: task maps to '{task_intent}', not '{expected_intent}'"
+        )
+    routed_skill = router_routes.get(expected_intent)
+    if routed_skill is None:
+        errors.append(f"fixture {fixture['id']}: expected intent is missing from work-router")
+    elif routed_skill != expected_skill:
+        errors.append(
+            f"fixture {fixture['id']}: work-router maps '{expected_intent}' to "
+            f"'{routed_skill}', not '{expected_skill}'"
+        )
     if re.search(r"\b(production|security|authorization|deploy|irreversible|delete|destructive)\b", task):
         expected_checkpoint = "high-risk"
     elif re.search(r"\b(new|unverified)\b", task) and re.search(r"\b(crate|external|third.party)\b", task) and re.search(r"\bapi\b", task):

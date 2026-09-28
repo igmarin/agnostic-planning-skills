@@ -33,6 +33,7 @@ For behavior changes, add `Proof: <focused test or check>`. Add `Block: <risk>` 
 | Implement a Rails feature | `rails-feature` |
 | Review Rails code | `rails-review` |
 | Perform routine Rails maintenance | `rails-maintenance` |
+| Plan or review a Rails migration | `review-migration` |
 | Implement Ecto/database work | `ecto-essentials` |
 | Implement other Elixir/Phoenix work | The narrowest matching domain skill; use `elixir-essentials` for general Elixir work |
 | Implement Rust work or verify a crate API | `rust-essentials` |

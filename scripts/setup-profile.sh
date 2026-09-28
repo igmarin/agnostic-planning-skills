@@ -86,6 +86,18 @@ for repository in "${repositories[@]}"; do
     fi
     verify_trusted_upstream "$checkout" "$repository"
     git -C "$checkout" pull --ff-only
+    if ! upstream_tip="$(git -C "$checkout" rev-parse --verify '@{upstream}^{commit}' 2>/dev/null)"; then
+      echo "Setup stopped: cannot resolve the verified upstream tip for $repository/main after pull." >&2
+      exit 1
+    fi
+    if ! current_revision="$(git -C "$checkout" rev-parse --verify 'HEAD^{commit}' 2>/dev/null)"; then
+      echo "Setup stopped: cannot resolve the current revision for $repository/main after pull." >&2
+      exit 1
+    fi
+    if [[ "$current_revision" != "$upstream_tip" ]]; then
+      echo "Setup stopped: $repository/main is at $current_revision, not its verified upstream tip $upstream_tip after pull." >&2
+      exit 1
+    fi
     if [[ "$repository" == "agnostic-planning-skills" && ! -f "$planning_repo/scripts/install-profile.py" ]]; then
       echo "Setup stopped: merge the profile setup PR before installing profiles." >&2
       exit 1
