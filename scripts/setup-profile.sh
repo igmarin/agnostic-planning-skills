@@ -44,6 +44,10 @@ verify_trusted_upstream() {
     exit 1
   fi
   remote="${upstream%%/*}"
+  if [[ "$upstream" != "$remote/main" ]]; then
+    echo "Setup stopped: $repository/main must track $remote/main, not $upstream." >&2
+    exit 1
+  fi
   if ! remote_url="$(git -C "$checkout" remote get-url "$remote" 2>/dev/null)"; then
     echo "Setup stopped: cannot read the $remote remote for $repository." >&2
     exit 1

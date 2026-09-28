@@ -86,6 +86,11 @@ def read_manifest(path, label):
         raise ValueError(f"invalid skills list in {label}: {path}")
     if any(not name or Path(name).name != name or name in {".", ".."} for name in skills):
         raise ValueError(f"invalid skill directory name in {label}: {path}")
+    archive = data.get("archive", [])
+    if not isinstance(archive, list) or not all(isinstance(name, str) for name in archive):
+        raise ValueError(f"invalid archive list in {label}: {path}")
+    if any(not name or Path(name).name != name or name in {".", ".."} for name in archive):
+        raise ValueError(f"invalid archive directory name in {label}: {path}")
     return data
 
 
@@ -219,7 +224,18 @@ def install_locked(profile_name, output_root, projects_root, backup_conflicts, p
             "Move them aside yourself or rerun with --backup-conflicts to preserve them in a backup."
         )
 
-    archive_names = managed_names - selected_names
+    pending_archive_names = set(pending.get("archive", [])) if pending else set()
+    if pending and "archive" not in pending:
+        # Older pending manifests cannot distinguish a partial install from a
+        # conflicting personal skill. Preserve ambiguous selected directories.
+        pending_archive_names.update(
+            name for name in pending_names & selected_names
+            if name not in previous_names
+            and name not in legacy_names
+            and ((output_root / name).exists() or (output_root / name).is_symlink())
+        )
+
+    archive_names = (managed_names - selected_names) | pending_archive_names
     if backup_conflicts:
         archive_names |= conflicts
 
@@ -231,7 +247,10 @@ def install_locked(profile_name, output_root, projects_root, backup_conflicts, p
         recovery_names = managed_names | selected_names
         if backup_conflicts:
             recovery_names |= conflicts
-        write_json_atomic(pending_path, {"profile": profile_name, "skills": sorted(recovery_names)})
+        write_json_atomic(
+            pending_path,
+            {"profile": profile_name, "skills": sorted(recovery_names), "archive": sorted(archive_names)},
+        )
         archived = archive_paths(output_root, archive_names)
         for name, source in sources:
             destination = output_root / name

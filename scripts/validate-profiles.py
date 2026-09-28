@@ -237,6 +237,41 @@ with tempfile.TemporaryDirectory(prefix="skill-profile-switch-check-") as temp_d
             if not any(path.read_text() == "partially installed skill\n" for path in recovered_backups):
                 errors.append("profile recovery did not archive the interrupted skill")
 
+for archive_field in (True, False):
+    manifest_kind = "current" if archive_field else "legacy"
+    with tempfile.TemporaryDirectory(prefix="skill-profile-conflict-recovery-") as temp_dir:
+        output = Path(temp_dir) / ".agents" / "skills"
+        output.mkdir(parents=True)
+        personal_skill = output / "rails-feature"
+        personal_skill.mkdir()
+        (personal_skill / "SKILL.md").write_text("personal skill\n")
+        pending = {"profile": "ruby-rails", "skills": ["rails-feature"]}
+        if archive_field:
+            pending["archive"] = ["rails-feature"]
+        (output / ".skill-profile-pending.json").write_text(json.dumps(pending))
+
+        recovered = subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts/install-profile.py"),
+                "ruby-rails",
+                "--output",
+                str(output),
+                "--projects-root",
+                str(PROJECTS),
+            ],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if recovered.returncode:
+            errors.append(f"conflict recovery ({manifest_kind} manifest): {recovered.stderr.strip()}")
+            continue
+
+        backups = (output.parent / "skill-profile-backups").glob("*/rails-feature/SKILL.md")
+        if not any(path.read_text() == "personal skill\n" for path in backups):
+            errors.append(f"conflict recovery did not preserve a personal skill ({manifest_kind} manifest)")
+
 elixir_skills = PROJECTS / "elixir-phoenix-skills" / "skills"
 fp_copies = sum(path.read_text(errors="ignore").count("Canonical FP bar:") for path in elixir_skills.glob("*/SKILL.md"))
 if fp_copies:
