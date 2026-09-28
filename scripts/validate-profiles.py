@@ -81,12 +81,12 @@ def read_router_routes():
 
 def infer_task_intent(task, profile_name):
     task = task.lower()
-    if profile_name == "foundation":
+    if profile_name in {"foundation", "ruby-rails-rust"}:
         if re.search(r"\b(review|audit)\b", task) and re.search(r"\b(brief|prd)\b", task):
             return "Review a product brief"
         if re.search(r"\b(brief|prd)\b", task):
             return "Draft a product brief"
-    elif profile_name == "ruby-rails" and re.search(r"\brails\b", task):
+    if profile_name in {"ruby-rails", "ruby-rails-rust"} and re.search(r"\brails\b", task):
         if re.search(r"\bmigration\b", task):
             return "Plan or review a Rails migration"
         if re.search(r"\b(review|audit)\b", task):
@@ -95,12 +95,12 @@ def infer_task_intent(task, profile_name):
             return "Perform routine Rails maintenance"
         if re.search(r"\b(add|implement|build|create|feature|endpoint)\b", task):
             return "Implement a Rails feature"
-    elif profile_name == "elixir-phoenix":
+    if profile_name == "elixir-phoenix":
         if re.search(r"\b(ecto|database|query)\b", task):
             return "Implement Ecto/database work"
         if re.search(r"\b(elixir|phoenix)\b", task):
             return "Implement other Elixir/Phoenix work"
-    elif profile_name == "rust" and re.search(r"\b(rust|crate|cargo)\b", task):
+    if profile_name in {"rust", "ruby-rails-rust"} and re.search(r"\b(rust|crate|cargo)\b", task):
         return "Implement Rust work or verify a crate API"
     return None
 
