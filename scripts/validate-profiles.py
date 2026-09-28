@@ -67,13 +67,15 @@ def read_router_routes():
         intent, target = row.groups()
         if intent == "Request" or re.fullmatch(r"-+", intent):
             continue
-        skills = re.findall(r"`([a-z][a-z0-9-]*)`", target)
-        if len(skills) != 1:
-            errors.append(f"work-router: route '{intent}' must name exactly one skill")
+        skill = re.fullmatch(r"`([a-z][a-z0-9-]*)`", target)
+        if not skill:
+            errors.append(
+                f"work-router: route '{intent}' must select one canonical skill id"
+            )
             continue
         if intent in routes:
             errors.append(f"work-router: duplicate route intent '{intent}'")
-        routes[intent] = skills[0]
+        routes[intent] = skill.group(1)
     return routes
 
 
@@ -104,6 +106,16 @@ def infer_task_intent(task, profile_name):
 
 
 router_routes = read_router_routes()
+profile_skill_names = {
+    skill
+    for repositories in expanded.values()
+    for skills in repositories.values()
+    for skill in skills
+}
+for intent, skill in router_routes.items():
+    if skill not in profile_skill_names:
+        errors.append(f"work-router: route '{intent}' targets '{skill}' outside profiles.json")
+
 fixture_ids = set()
 for fixture in fixtures:
     if fixture["id"] in fixture_ids:

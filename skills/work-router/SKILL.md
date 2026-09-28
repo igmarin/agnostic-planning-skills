@@ -19,6 +19,8 @@ For behavior changes, add `Proof: <focused test or check>`. Add `Block: <risk>` 
 
 ## Route by intent
 
+Use a narrower domain skill from the active profile when one matches; otherwise select the row's exact skill. Resolve to one canonical skill ID before output.
+
 | Request | Select |
 |---|---|
 | Clarify a rough request or acceptance criteria | `requirements-clarifier` |
@@ -35,7 +37,7 @@ For behavior changes, add `Proof: <focused test or check>`. Add `Block: <risk>` 
 | Perform routine Rails maintenance | `rails-maintenance` |
 | Plan or review a Rails migration | `review-migration` |
 | Implement Ecto/database work | `ecto-essentials` |
-| Implement other Elixir/Phoenix work | The narrowest matching domain skill; use `elixir-essentials` for general Elixir work |
+| Implement other Elixir/Phoenix work | `elixir-essentials` |
 | Implement Rust work or verify a crate API | `rust-essentials` |
 | Diagnose an ownership or borrowing issue | `ownership-borrowing` |
 | Design Rust types for domain constraints | `type-driven-design` |
