@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -euo pipefail
 
 # Every suite repository is expected to track this owner on GitHub.
@@ -106,6 +106,12 @@ redact_remote() {
         printf '%s' "$url"
       fi
       ;;
+    *@*:*)
+      # scp-like [user@]host:path. The user is a login name rather than part of
+      # the source, so leaving it out of the message costs nothing and avoids
+      # printing one that holds a token.
+      printf '%s' "***@${url#*@}"
+      ;;
     *)
       printf '%s' "$url"
       ;;
@@ -115,7 +121,7 @@ redact_remote() {
 
 verify_trusted_upstream() {
   local checkout="$1" repository="$2" remote merge_ref expected
-  local configured_url effective_url remote_url normalized
+  local configured_url effective_urls effective_first checked candidate normalized
 
   # Read main's upstream from config rather than @{upstream}: this checkout may be
   # on another branch now and is switched to main before the pull.
@@ -133,27 +139,40 @@ verify_trusted_upstream() {
     exit 1
   fi
 
-  # Compare the URL git will fetch from. `git pull` uses the effective URL after
-  # any url.*.insteadOf rewrite, so the configured value is not what runs. Report
-  # the rewrite when the two differ, since that is what changed the source.
+  # Compare the URLs git will fetch from. `git pull` uses the effective values
+  # after any url.*.insteadOf rewrite, so the configured ones are not what runs.
+  # A remote may list several fetch URLs, and every one of them has to be
+  # canonical: `git remote get-url` shows only the first, hence --all here.
   configured_url="$(git -C "$checkout" config --get "remote.$remote.url" 2>/dev/null || true)"
-  effective_url="$(git -C "$checkout" remote get-url "$remote" 2>/dev/null || true)"
-  remote_url="${effective_url:-$configured_url}"
-  if [[ -n "$configured_url" && -n "$effective_url" && "$configured_url" != "$effective_url" ]]; then
-    echo "Note: git rewrites $remote through url.*.insteadOf: $(redact_remote "$configured_url") -> $(redact_remote "$effective_url")" >&2
+  effective_urls="$(git -C "$checkout" remote get-url --all "$remote" 2>/dev/null || true)"
+  effective_first="${effective_urls%%$'\n'*}"
+  if [[ -n "$configured_url" && -n "$effective_first" && "$configured_url" != "$effective_first" ]]; then
+    echo "Note: git rewrites $remote through url.*.insteadOf: $(redact_remote "$configured_url") -> $(redact_remote "$effective_first")" >&2
   fi
 
   expected="github.com/$GITHUB_OWNER/$repository"
-  normalized="$(normalize_remote "$remote_url")"
-  if [[ "${normalized,,}" == "${expected,,}" ]]; then
-    return 0
-  fi
+  checked=0
+  while IFS= read -r candidate; do
+    if [[ -z "$candidate" ]]; then
+      continue
+    fi
+    checked=$((checked + 1))
+    normalized="$(normalize_remote "$candidate")"
+    if [[ "${normalized,,}" == "${expected,,}" ]]; then
+      continue
+    fi
+    echo "Setup stopped: $repository/main tracks a non-canonical source; expected $GITHUB_OWNER/$repository on GitHub." >&2
+    echo "  remote: $remote" >&2
+    echo "  found:  $(redact_remote "$candidate")" >&2
+    echo "  fix:    git -C '$checkout' remote set-url $remote https://github.com/$GITHUB_OWNER/$repository.git" >&2
+    exit 1
+  done <<< "$effective_urls"
 
-  echo "Setup stopped: $repository/main tracks a non-canonical source; expected $GITHUB_OWNER/$repository on GitHub." >&2
-  echo "  remote: $remote" >&2
-  echo "  found:  $(redact_remote "$remote_url")" >&2
-  echo "  fix:    git -C '$checkout' remote set-url $remote https://github.com/$GITHUB_OWNER/$repository.git" >&2
-  exit 1
+  if [[ "$checked" -eq 0 ]]; then
+    echo "Setup stopped: $remote for $repository has no fetch URL to verify." >&2
+    exit 1
+  fi
+  return 0
 }
 
 # Pass 1: read-only checks. Nothing is switched, pulled, or cloned until every
