@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Every suite repository is expected to track this owner on GitHub.
+GITHUB_OWNER="igmarin"
+
 usage() {
   echo "Usage: bash scripts/setup-profile.sh <foundation|ruby-rails|ruby-rails-rust|elixir-phoenix|rust> [projects-root]" >&2
   exit 2
@@ -35,56 +38,121 @@ repositories=(
   rails-agent-skills
 )
 
-verify_trusted_upstream() {
-  local checkout="$1" repository="$2" upstream remote remote_url expected
-  expected="igmarin/$repository"
+# Reduce a remote URL to "host/owner/repo" so equivalent spellings of the same
+# GitHub source, such as an https clone and an ssh clone, compare equal. Only
+# secure transports are recognized; anything else keeps its raw form and fails
+# the comparison in verify_trusted_upstream.
+normalize_remote() {
+  local url="$1" host path rest
+  url="${url//$'\t'/}"
+  url="${url//$'\r'/}"
+  url="${url//$'\n'/}"
+  while [[ "$url" == *' ' ]]; do url="${url% }"; done
+  url="${url%/}"
+  url="${url%.git}"
+  case "$url" in
+    git@*:*)
+      host="${url#git@}"
+      host="${host%%:*}"
+      path="${url#*:}"
+      ;;
+    ssh://*)
+      rest="${url#ssh://}"
+      rest="${rest#*@}"
+      host="${rest%%/*}"
+      host="${host%%:*}"
+      path="${rest#*/}"
+      ;;
+    https://*)
+      rest="${url#*://}"
+      rest="${rest#*@}"
+      host="${rest%%/*}"
+      path="${rest#*/}"
+      ;;
+    *)
+      printf '%s' "$url"
+      return 0
+      ;;
+  esac
+  printf '%s/%s' "${host,,}" "${path,,}"
+}
 
-  if ! upstream="$(git -C "$checkout" rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null)"; then
+
+verify_trusted_upstream() {
+  local checkout="$1" repository="$2" remote merge_ref expected
+  local configured_url effective_url remote_url normalized
+
+  # Read main's upstream from config rather than @{upstream}: this checkout may be
+  # on another branch now and is switched to main before the pull.
+  if ! remote="$(git -C "$checkout" config --get branch.main.remote 2>/dev/null)"; then
     echo "Setup stopped: $repository/main has no configured upstream." >&2
     exit 1
   fi
-  remote="${upstream%%/*}"
-  if [[ "$upstream" != "$remote/main" ]]; then
-    echo "Setup stopped: $repository/main must track $remote/main, not $upstream." >&2
+  if [[ -z "$remote" || "$remote" == "." ]]; then
+    echo "Setup stopped: $repository/main tracks a local branch, not a remote." >&2
     exit 1
   fi
-  if ! remote_url="$(git -C "$checkout" remote get-url "$remote" 2>/dev/null)"; then
-    echo "Setup stopped: cannot read the $remote remote for $repository." >&2
+  merge_ref="$(git -C "$checkout" config --get branch.main.merge 2>/dev/null || true)"
+  if [[ "$merge_ref" != "refs/heads/main" ]]; then
+    echo "Setup stopped: $repository/main must track $remote/main, not ${merge_ref:-an unknown ref}." >&2
     exit 1
   fi
 
-  case "$remote_url" in
-    "https://github.com/$expected"|"https://github.com/$expected.git"|\
-    "git@github.com:$expected"|"git@github.com:$expected.git"|\
-    "ssh://git@github.com/$expected"|"ssh://git@github.com/$expected.git") ;;
-    *)
-      echo "Setup stopped: $repository/main tracks a non-canonical source; expected igmarin/$repository on GitHub." >&2
-      exit 1
-      ;;
-  esac
+  # `git remote get-url` applies url.*.insteadOf rewrites, so compare the value
+  # that is configured and keep the effective one only to report a rewrite.
+  configured_url="$(git -C "$checkout" config --get "remote.$remote.url" 2>/dev/null || true)"
+  effective_url="$(git -C "$checkout" remote get-url "$remote" 2>/dev/null || true)"
+  remote_url="${configured_url:-$effective_url}"
+  if [[ -n "$configured_url" && -n "$effective_url" && "$configured_url" != "$effective_url" ]]; then
+    echo "Note: git rewrites $remote through url.*.insteadOf: $configured_url -> $effective_url" >&2
+  fi
+
+  expected="github.com/$GITHUB_OWNER/$repository"
+  normalized="$(normalize_remote "$remote_url")"
+  if [[ "${normalized,,}" == "${expected,,}" ]]; then
+    return 0
+  fi
+
+  echo "Setup stopped: $repository/main tracks a non-canonical source; expected igmarin/$repository on GitHub." >&2
+  echo "  remote: $remote" >&2
+  echo "  found:  ${remote_url:-<empty>}" >&2
+  echo "  fix:    git -C '$checkout' remote set-url $remote https://github.com/$GITHUB_OWNER/$repository.git" >&2
+  exit 1
 }
 
+# Pass 1: read-only checks. Nothing is switched, pulled, or cloned until every
+# existing checkout passes, so a rejected remote cannot leave earlier
+# repositories already updated.
+for repository in "${repositories[@]}"; do
+  checkout="$projects_root/$repository"
+  if [[ ! -e "$checkout" ]]; then
+    continue
+  fi
+  if [[ ! -e "$checkout/.git" ]]; then
+    echo "Setup stopped: $checkout exists but is not a Git checkout." >&2
+    exit 1
+  fi
+  if [[ -n "$(git -C "$checkout" status --porcelain -- . ':(exclude).clinerules')" ]]; then
+    echo "Setup stopped: $repository has local changes. Commit, stash, or resolve them first." >&2
+    exit 1
+  fi
+  branch="$(git -C "$checkout" branch --show-current)"
+  if [[ "$branch" != "main" ]] && ! git -C "$checkout" show-ref --verify --quiet refs/heads/main; then
+    echo "Setup stopped: $repository has no local main branch." >&2
+    exit 1
+  fi
+  verify_trusted_upstream "$checkout" "$repository"
+done
+
+# Pass 2: switch each clean checkout to main, then update or clone it.
 for repository in "${repositories[@]}"; do
   checkout="$projects_root/$repository"
   if [[ -e "$checkout" ]]; then
-    if [[ ! -e "$checkout/.git" ]]; then
-      echo "Setup stopped: $checkout exists but is not a Git checkout." >&2
-      exit 1
-    fi
-    if [[ -n "$(git -C "$checkout" status --porcelain -- . ':(exclude).clinerules')" ]]; then
-      echo "Setup stopped: $repository has local changes. Commit, stash, or resolve them first." >&2
-      exit 1
-    fi
     branch="$(git -C "$checkout" branch --show-current)"
     if [[ "$branch" != "main" ]]; then
-      if ! git -C "$checkout" show-ref --verify --quiet refs/heads/main; then
-        echo "Setup stopped: $repository has no local main branch." >&2
-        exit 1
-      fi
       echo "Switching clean $repository checkout from '${branch:-detached HEAD}' to main."
       git -C "$checkout" switch main
     fi
-    verify_trusted_upstream "$checkout" "$repository"
     git -C "$checkout" pull --ff-only
     if ! upstream_tip="$(git -C "$checkout" rev-parse --verify '@{upstream}^{commit}' 2>/dev/null)"; then
       echo "Setup stopped: cannot resolve the verified upstream tip for $repository/main after pull." >&2
@@ -103,7 +171,7 @@ for repository in "${repositories[@]}"; do
       exit 1
     fi
   else
-    git clone "https://github.com/igmarin/$repository.git" "$checkout"
+    git clone "https://github.com/$GITHUB_OWNER/$repository.git" "$checkout"
   fi
 done
 

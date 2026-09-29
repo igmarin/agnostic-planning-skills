@@ -12,6 +12,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ### Changed
 - Setup documentation now explains the shared Agent Skills directory and use across supported coding tools.
 
+### Fixed
+- `scripts/setup-profile.sh` reports the remote URL it rejected, instead of only the URL it expected.
+- The trusted-source check no longer stops on equivalent spellings of the same GitHub remote, such as an ssh host alias, an explicit port, or a different owner casing.
+- The trusted-source check reads the configured remote URL, so a `url.*.insteadOf` rewrite no longer reports a canonical checkout as non-canonical.
+- Setup verifies every repository before pulling any of them, so a rejected remote cannot leave an earlier checkout already updated.
+
 ## [5.0.0] - 2026-09-26
 
 ### Added
