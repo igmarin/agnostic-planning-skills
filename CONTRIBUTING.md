@@ -6,4 +6,4 @@ Keep skills short, task-focused, and grounded in the active profile model.
 - Update `profiles.json` only when a skill should be installed by a profile. It maps skills across the five suite repositories.
 - Keep role language as `work-router` intent, not separate persona workflows.
 - Do not commit machine-specific editor/MCP config or bundled review binaries.
-- Run `scripts/validate-skills.sh` and `python3 scripts/validate-profiles.py` before opening a PR.
+- Run `scripts/validate-skills.sh` and `python3 scripts/validate-profiles.py` before opening a PR. The profile validator needs all five repositories checked out as siblings.

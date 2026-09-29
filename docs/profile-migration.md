@@ -81,13 +81,20 @@ cd ~/Developer/Projects/agnostic-planning-skills
 bash scripts/setup-profile.sh ruby-rails-rust
 ```
 
-Use `foundation`, `ruby-rails`, `elixir-phoenix`, or `rust` in place of `ruby-rails-rust` when you want a different profile. The setup script updates the five source repositories from their `main` branches, then installs the selected profile into `~/.agents/skills`. It stops if it finds uncommitted changes in those repositories, except for the existing local `.clinerules` files.
+Use `foundation`, `ruby-rails`, `elixir-phoenix`, or `rust` in place of `ruby-rails-rust` when you want a different profile. The setup script checks all five source repositories, updates them from their `main` branches, then installs the selected profile into `~/.agents/skills`.
+
+It stops if a checkout has uncommitted changes (except the existing local `.clinerules` files), has no local `main` branch, or tracks a remote other than `github.com/igmarin/<repository>`. Check and correct the remote with:
+
+```sh
+git -C <path-to-checkout> remote get-url origin
+git -C <path-to-checkout> remote set-url origin https://github.com/igmarin/<repository>.git
+```
 
 Run this after the profile changes have been merged to the repositories' `main` branches. If Codex, Pi, or Kilo does not show a newly installed skill, reload or restart that tool.
 
 The installer leaves unrelated skills in `~/.agents/skills` alone. If it finds a same-named skill that it does not manage, it stops rather than replace it. Use `--backup-conflicts` with `install-profile.py` only when you want that existing folder backed up before installation.
 
-Keep all five source repositories together as sibling folders. The default parent is `~/Developer/Projects`. If you use a different parent, pass it as the second argument to `setup-profile.sh`; this checkout must still be named `agnostic-planning-skills`.
+Keep all five source repositories together as sibling folders. `setup-profile.sh` uses the parent of this checkout as the projects root, so `~/Developer/Projects` above is an example rather than a requirement. Pass a different parent as the second argument. This checkout must still be named `agnostic-planning-skills`.
 
 ## Set up another computer
 
@@ -116,5 +123,15 @@ Codex, Pi, and Kilo scan project `.agents/skills` directories. Keep generated sk
 ## Updating a skill
 
 Edit the skill in its source repository, commit and merge the change, then rerun setup on each computer that uses it. This refreshes the generated copies without changing unrelated skills.
+
+## Removing skills an agent still lists
+
+`setup-profile.sh` writes to `~/.agents/skills`. `install-profile.py` writes to the directory `--output` names, which defaults to the same place. The directories some agents read themselves are separate: `npx skills add` fills them with symlinks into that directory, and nothing removes a link when you switch profiles. An agent can keep listing a skill that is no longer installed.
+
+Remove the folder or link by hand after switching, then reload the agent if the skill is still listed:
+
+```sh
+rm ~/.claude/skills/<skill>
+```
 
 See [daily skill use](calling-skills.md) for choosing a direct skill or using `work-router`.

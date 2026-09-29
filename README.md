@@ -14,11 +14,11 @@ bash scripts/setup-profile.sh ruby-rails-rust
 
 See [profile setup](docs/profile-migration.md) for another computer, profile switching, and tool compatibility.
 
-Without cloning the source repositories, install a single skill or all of them with `npx skills add igmarin/agnostic-planning-skills -g --skill <name>`. `npx skills update -g` only updates skills you already installed, so run `add` once for each new skill. Details: [Install with npx skills](docs/profile-migration.md#install-with-npx-skills).
+Without cloning the source repositories, install one skill or all of them with `npx skills add igmarin/agnostic-planning-skills -g --skill <name> -a <agents> -y`. `npx skills update -g` only updates skills you already installed, so run `add` once for each new skill. Details: [Install with npx skills](docs/profile-migration.md#install-with-npx-skills).
 
 ## Skills
 
-The profiles cover clarification, PRDs, draft tickets, estimation, prioritization, sprints, retrospectives, risk, status, GitHub issues, routing, and task complexity classification. `plan-tickets` is draft-only; `github-issue` is the only issue-mutation skill. `task-complexity-classifier` uses Jev (TypeSafe AI) to assess task complexity and works across all AI agents. `judgment-gate` and `llm-judgment-layer` remain specialist source cards and are not installed by a profile.
+The profiles cover clarification, PRDs, draft tickets, estimation, prioritization, sprints, retrospectives, risk, status, GitHub issues, routing, and task complexity classification. `plan-tickets` is draft-only; `github-issue` is the only issue-mutation skill. `task-complexity-classifier` uses Jev (TypeSafe AI) to assess task complexity and needs a `TYPESAFE_API_KEY`. `judgment-gate` and `llm-judgment-layer` remain specialist source cards and are not installed by a profile.
 
 ## Migration
 
@@ -28,4 +28,4 @@ The profiles cover clarification, PRDs, draft tickets, estimation, prioritizatio
 | `generate-tasks` | Stack profile task planning; Ruby has `generate-tdd-tasks` |
 | `plan-tickets` create mode | Draft with `plan-tickets`; use `github-issue` only when issue mutation is requested |
 
-Validate profiles with `python3 scripts/validate-profiles.py`; validate this pack with `scripts/validate-skills.sh`.
+Validate this pack with `scripts/validate-skills.sh`. `python3 scripts/validate-profiles.py` also checks the profiles, the router routes, and the router fixtures, and needs all five repositories checked out as siblings.
