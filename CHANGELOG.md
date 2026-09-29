@@ -11,6 +11,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Changed
 - Setup documentation now explains the shared Agent Skills directory and use across supported coding tools.
+- Clarified how to list the agent IDs accepted by `npx skills add`, how to remove a skill from agent directories, and what the classifier returns without a `TYPESAFE_API_KEY`.
 
 ## [5.0.0] - 2026-09-26
 

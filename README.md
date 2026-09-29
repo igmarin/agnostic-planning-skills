@@ -21,11 +21,11 @@ npx skills add igmarin/agnostic-planning-skills -g --skill task-complexity-class
 npx skills add igmarin/agnostic-planning-skills -g --skill '*' -a claude-code codex -y
 ```
 
-Agent ids come from the CLI. `npx skills update -g` only updates skills you already installed, so run `add` once for each new skill. Details: [Install with npx skills](docs/profile-migration.md#install-with-npx-skills).
+Agent IDs are space separated. To list them, pass an invalid one: `npx skills list --agent claude` prints the valid IDs. `npx skills update -g` only updates skills you already installed, so run `add` once for each new skill. Details: [Install with npx skills](docs/profile-migration.md#install-with-npx-skills).
 
 ## Skills
 
-The profiles cover clarification, PRDs, draft tickets, estimation, prioritization, sprints, retrospectives, risk, status, GitHub issues, routing, and task complexity classification. `plan-tickets` is draft-only; `github-issue` is the only issue-mutation skill. `task-complexity-classifier` uses Jev (TypeSafe AI) to assess task complexity and needs a `TYPESAFE_API_KEY`. Without one it returns `complex` with `fallback_used: true`, which means unknown. `judgment-gate` and `llm-judgment-layer` remain specialist source cards and are not installed by a profile.
+The profiles cover clarification, PRDs, draft tickets, estimation, prioritization, sprints, retrospectives, risk, status, GitHub issues, routing, and task complexity classification. `plan-tickets` is draft-only; `github-issue` is the only issue-mutation skill. `task-complexity-classifier` uses Jev (TypeSafe AI) to assess task complexity and needs a `TYPESAFE_API_KEY`. Without one it returns `complex` with `fallback_used: true`. Treat that as unknown, not as a real classification. `judgment-gate` and `llm-judgment-layer` remain specialist source cards and are not installed by a profile.
 
 ## Migration
 

@@ -31,7 +31,7 @@ npx skills add igmarin/agnostic-planning-skills -g --skill '*' \
   -a claude-code codex devin antigravity cline kilo pi zed -y
 ```
 
-Replace `'*'` with a skill name, such as `task-complexity-classifier`, to install one skill. Agent ids come from the CLI; run `npx skills add --help` for options.
+Replace `'*'` with a skill name, such as `task-complexity-classifier`, to install one skill. Agent IDs are space separated. To list them, pass an invalid one: `npx skills list --agent claude` prints the valid IDs. Run `npx skills add --help` for the other options.
 
 What the installer did on a verified run:
 
@@ -128,12 +128,20 @@ Edit the skill in its source repository, commit and merge the change, then rerun
 
 `setup-profile.sh` writes to `~/.agents/skills`. `install-profile.py` writes to the directory `--output` names, which defaults to the same place. The directories some agents read themselves are separate: `npx skills add` links or copies each skill into them, and nothing removes an entry when you switch profiles. An agent can keep listing a skill that is no longer installed.
 
-Remove the folder or link by hand after switching, then reload the agent if the skill is still listed. The path depends on the agent; `~/.claude/skills` is the Claude Code one:
+Remove it with `npx skills remove`. Omitting `-a` cleans every agent link, and the shared copy in `~/.agents/skills` is deleted once no other agent still uses the skill:
+
+```sh
+npx skills remove -g task-complexity-classifier
+```
+
+Run `npx skills remove --help` for the other options.
+
+If that does not find the skill, delete the folder or link by hand and reload the agent. The path depends on the agent; `~/.claude/skills` is the Claude Code one:
 
 ```sh
 rm -r ~/.claude/skills/<skill>
 ```
 
-`rm -r` removes a copied directory or a symlink. It does not follow the symlink, so the copy in `~/.agents/skills` is untouched.
+`rm -r` handles a copied directory and a symlink. It does not follow the symlink, so the copy in `~/.agents/skills` is untouched.
 
 See [daily skill use](calling-skills.md) for choosing a direct skill or using `work-router`.
