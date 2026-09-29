@@ -47,10 +47,11 @@ What the installer did on a verified run:
 If `update -g` does not show a new skill, check the lock file first. It is `~/.agents/.skill-lock.json`, or `$XDG_STATE_HOME/skills/.skill-lock.json` when `XDG_STATE_HOME` is set:
 
 ```sh
-grep -c '"<skill-name>"' ~/.agents/.skill-lock.json
+[ -n "${XDG_STATE_HOME:-}" ] && LOCK="$XDG_STATE_HOME/skills/.skill-lock.json" || LOCK="$HOME/.agents/.skill-lock.json"
+grep -c '"<skill-name>"' "$LOCK"
 ```
 
-A count of `0` means the skill is not in that file. Check the other location before concluding it was never installed.
+A count of `0` means that lock file has no record of the skill. If that file is missing, the CLI wrote it under the other path, so run the same command there.
 
 ## Personal defaults on every computer
 
