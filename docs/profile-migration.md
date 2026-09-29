@@ -51,7 +51,7 @@ If `update -g` does not show a new skill, check the lock file first. It is `~/.a
 grep -c '"<skill-name>"' "$LOCK"
 ```
 
-A count of `0` means that lock file has no record of the skill. If that file is missing, the CLI wrote it under the other path, so run the same command there.
+A count of `0` means this lock file has no record of the skill. Check the alternate path too, especially if XDG_STATE_HOME changed since installation. If this file is missing, check the alternate path; do not assume a lock exists there.
 
 ## Personal defaults on every computer
 
