@@ -31,7 +31,7 @@ npx skills add igmarin/agnostic-planning-skills -g --skill '*' \
   -a claude-code codex devin antigravity cline kilo pi zed -y
 ```
 
-Replace `'*'` with a skill name, such as `task-complexity-classifier`, to install one skill. Agent IDs are space separated. To list them, pass an invalid one: `npx skills list --agent claude` prints the valid IDs. Run `npx skills add --help` for the other options.
+Replace `'*'` with a skill name, such as `task-complexity-classifier`, to install one skill. `-g` installs to the user-level `~/.agents/skills` instead of a project directory. Agent IDs are space separated. To list them, pass an invalid one: `npx skills list --agent not-a-real-agent` prints the valid IDs. Run `npx skills add --help` for the other options.
 
 What the installer did on a verified run:
 
@@ -42,15 +42,15 @@ What the installer did on a verified run:
 
 ### `add` vs `update`
 
-`npx skills update -g` refreshes only skills already recorded in `~/.agents/.skill-lock.json`. It never installs a skill that was added to the repository later. After you push a new skill, run `npx skills add ... --skill <name>` once. Later `update -g` runs then keep it current.
+`npx skills update -g` refreshes only skills already recorded in the lock file. It never installs a skill that was added to the repository later. After you push a new skill, run `npx skills add ... --skill <name>` once. Later `update -g` runs then keep it current.
 
-If `update -g` does not show a new skill, check the lock file first:
+If `update -g` does not show a new skill, check the lock file first. It is `~/.agents/.skill-lock.json`, or `$XDG_STATE_HOME/skills/.skill-lock.json` when `XDG_STATE_HOME` is set:
 
 ```sh
 grep -c '"<skill-name>"' ~/.agents/.skill-lock.json
 ```
 
-A count of `0` means the skill was never installed.
+A count of `0` means the skill is not in that file. Check the other location before concluding it was never installed.
 
 ## Personal defaults on every computer
 
@@ -128,7 +128,7 @@ Edit the skill in its source repository, commit and merge the change, then rerun
 
 `setup-profile.sh` writes to `~/.agents/skills`. `install-profile.py` writes to the directory `--output` names, which defaults to the same place. The directories some agents read themselves are separate: `npx skills add` links or copies each skill into them, and nothing removes an entry when you switch profiles. An agent can keep listing a skill that is no longer installed.
 
-Remove it with `npx skills remove`. Omitting `-a` cleans every agent link, and the shared copy in `~/.agents/skills` is deleted once no other agent still uses the skill:
+Remove it with `npx skills remove`. Omitting `-a` cleans every agent link, and the shared copy in `~/.agents/skills` is deleted once no other detected agent still uses the skill:
 
 ```sh
 npx skills remove -g task-complexity-classifier
