@@ -21,7 +21,7 @@ npx skills add igmarin/agnostic-planning-skills -g --skill task-complexity-class
 npx skills add igmarin/agnostic-planning-skills -g --skill '*' -a claude-code codex -y
 ```
 
-Agent IDs are space separated; an unknown one prints the valid list. `npx skills update -g` only updates skills you already installed, so run `add` once for each new skill. Details: [Install with npx skills](docs/profile-migration.md#install-with-npx-skills).
+Agent IDs are space separated. To list them, pass an invalid one: `npx skills list --agent claude` prints the valid IDs. `npx skills update -g` only updates skills you already installed, so run `add` once for each new skill. Details: [Install with npx skills](docs/profile-migration.md#install-with-npx-skills).
 
 ## Skills
 

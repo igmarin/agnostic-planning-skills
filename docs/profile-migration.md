@@ -31,7 +31,7 @@ npx skills add igmarin/agnostic-planning-skills -g --skill '*' \
   -a claude-code codex devin antigravity cline kilo pi zed -y
 ```
 
-Replace `'*'` with a skill name, such as `task-complexity-classifier`, to install one skill. Agent IDs are space separated; an unknown ID prints the valid list. Run `npx skills add --help` for the other options.
+Replace `'*'` with a skill name, such as `task-complexity-classifier`, to install one skill. Agent IDs are space separated. To list them, pass an invalid one: `npx skills list --agent claude` prints the valid IDs. Run `npx skills add --help` for the other options.
 
 What the installer did on a verified run:
 
@@ -133,6 +133,8 @@ Remove it with `npx skills remove`. Omitting `-a` cleans every agent link, and t
 ```sh
 npx skills remove -g task-complexity-classifier
 ```
+
+Run `npx skills remove --help` for the other options.
 
 If that does not find the skill, delete the folder or link by hand and reload the agent. The path depends on the agent; `~/.claude/skills` is the Claude Code one:
 
