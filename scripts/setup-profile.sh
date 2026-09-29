@@ -41,7 +41,9 @@ repositories=(
 # Reduce a remote URL to "host/owner/repo" so equivalent spellings of the same
 # GitHub source, such as an https clone and an ssh clone, compare equal. Only
 # secure transports are recognized; anything else keeps its raw form and fails
-# the comparison in verify_trusted_upstream.
+# the comparison in verify_trusted_upstream. Userinfo is dropped from the
+# authority only, never from the path, so an "@" later in the URL cannot make an
+# unrelated host look like github.com.
 normalize_remote() {
   local url="$1" host path rest
   url="${url//$'\t'/}"
@@ -53,19 +55,20 @@ normalize_remote() {
     git@*:*)
       host="${url#git@}"
       host="${host%%:*}"
+      host="${host##*@}"
       path="${url#*:}"
       ;;
     ssh://*)
       rest="${url#ssh://}"
-      rest="${rest#*@}"
       host="${rest%%/*}"
+      host="${host##*@}"
       host="${host%%:*}"
       path="${rest#*/}"
       ;;
     https://*)
       rest="${url#*://}"
-      rest="${rest#*@}"
       host="${rest%%/*}"
+      host="${host##*@}"
       host="${host%%:*}"
       path="${rest#*/}"
       ;;
