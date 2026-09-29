@@ -49,7 +49,6 @@ normalize_remote() {
   url="${url//$'\n'/}"
   while [[ "$url" == *' ' ]]; do url="${url% }"; done
   url="${url%/}"
-  url="${url%.git}"
   case "$url" in
     git@*:*)
       host="${url#git@}"
@@ -67,6 +66,7 @@ normalize_remote() {
       rest="${url#*://}"
       rest="${rest#*@}"
       host="${rest%%/*}"
+      host="${host%%:*}"
       path="${rest#*/}"
       ;;
     *)
@@ -74,7 +74,25 @@ normalize_remote() {
       return 0
       ;;
   esac
-  printf '%s/%s' "${host,,}" "${path,,}"
+  host="${host,,}"
+  path="${path,,}"
+  path="${path%.git}"
+  printf '%s/%s' "$host" "$path"
+}
+
+
+# Strip any userinfo from a remote URL before printing it, so a token kept in
+# the remote config does not reach the terminal or a log.
+redact_remote() {
+  local url="$1"
+  if [[ -z "$url" ]]; then
+    printf '%s' "<empty>"
+    return 0
+  fi
+  case "$url" in
+    *://*@*) printf '%s' "${url%%://*}://***@${url##*@}" ;;
+    *) printf '%s' "$url" ;;
+  esac
 }
 
 
@@ -98,13 +116,14 @@ verify_trusted_upstream() {
     exit 1
   fi
 
-  # `git remote get-url` applies url.*.insteadOf rewrites, so compare the value
-  # that is configured and keep the effective one only to report a rewrite.
+  # Compare the URL git will fetch from. `git pull` uses the effective URL after
+  # any url.*.insteadOf rewrite, so the configured value is not what runs. Report
+  # the rewrite when the two differ, since that is what changed the source.
   configured_url="$(git -C "$checkout" config --get "remote.$remote.url" 2>/dev/null || true)"
   effective_url="$(git -C "$checkout" remote get-url "$remote" 2>/dev/null || true)"
-  remote_url="${configured_url:-$effective_url}"
+  remote_url="${effective_url:-$configured_url}"
   if [[ -n "$configured_url" && -n "$effective_url" && "$configured_url" != "$effective_url" ]]; then
-    echo "Note: git rewrites $remote through url.*.insteadOf: $configured_url -> $effective_url" >&2
+    echo "Note: git rewrites $remote through url.*.insteadOf: $(redact_remote "$configured_url") -> $(redact_remote "$effective_url")" >&2
   fi
 
   expected="github.com/$GITHUB_OWNER/$repository"
@@ -113,9 +132,9 @@ verify_trusted_upstream() {
     return 0
   fi
 
-  echo "Setup stopped: $repository/main tracks a non-canonical source; expected igmarin/$repository on GitHub." >&2
+  echo "Setup stopped: $repository/main tracks a non-canonical source; expected $GITHUB_OWNER/$repository on GitHub." >&2
   echo "  remote: $remote" >&2
-  echo "  found:  ${remote_url:-<empty>}" >&2
+  echo "  found:  $(redact_remote "$remote_url")" >&2
   echo "  fix:    git -C '$checkout' remote set-url $remote https://github.com/$GITHUB_OWNER/$repository.git" >&2
   exit 1
 }
