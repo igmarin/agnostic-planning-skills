@@ -6,4 +6,4 @@
 - `plan-tickets` drafts only. `github-issue` owns GitHub issue mutations.
 - `task-complexity-classifier` requires a TYPESAFE_API_KEY configuration but fails gracefully without it.
 - Keep machine-specific MCP/editor configuration out of this repository.
-- Run `scripts/validate-skills.sh` and `python3 scripts/validate-profiles.py` after changes.
+- Run `scripts/validate-skills.sh` and `python3 scripts/validate-profiles.py` after changes. The profile validator needs all five repositories checked out as siblings.
