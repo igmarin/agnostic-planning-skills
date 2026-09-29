@@ -85,16 +85,30 @@ normalize_remote() {
 
 
 # Strip any userinfo from a remote URL before printing it, so a token kept in
-# the remote config does not reach the terminal or a log.
+# the remote config does not reach the terminal or a log. Userinfo comes from the
+# authority only, as in normalize_remote, so an "@" in the path is left alone and
+# the real host stays visible in the message.
 redact_remote() {
-  local url="$1"
+  local url="$1" scheme rest authority tail
   if [[ -z "$url" ]]; then
     printf '%s' "<empty>"
     return 0
   fi
   case "$url" in
-    *://*@*) printf '%s' "${url%%://*}://***@${url##*@}" ;;
-    *) printf '%s' "$url" ;;
+    *://*)
+      scheme="${url%%://*}"
+      rest="${url#*://}"
+      authority="${rest%%/*}"
+      tail="${rest#"$authority"}"
+      if [[ "$authority" == *@* ]]; then
+        printf '%s://%s@%s%s' "$scheme" '***' "${authority##*@}" "$tail"
+      else
+        printf '%s' "$url"
+      fi
+      ;;
+    *)
+      printf '%s' "$url"
+      ;;
   esac
 }
 
