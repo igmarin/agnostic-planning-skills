@@ -13,6 +13,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Setup documentation now explains the shared Agent Skills directory and use across supported coding tools.
 - Clarified how to list the agent IDs accepted by `npx skills add`, how to remove a skill from agent directories, and what the classifier returns without a `TYPESAFE_API_KEY`.
 
+### Fixed
+- `scripts/setup-profile.sh` reports the remote URL it rejected, instead of only the URL it expected, and does not echo a token kept in a remote URL.
+- The trusted-source check no longer stops on equivalent spellings of the same GitHub remote, such as an explicit port, a trailing slash, a missing `.git`, or a different owner casing.
+- The trusted-source check verifies the URL git will fetch from, so a `url.*.insteadOf` rewrite that lands on `igmarin/<repository>` passes and one that lands elsewhere is reported with both URLs.
+- Setup verifies every repository before pulling any of them, so a rejected remote cannot leave an earlier checkout already updated.
+
 ## [5.0.0] - 2026-09-26
 
 ### Added
