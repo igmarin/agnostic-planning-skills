@@ -31,7 +31,7 @@ npx skills add igmarin/agnostic-planning-skills -g --skill '*' \
   -a claude-code codex devin antigravity cline kilo pi zed -y
 ```
 
-Replace `'*'` with a skill name, such as `task-complexity-classifier`, to install one skill. Agent ids are space separated; an unknown id prints the valid list. Run `npx skills add --help` for the other options.
+Replace `'*'` with a skill name, such as `task-complexity-classifier`, to install one skill. Agent IDs are space separated; an unknown ID prints the valid list. Run `npx skills add --help` for the other options.
 
 What the installer did on a verified run:
 
@@ -128,7 +128,7 @@ Edit the skill in its source repository, commit and merge the change, then rerun
 
 `setup-profile.sh` writes to `~/.agents/skills`. `install-profile.py` writes to the directory `--output` names, which defaults to the same place. The directories some agents read themselves are separate: `npx skills add` links or copies each skill into them, and nothing removes an entry when you switch profiles. An agent can keep listing a skill that is no longer installed.
 
-Remove it from the agent directories with `npx skills remove`. Omitting `-a` cleans every agent link:
+Remove it with `npx skills remove`. Omitting `-a` cleans every agent link, and the shared copy in `~/.agents/skills` is deleted once no other agent still uses the skill:
 
 ```sh
 npx skills remove -g task-complexity-classifier
