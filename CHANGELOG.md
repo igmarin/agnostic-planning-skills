@@ -11,6 +11,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Changed
 - Setup documentation now explains the shared Agent Skills directory and use across supported coding tools.
+- Corrected setup instructions that disagreed with the scripts: the projects root, the stop conditions, agent skill directories, and the profile validator's sibling-repository requirement.
 
 ## [5.0.0] - 2026-09-26
 
