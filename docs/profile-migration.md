@@ -83,7 +83,7 @@ bash scripts/setup-profile.sh ruby-rails-rust
 
 Use `foundation`, `ruby-rails`, `elixir-phoenix`, or `rust` in place of `ruby-rails-rust` when you want a different profile. The setup script checks all five source repositories, updates them from their `main` branches, then installs the selected profile into `~/.agents/skills`.
 
-It stops if a checkout has uncommitted changes (except the existing local `.clinerules` files), has no local `main` branch, or tracks a remote other than `github.com/igmarin/<repository>`. Check and correct the remote with:
+It stops if a checkout has uncommitted changes (except the existing local `.clinerules` files), has no local `main` branch, or tracks a remote that is not `igmarin/<repository>` on GitHub. `https://github.com/igmarin/<repository>.git` and `git@github.com:igmarin/<repository>.git` are both accepted, so an existing SSH clone passes. Check and correct the remote with:
 
 ```sh
 git -C <path-to-checkout> remote get-url origin
@@ -126,12 +126,14 @@ Edit the skill in its source repository, commit and merge the change, then rerun
 
 ## Removing skills an agent still lists
 
-`setup-profile.sh` writes to `~/.agents/skills`. `install-profile.py` writes to the directory `--output` names, which defaults to the same place. The directories some agents read themselves are separate: `npx skills add` fills them with symlinks into that directory, and nothing removes a link when you switch profiles. An agent can keep listing a skill that is no longer installed.
+`setup-profile.sh` writes to `~/.agents/skills`. `install-profile.py` writes to the directory `--output` names, which defaults to the same place. The directories some agents read themselves are separate: `npx skills add` links or copies each skill into them, and nothing removes an entry when you switch profiles. An agent can keep listing a skill that is no longer installed.
 
-Remove the folder or link by hand after switching, then reload the agent if the skill is still listed:
+Remove the folder or link by hand after switching, then reload the agent if the skill is still listed. The path depends on the agent; `~/.claude/skills` is the Claude Code one:
 
 ```sh
-rm ~/.claude/skills/<skill>
+rm -r ~/.claude/skills/<skill>
 ```
+
+`rm -r` removes a copied directory or a symlink. It does not follow the symlink, so the copy in `~/.agents/skills` is untouched.
 
 See [daily skill use](calling-skills.md) for choosing a direct skill or using `work-router`.
